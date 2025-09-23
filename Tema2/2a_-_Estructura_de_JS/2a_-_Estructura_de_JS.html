@@ -1,0 +1,1019 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>UD2 - Estructura de JS</title>
+	<meta name='Generator' content='Zim 0.76.1'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">UD2 - Estructura de JS</a> <br>
+            &nbsp; &nbsp; <a href="#h2">Javascript, HTML and CSS resources</a> <br>
+            <a href="#h3">1- Fundamentos de Javascript</a> <br>
+            &nbsp; &nbsp; <a href="#h4">Orden de ejecución de JS</a> <br>
+            &nbsp; &nbsp; <a href="#h5">Variables</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicion 2.1 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Web console <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Javascript es un lenguaje dinámico débilmente tipado <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Recomendaciones básicas y errores típicos <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+            &nbsp; &nbsp; <a href="#h11">Scope o ámbito</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejemplo <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h13">Tipos de datos y conversiones</a> <br>
+            &nbsp; &nbsp; <a href="#h14">Tipos de datos</a> <br>
+            &nbsp; &nbsp; <a href="#h15">Conversiones de tipos</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Truthy values <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Diversión con las conversiones <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Otras cositas curiosas <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h19">Strict Mode</a> <br>
+        
+            <a href="#h21">Operadores</a> <br>
+            <a href="#h22">Comentarios</a> <br>
+            &nbsp; &nbsp; <a href="#h23">Ejercicio 2.2</a> <br>
+            &nbsp; &nbsp; <a href="#h24">Ejercicio 2.3</a> <br>
+            <a href="#h25">Introducción brevísima a funciones y eventos</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">UD2 - Estructura de JS</h1>
+			<p>
+Introducción básica al lenguaje Javascript (JS en adelante).<br>
+<img src="./2a_-_Estructura_de_JS_files/compras.jpeg">
+</p>
+<br>
+
+			<h2 id="h2">Javascript, HTML and CSS resources</h2>
+			<p>
+This is a good starting point to learn Javascript.<br>
+<a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics" title="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics" class="https">https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics</a>
+</p>
+<br>
+<p>
+Probably the best modern javascript tutorial<br>
+<a href="http://javascript.info/" title="http://javascript.info/" class="http">http://javascript.info/</a>
+</p>
+<br>
+<p>
+A good manual (in Spanish, but a little bit outdated) <br>
+<a href="https://www.tutorialesprogramacionya.com/javascriptya/" title="https://www.tutorialesprogramacionya.com/javascriptya/" class="https">https://www.tutorialesprogramacionya.com/javascriptya/</a>
+</p>
+<br>
+<p>
+Another manual<br>
+<a href="https://www.w3schools.com/js/default.asp" title="https://www.w3schools.com/js/default.asp" class="https">https://www.w3schools.com/js/default.asp</a><br>
+<a href="https://www.w3schools.com/html/default.asp" title="https://www.w3schools.com/html/default.asp" class="https">https://www.w3schools.com/html/default.asp</a><br>
+<a href="https://www.w3schools.com/css/default.asp" title="https://www.w3schools.com/css/default.asp" class="https">https://www.w3schools.com/css/default.asp</a>
+</p>
+<br>
+<p>
+Online IDE (Integrated Development Environment)<br>
+<a href="https://codepen.io/" title="https://codepen.io/" class="https">https://codepen.io/</a><br>
+<a href="https://jsfiddle.net/" title="https://jsfiddle.net/" class="https">https://jsfiddle.net/</a><br>
+<a href="https://glitch.com" title="https://glitch.com" class="https">https://glitch.com</a><br>
+<a href="https://vite.new/vanilla" title="https://vite.new/vanilla" class="https">https://vite.new/vanilla</a><br>
+<a href="https://repl.it/r" title="https://repl.it/r" class="https">https://repl.it/r</a><br>
+<a href="https://plnkr.co/edit/?open=lib%2Fscript.js" title="https://plnkr.co/edit/?open=lib%2Fscript.js" class="https">https://plnkr.co/edit/?open=lib%2Fscript.js</a>
+</p>
+<br>
+<p>
+Curso de javascript con pequeños desafíos<br>
+<a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/" title="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/" class="https">https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/</a>
+</p>
+<br>
+<br>
+
+			<h1 id="h3">1- Fundamentos de Javascript</h1>
+			<p>
+JS permite introducir interactividad en una página web haciendo uso de las API del navegador (API = <i>Application Programming Interface</i>) que permite que nuestro código interactúe con el navegador (por ejemplo el DOM, Geolocalización, Canvas, Fetch,...).
+</p>
+<br>
+
+			<h2 id="h4">Orden de ejecución de JS</h2>
+			<p>
+Los archivos de código JS se ejecutan en el orden en el que se encuentran en el HTML. Esto es importante porque un fichero JS puede hacer referencia a un elemento HTML que todavía no se ha cargado en el navegador. Para evitar esto se utiliza el atributo <tt>defer</tt> o <tt>async</tt>:
+</p>
+<br>
+<p>
+Dentro del <tt>&lt;head&gt;</tt>:
+</p>
+<pre>
+&lt;script defer src="js/script1.js"&gt;&lt;/script&gt;
+&lt;script async src="js/script2.js"&gt;&lt;/script&gt;
+&lt;script defer src="js/script3.js"&gt;&lt;/script&gt;
+</pre>
+<br>
+<p>
+Diferencia entre <tt>async</tt> y <tt>defer</tt>:
+</p>
+<ul>
+<li>Ambos se ejecutan en un hilo aparte del navegador (lo que favorece la carga de la página).</li>
+<li>Con <tt>defer</tt> se ejecutará tras la carga del documento completo en el orden indicado (por ello es adecuado para manipular el DOM).</li>
+<li>Con <tt>async</tt> se ejecutará tan pronto como esté disponible sin bloquear la carga del HTML, por tanto no se garantiza el orden de ejecución ni que el documento esté cargado. Es útil para scripts que no dependan del DOM y sean independientes.</li>
+</ul>
+<br>
+<p>
+Cuando el navegador encuentra código JS lo ejecuta inmediatamente de arriba a abajo, por lo que el orden de los bloques de código de JS también es importante.
+</p>
+<br>
+<br>
+
+			<h2 id="h5">Variables</h2>
+			<p>
+Una variable es simplemente un trozo de memoria con un nombre, de esta manera podemos almacenar valores dentro. Podemos utilizar casi cualquier carácter para nombrar la variable, pero es siempre juicioso utilizar <b>solo los caracteres básicos del ASCII estándar</b> (el alfabeto en inglés), <b>dígitos</b>, el símbolo <b>$</b> y el guión bajo (<b>_</b>). <br>
+El primer carácter del nombre no puede ser un número, además, los puntos (.) y los espacios en blanco no están permitidos.
+</p>
+<br>
+<p>
+Para declarar una variable, podemos utilizar la palabra reservada <tt>let</tt>.<br>
+Para declarar una constante, podemos usar <tt>const</tt>.
+</p>
+<br>
+<p>
+<b>Nota</b>: en textos antiguos, ejemplos viejos o código de gente del siglo pasado podemos seguir encontrando <tt>var</tt> para declarar variables. Es una mala idea usarlo porque utiliza un <i>scope</i> o ámbito de variables muy particular.
+</p>
+<br>
+<br>
+
+            
+				<h3>Ejercicion 2.1<a id="ejercicion-21" class="h_anchor"></a></h3>
+<br>
+<p>
+Comprueba los ejemplos de abajo, sólo tres de ellos harán que se muestre un error ¿puedes averiguar cuáles?
+</p>
+<br>
+<div class="zim-object">
+<pre><code class="js">let ño = 56;
+let _ño = 56;
+let _$ñó = 56;
+let ñ_ó = 56;
+let ñ.a = 56;
+let ñ_ó_ = 56;
+let $ño _1 = 56;
+let ñ2_ó = 56;
+let ñ_ó2 = 56;
+let 2ño = 56;
+let ñ_2ó = 56;
+let a = 56;
+let $ = 56;
+let _ = 56;
+let $_ = 56;
+</code></pre>
+</div>
+<br>
+<br>
+ <br>
+            
+				<h3>Web console<a id="web-console" class="h_anchor"></a></h3>
+<br>
+<p>
+Según <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console" title="https://developer.mozilla.org/en-US/docs/Tools/Web_Console" class="https">https://developer.mozilla.org/en-US/docs/Tools/Web_Console</a>, la consola web:
+</p>
+<ol style='padding-left: 30pt' type="1" start="1">
+<li><b>Registra información</b> asociada a una página web: solicitudes de red, JavaScript, CSS, errores y advertencias de seguridad, así como mensajes de error, advertencia e información registrados explícitamente por el código JavaScript que se ejecuta en el contexto de la página.</li>
+<li>Te permite interactuar con una página web <b>ejecutando expresiones JavaScript</b> en el contexto de la página.</li>
+</ol>
+<br>
+<p>
+En el ejercicio 2.1, puedes intentar adivinar la respuesta, pero deberías utilizar la consola del navegador para comprobarlo rápidamente. Para abrir la consola web en tu navegador, puedes presionar <tt>F12</tt> o <tt>SHIFT+F5</tt>, luego ve a la pestaña de la consola y escribe cada comando para verificar si generan un error.
+</p>
+<br>
+<p>
+Prueba este código en la <i>web console</i>:
+</p>
+<div class="zim-object">
+<pre><code class="js">let msj = "Mi archienemigo es el brócoli";
+alert (msj);
+console.log("El té es agua sucia. ¡Larga vida al café!");
+</code></pre>
+</div>
+<br>
+<p>
+Puedes comprobar el valor de una variable tecleando su nombre en la consola, por ejemplo escribe <tt>msj</tt> para recuperar el valor de la variable <tt>msj</tt>.
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Javascript es un lenguaje dinámico débilmente tipado<a id="javascript-es-un-lenguaje-dinámico-débilmente-tipado" class="h_anchor"></a></h3>
+<br>
+<p>
+Cuando declaras una variable en javascript no necesitas declarar el tipo de dato que almacenará (se determinará al ejecutarse el código, por eso es <b>de tipado dinámico</b>). En otros lenguajes como C o Java tienes que indicar el tipo de la variable (ej.: <tt>int a; float b;</tt>).
+</p>
+<br>
+<p>
+A variable en JS puede contener cualquier dato y el tipo puede cambiar durante la ejecución (por ello es debilmente tipado).
+</p>
+<br>
+<p>
+Por ejemplo:
+</p>
+<div class="zim-object">
+<pre><code class="js">//This piece of code will be totally correct
+let dato = "Javier";
+let nombreCompleto = dato + " Mancera"; //concatenate strings with +
+dato = 'single quotes are ok too!'
+
+dato = false; //also boolean values
+dato = true;
+
+dato = 356; //numbers
+let b = 356/5; //b will be 71.2 (a float number)
+
+b = null; //special value, means 'nothing'
+let c; //c is undefined, a special value used when a variable doesn't have a defined value yet
+</code></pre>
+</div>
+<br>
+<br>
+ <br>
+            
+				<h3>Recomendaciones básicas y errores típicos<a id="recomendaciones-básicas-y-errores-típicos" class="h_anchor"></a></h3>
+<br>
+<p>
+Recomendaciones:
+</p>
+<ul style='padding-left: 30pt'>
+<li>El nombre de la variable debe ser autodescriptivo  (<tt>precioProducto</tt> vs <tt>p</tt>).</li>
+<li>Es mejor ser verboso que críptico.</li>
+<li>Deberíamos usar camelCase (<tt>totalGastosMensuales</tt> vs <tt>totalgastosmensuales</tt>).</li>
+<li>Usa las abreviaturas con cuidado (<tt>precioProducto</tt> es mejor que <tt>prcPr</tt>, pero puede que  <tt>tlf</tt> o <tt>numProducto</tt> estén bien).</li>
+<li>Evita palabras vacías (<tt>cosa</tt>, <tt>valor</tt>, <tt>dato</tt>).</li>
+<li>Puede ser útil (y controvertido) usar la <b>notación húngara</b>, es decir, usar las primeras letras para indicar el tipo que se espera en la variable (<tt>sNombre</tt> para <tt>strings</tt>, <tt>txtNombre</tt> fpara <tt>textboxes</tt> o <tt>oNombre</tt> para <tt>objects</tt>) . Puede ayudar a entender mejor el código escrito en un lenguaje de tipado débil.</li>
+</ul>
+<br>
+<p>
+<b>Importante 1:</b> si declaras una variable dos veces obtendrás un error.
+</p>
+<div class="zim-object">
+<pre><code class="js">//Redeclaration error
+let dato = "Juan";
+let dato = "Pedro"; // This will throw this error: "SyntaxError: redeclaration of let nombre"
+</code></pre>
+</div>
+<br>
+<p>
+<b>Importante 2:</b> No puedes usar variables que no han sido declaradas antes (recuerda que es <b>case-sensitive</b>). Se autodeclaran las variables <b>globales</b> al asignarles un valor inicial sin usar let, const o var (mala idea).
+</p>
+<div class="zim-object">
+<pre><code class="js">//Se pueden usar variables sin let, const o var, pero no es recomendado (serán globales)
+semanas = 5
+let dias = 7 * dias
+ 
+//Reference error
+let hora = 5;
+let minutos = horas * 60; // This will throw this error: "ReferenceError: horas is not defined"
+let segundos = Hora * 3600; // This will throw this error: "ReferenceError: Hora is not defined"
+
+let copia = valor //Reference error: valor is not defined
+</code></pre>
+</div>
+<br>
+<p>
+<b>Importante 3:</b> Deberíamos evitar el uso de caracteres fuera del ASCII estándar
+</p>
+<div class="zim-object">
+<pre><code class="js">let имя = 'technically there is no problem but they are not very readable';
+let 我 = 'we should avoid these characters';
+</code></pre>
+</div>
+<br>
+ <br>
+            
+				<h4>Palabras reservadas<a id="palabras-reservadas" class="h_anchor"></a></h4>
+<br>
+<p>
+Como en cualquier otro lenguaje hay algunas palabras que están reservadas para el propio lenguaje. <br>
+List of reserved words: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords" class="https">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords</a>
+</p>
+<br>
+<div class="zim-object">
+<pre><code class="js">//These declarations will throw an error
+let true=5; //SyntaxError: unexpected token: boolean literal 'true'
+let function="hola"; //SyntaxError: unexpected token: keyword 'function'
+let return = 45; //SyntaxError: unexpected token: keyword 'return'
+let let = "caracola"; //SyntaxError: a lexical declaration can't define a 'let' binding
+</code></pre>
+</div>
+<br>
+<br>
+<br>
+ <br>
+			<h2 id="h11">Scope o ámbito</h2>
+			<p>
+Algunas ideas:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Si declaramos una variable en la sección main del código (con <tt>let</tt> o <tt>var</tt>), la variable estará disponible en todas partes del código (<b>será global</b>).</li>
+<li>Usando <tt>let</tt> se define la variable sólo en el bloque actual de código (es una variable <b>local</b>). Un bloque de código se define en una función o con <tt>{ }</tt> (condicionales y bucles también definen bloques de código).</li>
+<li>Usando <tt>var</tt> la variable <b>estará disponible en toda la función</b>, no sólo en el bloque de código. En el ejemplo de abajo.</li>
+</ul>
+<br>
+
+            
+				<h3>Ejemplo<a id="ejemplo" class="h_anchor"></a></h3>
+<div class="zim-object">
+<pre><code class="js">/***** MAIN *****/
+let a = 5; //a existirá en todo el código porque está declarada el MAIN
+
+{
+	var b = 5; //b existe en el ámbito de la función (en este caso todo el MAIN)
+	let c = 5; //c sólo existe en este bloque de código (let tiene ámbito de bloque)
+	a = a + 1; //a existe en todo el código por lo que podemos usarla sin problemas
+}
+
+b = b + 1; //se declaró con var, así que tiene de ámbito la función aunque se declaró en un bloque 
+
+console.log( a +", "+ b); //Imprimirá 6, 6
+console.log( c ); //dará un error porque c no existe en esta porción de código
+</code></pre>
+</div>
+<br>
+<br>
+ <br>
+			<h1 id="h13">Tipos de datos y conversiones</h1>
+			<p>
+Js posee unos pocos tipos de datos nativos y usa conversiones automáticas.
+</p>
+<br>
+
+			<h2 id="h14">Tipos de datos</h2>
+			<p>
+En JS existen los siguientes siete tipos de datos:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Number : <tt>12</tt>, <tt>12.4</tt>, <tt>Infinity</tt>, <tt>-Infinity</tt>, <tt>NaN</tt> (Not a number)</li>
+<li>BigInt :  <tt>1234567890123456789012345678901234567890n</tt> (la n indica que es un entero grande)</li>
+<li>String : <tt>"Hola" 'caracola' `Resultado: ${3*5}`</tt></li>
+<li>Boolean : <tt>true</tt>, <tt>false</tt></li>
+<li>null</li>
+<li>undefined</li>
+<li>Objects : <tt>a={nombre: 'Javier', apellido:'Mancera'}</tt>, <tt>b=[2,3]</tt></li>
+</ul>
+<br>
+<p>
+Se puede usar el operador <tt>typeof</tt> para saber el tipo de una variable: <tt>typeof "foo"</tt><br>
+Se puede comprobar si una expresión es <tt>NaN</tt> con la función <tt>isNaN()</tt>
+</p>
+<br>
+
+			<h2 id="h15">Conversiones de tipos</h2>
+			<p>
+Javascript en un lenguaje de tipado dinámico, por lo que una variable puede almacenar diferentes tipos de datos con el timpo lo que puede ocasionar comportamientos inesperados.
+</p>
+<br>
+<p>
+Ejecuta el código de abajo u fíjate en el uso de <tt>Number</tt> para convertir una cadena a un número. También se puede usar <tt>String</tt> para convertir un número a cadena o <tt>Boolean</tt> para un booleano.
+</p>
+<div class="zim-object">
+<pre><code class="js">alert( "6" / "2" ); 	// 3 The expected result
+alert( 6 + '2' ); 	// '62' (the string is on the right)
+alert(  '6' + 2 ); 	// '62' (the string is on the left)
+
+let dato = 6; 		//is a number
+dato = "6"; 		//now a string
+let num = Number(dato);	//num is 6 (convert a string to a number)
+
+alert( num + 2); 	// 8
+alert( num + Number('2') ); // 8
+alert( dato + +"2" ); 	//62
+alert( +dato + +"2" ); 	//8
+
+</code></pre>
+</div>
+<br>
+<p>
+La mayoría de las veces no tenemos que preocuparnos, pero es importante tenerlo en cuenta por ejemplo al leer de un <tt>textbox</tt> en un formulario.
+</p>
+<br>
+
+            
+				<h3>Truthy values<a id="truthy-values" class="h_anchor"></a></h3>
+<br>
+<p>
+En JS hay valores que se convertirán a <tt>true</tt> o <tt>false</tt> automáticamente:
+</p>
+<ul style='padding-left: 30pt'>
+<li>El número <tt>0</tt> es <tt>false</tt>, cualquier otro es <tt>true</tt></li>
+<li><tt>null</tt>, <tt>undefined</tt>, <tt>NaN</tt> se consideran <tt>false</tt></li>
+<li>La cadena vacía <tt>""</tt> es <tt>false</tt>, cualquier otra cadena será <tt>true</tt></li>
+</ul>
+<br>
+<br>
+ <br>
+            
+				<h3>Diversión con las conversiones<a id="diversión-con-las-conversiones" class="h_anchor"></a></h3>
+<pre>
+1/0 --&gt; Infinity
+
+"10" + 5 --&gt; 105
+"10" - 5 --&gt; 5
+'1' + 1 - 1 === 10
+
+"Hola" / 2      --&gt; NaN
+("Hola" / 2)**1 --&gt; NaN
+("Hola" / 2)**0 --&gt; 1
+
+('b'+'a'+ +'a'+'a').toLowerCase() --&gt; banana
+
+0 equivale a false
+"0" equivale a true
+" " equivale a true
+
+4 + 5 + "px" --&gt; "9px" // ¡El orden importa! Se lee de izq a der
+"$" + 4 + 5  --&gt; "$45"
+
+2e3 --&gt; 2000 // Notación científica 2e3 = 2*10^3
+
+Number(null)      --&gt; 0
+Number(undefined) --&gt; NaN
+Number("")        --&gt; 0
+Number(" ")       --&gt; 0
+Number("x")       --&gt; NaN
+Number("010")     --&gt; 10
+Number("0 10")    --&gt; NaN
+
+true + true + true   --&gt; 3
+[] + []              --&gt; ""
+[] + 3               --&gt; "3"
+{} + 3               --&gt; 3
+[] + {}              --&gt; "[object Object]"
+{} + []              --&gt; 0
+</pre>
+<br>
+ <br>
+            
+				<h3>Otras cositas curiosas<a id="otras-cositas-curiosas" class="h_anchor"></a></h3>
+<p>
+Javascript representa los números usando 64 bits (usa concretamente el estándar  IEEE 754), por lo que el resultado de cualquier operación se tiene que representar con el número de 64 bits más cercano, lo que da lugar a jocosos resultados:  
+</p>
+<pre>
+0.1 + 0.2   // 0.30000000000000004
+0.3 - 0.1   // 0.19999999999999998
+0.1 * 3     // 0.30000000000000004
+</pre>
+<br>
+<br>
+ <br>
+			<h1 id="h19">Strict Mode</h1>
+			<p>
+Desde 2015 JS ha evolucionado mucho y se han ido incluyendo muchas novedades para mejorar el lenguaje, incluyendo modificaciones de cómo funciona el código que permiten además optimizaciones automáticas en la ejecución del mismo.
+</p>
+<br>
+<p>
+Para más información podemos leer el siguiente artículo de John Resig: <a href="https://johnresig.com/blog/ecmascript-5-strict-mode-json-and-more/" title="https://johnresig.com/blog/ecmascript-5-strict-mode-json-and-more/" class="https">https://johnresig.com/blog/ecmascript-5-strict-mode-json-and-more/</a>
+</p>
+<br>
+<p>
+Para activar estas novedades (y siempre querremos activarlas) la primera línea de nuestro script será:
+</p>
+<pre>
+"use strict";
+// Resto del código
+</pre>
+<br>
+<p>
+ Según <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode" class="https">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode</a> estas son algunas ventajas:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Eliminates some JavaScript silent errors by changing them to throw errors.</li>
+<li>Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.</li>
+<li>Prohibits some syntax likely to be defined in future versions of ECMAScript.</li>
+</ul>
+<br>
+
+            
+				<h4>Ejemplo<a id="ejemplo" class="h_anchor"></a></h4>
+<p>
+Prueba a ejecutar el código con y sin el modo estricto. En este ejemplo se pretende manejar información sobre un imán que se va modificando, sin embargo hay un error tipográfico que se ha colado.
+</p>
+<div class="zim-object">
+<pre><code class="js">"use strict";
+
+let potenciaIman = 5;
+let posicionIman ="arriba";
+
+// Aquí vendrá mucho más código, 
+// Llamadas a funciones
+// Montones de cálculos
+
+potenciaImam = 4;
+posicionIman ="abajo";
+</code></pre>
+</div>
+<br>
+<p>
+Con el <tt>"use strict";</tt> el error será localizado fácilmente (se mostrará un error indicando la línea), sin el modo estricto ni siquiera se mostrará una advertencia (ni mucho menos un error) por lo que nos podemos volver locos para arreglar el problema. Es por ello que <b>se recomienda activar el modo estricto</b>.
+</p>
+<br>
+<br>
+ <br>
+			<h1 id="h21">Operadores</h1>
+			<p>
+Comparación:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>==</tt> vs <tt>===</tt></li>
+<li><tt>&gt;</tt>, <tt>&lt;</tt>, <tt>&gt;=</tt>, <tt>&lt;=</tt></li>
+<li><tt>!=</tt></li>
+</ul>
+<br>
+<p>
+Aritméticos:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>+</tt> </li>
+<li><tt>-</tt> </li>
+<li><tt>*</tt> </li>
+<li><tt>/</tt> </li>
+<li><tt>**</tt></li>
+<li><tt>%</tt></li>
+<li><tt>++</tt>, <tt>--</tt></li>
+<li><tt>+=</tt>, <tt>-=</tt>, <tt>*=</tt>, <tt>/=</tt></li>
+</ul>
+<br>
+<p>
+Cadenas:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>+</tt> (Concatenación)</li>
+</ul>
+<br>
+<p>
+Asignación:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>=</tt></li>
+</ul>
+<br>
+<p>
+Booleanos:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>!</tt></li>
+<li><tt>&amp;&amp;</tt>, <tt>||</tt></li>
+</ul>
+<br>
+<p>
+Otros operadores:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>typeof</tt></li>
+<li><tt>isNaN()</tt></li>
+<li><tt>+</tt> (conversión, por ejemplo: <tt>+true</tt> → 1 o <tt>+"56"</tt> → 56)</li>
+<li>Operadores de bits (<tt>&amp; | ^ ~ &lt;&lt; &gt;&gt; &gt;&gt;&gt;</tt>)</li>
+<li>Agrupación: <tt>()</tt></li>
+</ul>
+<br>
+<p>
+Ejercicio, la posición del ++: ¿Qué muestra este código?
+</p>
+<pre>
+let counter = 1;
+let a = counter++;
+alert(a); 
+
+let b = ++counter;
+alert(b); 
+</pre>
+<br>
+<p>
+El factor de precedencia de los operadores funciona como en el resto de los lenguajes de programación.
+</p>
+<br>
+<br>
+
+			<h1 id="h22">Comentarios</h1>
+			<p>
+A pesar de las modas, es importante comentar las partes del código más complciadas para poder entenderlas pasado un tiempo (meses o años). No comentar el código es de niñatos.
+</p>
+<br>
+<p>
+Podemos usar <tt>//</tt> para introducir comentarios de una única línea y <tt>/* */</tt> para indicar un comentario de varias líneas.
+</p>
+<br>
+<p>
+También se puede usar un tipo especial de comentarios que se usan para generar documentación de nuestro código automáticamente. Más información en los siguientes enlaces:<br>
+<a href="https://en.wikipedia.org/wiki/JSDoc" title="https://en.wikipedia.org/wiki/JSDoc" class="https">https://en.wikipedia.org/wiki/JSDoc</a><br>
+<a href="https://devdocs.io/jsdoc/about-getting-started" title="https://devdocs.io/jsdoc/about-getting-started" class="https">https://devdocs.io/jsdoc/about-getting-started</a>
+</p>
+<br>
+<div class="zim-object">
+<pre><code class="js">//Single line comment:
+let semanas= 12; //declaración de una variable
+
+
+/* Block comment example:
+
+Multiplicamos ahora la variable semanas por 7 para saber 
+cuántos días hay en 12 semanas */
+let dias = semanas * 7;
+
+//Special JSdoc comment:
+
+/**
+*
+* Devuelve la longitud de una circunferencia de radio r
+* 
+* @author: Javier Mancera
+* @param {number} r - El radio del círculo.
+*/
+function longitud(r){
+	return 2*Math.PI*r;
+}
+
+</code></pre>
+</div>
+<br>
+<br>
+
+			<h2 id="h23">Ejercicio 2.2</h2>
+			<p>
+Crea un fichero javascript que calcule la nota media de un alumno que ha obtenido las siguientes notas:<br>
+<tt>4, 8, 9, 7, 2, 6</tt>
+</p>
+<br>
+<p>
+Haz que se muestre el resultado en la consola.
+</p>
+<br>
+
+			<h2 id="h24">Ejercicio 2.3</h2>
+			<p>
+Crea un fichero javascript que calcule el volumen de una esfera de radio 1 y el volumen de una esfera de radio 2.<br>
+El volumen de una esfera se calcula como 4/3 multiplicado por Pi multiplicado por el radio de la esfera al cubo. <br>
+Haz que se muestren los dos resultados en la consola.
+</p>
+<br>
+<p>
+<b>Nota</b>: Un valor exacto de Pi se puede obtener en javascript como <tt>Math.PI</tt>
+</p>
+<br>
+<br>
+<br>
+
+			<h1 id="h25">Introducción brevísima a funciones y eventos</h1>
+			<p>
+Las funciones en JS se pueden definir de varias maneras, la más sencilla es esta:
+</p>
+<pre>
+function nombreFuncion( param1, param2, param3 ){
+  /* código */
+  return valor;
+}
+</pre>
+<br>
+<p>
+Se puede añadir un manejador de evento a un elemento (por ejemplo un botón) de esta manera:
+</p>
+<pre>
+elemento.addEventListener( evento, nombreFuncion );
+</pre>
+<br>
+<p>
+Algunos eventos básicos:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>"click"</tt></li>
+<li><tt>"change"</tt></li>
+<li><tt>"mouseover"</tt></li>
+</ul>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>
