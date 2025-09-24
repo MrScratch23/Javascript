@@ -27,4 +27,4 @@ function mostrarTabla() {
 const btnCalcular = document.querySelector("#btnCalcular");
 
 btnCalcular.addEventListener("click", mostrarTabla);
-
+btnCalcular.addEventListener ("enter", mostrarTabla);
