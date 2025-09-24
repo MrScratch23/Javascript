@@ -1,0 +1,1098 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>2c - Estructuras de control</title>
+	<meta name='Generator' content='Zim 0.76.1'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">2c - Estructuras de control</a> <br>
+            <a href="#h2">Condicionales</a> <br>
+            &nbsp; &nbsp; <a href="#h3">Condiciones</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.1 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.2 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h6">Operadores lógicos</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.3 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio para repasar en clase <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.4 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejemplo resuelto <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.5: Casa de la cultura <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.6 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.7: bola mágica <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.8 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio 7.9: Estaciones del año (repaso) <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h17">Switch/case</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Una solución alternativa usando un Map <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h19">Try...catch</a> <br>
+            <a href="#h20">Bucles</a> <br>
+            &nbsp; &nbsp; <a href="#h21">Ejercicio 8.2</a> <br>
+            &nbsp; &nbsp; <a href="#h22">Ejercicio 8.2b</a> <br>
+            &nbsp; &nbsp; <a href="#h23">Ejercicio 8.3</a> <br>
+            &nbsp; &nbsp; <a href="#h24">Ejercicio 8.4</a> <br>
+            &nbsp; &nbsp; <a href="#h25">Ejercicio 8.5 bucles anidados</a> <br>
+            <a href="#h26">Breve introducción a los arrays</a> <br>
+            <a href="#h27">Introducción brevísima a la depuración de código</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">2c - Estructuras de control</h1>
+			<p>
+Contenido básico:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Condicionales</li>
+<li>Bucles</li>
+</ul>
+<br>
+<br>
+<br>
+
+			<h1 id="h2">Condicionales</h1>
+			<p>
+A veces necesitamos ejecutar diferentes acciones según alguna condición. La instrucción <tt>if</tt> evalua la condición y si el resultado es  <tt>true</tt>, ejecuta un bloque de código.
+</p>
+<br>
+<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image.png">
+</p>
+<br>
+<p>
+Ejemplo:
+</p>
+<div class="zim-object">
+<pre><code class="js">let año = prompt("¿En qué año fue la revolución española de 1868 conocida como 'La Gloriosa'?");
+
+if ( año == 1868 ){
+  alert( "¡Correcto!" );
+}
+</code></pre>
+</div>
+<br>
+<p>
+<b>Nota</b>: En javascript, <tt>0</tt> será considerado <tt>false</tt>; cualquier otro valor numérico se considera <tt>true</tt> (incluso <tt>Infinity</tt> o <tt>-Infinity</tt>).
+</p>
+<br>
+<p>
+Sintaxis completa:
+</p>
+<pre>
+if ( condición1 ){
+	//this code will be executed if the condición1 is true
+}
+else if (condición2 ){
+	//this code will be executed if the condición2 is true
+}
+else{
+	//this code will be executed if both conditions were false
+}
+</pre>
+<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image001.png">
+</p>
+<br>
+
+			<h2 id="h3">Condiciones</h2>
+			<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image011.png">
+</p>
+<br>
+<p>
+<b>Nota</b>: acostúmbrate a utilizar <tt>===</tt> en las comparaciones en lugar de <tt>==</tt> para evitar comportamientos extraños. Por ejemplo:
+</p>
+<pre>
+undefined == null  --&gt; true
+true == 1          --&gt; true
+[] == 0            --&gt; true
+</pre>
+<br>
+<br>
+
+            
+				<h3>Ejercicio 7.1<a id="ejercicio-71" class="h_anchor"></a></h3>
+<p>
+Intenta adivinar el resultado de estas condiciones. ¿<tt>true</tt> o <tt>false</tt>?
+</p>
+<br>
+<pre>
+let a = 5;
+let b = 30;
+
+a == a
+5 &gt; 5
+5 &lt;= a
+60 &gt;= b
+a != b
+a + b == 35
+"gato" != "perro"
+"gato" == "Gato" 
+b  != 30
+</pre>
+<br>
+<p>
+Podemos usar cualquier cosa como condición, incluso funciones (especialmente si devuelven un valor). Los valores especiales como <tt>undefined</tt> o <tt>null</tt> se consideran <tt>false</tt>, pero aún así podemos tener resultados inesperados. <br>
+Por ejemplo, ¿qué se obtiene al ejecutar este código?
+</p>
+<div class="zim-object">
+<pre><code class="js">if(null &lt; 58)console.log("null con 58");
+
+if(undefined &lt; 58)console.log("undefined con 58");
+	
+if(undefined &lt; null)console.log("undefined con null");
+
+if(undefined &lt; -Infinity)console.log("undefined con -Infinity");
+</code></pre>
+</div>
+<br>
+<br>
+ <br>
+            
+				<h3>Ejercicio 7.2<a id="ejercicio-72" class="h_anchor"></a></h3>
+<p>
+Entra en la carpeta <tt>Ej7.2 - Condiciones</tt>. Puedes modificar el código fuente del archivo Javascript para realizar pruebas.
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h6">Operadores lógicos</h2>
+			<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image013.png">
+</p>
+<br>
+<br>
+
+            
+				<h3>Ejercicio 7.3<a id="ejercicio-73" class="h_anchor"></a></h3>
+<br>
+<p>
+Intenta averiguar qué se imprimirá en la consola con este código.
+</p>
+<br>
+<div class="zim-object">
+<pre><code class="js">let a = 26;
+let b = 13;
+
+if( b &gt; a )
+	console.log("1");
+
+if ( b*2 == a )
+	console.log("2");
+
+if ( b &gt;= a*2 )
+	console.log("3");
+
+if ( b != a*2 )
+	console.log("4");
+else
+	console.log("5");
+
+if ( a == 26 &amp;&amp; b &lt;26 )
+	console.log("6");
+
+let c = 8;
+if ( c &gt; b || b != a )
+	console.log("7");
+else
+	console.log("8");
+
+if ( c != 26 || b == 26 )
+	console.log("9");
+else
+	console.log("10");
+
+if ( a &gt; b &amp;&amp; b &gt; c )
+	console.log("11");
+</code></pre>
+</div>
+<br>
+ <br>
+            
+				<h3>Ejercicio para repasar en clase<a id="ejercicio-para-repasar-en-clase" class="h_anchor"></a></h3>
+<br>
+<p>
+Suponiendo que tenemos la función <tt>getPH()</tt> que se conecta a un servidor externo y a unos sensores que nos indican la calidad del agua de una piscina de un hotel.<br>
+<div style='padding-left: 30pt'>
+<tt>let phAgua = getPH();</tt>
+</div>
+</p>
+<br>
+<p>
+Crea un código javascript que indique si el agua tiene un ph neutro (entre 6.5 y 8.5), ligeramente alcalino (entre 8.5 y 11), muy alcalino (mayor que 11), ligeramente ácido (entre 3.5 y 6.5) o muy ácido (menor que 3.5).
+</p>
+<br>
+ <br>
+            
+				<h3>Ejercicio 7.4<a id="ejercicio-74" class="h_anchor"></a></h3>
+<br>
+<p>
+Responde a estas preguntas:
+</p>
+<ul style='padding-left: 30pt'>
+<li>¿Qué hace este código?</li>
+<li>¿Qué se imprimirá si <tt>nombre</tt> fuera "Javier"?</li>
+<li>¿Y si fuera "Paco"?</li>
+<li>¿Y si fuera "O"?</li>
+<li>¿Qué valor o valores debe tener <tt>nombre</tt> para que se imprima solamente "¡Hola caracola!" y nada más.</li>
+<li>¿Qué valor podría tener <tt>nombre</tt> para que se imprima solamente "Ola ke ase?". Nota: escribe un valor que no haya salido ya.</li>
+<li>¿Qué valor podría tener <tt>nombre</tt> para que se imprima "Ola ke ase?" y luego "No te conozco, pero tienes un nombre corto... aunque podría ser más corto." Nota: escribe un valor que no haya salido ya.</li>
+</ul>
+<br>
+<div class="zim-object">
+<pre><code class="js">let nombre = document.querySelector("#txtNombre").value;
+
+if ( nombre == "Javier" )
+	console.log("¡Hola caracola!");
+else
+	console.log("Ola ke ase?");
+
+if ( nombre != "Javier" &amp;&amp; (nombre.length &gt;1 &amp;&amp; nombre&lt;=5)
+	alert("No te conozco, pero tienes un nombre corto... aunque podría ser más corto.");
+</code></pre>
+</div>
+<br>
+ <br>
+            
+				<h3>Ejemplo resuelto<a id="ejemplo-resuelto" class="h_anchor"></a></h3>
+<br>
+<p>
+En una oficina se nos encarga crear un código en javascript que sirva para diferenciar rangos de temperatura, asignando una etiqueta en función de si la temperatura se considera perfecta, buena, aceptable, mala o extrema. Para ello te dan el siguiente gráfico y la función <tt>getTemperatura()</tt> que devolverá la temperatura actual de la sala.
+</p>
+<br>
+<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image023.png">
+</p>
+<br>
+ <br>
+            
+				<h4>Solución<a id="solución" class="h_anchor"></a></h4>
+<pre>
+//función que devuelve la temperatura actual de la habitación
+let temperatura = getTemperatura(); 
+
+if ( temperatura == 24 ){
+  console.log( "Temp. perfecta" );
+}
+else if ( temperatura &gt;= 22 &amp;&amp; temperatura &lt;= 22
+  console.log("Temp. buena");
+}
+else if ( temperatura &gt;= 19 &amp;&amp; temperatura &lt;= 19
+  console.log("Temp. aceptable");
+}
+else if ( temperatura &lt;15 || temperatura &gt;36 ){
+  console.log("Temp. extrema");
+}
+else{
+  console.log("Temp. mala");
+}
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Ejercicio 7.5: Casa de la cultura<a id="ejercicio-75-casa-de-la-cultura" class="h_anchor"></a></h3>
+<br>
+<p>
+Crea una página web que sirva de formulario de inscripción a un curso de fotografía de la Casa de la cultura de Utrera. Para ello básate en el archivo <tt>index.html</tt> que encontrarás en la carpeta del ejercicio. Todo lo que tienes que hacer y añadir en la web lo harás dentro de la división cuyo id es <tt>formulario</tt>.
+</p>
+<br>
+<p>
+Añade un encabezado de nivel 1 con el texto "Curso de fotografía".<br>
+Añade a continuación tres párrafos a la web. En el primero aparecerá el siguiente texto: "El 18 de Mayo se ha concertado un curso de fotograría para aprender a manejar técnicas de dirección de modelos, iluminación, revelado y postproducción. El curso será impartido en las instalaciones del centro norte."<br>
+En el segundo párrafo explica con tus palabras que se pueden matricular en el curso aquellos mayores de edad hasta 67 años y que hay dos turnos que serán Mañana y Tarde.<br>
+En el último párrafo añade la información que te parezca oportuna.
+</p>
+<br>
+<p>
+Después de los párrafos aparecerán los textboxes. La página web contendrá cinco textboxes, en el primero la persona interesada en el curso tendrá que teclear su nombre completo.<br>
+En el segundo deberá escribirse la edad. <br>
+En el tercero el turno elegido (debe indicarse en la web que los turnos posibles son "Mañana" o "Tarde").<br>
+Los dos últimos serán para incluir una contraseña que tendrá que escribirse dos veces (una vez en cada textbox).<br>
+Habrá un botón con el título "Validar" que servirá para validar los datos del cuestionario.
+</p>
+<br>
+<p>
+Incluye ahora una división con el id <tt>errores</tt> donde aparecerán los errores del formulario.
+</p>
+<br>
+<p>
+La función de validación de los datos se ejecutará cuando se pulse el botón validar. Se tendrá que comprobar:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Si el textbox del nombre, de la edad o del turno están vacíos, aparecerá un mensaje en la división <tt>errores</tt> indicando que deben rellenarse todos los campos.</li>
+<li>También se comprobará que si ocupa más de 20 caracteres se mostrará un mensaje de error en la división <tt>errores</tt>.</li>
+<li>Si la edad no está entre 18 y 67, se mostrará un mensaje de error en la división <tt>errores</tt>.</li>
+<li>Si el turno no es "Mañana" o "Tarde" se mostrará un mensaje de error en la división <tt>errores</tt>.</li>
+<li>La contraseña escrita en los textboxes de contraseña tendrán que ser iguales, además tendrá que tener al menos 6 caracteres. Si no son iguales o no tiene al menos seis caracteres, se mostrará un mensaje de error en la división <tt>errores</tt>.</li>
+</ul>
+<br>
+<p>
+Por supuesto los errores que aparezcan deberán ser descriptivos y si hay varios errores, deberán mostrarse <b>todos</b> los mensajes de error.
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Ejercicio 7.6<a id="ejercicio-76" class="h_anchor"></a></h3>
+<br>
+<p>
+Intenta corregir los 6 errores de este código para que funcione como se espera.
+</p>
+<div class="zim-object">
+<pre><code class="js">
+/* FUNCTIONS */
+
+//devuelve true si un número es par
+function esPar ( num ) {
+	if( num%2 == 0 )
+		return true;
+	else
+		return false;
+}
+
+//devuelve true si un número es positivo
+function esPositivo ( num ) {
+	if ( num &lt;= 0 )
+		return true;
+	else
+		return false;
+}
+
+
+function esParYPositivo( numero )
+{
+	//primero los pares
+	if ( esPar(numero){
+		if ( esPositivo(numero) ){
+			console.log(numero + " es par y positivo");
+		}
+		else {
+			console.log(numero + " es par y positivo");
+		}
+	}
+
+	//ahora los impares
+	if ( !esPar (numero) &amp;&amp; !esPositivo (numero) ){
+		console.log(numero + " es impar y positivo");
+	}
+	else if (esPar (numero) &amp;&amp; esPositivo (numero) ){
+		console.log(numero + " es impar y positivo");
+	}
+}
+
+/* MAIN */
+esParYPositivo( 12 ); //Debe mostrar que es par y positivo
+esParYPositivo( -12 ); //Debe mostrar que es par y negativo
+esParYPositivo( 5 ); //Debe mostrar que es impar y positivo
+esParYPositivo( -5 ); //Debe mostrar que es impar y negativo
+}
+
+</code></pre>
+</div>
+<br>
+<br>
+ <br>
+            
+				<h3>Ejercicio 7.7: bola mágica<a id="ejercicio-77-bola-mágica" class="h_anchor"></a></h3>
+<br>
+<p>
+Crea una web que contenga un textbox en el que el usuario escribirá una pregunta y al pulsar un botón, mostrará una posible respuesta al azar (ver la imagen de abajo como ejemplo). Crea al menos 4 posibles respuestas.
+</p>
+<br>
+<p>
+Es decir, cuando se pulse el botón habrá que:
+</p>
+<ol style='padding-left: 30pt' type="1" start="1">
+<li>Ocultar el número 8 (busca en google cómo se oculta un párrafo).</li>
+<li>Elegir un número al azar (busca en google cómo se genera un número al azar).</li>
+<li>Usando condicionales, mostrar un mensaje al azar (si el número aleatorio fue el 1, se mostrará el primer mensaje, si es el 2 el segundo mensaje y así sucesivamente).</li>
+</ol>
+<br>
+<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image017.png">
+</p>
+<br>
+<p>
+Nota: para hacer la bola puedes copiar este trozo de código HTML:
+</p>
+<div class="zim-object">
+<pre><code class="html">&lt;div id="bola"&gt;
+   &lt;div id="gris"&gt;
+      &lt;p id="ocho"&gt;8&lt;/p&gt;
+      &lt;p id="respuesta"&gt;&lt;/p&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+</div>
+<br>
+<br>
+<p>
+Y usar estos estilos:
+</p>
+<div class="zim-object">
+<pre><code class="css">#bola {
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+
+  display:grid;
+  place-items: center;
+}
+
+
+#gris {
+  background-color: #333;
+  border: 1px solid #333;
+  border-radius: 50%;
+  width: 50%;
+  height: 50%;
+  display:grid;
+  place-items: center;
+}
+
+#ocho {
+  font-size: 5em;
+  color: white;
+  text-align: center;
+  line-height: 0;
+  &amp;:empty{
+    display:none;
+  }
+}
+
+#respuesta {
+  padding: 25px;
+  color: lightblue;
+  letter-spacing: 2px;
+  &amp;:empty{
+    display:none;
+  }
+}
+</code></pre>
+</div>
+<br>
+<br>
+ <br>
+            
+				<h3>Ejercicio 7.8<a id="ejercicio-78" class="h_anchor"></a></h3>
+<br>
+<p>
+Crea una página web en la que el usuario tenga que añadir ciertos datos sobre él. Tendrá un textbox para el Nombre, otro para los Apellidos, otro para el Tratamiento (don o doña), otro para la IP y otro más para el País (AR, ES, US, FR...).<br>
+Además habrá dos botones uno que pondrá "Rellenar" y otro que pondrá "Acceder". El de acceder no hará nada hasta que no estén todos los datos rellenos, cuando estén rellenos, simplemente mostrará un alert con un mensaje cualquiera.<br>
+El botón de Rellenar intenta usar el servicio <a href="https://www.geojs.io/" title="https://www.geojs.io/" class="https">https://www.geojs.io/</a> para saber el país y la IP. <br>
+Si está relleno el Nombre, intenta rellenar automáticamente el textbox Tratamiento. Para esto se usarán varios ifs anidados, por ejemplo, si el nombre es María el tratamiento será doña, si el nombre es Juan, el tratamiento será don, si el nombre es Pedro, el tratamiento será don, si el nombre es Ana, el tratamiento será doña... si el textbox Nombre no está relleno o el nombre no lo tenemos contemplado, el campo tratamiento no será rellenado automáticamente.
+</p>
+<br>
+<p>
+<b>Nota</b>: si el servicio geojs no funciona, se puede cambiar el ejercicio para que cuando la ip esté rellena saque los datos de aquí: <a href="https://ipvigilante.com/" title="https://ipvigilante.com/" class="https">https://ipvigilante.com/</a>
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Ejercicio 7.9: Estaciones del año (repaso)<a id="ejercicio-79-estaciones-del-año-repaso" class="h_anchor"></a></h3>
+<br>
+<p>
+Crea una web que contenga un textbox con un día, un textbox que contenga una fecha y un botón que al pulsarlo indique la estación a la que pertenece la fecha.
+</p>
+<br>
+<p>
+<b>Ampliación:</b> en vez de usar textboxes, intenta usar un <tt>input type="date"</tt>
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h17">Switch/case</h2>
+			<pre>
+let a = 'alto';
+
+switch (a) {
+  case 'alto':
+	alert( 'Valor: 45' );
+	break;
+  case 'bajo':
+	alert( 'Valor: 30' );
+	break;
+  case 'medio':
+	alert( 'Valor: 40' );
+	break;
+  default:
+	alert( "Desconozco estos valores" );
+}
+</pre>
+<br>
+
+            
+				<h3>Una solución alternativa usando un Map<a id="una-solución-alternativa-usando-un-map" class="h_anchor"></a></h3>
+<pre>
+let a = 'alto';
+
+let m = new Map();
+m.set('alto', 45);
+m.set('bajo', 30);
+m.set('medio', 40);
+
+let valor = m.get(a);
+if(valor) alert('Valor: ' + valor);
+else alert( "Desconozco estos valores");
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h19">Try...catch</h2>
+			<p>
+En Javascript también tenemos la típica estructura para capturar errores:
+</p>
+<pre>
+try {
+  // código...
+} catch (err) {
+  // manipulación de error
+}
+</pre>
+<br>
+<p>
+Y por supuesto nosotros también podemos lanzar nuestros propios errores con <tt>throw new Error('Mensaje de error');</tt> Aunque esto quizás  no sea tan común.
+</p>
+<br>
+<br>
+
+			<h1 id="h20">Bucles</h1>
+			<p>
+Funcionan igual que en otros lenguajes de programación. Repiten un bloque de instrucciones mientras la condición sea cierta o un número determinado de veces.<br>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image002.png">
+</p>
+<br>
+<pre>
+while (condition) {
+  // code
+}
+</pre>
+<br>
+<pre>
+for (begin; condition; step) {
+  // code
+}
+</pre>
+<br>
+<pre>
+do{
+  //code
+} while(condition);
+</pre>
+<br>
+<br>
+
+			<h2 id="h21">Ejercicio 8.2</h2>
+			<p>
+Escribe un código javascript que haga lo siguiente:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Escribe un bucle <tt>while</tt></li>
+<li>Dentro del bucle haz que se pida un número al usuario. Para ello utiliza la función <tt>prompt()</tt>.</li>
+<li>El bucle se ejecutará mientras el usuario introduzca un número (o cualquier cosa) diferente a <tt>0</tt>.</li>
+<li>Usando la función <tt>divisores</tt> (copia el código o implementa tú una), imprime los divisores del número que ha introducido el usuario.</li>
+</ul>
+<br>
+
+			<h2 id="h22">Ejercicio 8.2b</h2>
+			<p>
+Modifica el código para que si el usuario no introdujo ningún valor en el <tt>prompt</tt> (es decir, si el resultado del <tt>prompt</tt> fue <tt>""</tt>) se muestre un <tt>alert</tt> con el mensaje <tt>"No introdujo ningún dato"</tt> y termine.
+</p>
+<br>
+
+			<h2 id="h23">Ejercicio 8.3</h2>
+			<p>
+Crea un bucle que indique al usuario con un <tt>prompt</tt> que introduzca un número.<br>
+Mientras el número introducido sea mayor que <tt>0</tt> se seguirán pidiendo números. <br>
+Cuando se introduzca <tt>0</tt> se terminará el bucle y se imprimirá cuánto suman en total todos los números introducidos.
+</p>
+<br>
+
+			<h2 id="h24">Ejercicio 8.4</h2>
+			<p>
+Write a loop which <tt>prompts</tt> for a number less than or equal <tt>100</tt>. If the visitor enters another number ask them to input again.<br>
+The loop must ask for a number until either the visitor enters a number greater than <tt>100</tt> or cancels the input/enters an empty line.<br>
+Here we can assume that the visitor only inputs numbers. There’s no need to implement a special handling for a non-numeric input in this task.
+</p>
+<br>
+
+			<h2 id="h25">Ejercicio 8.5 bucles anidados</h2>
+			<p>
+Crea un código que pregunte al usuario por un número e imprima tantos * en la consola como indique el número. 
+</p>
+<br>
+<p>
+Por ejemplo: Si el número es 5, se imprimirá esto:
+</p>
+<pre>
+*
+*
+*
+*
+*
+</pre>
+<br>
+<p>
+Actualiza el código ahora para que los * se impriman todos en la misma línea.<br>
+<tt>*****</tt>
+</p>
+<br>
+<p>
+Actualiza ahora el código para que imprima un cuadrado de *. Nota: usa un bucle anidado, aunque puedas resolver el ejercicio sin ellos. Es un ejercicio para trabajar bucles anidados.<br>
+Por ejemplo, si el número fue 5 se imprimirá:
+</p>
+<pre>
+*****
+*****
+*****
+*****
+*****
+</pre>
+<p>
+Pero si el código es 3, se imprimirá:
+</p>
+<pre>
+***
+***
+***
+</pre>
+<br>
+<p>
+Actualiza el código para que se imprima un triángulo, por ejemplo, si el número es 5 se imprimirá:
+</p>
+<pre>
+*
+**
+***
+****
+*****
+</pre>
+<br>
+<p>
+Pero si el código es 3, se imprimirá:
+</p>
+<pre>
+*
+**
+***
+</pre>
+<br>
+<br>
+
+			<h1 id="h26">Breve introducción a los arrays</h1>
+			<p>
+Declarar un array:
+</p>
+<pre>
+let arrNombreDelArray = []; // best way to declare a new empty array
+let frutas = ["Melón", "Kiwi", "Pera", "Mango"]; // declare an array with a few elements 
+</pre>
+<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image016.png">
+</p>
+<br>
+<p>
+Acceder a los elementos del array:
+</p>
+<pre>
+frutas[2] = "Uvas"; //Cambiamos el tercer elemento
+console.log( fruits[2] );  
+</pre>
+<br>
+<p>
+Añadir y quitar elementos:
+</p>
+<pre>
+frutas.push("Sandía");               // añade por el final
+frutas[frutas.length] = "Melocotón"; //añade por el final
+fruits.unshift("Kiwi");              //añade por el principio
+
+let ultimaFruta = frutas.pop();
+let primeraFruta = frutas.shift()
+</pre>
+<br>
+<br>
+<br>
+
+			<h1 id="h27">Introducción brevísima a la depuración de código</h1>
+			<p>
+Depurar código puede ser una de las herramientas más relevantes a la hora de programar, código queaparentemente es correcto puede no funcionar en alguna circunstancia o no funcionar correctamente en absoluto sin que seamos capaces de comprender la razón.
+</p>
+<br>
+<p>
+En javascript se puede incluir la palabra <tt>debugger</tt> en nuestro código para forzar el depurador en el navegador. Por ejemplo, crea un fichero javascript con este código, que esperamos que recorra el array mostrando todos sus elementos:
+</p>
+<pre>
+const a=[ 0,14,24,34,54,64,74,84,94];
+for(let i=a.length-1; i&gt;0 ;i--){
+  console.log( a[i] );
+}
+</pre>
+<br>
+<p>
+Si los datos del array fueran muchos números aleatorios de 7 cifras (por ejemplo 1234 números) o el código más complejo, tal vez no nos daríamos cuenta de que el código no imprime todos los números. Añade la palabra <tt>debugger</tt> y vuelve a ejecutar el código.
+</p>
+<pre>
+const a=[ 0,14,24,34,54,64,74,84,94];
+for(let i=a.length-1; i&gt;0 ;i--){
+  debugger
+  console.log( a[i] );
+}
+</pre>
+<br>
+<br>
+<p>
+Ahora el navegador abrira el depurador de código donde podremos ejecutar las instrucciones paso a paso (con los controles marcados en rojo en la imagen de abajo) y establecer expresiones cuyo valor queremos ir comprobando (marcados en azul en la imagen de abajo).
+</p>
+<br>
+<p>
+<img src="./2c_-_Estructuras_de_control_files/pasted_image003.png">
+</p>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>
