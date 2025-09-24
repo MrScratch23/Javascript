@@ -15,7 +15,7 @@ function getPH() {
 
     if (phAgua >= 6.5 && phAgua <= 8.5) {
         
-        solucion = "<p>El ph del agua es neutro</p>";
+        solucion = "neutro";
     }
 
     if (phAgua <= 11 && phAgua >= 8.5) {
