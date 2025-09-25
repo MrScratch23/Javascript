@@ -1,0 +1,751 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>3b - Generación de HTML y cookies</title>
+	<meta name='Generator' content='Zim 0.75.2'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">3b - Generación de HTML y cookies</a> <br>
+            <a href="#h2">Generación de texto y elementos HTML</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Interactividad del ejemplo <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h4">Funciones para insertar texto y HTML</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Problema <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h6">Ejercicios</a> <br>
+            <a href="#h7">Cookies, localStorage, sessionStorage</a> <br>
+            &nbsp; &nbsp; <a href="#h8">Gestión de cookies</a> <br>
+        
+        
+				&nbsp; &nbsp; &nbsp; &nbsp; Eliminar una cookie y fecha de expiración <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h12">Gestión básica de localStorage</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Almacenar objetos y arrays <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Manejador de eventos para API Storage <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h15">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">3b - Generación de HTML y cookies</h1>
+			<p>
+Contenido básico
+</p>
+<ul style='padding-left: 30pt'>
+<li>Generación de texto y elementos HTML</li>
+<li>Cookies</li>
+<li>localStorage</li>
+<li>SessionStorage</li>
+</ul>
+<br>
+<p>
+No se tratará IndexedDB.
+</p>
+<br>
+<br>
+
+			<h1 id="h2">Generación de texto y elementos HTML</h1>
+			<p>
+En un documento HTML se tienen que distinguir entre:
+</p>
+<ul style='padding-left: 30pt'>
+<li><b>Nodos</b> → Texto, Elementos y Comentarios</li>
+<li><b>Elementos</b> → los propios elementos HTML (las etiquetas)</li>
+</ul>
+<br>
+<p>
+La manera más cómoda de verlo es con un ejemplo. Imagina que tienes este HTML en tu página:
+</p>
+<pre>
+&lt;div id="divPregunta"&gt;
+  &lt;!-- contenido --&gt;
+  &lt;p id="pTexto"&gt;¿Cuánto es 6×4?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;button id="btnResolver" type="button"&gt;Resolver&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<br>
+<p>
+Copia el código de arriba en la siguiente web. Repite la prueba dejando todo el código sin espacios entre etiquetas y el resultado será similar al de la imagen de abajo..<br>
+<a href="https://software.hixie.ch/utilities/js/live-dom-viewer/" title="https://software.hixie.ch/utilities/js/live-dom-viewer/" class="https">https://software.hixie.ch/utilities/js/live-dom-viewer/</a><br>
+<img src="./3b_-_Generación_de_HTML_y_cookies_files/pasted_image.png">
+</p>
+<br>
+
+            
+				<h3>Interactividad del ejemplo<a id="interactividad-del-ejemplo" class="h_anchor"></a></h3>
+<br>
+<p>
+Por simplificar los selectores CSS se han añadido id a varios elementos HTML. Lo que queremos es que al pulsar sobre el botón, se cambie el texto del párrafo y en la divisón interna se oculte el botón y se muestre el resultado.
+</p>
+<br>
+<p>
+Evidentemente hay muchas maneras de resolverlo y la de abajo es una de ellas.<br>
+Prueba a usar <tt>innerText</tt> las dos veces para ver las diferencias.
+</p>
+<pre>
+function resolver(){ 
+  document.querySelector("#pTexto").innerText = "Solución de 6 × 4";
+  document.querySelector("#divPregunta &gt; div").innerHTML ="&lt;p&gt;6 × 4 es 24&lt;/p&gt; \
+	&lt;p&gt;&lt;strong&gt;Explicación:&lt;/strong&gt; 6 * 4 = 6 + 6 + 6 + 6&lt;/p&gt;";  
+}
+
+let btnResolver = document.querySelector("#btnResolver");
+btnResolver.addEventListener('click', resolver);
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h4">Funciones para insertar texto y HTML</h2>
+			<ul style='padding-left: 30pt'>
+<li><tt>innerText = texto</tt></li>
+<li><tt>innerHTML = códigoHTML</tt></li>
+<li><tt>outerText = texto</tt> → reemplaza el propio elemento con el texto</li>
+<li><tt>outerHTML = códigoHTML</tt> → reemplaza el propio elemento con el HTML</li>
+<li><tt>insertAdjacentText( posición, texto)</tt> → inserta el texto en la posición indicada</li>
+<li><tt>insertAdjacentHTML( posición, códigoHTML)</tt> → ídem, pero con HTML</li>
+</ul>
+<br>
+<p>
+Posibles valores de <tt>posición</tt> respecto al elemento <tt>&lt;p&gt;</tt>:<br>
+<img src="./3b_-_Generación_de_HTML_y_cookies_files/pasted_image001.png">
+</p>
+<br>
+<p>
+Puedes hacer pruebas para ver su funcionamiento con el código de arriba.
+</p>
+<br>
+<br>
+
+            
+				<h3>Problema<a id="problema" class="h_anchor"></a></h3>
+<br>
+<p>
+Mira este código para el HTML de arriba:
+</p>
+<pre>
+let btnResolver = document.querySelector('#btnResolver');
+btnResolver.addEventListener('click', () =&gt; {
+  let v = document.querySelector('#divResultado');
+  v.innerHTML = '&lt;ul&gt;';
+  v.innerHTML += '&lt;li&gt;Hola&lt;/li&gt;';
+  v.innerHTML += '&lt;li&gt;Caracola&lt;/li&gt;';
+  v.innerHTML += '&lt;/ul&gt;';
+});
+</pre>
+<br>
+<p>
+Genera una lista vacía y fuera dos <i>list item</i>. ¿Por qué?<br>
+<img src="./3b_-_Generación_de_HTML_y_cookies_files/pasted_image002.png">
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h6">Ejercicios</h2>
+			<p>
+<b>Ejercicio 3b1</b>: <br>
+Crea una web que contenga dentro del <tt>&lt;body&gt;</tt> un <tt>&lt;h1&gt;</tt> con el título del ejercicio, un botón con la etiqueta <i>Ver Resultado</i> <br>
+y una etiqueta <tt>&lt;main&gt;</tt> que será donde realmente trabajaremos.<br>
+Dentro de la etiqueta <tt>&lt;main&gt;</tt> añade un par de divisiones cada una con una pregunta. Cuando el usuario haga click en ellas se cambiará su contenido por la respuesta y un botón con la etiqueta <i>Acertada</i>. Si el usuario vuelve a hacer click sobre la división o el botón volverá a aparecer la pregunta. 
+</p>
+<br>
+<p>
+<b>Ampliación</b>:<br>
+Si pulsó sobre el botón <i>Acertada</i>, la respuesta se marcará como <i>contestada correctamente</i> (por ejemplo usando un array de <tt>respuestasAcertadas</tt>).<br>
+Si pulsa sobre el botón <i>Resultado</i> mostrará el número de preguntas marcadas como <i>contestadas correctamente,</i> el total de preguntas y el porcentaje de aciertos
+</p>
+<br>
+<br>
+<br>
+
+			<h1 id="h7">Cookies, localStorage, sessionStorage</h1>
+			<p>
+Enlaces relacionados con la GDPR: 
+</p>
+<ul style='padding-left: 30pt'>
+<li><a href="https://event-driven.io/pl/gdpr_for_busy_developers/" title="https://event-driven.io/pl/gdpr_for_busy_developers/" class="https">https://event-driven.io/pl/gdpr_for_busy_developers/</a></li>
+<li><a href="https://www.aepd.es/prensa-y-comunicacion/notas-de-prensa/aepd-actualiza-guia-cookies-para-adaptarla-a-nuevas-directrices-cepd" title="https://www.aepd.es/prensa-y-comunicacion/notas-de-prensa/aepd-actualiza-guia-cookies-para-adaptarla-a-nuevas-directrices-cepd" class="https">https://www.aepd.es/prensa-y-comunicacion/notas-de-prensa/aepd-actualiza-guia-cookies-para-adaptarla-a-nuevas-directrices-cepd</a></li>
+<li><a href="https://www.aepd.es/guias/guia-cookies.pdf" title="https://www.aepd.es/guias/guia-cookies.pdf" class="https">https://www.aepd.es/guias/guia-cookies.pdf</a></li>
+<li><a href="https://www.google.com/search?client=firefox-b-d&q=Guía+sobre+el+uso+de+las+cookies%2C+elaborada+por+la+Agencia+Española+de+Protección+de+Datos+%28AEPD%29" title="https://www.google.com/search?client=firefox-b-d&amp;q=Guía+sobre+el+uso+de+las+cookies%2C+elaborada+por+la+Agencia+Española+de+Protección+de+Datos+%28AEPD%29" class="https">https://www.google.com/search?client=firefox-b-d&amp;q=Guía+sobre+el+uso+de+las+cookies%2C+elaborada+por+la+Agencia+Española+de+Protección+de+Datos+%28AEPD%29</a></li>
+</ul>
+<br>
+<p>
+Diferencias y similitudes entre <tt>cookies</tt>, <tt>localStorage</tt> y <tt>sessionStorage</tt>:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Tamaño: las <tt>cookies</tt> permiten almacenar sólo 4KB. <tt>LocalStorage</tt> y <tt>sessionStorage</tt> permite hasta 5MB</li>
+<li>Sólo almacenan texto en pares de <tt>clave=valor</tt></li>
+<li>Ambas se almacenan por dominio</li>
+<li>Las cookies <b>se mandan automáticamente</b> al servidor en cada petición (importante para la autenticación, por ejemplo)</li>
+<li><tt>LocalStorage</tt> y <tt>cookies</tt> son persistentes, pero <tt>sessionStorage</tt> se borra al cerrar el navegador (y al cerrar la pestaña)</li>
+<li>Los datos se almacenan sin encriptar → es responsabilidad del programador hacerlo si es necesario</li>
+<li>Las <tt>cookies</tt> tienen fecha de caducidad, los otros no</li>
+<li><tt>Cookies</tt> y <tt>localStorage</tt> se ven afectada por las leyes de protección de datos como el RGPD</li>
+</ul>
+<br>
+<br>
+
+			<h2 id="h8">Gestión de cookies</h2>
+			<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie" title="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie" class="https">https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie</a>
+</p>
+<br>
+<p>
+Para hacer pruebas no puedes usar una pestaña vacía, utiliza un dominio cualquiera como <a href="http://rojo.com" title="http://rojo.com" class="http">http://rojo.com</a>.
+</p>
+<br>
+<p>
+<b>Crear cookie</b>:
+</p>
+<pre>
+document.cookie = "comidaPreferida=serranito; SameSite=None;";
+document.cookie = "bebidaFavorita=vino; SameSite=None;";
+</pre>
+<br>
+<p>
+<b>Nota</b>: <tt>SameSite=None</tt> indica que se mandará en peticiones sin restricciones, aunque la petición esté en otro dominio. Otro valor posible es <tt>Lax</tt> y <tt>Strict</tt>.<br>
+Si se añade <tt>Secure</tt> indicamos que la cookie sólo se mande si se está usando el protocolo <tt>https</tt> (no se mandará por <tt>http</tt>).
+</p>
+<br>
+<p>
+<b>Recuperar cookies</b>:
+</p>
+<pre>
+//imprime todas por la consola
+console.log( document.cookie );
+
+//recupera una concreta
+document.cookie.split(";").filter(e=&gt;e.trim().startsWith("comidaPreferida=")).toString().trim();
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 3b2</b>: usando los métodos que hemos visto de cadenas de caracteres, crea una función que reciba una cadena de caracteres y devuelva el valor asociado a la cookie con esa clave.<br>
+Nota: esto se puede resolver usando un bucle, pero puedes intentar resolverlo sin uno usando los métodos <tt>slice(), indexOf, includes(), search()</tt>...
+</p>
+<br>
+<p>
+<b>Ejercicio 3b2 cookies</b>: crea una web en el que el usuario pueda elegir en un <tt>&lt;select&gt;</tt> si quiere que el fondo de la web sea rojo o azul al pulsar un cookie. Haz que la preferencia sea persistente guardando el valor en una cookie que se leerá al arrancar la web y colocará el color de fondo de la página (usa el atributo <tt>style.backgroundColor="red"</tt>).
+</p>
+<br>
+
+            
+						<pre class="codigo">
+Abajo puedes ver una posible solución del ejercicio. Piénsalo antes de pulsar el botón.
+							<div class="codigojs" style="display:none">let s = `function recuperarCookie(sCookie){
+  const posInicial = document.cookie.indexOf(sCookie+"=");
+  if(posInicial == -1 ) return ""; // no hemos encontrado el valor buscado
+
+  const rebanada1 = document.cookie.slice(posInicial);
+  const posFinal = rebanada1.indexOf(";");
+
+  let rebanada2 = rebanada1; //Si es el último valor, no hay ; ni hay que recortar más
+  if(posFinal != -1 ){ //Si no es el último valor, hay que recortar desde el primer ;
+    rebanada2 = rebanada1.slice(0,posFinal);
+  }
+
+  const posIgual = rebanada2.indexOf("=");
+  return rebanada2.slice(posIgual+1);
+}`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				<p>
+Finalmente veremos el código para eliminar una cookie.
+</p>
+<br>
+            
+				<h3>Eliminar una cookie y fecha de expiración<a id="eliminar-una-cookie-y-fecha-de-expiración" class="h_anchor"></a></h3>
+<br>
+<p>
+Para eliminar una cookie basta con establecer una fecha de expiración en el pasado.
+</p>
+<pre>
+function eliminarCookie(nombreCookie) {
+  // Establece la fecha de expiración en el pasado (por ejemplo, 1 de enero de 1970)
+  var fechaExpiracion = new Date(0);
+
+  // Crea una cookie con el mismo nombre y fecha de expiración en el pasado
+  document.cookie = nombreCookie + "=; expires=" + fechaExpiracion.toUTCString() + "; path=/";
+}
+</pre>
+<br>
+<br>
+<br>
+ <br>
+			<h2 id="h12">Gestión básica de localStorage</h2>
+			<p>
+La gestión es muy sencilla:
+</p>
+<pre>
+localStorage.dato=5;
+let s = localStorage.dato;
+let k = localStorage.getItem("dato");
+</pre>
+<br>
+<p>
+Acceder a un elemento por índice :<br>
+<tt>let clave = localStorage.key(5);</tt>
+</p>
+<br>
+<p>
+Eliminar un elemento por clave:
+</p>
+<pre>
+localStorage.removeItem("clave");
+</pre>
+<br>
+<p>
+Eliminar todos los elementos:
+</p>
+<pre>
+localStorage.clear();
+</pre>
+<br>
+<br>
+
+            
+				<h3>Almacenar objetos y arrays<a id="almacenar-objetos-y-arrays" class="h_anchor"></a></h3>
+<br>
+<p>
+<b>Problema</b>: en LocalStorage sólo se pueden guardar cadenas de caracteres. Ni los objetos ni los arrays son cadenas de caracteres.
+</p>
+<br>
+<p>
+<b>Solución</b>: convertirlos a notación JSON y guardarlos como cadenas.
+</p>
+<pre>
+let alumno={nombre:"Javier", edad: 38};
+let notas=[4,7,9];
+
+let alumnoStringificado = JSON.stringify( alumno );
+localStorage.alumno = alumnoStringificado;
+
+//reconstruimos el alumno a objeto
+let alumnoRecuperado = JSON.parse( localStorage.alumno )
+
+//Con los array es igual
+localStorage.notas = JSON.stringify( notas );
+let notasRecuperadas = JSON.parse( localStorage.notas )
+</pre>
+<br>
+<p>
+<b>Importante</b>: una cadena JSON no puede contener métodos, sólo datos. Al <i>estringuificar</i> un objeto los métodos se perderán. Si deseas recuperar el objeto con los métodos desde el localStorage tras <i>estringuificarlo</i>, puedes añadir al constructor de tu objeto la funcionalidad necesaria para recrearlo a partir de la cadena <i>estringuificada</i> o el objeto JSON. Esto ahora mismo no sabemos hacerlo, pero más adelante veremos cómo crear nuestros objetos y clases.
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Manejador de eventos para API Storage<a id="manejador-de-eventos-para-api-storage" class="h_anchor"></a></h3>
+<br>
+<p>
+El evento se produce ante cualquier cambio de <tt>sessionStorage</tt> o <tt>localStorage</tt>.<br>
+El evento se produce en todas las pestañas del dominio, menos en la que hace el cambio. Se puede usar para lo siguiente: abres dos pestañas de una tienda, metes un producto en el carrito (almacenado en el <tt>localStorage</tt>) y el producto añadido también aparece en la otra pestaña.
+</p>
+<br>
+<pre>
+window.addEventListener("storage", function (oEvento){
+  console.log(oEvento.key);          // Qué clave
+  console.log(oEvento.oldvalue);     // Valor antiguo
+  console.log(oEvento.newvalue);     // Valor nuevo
+  console.log(oEvento.url);          // url
+  // Referencia a localStorage o sessionStorage
+  let oAlmacen = oEvento.storageArea; 
+
+  alert(oAlmacen[oEvento.key]);
+}
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h15">Ejercicios</h2>
+			<p>
+<b>Ejercicio 3b3</b>: Desde 2019 es obligatorio llevar un control de las entradas y salidas de la empresa. Crea una web que tenga tres botones: <i>Fichar</i>, <i>Mostrar</i> y <i>Resetear</i>.<br>
+Cuando se pulse <i>Fichar</i> se guardará en <tt>localStorage.fichajes</tt> la fecha y hora actual (recuerda o busca el objeto <tt>Date</tt>).<br>
+Cuando se pulse <i>Mostrar</i> se Mostrará una lista de todos los fichajes guardados en <tt>localStorage.fichajes</tt>.<br>
+Cuando se pulse <i>Resetear</i> se eliminará el contenido de <tt>localStorage.fichajes</tt>.
+</p>
+<br>
+<p>
+<b>Ampliación 3b3</b>: Añade un control radio button que tenga dos opciones: entrada y salida. Ahora el programa se comportará así;<br>
+Si está seleccionada la entrada, se almacenará en un array de entradas.<br>
+Si está seleccionada la salida, se almacenará en un array de salidas.<br>
+Como el número de las entradas y las salidas deben coincidir al final de la jornada, si se intentan añadir dos entradas seguidas es que se olvidó fichar a la salida del día anterior, por lo que se añadirá también una salida a null. Si se intentan añadir dos salidas seguidas es que se olvidó fichar a la entrada, por lo que se añadirá una entrada a null.<br>
+Para evitar problemas de que se haga doble click sobre el botón sin querer, se impedirá que se hagan fichajes seguidos con menos de 2 segundos entre ellos. 
+</p>
+<br>
+<p>
+<b>Ejercicio 3b4</b>: Crea una web que contenga un cuadro de texto, un textarea y un botón de guardar. Cada vez que se pulse el botón de guardar se guardará el contenido del textarea en una nota con el título escrito en el cuadro de texto. Añade un botón de cargar que sirva para recuperar la nota cuyo título sea el que aparece en el cuadro de texto.<br>
+<b>Ampliación</b>: Si ya existe un texto con ese título, avisa al usuario para saber si quiere sobreescribirlo.<br>
+<b>Ampliación 2</b>: Añade un botón que permita eliminar un texto indicando su título.
+</p>
+<br>
+<p>
+<b>Ejercicio 3b5</b>: Crea un array de nombres de flores predefinido (por ejemplo <tt>["margarita", "rosa", "clavel", "cristantemo", "narciso", "geranio", "lirio", "Azalea", "Tulipán", "Orquídea", "Girasol", "Gladiolo", "Jazmín", "Ciclamen", "Amapola"]</tt>) y haz que cada vez que se pulse un botón se elija un nombre al azar y se almacene en el localStorage. Cada vez que se pulse el botón también se mostrará cuál es el nombre de flor que más veces aparece almacenado en el localStorage.
+</p>
+<br>
+<p>
+<b>Ejercicio 3b6</b>: Crea una web con tres radio button con los textos <i>Colores</i>, <i>Números</i>, <i>Flores</i>, una división con <tt>id="resultado"</tt>, un botón y un botón. Al pulsar el botón se borrará el contenido de la división y se generará una lista (con sus <tt>&lt;ul&gt;</tt> y <tt>&lt;li&gt;</tt>) de la opción elegida.
+</p>
+<br>
+<p>
+HTML inicial:
+</p>
+<pre>
+&lt;div id="divPregunta"&gt;
+  &lt;fieldset&gt;
+  &lt;legend&gt;Elige un valor&lt;/legend&gt;
+  &lt;input type="radio" checked name="sel" value="Colores"&gt; Colores&lt;br&gt;
+  &lt;input type="radio" name="sel" value="Números"&gt; Números&lt;br&gt;
+  &lt;input type="radio" name="sel" value="Flores"&gt; Flores&lt;br&gt;
+  &lt;/fieldset&gt;
+  &lt;button id="btnResolver" type="button"&gt;Resolver&lt;/button&gt;
+  &lt;div id="divResultado"&gt;&lt;/div&gt; 
+&lt;/div&gt;
+</pre>
+<br>
+<p>
+<b>Nota</b>: puedes usar el selector <tt>[name=sel]:checked</tt> para recuperar la opción elegida.
+</p>
+<br>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>

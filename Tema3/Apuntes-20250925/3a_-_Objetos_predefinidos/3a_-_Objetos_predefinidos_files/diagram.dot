@@ -1,0 +1,24 @@
+graph {
+rankdir=LR
+  node [colorscheme=pastel19,style=filled,shape=box]
+  window [fillcolor=1]
+  document [fillcolor=3]
+  anchor [fillcolor=3]
+  forms [fillcolor=3]
+  etc [fillcolor=3]
+  navigator [fillcolor=5]
+  screen [fillcolor=5]
+  location [fillcolor=5]
+  frames [fillcolor=5]
+  history [fillcolor=5]
+  XMLHttpRequest [fillcolor=5]
+  Object [fillcolor=8]
+  Array [fillcolor=8]
+  Function [fillcolor=8]
+  Etc [fillcolor=8]
+
+  
+  window -- document -- anchor -- forms -- etc
+  window -- navigator -- screen -- location -- frames -- history -- XMLHttpRequest
+  window -- Object --  Array -- Function -- Etc
+}

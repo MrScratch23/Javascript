@@ -1,0 +1,956 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>3a - Objetos predefinidos</title>
+	<meta name='Generator' content='Zim 0.75.2'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">3a - Objetos predefinidos</a> <br>
+            <a href="#h2">El objeto Window / Global</a> <br>
+            &nbsp; &nbsp; <a href="#h3">BOM (Browser object model)</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Gestión de ventanas <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+        
+        
+				&nbsp; &nbsp; &nbsp; &nbsp; Otras propiedades y métodos <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+            &nbsp; &nbsp; <a href="#h10">Objeto document</a> <br>
+            <a href="#h11">Objetos nativos en Javascript</a> <br>
+            &nbsp; &nbsp; <a href="#h12">Objeto Number</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Propiedades y métodos del objeto Number <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h14">Objeto String</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Propiedades y métodos del objeto String <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Plantillas literales <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicios <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+				&nbsp; &nbsp; &nbsp; &nbsp; Cuidado con la propiedad length y los emojis <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h20">Objeto Math</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Obtener un valor aleatorio entero entre dos valores ambos incluidos <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h22">Objeto Date</a> <br>
+            &nbsp; &nbsp; <a href="#h23">Otros objetos</a> <br>
+            <a href="#h24">Marcos</a> <br>
+            <a href="#h25">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">3a - Objetos predefinidos</h1>
+			<p>
+Como otros lenguajes, JS tiene un conjunto de objetos predefinidos que ayudan a manejar y obtener información del entorno en el que se ejecuta (navegador, ventana, documento, etc.)
+</p>
+<br>
+<br>
+
+			<h1 id="h2">El objeto Window / Global</h1>
+			<p>
+Proporciona variables y funciones que estarán disponibles en cualquier parte del código. 
+</p>
+<ul style='padding-left: 30pt'>
+<li>En un navegador este es el objeto <tt>window</tt></li>
+<li>En Node.js es <tt>global</tt> (en el entorno del servidor no tiene sentido hablar de una ventana)</li>
+</ul>
+<br>
+<p>
+Por ejemplo la función <tt>alert()</tt> es en realidad <tt>window.alert()</tt>.
+</p>
+<br>
+<p>
+<b>Nota</b>: una variable definida como <tt>var</tt> se incorpora al objeto <tt>window</tt> (<tt>var a</tt> → <tt>window.a</tt>), pero si está definida como <tt>let</tt> no lo hará. Aún así esta es una mala práctica y si es necesario sería mejor declararla directamente (por ejemplo: <tt>window.a = 45;</tt>).
+</p>
+<br>
+<p>
+El objeto <tt>window</tt> encapsula otros muchos objetos interesantes y representa la propia ventana del navegador (por ejemplo <tt>window.innerHeight</tt> indica la altura interior de la ventana).<br>
+<img src="./3a_-_Objetos_predefinidos_files/diagram.png">
+</p>
+<br>
+<br>
+<br>
+
+			<h2 id="h3">BOM (Browser object model)</h2>
+			<p>
+Referencia: <a href="https://www.arkaitzgarro.com/javascript/capitulo-14.html" title="https://www.arkaitzgarro.com/javascript/capitulo-14.html" class="https">https://www.arkaitzgarro.com/javascript/capitulo-14.html</a>
+</p>
+<br>
+<p>
+Propiedades interesantes:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>navigator.userAgent</tt> → string que identifica  al navegador</li>
+<li><tt>navigator.platform</tt> → Sistema operativo</li>
+<li><tt>navigator.language</tt> → Idioma</li>
+<li><tt>navigator.cookieEnabled</tt> → Si están activadas las cookies</li>
+<li><tt>location.href</tt> → string con la URL actual. Si la cambiamos, vamos a la URL que queramos. También podemos formzar un refresco de la página con <tt>location.reload()</tt></li>
+</ul>
+<br>
+
+            
+				<h3>Gestión de ventanas<a id="gestión-de-ventanas" class="h_anchor"></a></h3>
+<br>
+<p>
+Referencia: <a href="https://es.javascript.info/popup-windows" title="https://es.javascript.info/popup-windows" class="https">https://es.javascript.info/popup-windows</a>
+</p>
+<br>
+<p>
+El objeto <tt>window</tt> tiene un conjunto de métodos que permiten modificar algunos aspectos de la ventana, pero cada vez hay menos navegadores que lo permiten: <tt>resizeBy()</tt>, <tt>moveBy()</tt>, <tt>resizeTo()</tt>...
+</p>
+<br>
+<p>
+Sí funcionan: 
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>scrollBy(10, 200)</tt> → mueve el contenido en píxeles</li>
+<li><tt>scrollTo(0,0)</tt> → va a una posición concreta</li>
+</ul>
+<br>
+ <br>
+            
+				<h4>Abrir ventanas<a id="abrir-ventanas" class="h_anchor"></a></h4>
+<p>
+Podemos abrir una ventana con una URL concreta: <tt>window.open("</tt><a href="https://example.com" title="https://example.com" class="https"><tt>https://example.com</tt></a><tt>");</tt>
+</p>
+<br>
+<p>
+O podemos crear una nueva ventana con el contenido que necesitemos:
+</p>
+<pre>
+let newWin = window.open("about:blank", "hello", "width=200,height=200");
+newWin.document.write("Hello, world!");
+</pre>
+<br>
+<p>
+Esa nueva ventana también podrá acceder a su padre con <tt>window.opener</tt>:
+</p>
+<pre>
+newWin.document.write(
+  "&lt;script&gt;window.opener.document.body.innerHTML = 'Test'&lt;\/script&gt;"
+);
+</pre>
+<br>
+<p>
+Sólo podemos escribir en las ventanas que estén creadas desde el mismo origen que la nuestra por motivos de seguridad (no puedo abrir Gmail y usar mi script para leer el correo).
+</p>
+<br>
+<p>
+Con <tt>newWin.close()</tt> se puede cerrar la ventana creada.
+</p>
+<br>
+<br>
+ <br>
+            
+				<h4>Comunicación entre ventanas<a id="comunicación-entre-ventanas" class="h_anchor"></a></h4>
+<p>
+Si creamos las ventanas programáticamente, se pueden compartir datos de la ventana padre a la hija otra <b>si los declaramos con</b> <tt>var</tt> y <b>usamos un servidor web</b>. Imagina este formulario en el <tt>index.html</tt>:
+</p>
+<pre>
+&lt;form action=""&gt;
+  &lt;label for="txtProducto"&gt;Nombre&lt;/label&gt;&lt;br&gt;
+  &lt;input id="txtProducto" type="text" value="Drones"&gt;&lt;br&gt;
+
+  &lt;label for="txtCantidad"&gt;Cantidad&lt;/label&gt;&lt;br&gt;
+  &lt;input id="txtCantidad" type="number" value="37"&gt;&lt;br&gt;
+  &lt;button id="btnFactura" type="button"&gt;Crear factura&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+<br>
+<p>
+Con este código JS recuperamos los datos de los textboxes y abriremos una ventana:
+</p>
+<pre>
+function crearFactura(){
+	producto = document.getElementById('txtProducto').value;
+	cantidad = document.getElementById('txtCantidad').value;
+	window.open("crearFactura.html");
+}
+
+var producto;  // tenemos que declararlos con var para que se puedan
+var cantidad;  // leer desde la ventana hija
+document.getElementById('btnFactura').addEventListener('click', crearFactura);
+</pre>
+<br>
+<p>
+El fichero <tt>crearFactura.html</tt> podría tener este contenido:
+</p>
+<pre>
+&lt;h1&gt;Factura&lt;/h1&gt;
+&lt;table border="1"&gt;
+  &lt;/tr&gt;&lt;th&gt;Producto&lt;/th&gt;&lt;th&gt;Cantidad&lt;/th&gt;&lt;/tr&gt;
+&lt;/tr&gt;
+  &lt;td id="celdaProducto"&gt;&lt;/td&gt;
+  &lt;td id="celdaCantidad"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;script&gt;
+  document.getElementById('celdaProducto').innerHTML=window.opener.producto;
+  document.getElementById('celdaCantidad').innerHTML=window.opener.cantidad;
+&lt;/script&gt;
+</pre>
+<br>
+<p>
+<b>Nota</b>: Si queremos imprimir con <tt>window.print()</tt> podemos añadir <tt>&lt;html lang="en" moznomarginboxes mozdisallowselectionprint&gt;</tt> para que no se muestre el encabezado y el pie de la página en Firefox.
+</p>
+<br>
+ <br>
+            
+				<h4>Recuperar valores de la URL<a id="recuperar-valores-de-la-url" class="h_anchor"></a></h4>
+<p>
+Otra manera de pasar información de una ventana padre a una hija es usando la propia URL en el método open y luego recuperarlos desde la hija.
+</p>
+<br>
+<p>
+Por ejemplo, si hacemos una búsqueda en google podríamos obtener esta URL: <tt>https://www.google.com/search?client=firefox-b-d&amp;q=transition+text-shadow</tt>
+</p>
+<br>
+<p>
+Lo que haremos será crear un objeto URL y usar los métodos para recuperar los parámetros:
+</p>
+<pre>
+url = new URL(window.location.href) 
+let valorClient = url.searchParams.get("client");
+console.log( valorClient ); //"firefox-b-d" 
+</pre>
+<br>
+ <br>
+            
+				<h3>Otras propiedades y métodos<a id="otras-propiedades-y-métodos" class="h_anchor"></a></h3>
+<br>
+<ul style='padding-left: 30pt'>
+<li>temporizadores</li>
+<li><tt>console()</tt>, <tt>alert()</tt>, <tt>confirm()</tt>...</li>
+<li><tt>getSelection()</tt> → obtiene un objeto con el texto seleccionado</li>
+<li><tt>print()</tt> → abre el diálogo de impresión del navegador</li>
+</ul>
+<br>
+ <br>
+            
+				<h4>Temporizadores<a id="temporizadores" class="h_anchor"></a></h4>
+<br>
+<p>
+Dada esta función:
+</p>
+<pre>
+function muestraMensaje() {
+  console.log("Este mensaje se muestra cada segundo");
+}
+</pre>
+<br>
+<p>
+Crear un temporizador:
+</p>
+<pre>
+let idTemp = setTimeout( muestraMensaje, 3000);
+</pre>
+<br>
+<p>
+Crear una tarea repetida:
+</p>
+<pre>
+let idTemp = setInterval(muestraMensaje, 1000);
+</pre>
+<br>
+<p>
+Cancelar el temporizador
+</p>
+<pre>
+clearTimeout(idTemp); 
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h10">Objeto document</h2>
+			<p>
+Contiene todos los elementos HTML de la web y permite crearlos, eliminarlos, modificarlos, recuperarlos, etc. Aunque eso lo veremos un poco más adelante.
+</p>
+<br>
+<ul style='padding-left: 30pt'>
+<li><tt>document.body</tt> → El body del documento actual</li>
+<li><tt>document.forms</tt> → devuelve un HTMLCollection de los elementos <tt>&lt;form&gt;</tt> del documento. Puede ser muy útil.</li>
+<li><tt>document.title</tt> → devuelve y permite cambiar el título de la página</li>
+</ul>
+<br>
+<br>
+<br>
+
+			<h1 id="h11">Objetos nativos en Javascript</h1>
+			<p>
+Veamos algunos de los más importantes con cierta profundidad.<br>
+En JS existen 8 tipos de datos:
+</p>
+<ul style='padding-left: 30pt'>
+<li>7 primitivos que sólo contienen un dato (booleano, cadenas de caracteres, números, bigint, null, undefined y symbol para identificadores)</li>
+<li>Objetos que pueden contener más de un dato y encapsular métodos</li>
+</ul>
+<br>
+<p>
+Podemos averiguar el tipo de un dato con el operador <tt>typeof</tt>.
+</p>
+<br>
+<br>
+
+			<h2 id="h12">Objeto Number</h2>
+			<p>
+Representa un número (el valor <tt>NaN</tt> está definido aquí y por eso se considera un número también).<br>
+Existen los valores <tt>Infinite</tt> y <tt>-Infinite</tt>.
+</p>
+<br>
+
+            
+				<h3>Propiedades y métodos del objeto Number<a id="propiedades-y-métodos-del-objeto-number" class="h_anchor"></a></h3>
+<ul style='padding-left: 30pt'>
+<li><tt>Number("456")</tt> → convierte una cadena de caracteres en número. Extremadamente útil.</li>
+<li><tt>Number.isNaN()</tt> → permite saber si algo es un número. Se puede usar directamente <tt>isNan()</tt> (aunque la implementación es diferente, prueba <tt>Number.isNaN("trece")</tt> y <tt>isNaN("trece")</tt> (esta última fuerza la conversión de tipos).</li>
+<li><tt>Number.parseInt()</tt> o <tt>parseInt()</tt> → intenta convertir una cadena en un entero y devuelve lo que encuentre, por ejemplo: <tt>console.log(parseInt("12ex"));</tt> → mostrará el número <tt>12</tt>, pero <tt>console.log(parseInt("x12er"));</tt> mostrará <tt>NaN</tt>.</li>
+<li>También existe <tt>parseFloat()</tt></li>
+<li><tt>Number.toFixed(2)</tt> → imprime el número con dos decimales, ej. <tt>123.45678.toFixed(2)</tt></li>
+</ul>
+<br>
+<br>
+<p>
+<b>Nota</b>: podemos recuperar los datos de un <tt>input type="number"</tt> como número usando su propiedad <tt>valueAsNumber</tt>. Si usamos <tt>value</tt> la recuperaremos como cadena de caracteres.
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h14">Objeto String</h2>
+			<ul style='padding-left: 30pt'>
+<li>Los string en JS son <b>inmutables</b>. Por tanto ningún método cambia la cadena, sino que devuelven una nueva.</li>
+<li>Se comporta como un array a veces, pero no es un array.</li>
+<li>Puedes recorrerlo con un <tt>for</tt> o un <tt>for..of</tt>,  pero no un <tt>forEach()</tt> o un <tt>map()</tt> porque no es un array.</li>
+<li>Se concatenan con <tt>+</tt>, pero es más potente usar plantillas literales.</li>
+<li>Se pueden usar comillas simples o dobles.</li>
+<li>El retorno de carro se representa con <tt>\n</tt> y es un único caracter</li>
+<li>La primera posición de la cadena de caracteres <tt>s="hola"</tt> es <tt>s[0]</tt> y la última <tt>s[length-1]</tt></li>
+</ul>
+<br>
+
+            
+				<h3>Propiedades y métodos del objeto String<a id="propiedades-y-métodos-del-objeto-string" class="h_anchor"></a></h3>
+<p>
+Métodos y propiedades importantes de la cadena <tt>s="Hola caracola"</tt>
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>length</tt> → la longitud de la cadena</li>
+<li><tt>[]</tt> → recupera el caracter de la posición indicada, ej. <tt>s[3]</tt></li>
+<li><tt>toUpperCase()</tt> y <tt>toLowerCase()</tt> → a mayúsculas y minísculas</li>
+<li><tt>trim()</tt>, <tt>trimStart()</tt> y <tt>trimEnd()</tt> → elimina espacios al principio y/o al final de la cadena, ej. <tt>s.trim()</tt></li>
+<li><tt>indexOf()</tt> y <tt>lastIndexOf()</tt> → devuelve la posición de la cadena buscada (se puede indicar la posición desde la que empezar a buscar)</li>
+<li><tt>split()</tt> → divide la cadena por el parámetro y devuelve un array, ej. <tt>s.split("la")</tt> </li>
+<li><tt>slice()</tt> y <tt>substring()</tt> → <tt>slice(posinicio, posfin)</tt> permite argumentos negativos</li>
+<li><tt>replace()</tt> y <tt>replaceAll()</tt> → puede usar expresiones regulares <tt>replace(patrón, reemplazo)</tt></li>
+<li><tt>padStart()</tt> y <tt>padEnd()</tt> → introduce espacios u otros caracteres para que la cadena tenga la longitud indicada, ej. <tt>s.padStart(22)</tt> o <tt>s.padEnd("32", ".")</tt></li>
+<li><tt>startsWith()</tt>, <tt>endsWith()</tt>, <tt>includes()</tt></li>
+<li><tt>match()</tt> y <tt>matchAll()</tt>→ usan expresiones regulares y devuelven un array con las coincidencias, ej. <tt>s.match(/[a-z][aeiou]l/g)</tt> (cualquier letra seguida de una vocal y una l buscada en toda la cadena, devuelve <tt>["hol","col"]</tt></li>
+<li><tt>charAt()</tt> y <tt>at()</tt> → la diferencia es que <tt>at()</tt> permite índices negativos para empezar por el final</li>
+<li><tt>search()</tt>, <tt>includes()</tt> → <tt>includes(texto)</tt> devuelve un booleano, <tt>search()</tt> recibe una expresión regular y devuelve la posición de la primera coincidencia</li>
+<li><tt>repeat()</tt> → devuelve la cadena repetida n veces, ej. <tt>s.repeat(2)</tt></li>
+<li><tt>concat()</tt> → permite concatenar varias cadenas de caracteres. Ej <tt>s.concat(". ", "Parece ", "menterio")</tt></li>
+<li><tt>localeCompare()</tt> → permite comparar cadenas de caracteres para ordenarlas (por ejemplo en un array). Ejemplo: <tt>"ánodo".localeCompare("ahora", "es")</tt> devolverá <tt>1</tt> si <tt>"ánodo"</tt> en el diccionario español viene después (es menor) que <tt>"ahora",</tt> <tt>0</tt> si son iguales y <tt>-1</tt> si <tt>"ánodo"</tt> viene antes (es mayor).</li>
+</ul>
+<br>
+ <br>
+            
+				<h3>Plantillas literales<a id="plantillas-literales" class="h_anchor"></a></h3>
+<br>
+<pre>
+let edad = 42;
+let msj = `tienes ${edad} y el curso que viene ${edad + 1}`;
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Ejercicios<a id="ejercicios" class="h_anchor"></a></h3>
+<br>
+<p>
+<b>Ejercicio1</b>: Ve a la web <a href="www.aliexpress.com" title="www.aliexpress.com" class="http">www.aliexpress.com</a> y abre la consola. Recupera la URL y reemplaza el primer <tt>.com</tt> por un <tt>.es</tt> y pásala a mayúsculas. ¿En qué posición empieza el último <tt>ES</tt> que aparece?
+</p>
+<br>
+<p>
+<b>Ejercicio 2</b>: partiendo de "caca de la vaca" crea una cadena que tenga un <tt>-</tt> entre cada letra. Es decir: <tt>c-a-c-a- -d-e- -l-a- -v-a-c-a</tt>
+</p>
+<br>
+<p>
+<b>Ejercicio 3</b>: Partiendo del <tt>navigator.userAgent</tt> suma todos los números que aparecen en la cadena de caracteres.<br>
+Por ejemplo si el userAgent es <tt>Firefox/117.0</tt> el resultado será 9 (1+1+7+0).<br>
+Nota: tal vez las funciones <tt>isNaN()</tt> y <tt>Number()</tt> puedan serte de utilidad.
+</p>
+<br>
+<p>
+<b>Ejercicio 4a</b>: Partiendo de <tt>"echa el freno, Magdaleno"</tt> haz que se cuenten el número de vocales que tiene el texto.
+</p>
+<br>
+<p>
+<b>Ejercicio 4b</b>: haz que se devuelva una cadena de caracteres con el número de veces que aparece cada vocal. Por ejemplo <tt>"a3, e4, i0, o2, u0"</tt>
+</p>
+<br>
+<p>
+<b>Ejercicio 5</b>: Los reyes magos te encargan crear un método que permita averiguar qué hay en los regalos ya envueltos, por ejemplo:
+</p>
+<pre>
+//*******
+//* aro *
+//*******
+let a="*******\n* aro *\n*******";
+let p="***********\n* patines *\n***********";
+let ao="*****************\n* anillo de oro *\n*****************";
+console.log( desenvolver(a) ); // "aro"
+console.log( desenvolver(ao) ); // "anillo de oro" 
+</pre>
+<p>
+Nota: intenta resolverlo sin usar un bucle.
+</p>
+<br>
+<p>
+<b>Ejercicio 5b</b>: Haz justo lo contrario, una función que reciba una cadena de caracteres y la devuelva envuelta, por ejemplo:
+</p>
+<pre>
+console.log( envolver("reloj") ); // *********\n* reloj *\n*********
+</pre>
+<p>
+Nota: intenta resolverlo sin usar un bucle.
+</p>
+<br>
+<p>
+<b>Ejercicio 6</b>: Un editor que utilizas en tu web te devuelve las listas creadas con Markdown así: <tt>"* Uno\n* Dos\n* Tres \n* Cuatro\n"</tt>. <br>
+Crea una función que reciba esas cadenas de caracteres y devuelva otra equivalente de una lista HTML:<br>
+<tt>"&lt;ul&gt;&lt;li&gt;Uno&lt;/li&gt;&lt;li&gt;Dos&lt;/li&gt;&lt;li&gt;Tres&lt;/li&gt;&lt;li&gt;Cuatro&lt;/li&gt;&lt;/ul&gt;"</tt>
+</p>
+<br>
+<p>
+<b>Ejercicio 7</b>: Crea una función que indique si una cadena de caracteres es un palíndromo. Lo es porque si no se tienen en cuenta los espacios (ni otros símbolos de puntuación) se lee igual de izquierda a derecha y de derecha a izquierda. Por ejemplo <tt>"arriba la birra"</tt> o <tt>"someto votemos"</tt>.
+</p>
+<br>
+<p>
+<b>Ejercicio 8</b>: Crea una función que se llame <tt>reemplaza</tt> que reciba tres parámetros:
+</p>
+<ul style='padding-left: 30pt'>
+<li>una cadena de caracteres</li>
+<li>una cadena que representa los caracteres que serán reemplazados</li>
+<li>una cadena de la misma longitud que la anterior y que contiene los caracteres que reemplazarán a los anteriores</li>
+</ul>
+<p>
+Devolverá una nueva cadena que sea la original reemplazando las ocurrencias de cada letra del segundo parámetro por la correspondiente letra del tercer parámetro. <br>
+Por ejemplo: <tt>reemplaza("pues yavestruz", "eus", "*xp")</tt> devolverá <tt>"px*p yav*ptrxz"</tt><br>
+Por ejemplo: <tt>reemplaza("pues yavestruz", "aeiou", "123")</tt> devolverá un error porque la tercera cadena no tiene la longitud de la segunda.
+</p>
+<br>
+<br>
+ <br>
+            
+				<h4>Posibles soluciones<a id="posibles-soluciones" class="h_anchor"></a></h4>
+<p>
+Posible solución 4a: "echa el freno, Magdaleno".replace(/[^aeiou]/g, "").length <br>
+También ao.slice(ao.indexOf(" ")+1,ao.lastIndexOf(" "))<br>
+Posible solución de 4b: `   a${ao.replaceAll(/[^a]/g,"").length} e${ao.replaceAll(/[^e]/g,"").length} ... `<br>
+Otra solución de 4b: `   a${a.length - a.replaceAll("a","").length} e${a.length - a.replaceAll("e","").length} ...` <br>
+Posible solución 5: a.replaceAll("*","").replaceAll("\n", "").trim()<br>
+Posible solución 5b: "".padStart(r.length+4,"*") +"\n* " + r + " *\n".padEnd(r.length+7,"*") <br>
+Posible solución 6: "&lt;ul&gt;"+"* Uno\n* Dos\n* Tres \n* Cuatro\n".replaceAll("* ","&lt;li&gt;").replaceAll("\n", "&lt;/li&gt;") +"/ul&gt;";
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Cuidado con la propiedad length y los emojis<a id="cuidado-con-la-propiedad-length-y-los-emojis" class="h_anchor"></a></h3>
+<p>
+Los caracteres unicode se pueden representar de varias maneras (UTF-8 es la más popular, pero también están UTF-32 o UTF-16) y no siempre los grafemas (<i>graphemes</i>) de UTF-8 se representan correctamente como un único caracter si están compuestos por más de un <i>endpoint</i> (por ejemplo el caracter <tt>á</tt> puede ser un único endpoint o dos endpoint: <tt>a</tt> + <tt>´</tt> dependiendo de cómo decidamos codificarlos, porque Unicode permite ambos). Esto puede dar a situaciones extrañas en las que <tt>.length</tt> no indique correctamente el número de caracteres como debería hacer en todas las ocasiones.
+</p>
+<pre>
+"❌".length            //1
+"😀".length           // 2
+"🤦‍♀️".length           // 5
+"🤦‍♀️".substring(3,6)   // "♀️" 
+"🦸🏼‍♂️".substring(0,2)   // "🦸" , longitud 7 = 🦸 + color de piel + ♂️
+"👩🏼‍🦰".length           // 7, 👩 + color de piel + 🦰 (pelo pelirrojo)
+</pre>
+<br>
+<p>
+Y también tenemos casos como estos:
+</p>
+<pre>
+"Å" === "Å"  // false, la combinación  A+º es diferente a directamente Å
+</pre>
+<br>
+ <br>
+			<h2 id="h20">Objeto Math</h2>
+			<p>
+Permite realizar operaciones matemáticas complejas e incluye símbolos y valores:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>Math.PI</tt>, <tt>Math.E</tt>, <tt>Math.SQRT2</tt></li>
+<li><tt>Math.abs()</tt>, <tt>Math.sign()</tt>, <tt>Math.sin()</tt>, <tt>Math.cos()</tt>, </li>
+<li><tt>Math.max()</tt>, <tt>Math.min()</tt>, </li>
+<li><tt>Math.floor()</tt>, <tt>Math.ceil()</tt>, <tt>Math.round()</tt></li>
+<li><tt>Math.sqrt()</tt>, <tt>Math.pow()</tt></li>
+<li>Y muchos más</li>
+</ul>
+<br>
+
+            
+				<h3>Obtener un valor aleatorio entero entre dos valores ambos incluidos<a id="obtener-un-valor-aleatorio-entero-entre-dos-valores-ambos-incluidos" class="h_anchor"></a></h3>
+<pre>
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); 
+}
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h22">Objeto Date</h2>
+			<p>
+Representa una fecha y hora. Es bastante complejo, por lo que se recomienda tener a mano la documentación siempre que se vaya a trabajar con fechas.<br>
+Las fechas se almacenan como el número de milisegundos transcurridas desde la fecha base.<br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date" class="https">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date</a>
+</p>
+<br>
+<p>
+<b>Nota</b>: podemos recuperar los datos de un <tt>input type="date"</tt> como número usando su propiedad <tt>valueAsDate</tt>. Si usamos <tt>value</tt> la recuperaremos como cadena de caracteres.
+</p>
+<br>
+<pre>
+let f = new Date("2031-10-17");   // 17 de octubre de 2031
+let f2 = new Date( Date.now());   //fecha y hora actual
+let f3 = new Date( 2026, 11, 30); // 30 de diciembre de 2026 (0=enero, 1=febrero...)
+
+console.log( "Año: " + f.getFullYear() );
+console.log( "Mes: " + f.getMonth()+1 ); //0=Enero, 1=Febrero, ...
+console.log( "Día: " + f.getDate() );
+console.log( f2.toLocaleDateString() );
+console.log( f2.toLocaleTimeString() );
+console.log( f2.toLocaleString() );
+</pre>
+<br>
+<p>
+<b>Nota importante</b>: si no usas el operador new para crear el objeto, obtendrás una cadena de caracteres <b>con la fecha actual</b>.
+</p>
+<pre>
+let d1 = new Date("2027-12-23"); //crea un objeto de tipo fecha
+let d2 = Date("2027-12-23")      //crea una cadena de caracteres con la fecha actual
+</pre>
+<br>
+<p>
+Crear una fecha desde una cadena de caracteres tiene algunas inconsistencias entre navegadores (si no se usa el separador <tt>"-"</tt>).
+</p>
+<br>
+<p>
+Además hay que tener en cuenta que el constructor del objeto <tt>Date</tt> realiza un <i>overflow</i> y <i>underflow</i> si puede hacerlo para que la fecha sea correcta. Documentación: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date" class="https">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date</a>
+</p>
+<br>
+<p>
+<i>If any parameter overflows its defined bounds, it "carries over". For example, if a monthIndex greater than 11 is passed in, those months will cause the year to increment; if a minutes greater than 59 is passed in, hours will increment accordingly, etc.</i> <br>
+<i>Therefore, new Date(1990, 12, 1) will return January 1st, 1991; new Date(2020, 5, 19, 25, 65) will return 2:05 A.M. June 20th, 2020.</i><br>
+<i>Similarly, if any parameter underflows, it "borrows" from the higher positions. For example, new Date(2020, 5, 0) will return May 31st, 2020.</i>
+</p>
+<br>
+<p>
+Una manera sencilla de validar fechas es la siguiente:
+</p>
+<pre>
+/**
+ * Valida si una fecha en formato AÑO-MES-DÍA es válida
+ * @param {String} dateStr - Fecha en formato AÑO-MES-DÍA 
+ * @returns Boolean
+ */
+function isValidDate(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  const date = new Date(year, month - 1, day); // el mes comienza a contarse en 0
+
+  return date.getFullYear() == year &amp;&amp;
+         date.getMonth() == month - 1 &amp;&amp;
+         date.getDate() == day;
+}
+</pre>
+<br>
+<br>
+<p>
+Otros recursos y bibliotecas:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Day.js (<a href="https://day.js.org/" title="https://day.js.org/" class="https">https://day.js.org/</a>)</li>
+<li>Moment.js (<a href="https://momentjs.com/" title="https://momentjs.com/" class="https">https://momentjs.com/</a>)</li>
+<li>Temporal API (<a href="https://tc39.es/proposal-temporal/docs/index.html" title="https://tc39.es/proposal-temporal/docs/index.html" class="https">https://tc39.es/proposal-temporal/docs/index.html</a> futuro standard, ahora mismo está marcado como experimental)</li>
+</ul>
+<br>
+
+			<h2 id="h23">Otros objetos</h2>
+			<ul style='padding-left: 30pt'>
+<li>Array</li>
+<li>Function</li>
+<li>RegExp</li>
+<li>JSON</li>
+<li>Error</li>
+<li>Promise</li>
+<li>Boolean</li>
+<li>Y muchos más</li>
+</ul>
+<br>
+<br>
+
+			<h1 id="h24">Marcos</h1>
+			<p>
+Murieron hace mucho tiempo, los <tt>&lt;iframes&gt;</tt> se siguen usando, pero no demasiado más allá de alguna curiosidad. Por ejemplo Codepen (<a href="https://codepen.io/" title="https://codepen.io/" class="https">https://codepen.io/</a>) los usa y también Google para que insertemos vídeos de Youtube o mapas de Google Maps en nuestras webs.
+</p>
+<br>
+<br>
+
+			<h1 id="h25">Ejercicios</h1>
+			<p>
+<b>Ejercicio 3a fechas</b>: pide a un usuario que introduzca el día mes y año de una fecha usando tres <tt>input type="number"</tt> y a continuación una más pero usando un <tt>input type="date"</tt>. A partir de esos datos construye dos objetos <tt>Date</tt> y muestra el número de días entre ambas. <br>
+Pista: Puedes convertir los objetos <tt>Date</tt> a tiempo los milisegundos transcurridos desde la fecha base con <tt>getTime()</tt>, restarlas y a partir de ese dato calcular la cantidad de días. O directamente puedes restarlas.
+</p>
+<br>
+<p>
+<b>Ejercicio 3a fechas 2</b>: Crea una parte de una web de reservas hoteleras que conste de dos una división con <tt>id="resultado"</tt>, sendos <tt>input type="date"</tt> (uno para la fecha de entrada y otro para la de salida) y un botón con la etiqueta <i>Reservar</i>. En la web se pedirá al usuario que introduzca las fechas y cuando se pulse el botón con la etiqueta <i>Reservar</i> ocurrirá lo siguiente:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Comprueba que los inputs están rellenos, si no es así se mostrará un mensaje de error en la división con <tt>id="resultado"</tt>.</li>
+<li>Si están rellenos, se calculará el número de días entre las fechas (los días de reserva) que se mostrarán en la división con <tt>id="resultado"</tt>.</li>
+<li>Si la fecha de salida es anterior a la de entrada se mostrará un mensaje de error en la división con <tt>id="resultado"</tt>.</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: se puede recuperar la información de un <tt>input type="date"</tt> directamente como un objeto fecha usando <tt>valueAsDate</tt> en lugar de <tt>value</tt>
+</p>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>
