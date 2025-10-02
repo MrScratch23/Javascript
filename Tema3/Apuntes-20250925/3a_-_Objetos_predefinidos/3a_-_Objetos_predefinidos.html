@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>3a - Objetos predefinidos</title>
-	<meta name='Generator' content='Zim 0.75.2'>
+	<meta name='Generator' content='Zim 0.76.1'>
 	<style type='text/css'>
 	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
 	    :root {
@@ -294,12 +294,14 @@ background-image: var(--html-background-color-image);
 				&nbsp; &nbsp; &nbsp; &nbsp; Cuidado con la propiedad length y los emojis <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
             &nbsp; &nbsp; <a href="#h20">Objeto Math</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Sumar los valores de un array <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
 				&nbsp; &nbsp; &nbsp; &nbsp; Obtener un valor aleatorio entero entre dos valores ambos incluidos <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
-            &nbsp; &nbsp; <a href="#h22">Objeto Date</a> <br>
-            &nbsp; &nbsp; <a href="#h23">Otros objetos</a> <br>
-            <a href="#h24">Marcos</a> <br>
-            <a href="#h25">Ejercicios</a> <br>
+            &nbsp; &nbsp; <a href="#h23">Objeto Date</a> <br>
+            &nbsp; &nbsp; <a href="#h24">Otros objetos</a> <br>
+            <a href="#h25">Marcos</a> <br>
+            <a href="#h26">Ejercicios</a> <br>
 </div>
 <!-- Sumario -->
 
@@ -352,7 +354,7 @@ Propiedades interesantes:
 <li><tt>navigator.platform</tt> → Sistema operativo</li>
 <li><tt>navigator.language</tt> → Idioma</li>
 <li><tt>navigator.cookieEnabled</tt> → Si están activadas las cookies</li>
-<li><tt>location.href</tt> → string con la URL actual. Si la cambiamos, vamos a la URL que queramos. También podemos formzar un refresco de la página con <tt>location.reload()</tt></li>
+<li><tt>location.href</tt> → string con la URL actual. Si la cambiamos, vamos a la URL que queramos. También podemos forzar un refresco de la página con <tt>location.reload()</tt></li>
 </ul>
 <br>
 
@@ -759,6 +761,42 @@ Permite realizar operaciones matemáticas complejas e incluye símbolos y valore
 <br>
 
             
+				<h3>Sumar los valores de un array<a id="sumar-los-valores-de-un-array" class="h_anchor"></a></h3>
+<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sumPrecise" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sumPrecise" class="https">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sumPrecise</a>
+</p>
+<br>
+<p>
+En versiones recientes de Firefox (desde la 137) está disponible la función <tt>Math.sumPrecise()</tt> para sumar un array. Se espera que se incorpore a las versiones modernas de Google Chrome.
+</p>
+<pre>
+Math.sumPrecise(  [2,3,4,5,7,45] ); // 66
+</pre>
+<br>
+<p>
+La ventaja de este método respecto a usar un bucle es que no se pierde precisión en cada operación al sumar números con coma flotante. Por ejemplo:
+</p>
+<pre>
+let arrNumeros = [1.0001,1.001,1.01,1.1,1.000001];
+
+Math.sumPrecise( arrNumeros ); //5.111101  OK
+ 
+let total = 0;
+for ( let n of arrNumeros ){
+  total+=n;
+}
+console.log(total); //5.111101000000001  ERROR DE PRECISIÓN
+</pre>
+<br>
+<p>
+<b>Nota</b>: el resultado final lo representa como un número de 64 bits, así que esto no evita los errores propios de la representación al número de 64 bits más cercano al resultado:
+</p>
+<pre>
+0.1 + 0.2 = 0.30000000000000004
+</pre>
+<br>
+ <br>
+            
 				<h3>Obtener un valor aleatorio entero entre dos valores ambos incluidos<a id="obtener-un-valor-aleatorio-entero-entre-dos-valores-ambos-incluidos" class="h_anchor"></a></h3>
 <pre>
 function getRandomIntInclusive(min, max) {
@@ -770,7 +808,7 @@ function getRandomIntInclusive(min, max) {
 <br>
 <br>
  <br>
-			<h2 id="h22">Objeto Date</h2>
+			<h2 id="h23">Objeto Date</h2>
 			<p>
 Representa una fecha y hora. Es bastante complejo, por lo que se recomienda tener a mano la documentación siempre que se vaya a trabajar con fechas.<br>
 Las fechas se almacenan como el número de milisegundos transcurridas desde la fecha base.<br>
@@ -846,7 +884,7 @@ Otros recursos y bibliotecas:
 </ul>
 <br>
 
-			<h2 id="h23">Otros objetos</h2>
+			<h2 id="h24">Otros objetos</h2>
 			<ul style='padding-left: 30pt'>
 <li>Array</li>
 <li>Function</li>
@@ -860,14 +898,14 @@ Otros recursos y bibliotecas:
 <br>
 <br>
 
-			<h1 id="h24">Marcos</h1>
+			<h1 id="h25">Marcos</h1>
 			<p>
 Murieron hace mucho tiempo, los <tt>&lt;iframes&gt;</tt> se siguen usando, pero no demasiado más allá de alguna curiosidad. Por ejemplo Codepen (<a href="https://codepen.io/" title="https://codepen.io/" class="https">https://codepen.io/</a>) los usa y también Google para que insertemos vídeos de Youtube o mapas de Google Maps en nuestras webs.
 </p>
 <br>
 <br>
 
-			<h1 id="h25">Ejercicios</h1>
+			<h1 id="h26">Ejercicios</h1>
 			<p>
 <b>Ejercicio 3a fechas</b>: pide a un usuario que introduzca el día mes y año de una fecha usando tres <tt>input type="number"</tt> y a continuación una más pero usando un <tt>input type="date"</tt>. A partir de esos datos construye dos objetos <tt>Date</tt> y muestra el número de días entre ambas. <br>
 Pista: Puedes convertir los objetos <tt>Date</tt> a tiempo los milisegundos transcurridos desde la fecha base con <tt>getTime()</tt>, restarlas y a partir de ese dato calcular la cantidad de días. O directamente puedes restarlas.
@@ -880,6 +918,7 @@ Pista: Puedes convertir los objetos <tt>Date</tt> a tiempo los milisegundos tran
 <li>Comprueba que los inputs están rellenos, si no es así se mostrará un mensaje de error en la división con <tt>id="resultado"</tt>.</li>
 <li>Si están rellenos, se calculará el número de días entre las fechas (los días de reserva) que se mostrarán en la división con <tt>id="resultado"</tt>.</li>
 <li>Si la fecha de salida es anterior a la de entrada se mostrará un mensaje de error en la división con <tt>id="resultado"</tt>.</li>
+<li>Si la fecha de salida es igual a la de entrada se mostrará un mensaje de error en la división con <tt>id="resultado"</tt>.</li>
 </ul>
 <br>
 <p>
