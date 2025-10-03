@@ -1,45 +1,51 @@
-"use strict"
+"use strict";
 
-// funciones
-
-
+// guarda el color en cookie y aplica el fondo
 function conseguirCookie() {
+    const select = document.querySelector("#color");
+    const color = select.value;
 
-    
+    let colorCSS = "";
+    if (color === "rojo") {
+        colorCSS = "red";
+    } else if (color === "azul") {
+        colorCSS = "blue";
+    }
 
-    // //CREAR COOKIE
-    //     document.cookie = "user=Iker; expires=Thu, 18 Dec 2025 12:00:00 UTC; path=/;";
+    // IMPORTANTE: usar path=/ para que se lea siempre desde cualquier ruta
+    document.cookie = "colorGuardado=" + colorCSS + "; expires=Thu, 18 Dec 2025 12:00:00 UTC; path=/";
+    document.body.style.backgroundColor = colorCSS;
 
-    //     //ACCEDER A LA COOKIE Y MOSTRAR
-    //     function getCookieValue(nombre) {
-    //         var cookies = document.cookie.split(";"); // Divide la cadena de cookies en un array
-    //         for (var i = 0; i < cookies.length; i++) {
-    //             var cookie = cookies[i].trim(); // Elimina los espacios en blanco al principio y al final
-    //             if (cookie.startsWith(nombre + "=")) {
-    //                 return cookie.substring(nombre.length + 1); // Retorna el valor de la cookie
-    //             }
-    //         }
-    //         return null; // Si no se encuentra la cookie, retorna null
-    //     }
+    alert("Color cambiado a: " + color);
+}
 
-    //     var nombreCookie = getCookieValue("user");
-    //     console.log(nombreCookie); // Muestra el valor en la consola
+// funcion para leer cookie por nombre
+function obtenerCookie(nombre) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(nombre + '=')) {
+            return cookie.substring((nombre + '=').length);
+        }
+    }
+    return null;
+}
 
+// función para aplicar el color guardado al cargar la página
+function aplicarColorGuardado() {
+    const colorGuardado = obtenerCookie("colorGuardado");
 
-    
+    if (colorGuardado) {
+        document.body.style.backgroundColor = colorGuardado;
+
+       
+    }
 }
 
 
-
-
-
-
-
-
-
-
-// main
-const rojo = document.querySelector("#rojo");
-const azul = document.querySelector("#azul");
-const btnCambiar = document.querySelector('#btnCambiar')
+const btnCambiar = document.querySelector('#btnCambiar');
 btnCambiar.addEventListener('click', conseguirCookie);
+
+// Al cargar la página, aplicar el color guardado, para eso podemos usar el domcontent
+document.addEventListener('DOMContentLoaded', aplicarColorGuardado);
+
