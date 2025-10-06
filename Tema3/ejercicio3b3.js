@@ -1,47 +1,113 @@
-"use strict"
+"use strict";
 
-// funciones
 
-function fichar() {
-    alert(1);
-    const fichaje = new Date().toString();
-    alert(fichaje);
 
-    // Obtener lo que ya hay guardado, o iniciar un array vacío
-    let fechas = JSON.parse(localStorage.getItem("fechas")) || [];
+//////////////////////////
+// FUNCTION
+///////////////////
 
-    // Agregar el nuevo fichaje
-    fechas.push(fichaje);
 
-    // Guardar el array actualizado
-    localStorage.setItem("fechas", JSON.stringify(fechas));
+/**
+ * Añade un nuevo fichaje al array de fichajes del localStorage. Cada fichaje se va a guardar
+ * como el timeStamp del momento en el que se pulsó el botón
+ */
+function fichar(){
+  // 1. Cargar datos existentes
+  let arrFichajesEntrada = localStorage.entradas ? JSON.parse(localStorage.entradas) : [];
+  let arrFichajesSalida = localStorage.salidas ? JSON.parse(localStorage.salidas) : [];
+  // desahibilitar el boton 
+ const btnFichar = document.querySelector("#btnFichar");
+  btnFichar.disabled = true;
+
+  const tipoSeleccionado = document.querySelector('input[name="tipoFichaje"]:checked').value;
+
+  // 2. Validar secuencia ANTES de guardar
+  const numEntradas = arrFichajesEntrada.length;
+  const numSalidas = arrFichajesSalida.length;
+  
+  if (tipoSeleccionado === "entrada" && numEntradas > numSalidas) {
+    arrFichajesSalida.push(null);
+  }
+  
+  if (tipoSeleccionado === "salida" && numSalidas >= numEntradas) {
+    arrFichajesEntrada.push(null);
+  }
+
+  // 3. Guardar nuevo fichaje
+  let nuevoFichaje = Date.now();
+  
+  if (tipoSeleccionado === "entrada") {
+    arrFichajesEntrada.push(nuevoFichaje);
+  } else {
+    arrFichajesSalida.push(nuevoFichaje);
+  }
+
+  // 4. Guardar todo en localStorage
+  localStorage.entradas = JSON.stringify(arrFichajesEntrada);
+  localStorage.salidas = JSON.stringify(arrFichajesSalida);
+  
+  const todosLosFichajes = arrFichajesEntrada.concat(arrFichajesSalida);
+  localStorage.fichajes = JSON.stringify(todosLosFichajes);
+
+
+ setTimeout(() => {
+    btnFichar.disabled = false;
+  }, 2000);
+
 }
 
 
-function mostrar() {
-    const divFichajes = document.querySelector("#divFichajes");
 
-    // Obtener del localStorage la lista de fechas
-    let todasFechas = JSON.parse(localStorage.getItem("fechas")) || [];
 
-    // formateado para que se vea bien, añadiendo un boton de vuelta hacia atras
-    divFichajes.innerHTML = todasFechas.map(f => `<p>${f}</p>`).join('');
+
+
+
+
+
+/**
+ * Muestra los fichajes en forma de lista en una división del HTML
+ */
+function mostrar(){
+  const divFichajes = document.querySelector("#divFichajes");
+  
+  if( !localStorage.fichajes ){
+    divFichajes.innerHTML = "<p><strong>Atención</strong>: Todavía no se ha guardado ningún fichaje.</p>";
+    return;
+  }
+
+  const arrFichajes = JSON.parse( localStorage.fichajes );
+  let sol = "<ul>";
+
+  for (let i = 0; i < arrFichajes.length; i++) {
+    if (arrFichajes[i] === null) {
+      sol += `<li>Fichaje olvidado</li>`;
+    } else {
+      const fichaje = new Date( arrFichajes[i] );
+      sol += `<li>${ fichaje.toLocaleString() }</li>`;
+    }
+  }
+
+  sol += "</ul>";
+  divFichajes.innerHTML = "<h3>Fichajes</h3>" + sol;
+}
+/**
+ * Elimina todos los fichajes del localStorage
+ */
+function resetear(){
+  // Eliminamos el array de fichajes...
+  localStorage.removeItem("fichajes");
+  // ...O directamente eliminamos todo lo que haya en el localStorage
+  //localStorage.clear();
 }
 
 
-function resetear() {
-   
-    localStorage.clear();
-     alert("Local storage borrada");
-}
+
+//////////////////////////
+// MAIN
+//////////////////
+
+document.querySelector("#btnFichar").addEventListener("click", fichar);
+document.querySelector("#btnMostrar").addEventListener("click", mostrar);
+document.querySelector("#btnResetear").addEventListener("click", resetear);
 
 
-// main
-
-const btnFichar = document.querySelector("#btnFichar");
-const btnMostrar = document.querySelector("#btnMostrar");
-const btnResetear = document.querySelector("#btnResetear");
-
-btnFichar.addEventListener('click', fichar);
-btnMostrar.addEventListener('click', mostrar);
-btnResetear.addEventListener('click', resetear);
