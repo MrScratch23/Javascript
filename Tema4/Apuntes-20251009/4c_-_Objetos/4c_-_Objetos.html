@@ -1,0 +1,1376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>4c - Objetos y clases</title>
+	<meta name='Generator' content='Zim 0.75.2'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">4c - Objetos y clases</a> <br>
+            &nbsp; &nbsp; <a href="#h2">Creación y acceso</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Funciones como propiedades <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+        
+        
+        
+        
+            &nbsp; &nbsp; <a href="#h9">Añadir y eliminar propiedades</a> <br>
+            &nbsp; &nbsp; <a href="#h10">Comparación y copia</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Clonación simple <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Clonación anidada <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h13">Constructores con new</a> <br>
+            &nbsp; &nbsp; <a href="#h14">Otras cuestiones más circunstanciales (y avanzadas)</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Saber si un objeto tiene una propiedad <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Recorrer todas las propiedades <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Object.freeze() vs Object.seal() <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h18">Ejercicios</a> <br>
+            &nbsp; &nbsp; <a href="#h19">Ejercicio de perros</a> <br>
+            &nbsp; &nbsp; <a href="#h20">Ejercicio de cremas</a> <br>
+            &nbsp; &nbsp; <a href="#h21">Ejercicio de implementación de un Conjunto</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejemplo de funcionamiento de prueba <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Ampliación <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h25">Herencia prototípica (o funciones disfrazadas de clases)</a> <br>
+            &nbsp; &nbsp; <a href="#h26">Herencia entre objetos literales</a> <br>
+            &nbsp; &nbsp; <a href="#h27">Implementación con constructores</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Un constructor que hereda de un objeto literal <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Un constructor que hereda de otro constructor <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+        
+        
+            <a href="#h33">Clases en JS</a> <br>
+            &nbsp; &nbsp; <a href="#h34">Herencia de clases</a> <br>
+            &nbsp; &nbsp; <a href="#h35">Otras cuestiones</a> <br>
+            &nbsp; &nbsp; <a href="#h36">Ejercicio Canciones y Ficheros</a> <br>
+            &nbsp; &nbsp; <a href="#h37">Ejercicio</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">4c - Objetos y clases</h1>
+			<p>
+A los objetos que creamos directamente en el código (en lugar de ser instancias una clase) en JS a veces se les conocen como <b>objetos literales</b>.<br>
+Podemos pensar en ellos como un conjunto de variables y funciones (propiedades o atributos) encapsuladas bajo un mismo nombre. Estos datos se almacenan usando pares clave-valor (o <tt>key:value</tt>). Funcionan por tanto de manera similar a un objeto de tipo <i>map</i>.
+</p>
+<br>
+<p>
+<b>Importante</b>: los objetos se pasan a las funciones por referencia, no por valor.
+</p>
+<br>
+<p>
+<b>Importante</b>: cuando se crea una constante que es un objeto, la referencia no puede cambiar, pero el contenido del objeto sí.
+</p>
+<br>
+<p>
+<b>Referencias</b>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><a href="https://www.freecodecamp.org/news/objects-in-javascript-for-beginners/" title="https://www.freecodecamp.org/news/objects-in-javascript-for-beginners/" class="https">https://www.freecodecamp.org/news/objects-in-javascript-for-beginners/</a></li>
+</ul>
+<br>
+
+			<h2 id="h2">Creación y acceso</h2>
+			<p>
+Se puede crear un objeto vacío de dos maneras (sin diferencias entre ellas, aunque la primera es más compacta y es la preferida):
+</p>
+<pre>
+let alumno = {}
+let usuario = new Object();
+</pre>
+<br>
+<p>
+Para crear un objeto con atributos podemos usar:
+</p>
+<pre>
+let alumno = {
+  nombre: "Javier",
+  apellidos: "Mancera Fernández",
+  edad: 42,    //se puede terminar con una coma o no
+}
+</pre>
+<br>
+<p>
+Se accede a las propiedades usando el operador <tt>.</tt>:
+</p>
+<pre>
+if( alumno.edad &gt;=18){
+  console.log( `El alumno ${alumno.nombre} ${alumno.apellidos} es mayor de edad`);
+}
+</pre>
+<br>
+<p>
+<b>Nota</b>: Si queremos propiedades con más de una palabra las colocaremos entre comillas dobles, pero es mejor evitarlo y en su lugar usar <i>camelCase</i>.
+</p>
+<br>
+<p>
+También se puede acceder con corchetes, lo que puede ser interesante si tenemos una propiedad con espacios:
+</p>
+<pre>
+alumno["nombre"] = "Marcos";
+alumno["mayor de edad"] = true;
+</pre>
+<br>
+<br>
+
+            
+				<h3>Funciones como propiedades<a id="funciones-como-propiedades" class="h_anchor"></a></h3>
+<br>
+<p>
+Se pueden indicar en la creación o añadirlas dinámicamente luego.
+</p>
+<br>
+<p>
+En la creación con sintaxis abreviada y sin abreviar:
+</p>
+<pre>
+// En la creación
+let alumno = {
+  nombre: "Javier",
+  apellidos: "Mancera Fernández",
+  edad: 42,
+  saludo(){ console.log("Hola, soy " + this.nombre); },
+  nombreCompleto: function (){ return `${this.nombre} ${this.apellidos}`;}
+}
+
+// Dinámicamente
+alumno.nombreFormal = function(){
+  return this.apellidos + ", " +this.nombre
+}; 
+</pre>
+<br>
+<p>
+<b>Nota</b>: el <tt>this</tt>, queda vinculado por defecto al ámbito del objeto que lo llamó y por tanto podemos asignar la misma función a dos objetos distintos y que funcione correctamente.<br>
+El ámbito del <tt>this</tt> se establece en el momento de llamar a la función (y puede ser modificado, como veremos más adelante al ver las funciones constructoras).
+</p>
+<br>
+ <br>
+            
+						<pre class="codigo">
+Abajo puedes ver una posible implementación de una función reutilizada en dos objetos.
+							<div class="codigojs" style="display:none">let s = `function mostrarDatosExterno(){
+  return \`Nombre: ${this.nombre} (edad: ${this.edad})\`;
+}
+
+// Añadimos la función a dos objetos
+alumno.mostrarDatosExterno = mostrarDatosExterno;
+
+let alumno2 = {
+  edad: 60,
+  nombre: "Juan",
+  mostrarDatosExterno: mostrarDatosExterno,
+}`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				<p>
+Sin embargo, esto no será posible si usamos funciones flecha.
+</p>
+<br>
+<br>
+            
+				<h4>Funciones flecha y el this<a id="funciones-flecha-y-el-this" class="h_anchor"></a></h4>
+<p>
+En la web de MDN podemos leer que...
+</p>
+<ul style='padding-left: 30pt'>
+<li>Arrow functions don't have their own bindings to <tt>this</tt>, <tt>arguments</tt>, or <tt>super</tt>, and <b>should not be used as methods</b>.</li>
+<li>Arrow functions <b>cannot be used as constructors</b>. Calling them with <tt>new</tt> throws a <tt>TypeError</tt>. They also don't have access to the <tt>new.target</tt> keyword.</li>
+</ul>
+<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" class="https">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions</a>
+</p>
+<br>
+<p>
+El <tt>this</tt> indica el <b>contexto de ejecución</b> de una función (el ámbito, las variables a las que puede acceder, etc). 
+</p>
+<br>
+<p>
+En una función normal, el <tt>this</tt> se refiere al objeto <b>que la llamó</b> (si es desde dentro de un objeto, será ese objeto, en caso contrario será <tt>window</tt>) y por tanto <b>se establece al llamarla</b>.
+</p>
+<br>
+<p>
+En una función flecha, el <tt>this</tt> se establece <b>en el momento de creación</b>, queda fijado y no puede ser modificado.
+</p>
+<pre>
+console.log(this); //this hace referencia a window
+
+function f(){ console.log(this);}
+f(); //this hace referencia a window
+
+const objeto = {funcion:f};
+const objeto.funcion() //this ahora hace referencia a Object { funcion: f() }
+
+const f_flecha = () =&gt;{console.log(this);}
+f_flecha(); //this hace referencia a window
+
+const objeto2 = {funcion:f_flecha};
+const objeto2.funcion(); //this sigue haciendo referencia a window
+
+const objeto3 = { funcion: () =&gt; {console.log(this);} }
+objeto3.funcion(); //this hace referencia a window
+</pre>
+<br>
+<br>
+<p>
+<b>Importante</b>: las funciones flechas no vinculan <tt>this</tt> al objeto que las llama (sino al objeto <tt>window</tt>/<tt>global</tt>) y por tanto no podrán acceder a las propiedades del objeto. <br>
+Pero si se crean dentro de otra función heredará el ámbito de ésta (scope) y su <tt>this</tt> apuntará al <tt>this</tt> de la función padre (y por tanto sí podrán acceder a las propiedades del objeto). Por el mecanismo de <i>hoisting</i> tiene acceso a las variables de la función padre, incluyendo al this).
+</p>
+ <br>
+            
+						<pre class="codigo">
+Abajo hay una implementación de dos objetos que usan funciones flecha,\n
+el u1 falla y el u2 no.
+							<div class="codigojs" style="display:none">let s = `let u1 = {
+  n:'Javier', 
+  hola: ()=&gt;{
+    return "Nombre: " + this.n;
+  }
+}
+u1.hola(); //Nombre: undefined
+
+let u2 = {
+  n:'Javier', 
+  hola (){
+    let a = ()=&gt;{return "Nombre: " + this.n;};
+    return a();
+  }
+}
+u2.hola(); //Nombre: Javier
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				<p>
+Veamos cómo añadir y eliminar propiedades.
+</p>
+<br>
+			<h2 id="h9">Añadir y eliminar propiedades</h2>
+			<p>
+Se pueden añadir y eliminar propiedades dinámicamente en tiempo de ejecución, por ejemplo:
+</p>
+<pre>
+alumno.fechaIncorporación = "19-09";
+delete alumno.edad; 
+
+console.log(`${alumno.nombre} ${alumno.apellidos} se incorporó a clase el ${alumno.fechaIncorporación}`);
+</pre>
+<br>
+<br>
+
+			<h2 id="h10">Comparación y copia</h2>
+			<p>
+La comparación se realiza por referencia:
+</p>
+<pre>
+let a = { x:4, y:6 };
+let b = a;             //a y b son el mismo objeto (a==b y a===b)
+let c = { x:4, y:6 };  // a != c
+</pre>
+<br>
+<p>
+Si necesitamos comparar dos objetos tendremos que iterar por sus propiedades y compararlas una a una. Pero claro, si tenemos propiedades de los objetos que sean a su vez nuevos objetos (o arrays) habría que compararlos también en una función recursiva. Mi recomendación es usar alguna biblioteca de funciones que proporcione esta funcionalidad si se necesita.<br>
+<a href="https://github.com/loveencounterflow/jseq" title="https://github.com/loveencounterflow/jseq" class="https">https://github.com/loveencounterflow/jseq</a>
+</p>
+<br>
+<p>
+Otra opción sencilla es stringificarlas (pero en este caso el orden en el que aparecen las propiedades será importante):
+</p>
+<pre>
+JSON.stringify(a) === JSON.stringify(c); // true
+</pre>
+<br>
+<br>
+
+            
+				<h3>Clonación simple<a id="clonación-simple" class="h_anchor"></a></h3>
+<p>
+¿Cómo clonamos un objeto en otro diferente? Tres métodos distintos que funcionan si sus propiedades son primitivas (no son otros objetos, por ejemplo).
+</p>
+<br>
+<p>
+Iterando por sus propiedades:
+</p>
+<pre>
+let clon = {}; // el nuevo objeto vacío
+
+for (let key in alumno) { //se copian todas las propiedades
+  clon[key] = alumno[key];
+}
+</pre>
+<br>
+<p>
+Usando <i>spread</i> (recomendada si no hay anidaciones):
+</p>
+<pre>
+let clon = {...alumno}
+</pre>
+<br>
+<p>
+Usando <tt>Object.assing()</tt>:
+</p>
+<pre>
+let clon = Object.assign( {}, alumno );
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Clonación anidada<a id="clonación-anidada" class="h_anchor"></a></h3>
+<p>
+Los métodos de arriba funcionarán si todas las propiedades son primitivas, en caso contrario se copiará una referencia a la propiedad en lugar de la propiedad.
+</p>
+<br>
+<pre>
+let clon = structuredClone( alumno );
+</pre>
+<br>
+<p>
+<b>Nota</b>: esto fallará si el objeto tiene funciones como atributos. En ese caso tendremos que hacerlo a mano.
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h13">Constructores con new</h2>
+			<p>
+Si necesitamos crear varios objetos que comparten el mismo tipo de propiedades, es buena idea crear una función constructora (un constructor). Esta función no devuelve nada.
+</p>
+<br>
+<p>
+Convenciones:
+</p>
+<ul style='padding-left: 30pt'>
+<li>El nombre del constructor suele colocarse con la primera letra en mayúsculas.</li>
+<li>Sólo deben ejecutarse con el operador <tt>new</tt>.</li>
+</ul>
+<br>
+<pre>
+function Alumno(nombre, apellidos, edad){
+  this.nombre = nombre;
+  this.apellidos = apellidos;
+  this.edad = edad;
+  this.teléfonos = [];
+  this.info = function(){ return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad}`};
+  this.mayorDeEdad = function(){ return (this.edad &gt;=18);};
+  this.imprime = function(){ 
+      let s = this.nombre + " " + this.apellidos + " (" + this.edad + ")";
+      console.log(s);
+  };
+}
+
+let juan = new Alumno("Juan", "Lopez Caro", 23);
+let paco = new Alumno("Paco", "Gómez", 21);
+</pre>
+<br>
+<p>
+En el código de arriba cada objeto creado con ese constructor <b>tendrá su propia copia</b> de los métodos <tt>info()</tt>, <tt>mayorDeEdad()</tt> e <tt>imprime()</tt>, lo que consumirá más memoria.
+</p>
+<br>
+<p>
+La opción más recomendable es incluir los métodos en el prototipo (ver más adelante la herencia prototípica) para que todos los objetos compartan las mismas funciones.
+</p>
+<pre>
+function Alumno(no, ap, ed){
+  this.nombre = no;
+  this.apellidos = ap;
+  this.edad = ed;
+  this.teléfonos = [];
+}
+
+Alumno.prototype.info = function(){ return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad}`};
+Alumno.prototype.mayorDeEdad = function(){ return (this.edad &gt;=18);};
+Alumno.prototype.imprime = function(){ 
+    let s = this.nombre + " " + this.apellidos + " (" + this.edad + ")";
+    console.log(s);
+};
+
+let juan = new Alumno("Juan", "Lopez Caro", 23);
+let paco = new Alumno("Paco", "Gómez", 21);
+</pre>
+<br>
+<p>
+<b>Nota</b>: ten en cuenta que si uno de los objetos tiene una propiedad añadida dinámicamente (por ejemplo <tt>paco.becado=false;</tt>) los métodos del prototipo no lo sabrán (tendremos que añadir su propio método <tt>info()</tt> para que lo tenga en cuenta, por ejemplo).
+</p>
+<br>
+<p>
+<img src="./4c_-_Objetos_files/diagram.svg">
+</p>
+<br>
+
+			<h2 id="h14">Otras cuestiones más circunstanciales (y avanzadas)</h2>
+			
+            
+				<h3>Saber si un objeto tiene una propiedad<a id="saber-si-un-objeto-tiene-una-propiedad" class="h_anchor"></a></h3>
+<p>
+Podemos saber si un objeto tiene una propiedad con <tt>"edad" in alumno</tt>, esto lo buscará en el propio objeto y luego en el prototipo y en el prototipo del prototipo...<br>
+Para saber si un objeto tiene él mismo una propiedad directamente se usa <tt>hasOwnProperty()</tt>.
+</p>
+<pre>
+const alumno = {id:1, nombre:"Juan", edad:36}
+
+alumno.hasOwnProperty("edad")      //true
+alumno.hasOwnProperty("toString")  //false
+"toString" in alumno               //true
+</pre>
+<br>
+ <br>
+            
+				<h3>Recorrer todas las propiedades<a id="recorrer-todas-las-propiedades" class="h_anchor"></a></h3>
+<p>
+Podemos usar el bucle <tt>for..in</tt> para iterar por sus propiedades.
+</p>
+<pre>
+for(let prop in alumno){
+  console.log(prop, alumno[prop])
+} 
+</pre>
+<br>
+ <br>
+            
+				<h3>Object.freeze() vs Object.seal()<a id="objectfreeze-vs-objectseal" class="h_anchor"></a></h3>
+<br>
+<p>
+<tt>Object.freeze()</tt> impide la modificación de un objeto. Una vez que está congelado no se puede eliminar, añadir o cambiar sus propiedades.
+</p>
+<br>
+<pre>
+const alumno = {
+  id:1,
+  nombre:"Juan",
+  edad:36
+} 
+
+Object.freeze(alumno);
+alumno.nombre = "Felipe";       // Sin efecto al modificar propiedad
+alumno.edad = 44;               // Sin efecto al modificar propiedad
+
+alumno.email = "juan@gmail.com" // Sin efecto al añadir propiedad
+</pre>
+<br>
+<br>
+<p>
+<tt>Object.seal()</tt> impide añadir o eliminar propiedades, pero sí permite la modificación de las existentes.
+</p>
+<br>
+<pre>
+const alumno = {
+  id:1,
+  nombre:"Juan",
+  edad:36
+} 
+
+Object.seal(alumno);
+alumno.nombre = "Felipe";       // OK. Modificar propiedad
+alumno.edad = 44;               // OK. Modificar propiedad
+
+alumno.email = "juan@gmail.com" // Sin efecto al añadir propiedad
+</pre>
+<br>
+<br>
+<br>
+<br>
+ <br>
+			<h1 id="h18">Ejercicios</h1>
+			<p>
+Algunos ejercicios para practicar.
+</p>
+<br>
+
+			<h2 id="h19">Ejercicio de perros</h2>
+			<p>
+Crea una web que contenga tres <i>textboxes</i>, uno para el nombre del perro, otro para la edad y otro para la raza. Además habrá los siguientes botones con estos comportamientos:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Botón de <i>Añadir</i>: Se creará un objeto de tipo <tt>Perro</tt> y se añadirá a un array de perros.</li>
+<li>Botón de <i>Ordenar por inserción</i>: Se mostrarán todos los perros con sus datos en una lista no ordenada (<tt>&lt;ul&gt;</tt>) en el orden en el que se insertaron.</li>
+<li>Botón de <i>Ordenar por edad</i>: Se mostrarán todos los perros con sus datos en una lista (<tt>&lt;ol&gt;</tt>) ordenados por edad.</li>
+<li>Botón de <i>Ordenar por raza</i>: Se mostrarán todos los perros con sus datos en una lista (<tt>&lt;ul&gt;</tt>) ordenados por la raza alfabéticamente.</li>
+<li>Tendrás que crear un constructor de objetos de tipo Perro que devuelva un objeto de tipo Perro que incluya también un método llamado <tt>mostrarDatos()</tt> que muestre los datos del perro.</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: la función de array <tt>toSorted()</tt> puede ser necesaria para no perder el orden original.<br>
+<b>Nota</b>: para comparar dos cadenas se puede usar <tt>string1.localeCompare(string2, "es");</tt>
+</p>
+<br>
+
+			<h2 id="h20">Ejercicio de cremas</h2>
+			<p>
+Crea un constructor de objetos de tipo <i>Crema</i> que tenga un <tt>nombre</tt>, <tt>precio</tt> y <tt>marca</tt>. Además contendrá un array de objetos de tipo <i>Ingrediente</i>, un método <tt>addIngrediente(nombre, cantidad)</tt> que permitirá añadir un objeto al array, un método <tt>removeIngrediente(i)</tt> que permite eliminar el iésimo ingrediente y una función <tt>toHTMLTable()</tt> que devuelva una tabla HTML con todos los ingredientes (se usará el método <tt>toHTMLRow()</tt> de los ingredientes).<br>
+Los objetos de tipo <i>Ingrediente</i> tendrán un nombre y una cantidad en gramos además de un método <tt>toHTMLRow()</tt> que devuelva una fila de una tabla HTML con todos los atributos.
+</p>
+<br>
+<p>
+<b>Nota</b>: en el ejercicio se pide que se devuelva una fila HTML o una tabla HTML, aunque eso es algo que aún no hemos visto. Puedes buscar información sobre cómo hacerlo o bien, de momento, puedes hacer que se devuelva el código HTML que generaría esa fila/tabla.
+</p>
+<br>
+<br>
+
+			<h2 id="h21">Ejercicio de implementación de un Conjunto</h2>
+			<p>
+Un conjunto de números es una colección de números que cumple unas condiciones básicas:
+</p>
+<ul style='padding-left: 30pt'>
+<li>No puede haber repeticiones</li>
+<li>El orden de los elementos no importa</li>
+</ul>
+<br>
+<p>
+Por eso un conjunto A que contenga los números 1, 5 y 7 y otro conjunto B con los números 5, 7 y 1 serían exactamente el mismo conjunto.
+</p>
+<br>
+<p>
+<b>Nota</b>: Javascript ya tiene una implementación de esta estructura de datos llamada <tt>Set()</tt>.
+</p>
+<br>
+<br>
+
+            
+				<h3>Ejercicio<a id="ejercicio" class="h_anchor"></a></h3>
+<p>
+Implementa una función constructora que devuelva un objeto de tipo <tt>Conjunto</tt> que contenga un array y tres métodos:
+</p>
+<pre>
+	* añadir: recibirá un número y lo añadirá al array sólo si el número no pertenece ya al array.
+	* eliminar: si el número que recibe como parámetro ya existe, lo eliminará del array
+	* imprimir: imprimirá por la consola el contenido del array
+</pre>
+<br>
+<p>
+Crea un constructor que permita crear conjuntos vacíos (si se invoca sin parámetros) y conjuntos con valores (si recibe un array como parámetro).
+</p>
+<br>
+<p>
+Ejemplo:
+</p>
+<pre>
+let c1 = new Conjunto();
+let c2 = new Conjunto([1,2,3]);
+</pre>
+<br>
+ <br>
+            
+				<h3>Ejemplo de funcionamiento de prueba<a id="ejemplo-de-funcionamiento-de-prueba" class="h_anchor"></a></h3>
+<br>
+<pre>
+let c = Conjunto();
+
+c.añadir(1);
+c.añadir(1);
+c.añadir(1);
+c.imprimir(); //1
+
+c.añadir(2);
+c.añadir(1);
+c.añadir(3);
+c.imprimir();//1,2,3
+
+c.eliminar(2);
+c.imprimir();//1,3
+
+c.eliminar(5);
+c.eliminar(1);
+c.imprimir();//3
+</pre>
+<br>
+ <br>
+            
+				<h3>Ampliación<a id="ampliación" class="h_anchor"></a></h3>
+<br>
+<p>
+Puedes ampliar el ejercicio añadiendo estas funcionalidades:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Comprobar que los datos que se reciben en el constructor y en los métodos añadir y eliminar son números. Si no lo son se lanzará una excepción <tt>throw new Error('El parámetro no es un número');</tt></li>
+<li>Puedes implementar un método sonIguales que reciba dos conjuntos y diga si son iguales o no.</li>
+<li>Puedes implementar un método que permita <tt>unir</tt> a un conjunto los números contenidos en otro conjunto que se pase como paraḿetros. Por ejemplo: <tt>c2.unir(new Conjunto([5,6,1]));</tt></li>
+<li>Puedes implementar un método que revuelva los valores comunes de dos conjuntos (<tt>intersección</tt>)</li>
+<li>Puedes implementar un método <tt>diferencia</tt> que quite de un conjunto los números contenidos en otro conjunto.</li>
+</ul>
+<br>
+<br>
+<br>
+ <br>
+			<h1 id="h25">Herencia prototípica (o funciones disfrazadas de clases)</h1>
+			<p>
+Referencia: <a href="https://es.javascript.info/prototype-inheritance" title="https://es.javascript.info/prototype-inheritance" class="https">https://es.javascript.info/prototype-inheritance</a>
+</p>
+<br>
+<p>
+La herencia en JS no funciona como otros lenguajes de POO, hasta 2015 con la aparición de ES6 (EcmaScript 6) se decía que JS era un lenguaje que soporta el uso de objetos, pero que no era orientado a objetos. 
+</p>
+<br>
+<p>
+Empezaremos viendo esta herencia clásica por prototipos antes de ver las clases.
+</p>
+<br>
+
+			<h2 id="h26">Herencia entre objetos literales</h2>
+			<p>
+En JS todos los objetos tienen una propiedad oculta <tt>__proto__</tt> (que puede ser <tt>null</tt>). Cuando intentamos acceder a una propiedad de un objeto y no la encuentra, la buscará en el objeto elegido como prototipo (y si no la encuentra ahí la buscará en el prototipo de ese objeto, etc. hasta que llegue a un <tt>null</tt>).
+</p>
+<br>
+<p>
+Por ejemplo, si creas un objeto <tt>s={}</tt> y haces un <tt>console.log(s)</tt> imprimirá <tt>[object Object]</tt>. Nuestro objeto <tt>s</tt> no tiene un método <tt>toString()</tt>, pero su prototipo (<tt>s.__proto__</tt>, que en este caso es <tt>Object</tt>) sí lo tiene. A su vez el prototipo de <tt>Object</tt> es <tt>null</tt>.
+</p>
+<br>
+<p>
+No existe la herencia múltiple porque sólo puede haber un objeto prototipo.
+</p>
+<br>
+<p>
+Usando el ejemplo de la web javascript.info con objetos literales (sin constructores):
+</p>
+<pre>
+let animal = {
+  eats: true,
+  walk() {
+    alert("Animal da un paseo");
+  },
+};
+
+let rabbit = {
+  jumps: true
+};
+
+//rabbit.__proto__ = animal; // deprecated
+Object.setPrototypeOf(rabbit, animal);
+
+console.log("Come: " + rabbit.eats );
+rabbit.walk();
+</pre>
+<br>
+<p>
+Cuando accedemos a <tt>rabbit.eats</tt>, el motor de JS buscará la propiedad en el objeto <tt>rabbit</tt>, pero como no se encuentra allí la buscará luego en <tt>animal</tt>.<br>
+Por supuesto <tt>animal</tt> podría tener otro objeto como prototipo y la cadena de búsqueda podría seguir.
+</p>
+<br>
+<p>
+<b>Importante</b>: el parámetro <tt>__proto__</tt> no es recomendable usarlo si tenemos alternativa porque su comportamiento no es estándar en todos los entornos de Javascript. Lo ideal es evitar su uso si puede evitarse.
+</p>
+<br>
+<p>
+El ejemplo de arriba podría solucionarse también así:
+</p>
+<pre>
+let rabbit = Object.create(animal);
+rabbit.jumps = true;
+</pre>
+<br>
+<p>
+<b>Nota</b>: no puede haber referencias circulares, JS mostrará un error si lo hacemos.<br>
+<b>Nota</b>: <tt>for..in</tt> itera también sobre las propiedades heredadas.
+</p>
+<br>
+<p>
+Otro ejemplo sería lo que ocurre cuando creamos una función <tt>f</tt>, esa función tendrá como prototipo <tt>Function</tt> que a su vez tendrá como prototipo <tt>Object</tt> y éste tendrá como prototipo <tt>null</tt>.
+</p>
+<pre>
+function f() → Function →  Object →  null
+[1,2,3] → Array → Object → null
+</pre>
+<br>
+<p>
+<b>Importante</b>: no se recomienda modificar los prototipos de los objetos predefinidos como <tt>Object</tt>, <tt>Array</tt>, etc. puede tener consecuencias desastrosas y difíciles de depurar.
+</p>
+<br>
+<br>
+
+			<h2 id="h27">Implementación con constructores</h2>
+			<p>
+Podemos crear un constructor que herede:
+</p>
+<ul style='padding-left: 30pt'>
+<li>de un objeto literal</li>
+<li>de otro constructor</li>
+</ul>
+<br>
+
+            
+				<h3>Un constructor que hereda de un objeto literal<a id="un-constructor-que-hereda-de-un-objeto-literal" class="h_anchor"></a></h3>
+<br>
+<p>
+Vamos a crear un constructor de objetos <tt>Alumno</tt> que herede de un objeto <tt>persona</tt>.
+</p>
+<pre>
+//Objeto base del que queremos heredar
+let persona = {
+  administrador: false,
+  telefonos: [],
+}
+</pre>
+<br>
+<p>
+Fíjate que <b>no queremos cambiar el prototipo de la función</b> constructura (usaríamos <tt>__proto__</tt>), <b>sino de los objetos creados con ella</b> por eso usaremos <tt>prototype</tt> (que sólo está disponible para funciones constructoras).
+</p>
+<pre>
+// Función constructora
+function Alumno(no, ap, ed){
+  this.nombre = no;
+  this.apellidos = ap;
+  this.edad = ed;
+}
+Alumno.prototype.info = function(){ 
+    return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad} - Adm: ${this.administrador}`;
+};
+
+Object.setPrototypeOf(Alumno, persona);
+//Object.setPrototypeOf(Alumno.prototype, Object.assign({},persona));
+
+let a = new Alumno ("Javier", "Mancera", 42);
+console.log("Tlf:" + a.telefonos + ", adm: " + a.administrador);
+</pre>
+<br>
+<p>
+<b>Importante</b>: con <tt>Object.setPrototypeOf(Alumno.prototype, persona);</tt> o <tt>Alumno.prototype = persona;</tt> realmente estamos copiando desde <tt>Alumno</tt> una referencia a las propiedades de <tt>persona</tt>, si creamos dos alumnos <tt>a1</tt> y <tt>a2</tt> y cambiamos el valor de <tt>persona.administrador = true;</tt> se cambiará el valor en ambos objetos (así funciona la herencia). Sin embargo si ejecutamos <tt>a1.administrador=false;</tt> se estará creando una nueva propiedad en <tt>a1</tt> que será usada en el método <tt>a1.info();</tt>
+</p>
+<br>
+<p>
+Podemos hacer que al crearse un objeto el prototipo sea un clon nuevo del objeto que vamos a usar como prototipo, así cada nuevo objeto tendrá nuevas propiedades (en lugar de referencias). En el ejemplo sería de <tt>persona</tt> a <tt>Alumno</tt> usando <tt>Object.setPrototypeOf(Alumno.prototype, Object.assign({},persona));</tt>
+</p>
+<br>
+<br>
+<p>
+Otra manera, pero de nuevo no recomendada, para la herencia podría ser cambiar el constructor y establecer la herencia allí con el código de abajo, (aunque de nuevo la propiedad <tt>__proto__</tt> no es estándar y deberíamos evitarla):
+</p>
+<pre>
+// Función constructora
+function Alumno(no, ap, ed){
+  this.nombre = no;
+  this.apellidos = ap;
+  this.edad = ed;
+  this.__proto__ = persona;
+  this.info = function(){ return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad}`}
+}
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Un constructor que hereda de otro constructor<a id="un-constructor-que-hereda-de-otro-constructor" class="h_anchor"></a></h3>
+<br>
+<p>
+Este es el método recomendado.
+</p>
+<br>
+<p>
+Partimos de la función constructora <tt>Persona</tt>:
+</p>
+<pre>
+function Persona(nombre, edad){
+  this.nombre = nombre;
+  this.edad = edad;
+  this.estado = "inactivo";
+  this.saludar = function(){
+    return `Hola, soy ${nombre} y tengo ${edad} años)`;
+  }
+}
+Persona.prototype.saludar = function(){ 
+    return `Hola, soy ${nombre} y tengo ${edad} años)`;
+};
+
+</pre>
+<br>
+<p>
+Usaremos <tt>call()</tt> para llamar al constructor de <tt>Persona</tt>.  Esta función permite establecer el valor del <tt>this</tt> de la función a la que llama.
+</p>
+<pre>
+
+function Alumno(nombre, edad, curso){
+  Persona.call(this, nombre, edad);
+  this.curso = curso;
+
+  // Sobreescritura del método saludar()
+  //this.saludar=function(){
+  //  return `Hola, soy ${this.nombre}, estoy en ${this.curso} y mi estado es ${this.estado}`;
+  //}
+}
+
+// Si necesitamos que se hereden los cambios realizados en el prototipo de Persona
+// Por ejemplo: Persona.prototype.activo = false;
+Object.setPrototypeOf(Alumno.prototype, Persona.prototype); // Hereda de Persona
+
+// deprecated
+//Alumno.prototype = Object.create(Persona.prototype);
+//Alumno.prototype.constructor = Alumno; 
+</pre>
+<br>
+<p>
+<b>Herencia</b>: objAlumno → Alumno.prototype → Persona.prototype → Object.prototype → null
+</p>
+<br>
+<p>
+<b>Importante</b>: fíjate que hemos llamado al constructor de <tt>Persona</tt> al principio de todo y de esa manera incorporamos sus atributos en <tt>Alumno</tt>. Es importante es entender que cuando creamos un objeto de tipo <tt>Alumno</tt> no creamos un objeto de tipo <tt>Persona</tt> (el padre) y otro de tipo <tt>Alumno</tt>, sino que sólo hay un objeto (el <tt>this</tt> lo hace posible). Esto implica que no podemos repetir nombres de métodos o propiedades porque serán sobreescritos.
+</p>
+<br>
+ <br>
+            
+						<pre class="codigo">
+¿Qué pasaría si llamamos al constructor de Persona al final, tras definir el 
+método saludar() en el constructor Alumno?.
+Piénsalo antes de pulsar el botón.
+							<div class="codigojs" style="display:none">let s = `El método saludar() de Alumno sería sobreescrito por el de Persona.`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				<p>
+Veamos finalmente cómo añadir métodos y propiedades comunes a todos los objetos creados desde nuestro constructor.
+</p>
+<br>
+            
+				<h4>Añadir  métodos y propiedades comunes<a id="añadir--métodos-y-propiedades-comunes" class="h_anchor"></a></h4>
+<p>
+Si queremos añadir <b>nuevas</b> propiedades o métodos comunes a todos los objetos creados con el constructor <tt>Persona</tt> Lo haremos a partir del prototipo de la función constructora.
+</p>
+<pre>
+Alumno.prototype.activo=false;
+Alumno.prototype.getActivo = function(){
+	return "Activo: "+ this.activo;
+}
+</pre>
+<br>
+<p>
+Estas propiedades podrán ser sobreescritas para objetos concretos:
+</p>
+<pre>
+let a1 = new Alumno("Pepe", 34, "daw");
+let a2 = new Alumno("Juan", 60, "smr");
+
+a1.activo=true;
+a2.getActivo=function(){
+	return "hola caracola";
+}
+
+console.log(a1.getActivo());
+console.log(a2.getActivo());
+console.log(a2.__proto__.getActivo()); //la función del prototipo
+</pre>
+<br>
+<br>
+<p>
+Ejemplo de herencia prototípica entre constructores
+</p>
+<pre>
+function Punto2D(x, y){
+  this.x=x;
+  this.y=y;
+}
+
+function Punto3D(x, y, z){
+  Punto2D.call(this,x,y);
+  this.z=z;
+}
+// Establecemos la herencia
+Object.setPrototypeOf( Punto3D.prototype, Punto2D.prototype );
+
+Punto3D.prototype.mostrar = function(){ return `${this.x}, ${this.y}, ${this.z}`};
+Punto2D.prototype.mostrar = function(){ return `${this.x}, ${this.y}`};
+
+Punto3D.prototype.tipo = "tridimensional";
+Punto2D.prototype.comentario = "Dos dimensiones";
+
+let p1 = new Punto3D(5,1,10);
+let p2 = new Punto3D(5,1,3);
+let p3 = new Punto2D(1,2);
+
+console.log( p1.mostrar() );
+console.log( p2.mostrar() );
+console.log( p3.mostrar() );
+</pre>
+<br>
+<p>
+¿Cómo sería el árbol de herencia completo de <tt>p1</tt>?
+</p>
+<br>
+<p>
+<img src="./4c_-_Objetos_files/diagram001.svg">
+</p>
+<br>
+ <br>
+			<h1 id="h33">Clases en JS</h1>
+			<p>
+Se introdujeron en 2015 como una característica importante, aunque no exenta de cierta controversia.<br>
+<a href="https://everyday.codes/javascript/please-stop-using-classes-in-javascript/" title="https://everyday.codes/javascript/please-stop-using-classes-in-javascript/" class="https">https://everyday.codes/javascript/please-stop-using-classes-in-javascript/</a><br>
+<a href="https://dev.to/giantmachines/stop-using-javascript-classes-33ij" title="https://dev.to/giantmachines/stop-using-javascript-classes-33ij" class="https">https://dev.to/giantmachines/stop-using-javascript-classes-33ij</a><br>
+<a href="https://javascript.plainenglish.io/why-you-should-not-use-classes-in-javascript-ca960d13c625" title="https://javascript.plainenglish.io/why-you-should-not-use-classes-in-javascript-ca960d13c625" class="https">https://javascript.plainenglish.io/why-you-should-not-use-classes-in-javascript-ca960d13c625</a>
+</p>
+<br>
+<p>
+En React, por ejemplo, se recomienda definir los componentes como funciones en lugar de basarse en clases (posiblemente queden marcadas como <i>deprecated</i> en algún momento).<br>
+<a href="https://react.dev/reference/react/Component" title="https://react.dev/reference/react/Component" class="https">https://react.dev/reference/react/Component</a>
+</p>
+<br>
+<p>
+Ejemplo básico: definición de una clase <tt>Persona</tt>
+</p>
+<pre>
+class Persona {
+  // Constructor de la clase
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+
+  saludar() {
+    console.log(`Hola, soy ${this.nombre} (${this.edad} años).`);
+  }
+}
+</pre>
+<br>
+<p>
+<b>Nota</b>: si tenemos varios métodos en la clase, éstos no se separan con una coma.
+</p>
+<br>
+<p>
+Creación de un objeto de la clase <tt>Persona</tt>:
+</p>
+<pre>
+// Creación de una instancia de la clase Persona (un objeto)
+const persona1 = new Persona("Juan", 30);
+
+// Llamada a un método del objeto
+persona1.saludar();
+</pre>
+<br>
+<br>
+
+			<h2 id="h34">Herencia de clases</h2>
+			<p>
+No existe la herencia múltiple.
+</p>
+<br>
+<pre>
+class Alumno extends Persona {
+  // Constructor de la clase que llama al padre
+  constructor(nombre, edad, curso) {
+    super(nombre,edad);
+    this.curso = curso;  //Importante: super se llama antes siempre
+  }
+
+  saludar() {
+    super.saludar();  //llama al método del padre que hemos sobreescrito
+    alert(`¡Hola, soy {this.nombre}!`);
+  }
+}
+</pre>
+<br>
+<br>
+
+			<h2 id="h35">Otras cuestiones</h2>
+			<ul style='padding-left: 30pt'>
+<li>También existen métodos y propiedades estáticos (usando la palabra reservada <tt>static</tt>).</li>
+<li>Hace poco se introdujeron miembros privados
+<ul>
+<li>También experimentalmente hay soporte para miembros protegidos (no lo uses en producción).</li>
+</ul></li>
+<li>También se han introducido <i>getters</i> y <i>setters</i>.</li>
+<li>Con <b>instanceof</b> podemos averiguar si un objeto es de un tipo de clase.</li>
+<li>No puede haber más de un constructor en una clase.</li>
+<li>Recuerda que al almacenar un objeto en el localStorage se eliminan los métodos y sólo se almacenan los datos. Si deseas recuperar los objetos desde el localStorage tras <i>estringuificarlo</i> y tener de nuevo los métodos, puedes añadir al constructor de tu objeto la funcionalidad necesaria para recrearlo a partir de la cadena stringificada o el objeto JSON recuperado.</li>
+</ul>
+<br>
+<p>
+Referencias: 
+</p>
+<ul style='padding-left: 30pt'>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields" class="https">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields</a></li>
+<li><a href="https://caniuse.com/?search=private class" title="https://caniuse.com/?search=private class " class="https">https://caniuse.com/?search=private class </a></li>
+</ul>
+<br>
+<br>
+
+			<h2 id="h36">Ejercicio Canciones y Ficheros</h2>
+			<p>
+Crea una clase <tt>Fichero</tt> cuyos atributos sean <tt>nombreFichero</tt> y <tt>tamaño</tt> y que tenga un método <tt>extensión()</tt> que devuelva la extensión del fichero y un método <tt>getDatos()</tt> que devuelva una cadena de caracteres con el nombre del fichero y el tamaño entre paréntesis.<br>
+Crea una clase <tt>Canción</tt> que herede de fichero cuyos atributoas serán <tt>nombreCanción</tt> y <tt>duración</tt> y tendrá un método <tt>getDatos()</tt> que devolverá en una cadena de caracteres el nombre de la canción, la duración y el tamaño del fichero. 
+</p>
+<br>
+<p>
+Crea una web que cuatro textboxes (para el nombre del fichero, el tamaño, el nombre de la canción y la duración respectivamente), un grupo de radio buttons y dos botones: <i>Agregar</i> y <i>Mostrar</i>. <br>
+Al arrancar se creará un array de ficheros vacío.<br>
+Los radio buttons tendrán dos opciones: <i>fichero</i> y <i>canción</i>.<br>
+Cuando se pulse el botón de <i>Agregar</i> se mirará el radio button selecionado. Si la opción elegida es <i>canción</i>, se recuperarán los datos que correspondan de los textboxes, se creará un objeto de tipo <tt>Canción</tt> y se añadirá al array de ficheros. Si la opción elegida es <i>fichero</i> se creará un objeto de tipo <tt>Fichero</tt> y se añadirá al array. <br>
+Cuando se pulse el botón de <i>Mostrar</i> se mostrará el contenido del array en una lista, llamando para cada objeto del array al método <tt>getDatos()</tt>.<br>
+<img src="./4c_-_Objetos_files/pasted_image.png">
+</p>
+<br>
+<p>
+Intenta repetir el ejercicio usando herencia prototípica y funciones constructoras (sin usar clases).
+</p>
+<br>
+<br>
+
+			<h2 id="h37">Ejercicio</h2>
+			<p>
+Crea la siguiente clase:
+</p>
+<pre>
+class P{
+  constructor() {}
+  saludo(){console.log("Hola caracola");}
+  hola(){this.saludo()}
+}
+</pre>
+<br>
+<p>
+Crea un objeto y llama al método <tt>saludo()</tt> y luego al método <tt>hola()</tt>:
+</p>
+<pre>
+let p = new P();
+p.saludo();
+p.hola();
+</pre>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>

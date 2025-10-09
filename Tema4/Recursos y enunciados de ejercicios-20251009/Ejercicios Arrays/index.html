@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Arrays</title>
+	<link rel="stylesheet" href="estilos.css">
+	<script defer src="codigo.js"></script>
+</head>
+<body>
+	<div id="contenido">
+		<h1>Arrays</h1>
+		<p>Los arrays son una estructura de datos muy simple en la que los elementos se encuentran contiguos en memoria. 
+			Esto hace que su acceso sea muy rápido y directo. 
+		</p>
+
+		<p>Los arrays se declaran vacíos o directamente con datos usando para ello los corchetes.</p>
+		<pre>
+	let array1 = [];
+	let array2 = [1,2,3, "Juan"];
+		</pre>
+
+		<p>A los arrays se accede por su posición y su longitud (la posición que ocupa el último elemento + 1) se encuentra 
+			en la propiedad <code>length</code>.</p>
+		<pre>
+	array2[1] = 'Paco';                // [1, 'Paco', 3, "Juan"];
+	console.log( array2[1] );          // 'Paco'
+	console.table(array2);
+	let longitudArray = array2.length; // 4
+		</pre>
+
+		<p>Javascript no se quejará ni mostrará un error si accedemos a una posición inválida del array (entendiéndose inválida
+			como una posición no ocupada por datos).
+		</p>
+		<pre>
+	array2[-1] = "Hola";
+	array2[35] = "Caracola";
+	alert( array2.length );   //36 --> posición del último elemento + 1
+		</pre>
+
+
+		<h1>Trabajar con arrays</h1>
+		<h2>Recorridos</h2>
+		<p>Dos métodos:</p>
+		<pre>
+	let a = [1,2,3];
+
+	for(let i=0; i&lt;a.length; i++){
+		console.log( a[i] ); 
+	}
+
+	for( let elemento of a){
+		console.log( elemento );
+	}
+		</pre>
+
+		<h2>Añadir elementos</h2>
+
+		<p>Se puede añadir un elemento por el final del array (push) o por el principio (unshift).</p>
+		<p>Se puede extraer un elemento por el final del array (pop) o por el principio (shift).</p>
+
+		<pre>
+	let arr = [1,2,3];
+	arr.push( 4 );           // [1,2,3,4]
+	arr.unshift( 0 );        // [0,1,2,3,4]
+	let últimoElemento = arr.pop();   // [0,1,2,3]  --> 4
+	let primerElemento = arr.shift(); // [1,2,3]    --> 0
+		</pre>
+
+
+		<h2>Otras funciones</h2>
+		<ul>
+			<li>indexOf()</li>
+			<li>lastIndexOf() (-1 = no encontrado) </li>
+			<li>map()</li>
+			<li>filter()</li>
+			<li>sort()</li>
+			<li>forEach()</li>
+			<li>slice()</li>
+			<li>splice()</li>
+			<li>reduce()</li>
+			<li>every()</li>
+			<li>include()</li>
+			<li>"Hola caracola".split(" ");</li>
+			<li>Comparar arrays</li>
+		</ul>
+
+
+		<h1>Ejercicios</h1>
+		<h2>Ejercicio 1</h2>
+		<p>Crea un array que contenga 3 valores y haz que se muestre el contenido.</p>
+
+		<form>
+			<input type="button" value="Calcular" id="btnCalcular1">
+		</form>
+		<div id="divResultado1" class="resultado"></div>
+
+		<h2>Ejercicio 2</h2>
+		<p>Crea una función que reciba un array de números y devuelva la suma de todos los números.</p>
+
+		<form>
+			<input type="button" value="Calcular" id="btnCalcular2">
+		</form>
+		<div id="divResultado2" class="resultado"></div>
+
+		<h2>Ejercicio 3</h2>
+		<p>Crea una función que reciba 2 parámetros, un array de números a y un valor numérico x.<br>
+			La función devolverá otro array que contenga todos los numeros de a que no sean x.</p>
+
+			<form>
+				<input type="button" value="Calcular" id="btnCalcular3">
+			</form>
+			<div id="divResultado3" class="resultado"></div>
+
+		<h2>Ejercicio 4</h2>
+		<p>Crea un array con números. Crea ahora otro array que contenga el cuadrado de dichos números.</p>
+		<form>
+			<input type="button" value="Calcular" id="btnCalcular4">
+		</form>
+		<div id="divResultado4" class="resultado"></div>
+
+
+		<h2>Ejercicio 5</h2>
+		<p>Usando una función <code>map</code> en un array de nombres, crea un array que contenga la longitud de los nombres</p>
+		<pre>let nombres=["Ana", "Paco", "Lucas"];</pre>
+		<form>
+			<input type="button" value="Calcular" id="btnCalcular5">
+		</form>
+		<div id="divResultado5" class="resultado"></div>
+
+
+		<h2>Ejercicio 6</h2>
+		<p>Crea una función que reciba un array de notas y devuelva un array que contenga "aprobado" o "suspenso" por cada nota 
+			que esté aprobada o suspensa.</p>
+		<p>Resuelve el ejercicio usando una función <code>map</code>.</p>
+		<form>
+			<input type="button" value="Calcular" id="btnCalcular6">
+		</form>
+		<div id="divResultado6" class="resultado"></div>
+	</div>
+</body>
+</html>

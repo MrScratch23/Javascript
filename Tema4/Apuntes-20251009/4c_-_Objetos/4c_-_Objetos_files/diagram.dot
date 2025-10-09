@@ -1,0 +1,29 @@
+digraph Herencia{
+
+  rankdir=BT
+  layout=neato
+  #splines=curved
+  #overlap=false
+  #outputorder = edgesfirst
+  #ranksep=1
+  #ordering=in
+ 
+  node [colorscheme=pastel19,style=filled,shape=record, margin="0.1,0.1", fixedsize=false]
+  
+  
+ 
+  
+  Alumno [pos="-1,1!", fillcolor=1, label="{Alumno | name: \"Alumno\" | <ref>prototype: ref | Alumno(nombre, apellidos,...)\{...\} }"]
+  "Prototype (Alumno)" [pos="1,4!", fillcolor=5, label="{Prototype (Alumno) | <fcons>constructor: ref | info: function(...)| mayorDeEdad: function(...)| imprime: function(...)}"]
+  
+  juan [fillcolor=3, pos="3,1!",label="{juan|<ref>prototype=ref|nombre: \"Juan\" |apellidos: \"López Caro\" | edad:23| telefonos:\[\] }"]
+  paco [fillcolor=4, pos="6,1!",label="{paco|<ref>prototype=ref|nombre: \"Paco\" |apellidos: \"Gómez\" | edad:21| telefonos:\[\] }"]
+
+  
+  paco:ref -> "Prototype (Alumno)"
+  juan:ref -> "Prototype (Alumno)"
+  "Prototype (Alumno)":fcons -> Alumno
+  Alumno:ref -> "Prototype (Alumno)"
+
+
+}
