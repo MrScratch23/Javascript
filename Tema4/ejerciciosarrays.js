@@ -110,7 +110,7 @@ const mostrarTexto = function() {
   if (arrNombres.length === 0) {
     sol = "No hay elementos que mostrar.";
   } else {
-    const arrayOrdenado = [...arrNombres].sort(); // Copia para no modificar original
+    const arrayOrdenado = [...arrNombres].sort(); // copia para no modificar original
     
     sol += "<ul>";
     for (const nombre of arrayOrdenado) {
@@ -313,6 +313,51 @@ function obtenerNombre(numero) {
 */
 
 
+// funcion ejercicio 12
+
+/* 
+let arraygeneral = [
+  ['Juan',   ['Granada',' Londres',' Roma']],
+  ['Ana',    ['Bilbao', 'Sevilla', 'Roma']],
+  ['Manuel', ['Granada', 'Paris', 'Londres', 'Roma']],
+  ['Antonio',['Granada', 'Sevilla','Bilbao']],
+  ['Elena',  ['Granada', 'Sevilla']],
+  ['Jorge',  ['Sevilla']]
+];
+
+
+const enseñarCiudades = function() {
+  const personasValue = document.querySelector("#personas");
+  const personas = personasValue.value;
+  const divResultado = document.querySelector("#divResultado");
+
+  let sol = "";
+
+  // buscamos la persona en el arraygeneral
+  for (let i = 0; i < arraygeneral.length; i++) {
+      if (arraygeneral[i][0] === personas) {
+          let ciudades = arraygeneral[i][1];
+          sol += `Las ciudades visitadas por ${personas} son:<ul>`;
+          for (let ciudad of ciudades) {
+              sol += `<li>${ciudad.trim()}</li>`; // .trim() por si hay espacios
+          }
+          sol += "</ul>";
+          break;
+      }
+  }
+
+  divResultado.innerHTML = sol;
+};
+*/ 
+
+// funcion ejercicio13
+
+
+
+
+
+
+
 // main
 
 
@@ -459,3 +504,43 @@ alert(quiniela());
 */
 
 // ejercicio 12
+
+
+
+
+/* const personas = document.querySelector("#personas");
+personas.addEventListener('click', enseñarCiudades); */
+
+// ejercicio 13
+
+
+/* Crea una función que se llame tr reciba tres cadenas de caracteres como parámetros (llama a los parámetros mensaje, a y b) y haga lo siguiente:
+1.- Convierte la cadena de caracteres contenida en la variable mensaje en un array. Para eso usa let arrayMensaje = mensaje.split("");
+2.- A continuación recorre el array. Cada vez que encuentres un caracter igual que el contenido en el parámetro a, cambia su valor al contenido en el parámetro b.
+3.- Une el array de nuevo para crear una cadena de caracteres con el resultado de la modificación. Para eso usa mensaje = arrayMensaje.join("");
+4.- Devuelve la cadena de caracteres con un return. */
+
+/*
+const tr = (mensaje, a, b) => {
+  let arrayMensaje = mensaje.split("");
+
+  for (let i = 0; i < arrayMensaje.length; i++) {
+    // si el caracter es igual a a, lo cambiamos por b
+    if (arrayMensaje[i] === a) {
+      arrayMensaje[i] = b;
+    }
+  }
+
+  return arrayMensaje.join("");
+}
+
+// Ejemplo
+console.log(tr("hola mundo", "o", "a")); // "hala munda"
+console.log(tr("javascript es genial", "a", "o")); // "jovoscript es geniol"
+*/ 
+
+
+
+  
+
+

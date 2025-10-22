@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Números a Palabras</title>
-    <script src="ejerciciosarrays.js" defer></script>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <meta charset="UTF-8" />
+  <title>Dropdown de Personas</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <script src="ejerciciosarrays.js" defer></script>
 </head>
 <body>
-    <h1>Conversor de Números a Palabras</h1>
-    
-    <div>
-        <label for="numeroInput">Ingresa un número (hasta 5 cifras):</label>
-        <input type="number" id="numeroInput" min="0" max="99999">
-        <button id="btnConvertir">Convertir</button>
-    </div>
-    
-    <div id="contenedorTabla">
-        <!-- La tabla se creará dinámicamente con JavaScript -->
-    </div>
 
-    
-    
+  <label for="personas">Selecciona una persona:</label>
+  <select id="personas" name="personas">
+    <option value="">-- Selecciona --</option>
+    <option value="Juan">Juan</option>
+    <option value="Ana">Ana</option>
+    <option value="Manuel">Manuel</option>
+    <option value="Antonio">Antonio</option>
+    <option value="Elena">Elena</option>
+    <option value="Jorge">Jorge</option>
+  </select>
+
+  <h3>Ciudades a visitar:</h3>
+  <ul id="divResultado" name="divResultado"></ul>
+
 </body>
 </html>
