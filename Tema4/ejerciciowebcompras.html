@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="ejerciciowebcompras.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+
+
+<!-- La web contendrá un formulario que contenga estos controles:
+
+Un <select> en el que el usuario podrá seleccionar el producto que quiera.
+Un textbox en el que el usuario podrá indicar la cantidad que quiere comprar. Este cuadro sólo debe permitir indicar números enteros (usa el atributo step).
+Un botón con la etiqueta Añadir al carrito.
+Un botón con la etiqueta Ver pedido. -->
+    <h1>Formulario de Compras</h1>
+
+    <form id="formCompra">
+        <label for="producto">Selecciona un producto:</label>
+        <select id="producto" name="producto">
+            <option value="">-- Selecciona --</option>
+            <option value="Producto1">Producto 1</option>
+            <option value="Producto2">Producto 2</option>
+            <option value="Producto3">Producto 3</option>
+        </select>
+
+        <br><br>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" step="1" min="1">
+
+        <br><br>
+
+        <button type="button" id="btnAñadir">Añadir al carrito</button>
+        <button type="button" id="btnVerPedido">Ver pedido</button>
+    </form>
+
+    <h3>Carrito de Compras:</h3>
+    <div id="divCarrito"></div>
+
+
+    
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>4c - Objetos y clases</title>
-	<meta name='Generator' content='Zim 0.75.2'>
+	<meta name='Generator' content='Zim 0.76.1'>
 	<style type='text/css'>
 	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
 	    :root {
@@ -246,6 +246,21 @@ background-image: var(--html-background-color-image);
 		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
 		ul {list-style-image: none}
 		/* ul rule needed to reset style for sub-bullets */
+
+		@media print {
+			div#pie{display:none;}
+			div#volver{display:none;}
+			form{display:none;}
+			div#sumario{display:none;}
+			/* Evitar que las imágenes se corten en Google Chrome, en FF parece que lo ignora */
+			img {
+				page-break-inside: avoid;
+			}
+			div#contenido{
+				border:0px;
+				box-shadow: none;
+			}
+		}
 	</style>
 	
 	<!-- resaltado de sintaxis -->
@@ -269,6 +284,8 @@ background-image: var(--html-background-color-image);
 <!-- Sumario --> 
             <a href="#h1">4c - Objetos y clases</a> <br>
             &nbsp; &nbsp; <a href="#h2">Creación y acceso</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; For..in <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
 				&nbsp; &nbsp; &nbsp; &nbsp; Funciones como propiedades <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
         
@@ -276,45 +293,65 @@ background-image: var(--html-background-color-image);
         
         
         
-            &nbsp; &nbsp; <a href="#h9">Añadir y eliminar propiedades</a> <br>
-            &nbsp; &nbsp; <a href="#h10">Comparación y copia</a> <br>
+            &nbsp; &nbsp; <a href="#h10">Añadir y eliminar propiedades</a> <br>
+        
+        
+        
+        
+            &nbsp; &nbsp; <a href="#h15">Comparación y copia</a> <br>
 				&nbsp; &nbsp; &nbsp; &nbsp; Clonación simple <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
-				&nbsp; &nbsp; &nbsp; &nbsp; Clonación anidada <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Clonación profunda de datos <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
-            &nbsp; &nbsp; <a href="#h13">Constructores con new</a> <br>
-            &nbsp; &nbsp; <a href="#h14">Otras cuestiones más circunstanciales (y avanzadas)</a> <br>
+            &nbsp; &nbsp; <a href="#h18">Funciones constructoras (patrón fábrica, no recomendado)</a> <br>
+        
+        
+            &nbsp; &nbsp; <a href="#h21">Constructores con new</a> <br>
+        
+        
+            &nbsp; &nbsp; <a href="#h24">Otras cuestiones más circunstanciales (y avanzadas)</a> <br>
 				&nbsp; &nbsp; &nbsp; &nbsp; Saber si un objeto tiene una propiedad <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
-				&nbsp; &nbsp; &nbsp; &nbsp; Recorrer todas las propiedades <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Recorrer las propiedades de un objeto <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
 				&nbsp; &nbsp; &nbsp; &nbsp; Object.freeze() vs Object.seal() <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
-            <a href="#h18">Ejercicios</a> <br>
-            &nbsp; &nbsp; <a href="#h19">Ejercicio de perros</a> <br>
-            &nbsp; &nbsp; <a href="#h20">Ejercicio de cremas</a> <br>
-            &nbsp; &nbsp; <a href="#h21">Ejercicio de implementación de un Conjunto</a> <br>
+            <a href="#h28">Ejercicios</a> <br>
+            &nbsp; &nbsp; <a href="#h29">Ejercicio de perros</a> <br>
+            &nbsp; &nbsp; <a href="#h30">Ejercicio de cremas</a> <br>
+            &nbsp; &nbsp; <a href="#h31">Ejercicio de implementación de un Conjunto</a> <br>
 				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
 				&nbsp; &nbsp; &nbsp; &nbsp; Ejemplo de funcionamiento de prueba <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
 				&nbsp; &nbsp; &nbsp; &nbsp; Ampliación <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
-            <a href="#h25">Herencia prototípica (o funciones disfrazadas de clases)</a> <br>
-            &nbsp; &nbsp; <a href="#h26">Herencia entre objetos literales</a> <br>
-            &nbsp; &nbsp; <a href="#h27">Implementación con constructores</a> <br>
+            <a href="#h35">Herencia prototípica (o funciones disfrazadas de clases)</a> <br>
+            &nbsp; &nbsp; <a href="#h36">Herencia entre objetos literales</a> <br>
+            &nbsp; &nbsp; <a href="#h37">Implementación con constructores</a> <br>
 				&nbsp; &nbsp; &nbsp; &nbsp; Un constructor que hereda de un objeto literal <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+        
 				&nbsp; &nbsp; &nbsp; &nbsp; Un constructor que hereda de otro constructor <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
         
         
         
-            <a href="#h33">Clases en JS</a> <br>
-            &nbsp; &nbsp; <a href="#h34">Herencia de clases</a> <br>
-            &nbsp; &nbsp; <a href="#h35">Otras cuestiones</a> <br>
-            &nbsp; &nbsp; <a href="#h36">Ejercicio Canciones y Ficheros</a> <br>
-            &nbsp; &nbsp; <a href="#h37">Ejercicio</a> <br>
+            &nbsp; &nbsp; <a href="#h45">Ejercicio complejo: Tareas y Ejercicios</a> <br>
+        
+        
+            <a href="#h48">Clases en JS</a> <br>
+            &nbsp; &nbsp; <a href="#h49">Herencia de clases</a> <br>
+            &nbsp; &nbsp; <a href="#h50">Otras cuestiones</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejemplo de clase con propiedades estáticas, privadas, getters/setters <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+        
+				&nbsp; &nbsp; &nbsp; &nbsp; Rehidratación de un objeto <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h55">Ejercicio Canciones y Ficheros</a> <br>
+            &nbsp; &nbsp; <a href="#h56">Ejercicio</a> <br>
 </div>
 <!-- Sumario -->
 
@@ -333,8 +370,12 @@ Podemos pensar en ellos como un conjunto de variables y funciones (propiedades o
 </p>
 <br>
 <p>
-<b>Importante</b>: cuando se crea una constante que es un objeto, la referencia no puede cambiar, pero el contenido del objeto sí.
+<b>Importante</b>: cuando se crea una constante que contiene un objeto, la referencia al objeto no puede cambiar (es constante), pero el contenido del objeto sí puede ser cambiado.
 </p>
+<pre>
+const a = {nombre:"Javier", edad:44};
+a.edad = 45;  // permitido
+</pre>
 <br>
 <p>
 <b>Referencias</b>:
@@ -349,7 +390,7 @@ Podemos pensar en ellos como un conjunto de variables y funciones (propiedades o
 Se puede crear un objeto vacío de dos maneras (sin diferencias entre ellas, aunque la primera es más compacta y es la preferida):
 </p>
 <pre>
-let alumno = {}
+let alumno = {};
 let usuario = new Object();
 </pre>
 <br>
@@ -360,7 +401,7 @@ Para crear un objeto con atributos podemos usar:
 let alumno = {
   nombre: "Javier",
   apellidos: "Mancera Fernández",
-  edad: 42,    //se puede terminar con una coma o no
+  edad: 44,    //  el último elemento puede terminar con una coma o no
 }
 </pre>
 <br>
@@ -378,20 +419,53 @@ if( alumno.edad &gt;=18){
 </p>
 <br>
 <p>
-También se puede acceder con corchetes, lo que puede ser interesante si tenemos una propiedad con espacios:
+También se puede acceder con corchetes, lo que puede ser interesante si tenemos una propiedad con espacios o necesitamos acceder a las propiedades mediante una variable:
 </p>
 <pre>
 alumno["nombre"] = "Marcos";
 alumno["mayor de edad"] = true;
+
+let propiedad = "alumno de DAW";
+alumno[prop] = true;
 </pre>
 <br>
 <br>
 
             
-				<h3>Funciones como propiedades<a id="funciones-como-propiedades" class="h_anchor"></a></h3>
+				<h3>For..in<a id="forin" class="h_anchor"></a></h3>
+<p>
+Para recorrer las propiedades de un objeto se puede usar el bucle <tt>for..in</tt>:
+</p>
+<pre>
+let p={nombre: "dron", precio:123, id:15};
+
+for(let prop in p){
+  console.log(`${prop} = ${ p[prop]}`);
+}
+
+//El resultado en la consola será:
+// nombre = dron
+// precio = 123
+// id = 15
+</pre>
 <br>
 <p>
-Se pueden indicar en la creación o añadirlas dinámicamente luego.
+<b>Importante</b>: sólo se recorren así las propiedades marcadas como <i>enumerables</i>, en el caso del ejemplo de arriba mostrará sólo las propias (<i>own properties</i>) porque las heredadas de <tt>Object</tt> están marcadas como <i>no enumerables</i>.
+</p>
+<br>
+<p>
+Si necesitamos saber las propiedades propias y enumerables de un objeto podemos obtenerlas así:
+</p>
+<pre>
+const propiedades = Object.keys(p); // ["nombre", "precio", "id"]
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Funciones como propiedades<a id="funciones-como-propiedades" class="h_anchor"></a></h3>
+<p>
+Se pueden indicar en la creación o añadirlas posteriormente de manera dinámica mediante una función que puede ser anónima. Una función que pertenece a un objeto se conoce como <b>método</b>. 
 </p>
 <br>
 <p>
@@ -414,8 +488,9 @@ alumno.nombreFormal = function(){
 </pre>
 <br>
 <p>
-<b>Nota</b>: el <tt>this</tt>, queda vinculado por defecto al ámbito del objeto que lo llamó y por tanto podemos asignar la misma función a dos objetos distintos y que funcione correctamente.<br>
-El ámbito del <tt>this</tt> se establece en el momento de llamar a la función (y puede ser modificado, como veremos más adelante al ver las funciones constructoras).
+<b>Nota</b>: el <tt>this</tt> (que es una referencia a un objeto), queda vinculado por defecto al ámbito del objeto que lo llamó y por tanto podemos asignar la misma función a dos objetos distintos y que funcione correctamente.<br>
+Es decir, el ámbito del <tt>this</tt> se establece en el momento de llamar a la función (y puede ser modificado, como veremos más adelante al ver las funciones constructoras y al reutilizar la misma función en diferentes objetos).<br>
+Sin embargo, esto no será posible si usamos funciones flecha.
 </p>
 <br>
  <br>
@@ -423,16 +498,17 @@ El ámbito del <tt>this</tt> se establece en el momento de llamar a la función 
 						<pre class="codigo">
 Abajo puedes ver una posible implementación de una función reutilizada en dos objetos.
 							<div class="codigojs" style="display:none">let s = `function mostrarDatosExterno(){
-  return \`Nombre: ${this.nombre} (edad: ${this.edad})\`;
+  return \`Nombre: \${this.nombre} (edad: \${this.edad})\`;
 }
 
 // Añadimos la función a dos objetos
-alumno.mostrarDatosExterno = mostrarDatosExterno;
+let alumno={nombre: "Paco", edad:23};
+alumno.mostrarDatosExterno = mostrarDatosExterno; // dinámicamente
 
 let alumno2 = {
   edad: 60,
   nombre: "Juan",
-  mostrarDatosExterno: mostrarDatosExterno,
+  mostrarDatosExterno: mostrarDatosExterno,       // en la creación del objeto
 }`;
 resultado.innerHTML=s;
 									</div>
@@ -441,12 +517,7 @@ resultado.innerHTML=s;
 				</pre>
 				
             
-				<p>
-Sin embargo, esto no será posible si usamos funciones flecha.
-</p>
-<br>
-<br>
-            
+				            
 				<h4>Funciones flecha y el this<a id="funciones-flecha-y-el-this" class="h_anchor"></a></h4>
 <p>
 En la web de MDN podemos leer que...
@@ -477,13 +548,13 @@ function f(){ console.log(this);}
 f(); //this hace referencia a window
 
 const objeto = {funcion:f};
-const objeto.funcion() //this ahora hace referencia a Object { funcion: f() }
+objeto.funcion() //this ahora hace referencia a Object { funcion: f() }
 
 const f_flecha = () =&gt;{console.log(this);}
 f_flecha(); //this hace referencia a window
 
 const objeto2 = {funcion:f_flecha};
-const objeto2.funcion(); //this sigue haciendo referencia a window
+objeto2.funcion(); //this sigue haciendo referencia a window
 
 const objeto3 = { funcion: () =&gt; {console.log(this);} }
 objeto3.funcion(); //this hace referencia a window
@@ -492,13 +563,14 @@ objeto3.funcion(); //this hace referencia a window
 <br>
 <p>
 <b>Importante</b>: las funciones flechas no vinculan <tt>this</tt> al objeto que las llama (sino al objeto <tt>window</tt>/<tt>global</tt>) y por tanto no podrán acceder a las propiedades del objeto. <br>
-Pero si se crean dentro de otra función heredará el ámbito de ésta (scope) y su <tt>this</tt> apuntará al <tt>this</tt> de la función padre (y por tanto sí podrán acceder a las propiedades del objeto). Por el mecanismo de <i>hoisting</i> tiene acceso a las variables de la función padre, incluyendo al this).
+Pero si se crean como función local dentro de otra función heredará el ámbito de ésta (<i>scope</i>) y su <tt>this</tt> apuntará al <tt>this</tt> de la función padre (y por tanto sí podrán acceder a las propiedades del objeto). Por el mecanismo de <i>clousure</i> tiene acceso a las variables de la función padre, incluyendo al <tt>this</tt>).
 </p>
+<br>
  <br>
             
 						<pre class="codigo">
-Abajo hay una implementación de dos objetos que usan funciones flecha,\n
-el u1 falla y el u2 no.
+Abajo hay una implementación de dos objetos que usan funciones flecha,
+el u1 falla (al no poder acceder al this del objeto) y el u2 no.
 							<div class="codigojs" style="display:none">let s = `let u1 = {
   n:'Javier', 
   hola: ()=&gt;{
@@ -523,32 +595,96 @@ resultado.innerHTML=s;
 				</pre>
 				
             
-				<p>
-Veamos cómo añadir y eliminar propiedades.
-</p>
-<br>
-			<h2 id="h9">Añadir y eliminar propiedades</h2>
+							<h2 id="h10">Añadir y eliminar propiedades</h2>
 			<p>
 Se pueden añadir y eliminar propiedades dinámicamente en tiempo de ejecución, por ejemplo:
 </p>
 <pre>
-alumno.fechaIncorporación = "19-09";
-delete alumno.edad; 
+let alumno={nombre: "Pepe", apellidos:"Lluyot", edad:54};
 
-console.log(`${alumno.nombre} ${alumno.apellidos} se incorporó a clase el ${alumno.fechaIncorporación}`);
+alumno.fechaIncorporación = "19-09-2025";
+delete alumno.edad;
+
+alumno.toString = function(){
+  return `${alumno.nombre} ${alumno.apellidos} se incorporó a clase el ${alumno.fechaIncorporación}`;
+}
+
+console.log("Alumno: " + alumno);
 </pre>
 <br>
 <br>
 
-			<h2 id="h10">Comparación y copia</h2>
+            
+						<pre class="codigo">
+Abajo hay un ejemplo de eliminación de propiedades dinámicamente para liberar memoria.
+							<div class="codigojs" style="display:none">let s = `Imagina que en lugar de 7 alumnos tenemos 100 alumnos con 20 notas (2000 enteros en memoria) 
+y que ese array de notas ya no lo necesitamos para nada. Podemos eliminarlos de la memoria para
+liberarla.
+
+let alumnos=[
+  {notas:[10,10,10],nombre:"Alumno 1"},
+  {notas:[ 1, 1, 7],nombre:"Alumno 2"},
+  {notas:[ 5, 6,10],nombre:"Alumno 3"},
+  {notas:[10, 3, 9],nombre:"Alumno 4"},
+  {notas:[10, 6,10],nombre:"Alumno 5"},
+  {notas:[10, 4, 8],nombre:"Alumno 6"},
+  {notas:[ 5,10, 2],nombre:"Alumno 7"},
+];
+
+alumnos.forEach( a=&gt;{delete a.notas} );
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				            
+						<pre class="codigo">
+Ampliación: propiedades avanzadas. Abajo hay un ejemplo de creación de una propiedad avanzada
+de un objeto que es no enumerable y además de sólo lectura.
+							<div class="codigojs" style="display:none">let s = `let ratón = {marca:"Baseus", conectividad:["BT", "RF"]};
+
+Object.defineProperty(ratón, 'modelo', { 
+  value: 'F01B',
+  enumerable: false,
+  writable: false
+}); 
+
+console.log( ratón.modelo );               //"F01B"
+
+// Iteramos por las propiedades enumerables
+for(let p in ratón){
+  console.log(\`\${p} = \${ratón[p]}\`);  // la propiedad modelo no aparece porque no es enumerable 
+}
+
+console.log( Object.keys(ratón) );        // Array [ "marca", "conectividad" ]
+
+// No se puede modificar la propiedad porque es de sólo lectura:
+ratón.mod = "XXX";                         // No se lanza ningún error
+console.log( ratón.mod ); //"F01B" 
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+							<h2 id="h15">Comparación y copia</h2>
 			<p>
 La comparación se realiza por referencia:
 </p>
 <pre>
 let a = { x:4, y:6 };
-let b = a;             //a y b son el mismo objeto (a==b y a===b)
+let b = a;             // a y b son el mismo objeto (a==b y a===b)
 let c = { x:4, y:6 };  // a != c
 </pre>
+<br>
+<p>
+<img src="./4c_-_Objetos_files/diagram002.png">
+</p>
 <br>
 <p>
 Si necesitamos comparar dos objetos tendremos que iterar por sus propiedades y compararlas una a una. Pero claro, si tenemos propiedades de los objetos que sean a su vez nuevos objetos (o arrays) habría que compararlos también en una función recursiva. Mi recomendación es usar alguna biblioteca de funciones que proporcione esta funcionalidad si se necesita.<br>
@@ -567,65 +703,189 @@ JSON.stringify(a) === JSON.stringify(c); // true
             
 				<h3>Clonación simple<a id="clonación-simple" class="h_anchor"></a></h3>
 <p>
-¿Cómo clonamos un objeto en otro diferente? Tres métodos distintos que funcionan si sus propiedades son primitivas (no son otros objetos, por ejemplo).
+¿Cómo clonamos un objeto en otro diferente? En Javavascript no hay un método que nos cree un clon perfecto, todos los métodos que existen a día de hoy presentan algún tipo de compromiso (<i>trade-off</i>).<br>
+Se presentan a continuación varios métodos distintos que funcionan si sus propiedades son primitivas (no son otros objetos o arrays, por ejemplo). Hay que tener cuidado con las propiedades heredadas del objeto a clonar.
 </p>
 <br>
 <p>
-Iterando por sus propiedades:
+Iterando por sus propiedades: tiene el problema de que si el objeto a clonar tiene propiedades heredadas, el objeto clon las tendrá como propias.
 </p>
 <pre>
 let clon = {}; // el nuevo objeto vacío
 
-for (let key in alumno) { //se copian todas las propiedades
+for (let key in alumno) { //se copian todas las propiedades enumerables
   clon[key] = alumno[key];
 }
 </pre>
 <br>
 <p>
-Usando <i>spread</i> (recomendada si no hay anidaciones):
+Usando <i>spread</i> (<b>opción recomendada</b> si no hay anidaciones ni propiedades heredadas): este método ignorará las propiedades heredadas enumerables o no (y romperá por tanto la herencia).
 </p>
 <pre>
-let clon = {...alumno}
+let clon = {...alumno};
 </pre>
 <br>
 <p>
-Usando <tt>Object.assing()</tt>:
+Usando <tt>Object.assing()</tt>: tenemos el mismo comportamiento que con el operador <i>spread</i>.
 </p>
 <pre>
 let clon = Object.assign( {}, alumno );
 </pre>
 <br>
+<p>
+También podemos usar el objeto JSON, pero sabemos que <b>esto eliminará las funciones</b> y que tiene efectos secundarios con propiedades que sean <tt>undefined</tt> u objetos <tt>Date</tt>, <tt>Set</tt> o <tt>Map</tt>, por lo que no se considera un método recomendable para esto:
+</p>
+<pre>
+let clon = JSON.parse( JSON.stringify(objeto) );
+</pre>
+<p>
+Ejemplo:
+</p>
+<pre>
+let a = {nombre: "Javier", edad: 44, info(){return this.nombre+" "+this.edad} };
+let b = JSON.parse( JSON.stringify(a) );
+a.info();       // 'Javier 44'
+b.info();       // Uncaught TypeError: b.info is not a function
+</pre>
+<br>
 <br>
  <br>
             
-				<h3>Clonación anidada<a id="clonación-anidada" class="h_anchor"></a></h3>
+				<h3>Clonación profunda de datos<a id="clonación-profunda-de-datos" class="h_anchor"></a></h3>
 <p>
-Los métodos de arriba funcionarán si todas las propiedades son primitivas, en caso contrario se copiará una referencia a la propiedad en lugar de la propiedad.
+Los métodos de arriba funcionarán si todas las propiedades son primitivas, en caso contrario (si es un objeto o un array, por ejemplo) se copiará una referencia a la propiedad en lugar de un clon de la propiedad.
 </p>
 <br>
+<p>
+El método que garantiza la creación de un clon de un objeto es este:
+</p>
 <pre>
 let clon = structuredClone( alumno );
 </pre>
 <br>
 <p>
-<b>Nota</b>: esto fallará si el objeto tiene funciones como atributos. En ese caso tendremos que hacerlo a mano.
+<b>Importante</b>: esto crea una copia profunda de los datos, fallará si el objeto tiene funciones como atributos. En ese caso tendremos que hacerlo a mano.
 </p>
+<pre>
+let a = {nombre: "Javier", edad: 44, info(){return this.nombre+" "+this.edad} }
+let b = structuredClone(a);  //Uncaught DOMException: Function object could not be cloned.
+</pre>
+<br>
+<p>
+¿Y entonces cómo hacemos un clon perfecto de un objeto? Haciéndolo a mano, cada objeto tiene sus peculiaridades, así que puedes crear entre los métodos de tu objeto uno que devuelva un clon perfecto del mismo.
+</p>
+<pre>
+let a = { nombre: "Javier", edad: 44, 
+  tlf: [123, 789],
+  info() { return this.nombre + " " + this.edad },
+
+  clonar() {
+    // 1.- Clon superficial: clon de las propiedades propias (incluyendo 'info').
+    //     Esto copia 'tlf' por referencia.
+    let clon = { ...this }; 
+      
+    // 2.- Usamos structuredClone para SOBREESCRIBIR la propiedad 'tlf' 
+    //    con una copia profunda de sí misma.
+    clon.tlf = structuredClone(this.tlf); 
+        
+    return clon;
+  }
+};
+</pre>
 <br>
 <br>
  <br>
-			<h2 id="h13">Constructores con new</h2>
+			<h2 id="h18">Funciones constructoras (patrón fábrica, no recomendado)</h2>
 			<p>
-Si necesitamos crear varios objetos que comparten el mismo tipo de propiedades, es buena idea crear una función constructora (un constructor). Esta función no devuelve nada.
+Si necesitamos crear varios objetos que comparten el mismo tipo de propiedades, es buena idea crear una <b>función constructora</b> (un constructor) que nos garantice que todos los objetos creados con ella tienen la misma forma (propiedades y métodos). <br>
+La manera más directa de hacerlo es usando el patrón fábrica (o <i>factory</i> en inglés), es decir, una función que nos construye los objetos literales y los devuelve.
 </p>
 <br>
 <p>
-Convenciones:
+<b>Nota</b>: en otros lenguajes de programación como Java o C# se suelen llamar <tt>AlumnoFactory</tt>, <tt>ProductoFactory</tt> o similares.
+</p>
+<br>
+<pre>
+function Alumno(nombre, apellidos, edad){
+  let a ={
+    nombre: nombre,
+    apellidos: apellidos,
+    edad: edad,
+    teléfonos: [],
+    info(){ return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad}` },
+    mayorDeEdad(){ return (this.edad &gt;=18);},
+    imprime(){ 
+      let s = this.nombre + " " + this.apellidos + " (" + this.edad + ")";
+      console.log(s);
+    },
+  }
+  return a;
+}
+</pre>
+<br>
+<p>
+Este método tiene algunos problemas como la ineficiencia (cada objeto tendrá una copia propia de los métodos, por ejemplo, lo que implica un desperdicio de memoria y de tiempo al crear un objeto) y hace que las instancias hereden solo de <tt>Object.prototype</tt>, lo que complica saber si un objeto creado con la función es un <tt>Alumno</tt>. La herencia se tratará más adelante, pero es algo a tener en cuenta para entender el problema de este método.
+</p>
+<pre>
+let a = Alumno("Paco", "López", 34);
+console.log( a instanceof Alumno ); // false
+console.log( a instanceof Object ); // true
+</pre>
+<br>
+<br>
+
+            
+						<pre class="codigo">
+Ampliación ¿Por qué funciona esto a pesar de que coord() es una función flecha?
+¿Qué problema tiene que hace que no sea recomendable usarlo?
+
+function FactoryB(x,y){
+  const objetob = {x:x, y:y};
+  objetob.coord = () =&gt;`(${x},${y})`;
+  return objetob;
+}
+
+let b = FactoryB(3,67);
+console.log( b.coord() ); // "(3,67)" 
+
+							<div class="codigojs" style="display:none">let s = `Funciona simplemente por el mecanismo de closure, que permite que una función acceda a 
+las variables disponibles en el contexto en el que fueron creadas (en este caso los 
+parámetros de la función factoryB).
+
+El problema principal es la ineficiencia, cada objeto construido por el patrón fábrica 
+en JS tendrá su propia copia de la función coord(). Si creas 1000 objetos, tendrás 
+1000 copias idénticas de la misma función en la memoria.
+
+Además imagina que tenemos también una función constructora FactoryA y una FactoryC.
+Imagina que el objeto x fue creado con una de las funciones constructoras ¿cómo podemos
+saber con cuál?
+No podemos. Tendríamos que añadir un atributo x.clase="C" para saberlo.
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+							<h2 id="h21">Constructores con new</h2>
+			<p>
+Un patrón mejor para crear objetos es crear una función constructora que use el operador <tt>new</tt>. Esta función no devuelve nada porque se invocará usando el operador <tt>new</tt>.
+</p>
+<br>
+<p>
+Convenciones y otros aspectos:
 </p>
 <ul style='padding-left: 30pt'>
 <li>El nombre del constructor suele colocarse con la primera letra en mayúsculas.</li>
 <li>Sólo deben ejecutarse con el operador <tt>new</tt>.</li>
+<li>No devuelven nada.</li>
+<li>El operador <tt>instanceof</tt> funciona correctamente.</li>
 </ul>
 <br>
+<p>
+Repitiendo el mismo ejemplo que en el patrón <i>factory</i>:
+</p>
 <pre>
 function Alumno(nombre, apellidos, edad){
   this.nombre = nombre;
@@ -645,11 +905,11 @@ let paco = new Alumno("Paco", "Gómez", 21);
 </pre>
 <br>
 <p>
-En el código de arriba cada objeto creado con ese constructor <b>tendrá su propia copia</b> de los métodos <tt>info()</tt>, <tt>mayorDeEdad()</tt> e <tt>imprime()</tt>, lo que consumirá más memoria.
+En el código de arriba cada objeto creado con ese constructor <b>tendrá su propia copia</b> de los métodos <tt>info()</tt>, <tt>mayorDeEdad()</tt> e <tt>imprime()</tt>, lo que consumirá más memoria y hará que tarden algo más en ser creados (aspectos a tener en cuenta si creamos decenas o centenares de objetos).
 </p>
 <br>
 <p>
-La opción más recomendable es incluir los métodos en el prototipo (ver más adelante la herencia prototípica) para que todos los objetos compartan las mismas funciones.
+La opción más recomendable es incluir los métodos en el <b>prototipo</b> (ver más adelante la herencia prototípica para entender el concepto en profundidad) para que todos los objetos compartan las mismas funciones.
 </p>
 <pre>
 function Alumno(no, ap, ed){
@@ -659,8 +919,12 @@ function Alumno(no, ap, ed){
   this.teléfonos = [];
 }
 
-Alumno.prototype.info = function(){ return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad}`};
+Alumno.prototype.info = function(){ 
+  return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad}`
+};
+
 Alumno.prototype.mayorDeEdad = function(){ return (this.edad &gt;=18);};
+
 Alumno.prototype.imprime = function(){ 
     let s = this.nombre + " " + this.apellidos + " (" + this.edad + ")";
     console.log(s);
@@ -671,15 +935,62 @@ let paco = new Alumno("Paco", "Gómez", 21);
 </pre>
 <br>
 <p>
-<b>Nota</b>: ten en cuenta que si uno de los objetos tiene una propiedad añadida dinámicamente (por ejemplo <tt>paco.becado=false;</tt>) los métodos del prototipo no lo sabrán (tendremos que añadir su propio método <tt>info()</tt> para que lo tenga en cuenta, por ejemplo).
+<b>Nota</b>: ten en cuenta que si uno de los objetos tiene una propiedad añadida dinámicamente (por ejemplo <tt>paco.becado=false;</tt>) se añadirá sólo a ese objeto y los métodos del prototipo no lo sabrán (si por ejemplo queremos que el método <tt>info()</tt> lo muestre tendremos que añadir también su propio método <tt>info()</tt> para que lo tenga en cuenta).
 </p>
 <br>
 <p>
 <img src="./4c_-_Objetos_files/diagram.svg">
 </p>
 <br>
+<br>
+<br>
+<br>
 
-			<h2 id="h14">Otras cuestiones más circunstanciales (y avanzadas)</h2>
+            
+						<pre class="codigo">
+Ampliación: ¿Qué sucede si llamamos a un constructor sin usar el operador new?
+							<div class="codigojs" style="display:none">let s = `Este es un error que puede ser relativamente común, peligroso y complicado de 
+detectar (por inesperado). Si llamamos a la función constructora sin usar new, el
+this estará vinculado al objeto window, no al objeto que esperabamos crear (sin el
+new el constructor devuelve undefined).
+
+function Entrenamiento(nombre, kcal, minutos){
+  this.nombre = nombre;
+  this.kcal = kcal;
+  this.tiempo = minutos;
+};
+
+let e = Entrenamiento("Elíptica", 150, 15); //sin el new e contiene undefined
+
+// Imprimirá: Elíptica (150kcal, 15 min.)
+console.log( \`\${window.nombre} (\${window.kcal} kcal, \${window.tiempo} min.)\` ); 
+
+// Error: Uncaught TypeError: can't access property "nombre", e is undefined
+console.log( \`\${e.nombre} (\${e.kcal} kcal, \${e.tiempo} min.)\` ); 
+
+
+Podemos modificar el código de manera algo más avanzada para asegurarnos de que 
+nuestras funciones constructoras siempre se llamen con new.
+
+function Entrenamiento(nombre, kcal, minutos) {
+  // Si this no es una instancia de Entrenamiento -&gt; fue llamada sin 'new'
+  if (!(this instanceof Entrenamiento)) {
+    return new Entrenamiento(nombre, kcal, minutos);
+  }
+
+  this.nombre = nombre;
+  this.kcal = kcal;
+  this.tiempo = minutos;
+}
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+							<h2 id="h24">Otras cuestiones más circunstanciales (y avanzadas)</h2>
 			
             
 				<h3>Saber si un objeto tiene una propiedad<a id="saber-si-un-objeto-tiene-una-propiedad" class="h_anchor"></a></h3>
@@ -695,11 +1006,19 @@ alumno.hasOwnProperty("toString")  //false
 "toString" in alumno               //true
 </pre>
 <br>
+<p>
+Si necesitamos recuperar las propiedades propias de un objeto (por ejemplo para iterar sólo ellas) podemos obtenerlas así:
+</p>
+<pre>
+const propiedades = Object.keys(alumno); // ["id", "nombre", "edad"];
+</pre>
+<br>
+<br>
  <br>
             
-				<h3>Recorrer todas las propiedades<a id="recorrer-todas-las-propiedades" class="h_anchor"></a></h3>
+				<h3>Recorrer las propiedades de un objeto<a id="recorrer-las-propiedades-de-un-objeto" class="h_anchor"></a></h3>
 <p>
-Podemos usar el bucle <tt>for..in</tt> para iterar por sus propiedades.
+Podemos usar el bucle <tt>for..in</tt> para iterar por sus propiedades enumerables (propias o heredadas) como ya se había comentado anteriormente.
 </p>
 <pre>
 for(let prop in alumno){
@@ -707,12 +1026,12 @@ for(let prop in alumno){
 } 
 </pre>
 <br>
+<br>
  <br>
             
 				<h3>Object.freeze() vs Object.seal()<a id="objectfreeze-vs-objectseal" class="h_anchor"></a></h3>
-<br>
 <p>
-<tt>Object.freeze()</tt> impide la modificación de un objeto. Una vez que está congelado no se puede eliminar, añadir o cambiar sus propiedades.
+<tt>Object.freeze()</tt> impide la modificación de un objeto. Una vez que está congelado no se puede eliminar, añadir o cambiar sus propiedades. Esta es la manera de crear un objeto que sea inalterable en Javascript.
 </p>
 <br>
 <pre>
@@ -752,13 +1071,13 @@ alumno.email = "juan@gmail.com" // Sin efecto al añadir propiedad
 <br>
 <br>
  <br>
-			<h1 id="h18">Ejercicios</h1>
+			<h1 id="h28">Ejercicios</h1>
 			<p>
-Algunos ejercicios para practicar.
+Algunos ejercicios sencillos de objetos para practicar.
 </p>
 <br>
 
-			<h2 id="h19">Ejercicio de perros</h2>
+			<h2 id="h29">Ejercicio de perros</h2>
 			<p>
 Crea una web que contenga tres <i>textboxes</i>, uno para el nombre del perro, otro para la edad y otro para la raza. Además habrá los siguientes botones con estos comportamientos:
 </p>
@@ -776,7 +1095,7 @@ Crea una web que contenga tres <i>textboxes</i>, uno para el nombre del perro, o
 </p>
 <br>
 
-			<h2 id="h20">Ejercicio de cremas</h2>
+			<h2 id="h30">Ejercicio de cremas</h2>
 			<p>
 Crea un constructor de objetos de tipo <i>Crema</i> que tenga un <tt>nombre</tt>, <tt>precio</tt> y <tt>marca</tt>. Además contendrá un array de objetos de tipo <i>Ingrediente</i>, un método <tt>addIngrediente(nombre, cantidad)</tt> que permitirá añadir un objeto al array, un método <tt>removeIngrediente(i)</tt> que permite eliminar el iésimo ingrediente y una función <tt>toHTMLTable()</tt> que devuelva una tabla HTML con todos los ingredientes (se usará el método <tt>toHTMLRow()</tt> de los ingredientes).<br>
 Los objetos de tipo <i>Ingrediente</i> tendrán un nombre y una cantidad en gramos además de un método <tt>toHTMLRow()</tt> que devuelva una fila de una tabla HTML con todos los atributos.
@@ -788,7 +1107,7 @@ Los objetos de tipo <i>Ingrediente</i> tendrán un nombre y una cantidad en gram
 <br>
 <br>
 
-			<h2 id="h21">Ejercicio de implementación de un Conjunto</h2>
+			<h2 id="h31">Ejercicio de implementación de un Conjunto</h2>
 			<p>
 Un conjunto de números es una colección de números que cumple unas condiciones básicas:
 </p>
@@ -802,8 +1121,20 @@ Por eso un conjunto A que contenga los números 1, 5 y 7 y otro conjunto B con l
 </p>
 <br>
 <p>
-<b>Nota</b>: Javascript ya tiene una implementación de esta estructura de datos llamada <tt>Set()</tt>.
+<b>Nota</b>: Javascript ya tiene una implementación de esta estructura de datos llamada <tt>Set</tt>:
 </p>
+<pre>
+let s = new Set();
+s.add("Hola");                  // {"Hola"}
+s.add("Hola");                  // {"Hola"}
+s.add("Hola");                  // {"Hola"}
+s.add("Caracola");              // {"Hola", "Caracola"}
+s.add("Adiós");                 // {"Hola", "Caracola", "Adiós"}
+s.has("Hola");                  // true
+s.delete("Adiós");              // {"Hola", "Caracola"}
+console.log( s.size );          // 2
+for(let e of s) console.log(e); // {"Hola", "Caracola"}
+</pre>
 <br>
 <br>
 
@@ -813,9 +1144,9 @@ Por eso un conjunto A que contenga los números 1, 5 y 7 y otro conjunto B con l
 Implementa una función constructora que devuelva un objeto de tipo <tt>Conjunto</tt> que contenga un array y tres métodos:
 </p>
 <pre>
-	* añadir: recibirá un número y lo añadirá al array sólo si el número no pertenece ya al array.
-	* eliminar: si el número que recibe como parámetro ya existe, lo eliminará del array
-	* imprimir: imprimirá por la consola el contenido del array
+- añadir: recibirá un número y lo añadirá al array sólo si el número no pertenece ya al array.
+- eliminar: si el número que recibe como parámetro ya existe, lo eliminará del array
+- imprimir: imprimirá por la consola el contenido del array
 </pre>
 <br>
 <p>
@@ -835,7 +1166,7 @@ let c2 = new Conjunto([1,2,3]);
 				<h3>Ejemplo de funcionamiento de prueba<a id="ejemplo-de-funcionamiento-de-prueba" class="h_anchor"></a></h3>
 <br>
 <pre>
-let c = Conjunto();
+let c = new Conjunto();
 
 c.añadir(1);
 c.añadir(1);
@@ -873,7 +1204,7 @@ Puedes ampliar el ejercicio añadiendo estas funcionalidades:
 <br>
 <br>
  <br>
-			<h1 id="h25">Herencia prototípica (o funciones disfrazadas de clases)</h1>
+			<h1 id="h35">Herencia prototípica (o funciones disfrazadas de clases)</h1>
 			<p>
 Referencia: <a href="https://es.javascript.info/prototype-inheritance" title="https://es.javascript.info/prototype-inheritance" class="https">https://es.javascript.info/prototype-inheritance</a>
 </p>
@@ -887,7 +1218,7 @@ Empezaremos viendo esta herencia clásica por prototipos antes de ver las clases
 </p>
 <br>
 
-			<h2 id="h26">Herencia entre objetos literales</h2>
+			<h2 id="h36">Herencia entre objetos literales</h2>
 			<p>
 En JS todos los objetos tienen una propiedad oculta <tt>__proto__</tt> (que puede ser <tt>null</tt>). Cuando intentamos acceder a una propiedad de un objeto y no la encuentra, la buscará en el objeto elegido como prototipo (y si no la encuentra ahí la buscará en el prototipo de ese objeto, etc. hasta que llegue a un <tt>null</tt>).
 </p>
@@ -901,21 +1232,19 @@ No existe la herencia múltiple porque sólo puede haber un objeto prototipo.
 </p>
 <br>
 <p>
-Usando el ejemplo de la web javascript.info con objetos literales (sin constructores):
+Usando el ejemplo de la web <i>javascript.info</i> con objetos literales (sin constructores):
 </p>
 <pre>
 let animal = {
   eats: true,
-  walk() {
-    alert("Animal da un paseo");
-  },
+  walk() { alert("Animal da un paseo"); },
 };
 
 let rabbit = {
   jumps: true
 };
 
-//rabbit.__proto__ = animal; // deprecated
+//rabbit.__proto__ = animal; // deprecated e ineficiente
 Object.setPrototypeOf(rabbit, animal);
 
 console.log("Come: " + rabbit.eats );
@@ -924,24 +1253,27 @@ rabbit.walk();
 <br>
 <p>
 Cuando accedemos a <tt>rabbit.eats</tt>, el motor de JS buscará la propiedad en el objeto <tt>rabbit</tt>, pero como no se encuentra allí la buscará luego en <tt>animal</tt>.<br>
-Por supuesto <tt>animal</tt> podría tener otro objeto como prototipo y la cadena de búsqueda podría seguir.
+Por supuesto <tt>animal</tt> podría tener otro objeto como prototipo (¡de hecho lo tiene y es <tt>Object</tt>!) y la cadena de búsqueda podría seguir. En la imagen de abajo se muestra la representación del objeto <tt>rabbit</tt> que hace Firefox en las <i>developer tools</i>, se enmarca en rojo el prototipo de <tt>rabbit</tt> (el objeto <tt>animal</tt>) y en azul el prototipo de éste (que es <tt>Object</tt>). <br>
+<img src="./4c_-_Objetos_files/pasted_image002.png">
 </p>
 <br>
+<br>
 <p>
-<b>Importante</b>: el parámetro <tt>__proto__</tt> no es recomendable usarlo si tenemos alternativa porque su comportamiento no es estándar en todos los entornos de Javascript. Lo ideal es evitar su uso si puede evitarse.
+<b>Importante</b>: el parámetro <tt>__proto__</tt> no es recomendable usarlo si tenemos alternativa porque su comportamiento no es estándar en todos los entornos de Javascript y usarlo anula optimizaciones que realizan los motores de Javascript modernos. Lo ideal es evitar su uso si puede evitarse (que será siempre salvo en código muy antiguo o que tengamos que dar soporte a navegadores obsoletos). Si lo vemos utilizado probablemente estemos ante código viejuno.
 </p>
 <br>
 <p>
 El ejemplo de arriba podría solucionarse también así:
 </p>
 <pre>
-let rabbit = Object.create(animal);
+// Método anterior a ES6 (2015) y a la introducción de Object.setPrototypeOf()
+let rabbit = Object.create(animal); 
 rabbit.jumps = true;
 </pre>
 <br>
 <p>
 <b>Nota</b>: no puede haber referencias circulares, JS mostrará un error si lo hacemos.<br>
-<b>Nota</b>: <tt>for..in</tt> itera también sobre las propiedades heredadas.
+<b>Nota</b>: <tt>for..in</tt> itera también sobre las propiedades heredadas, pero sólo las enumerables.
 </p>
 <br>
 <p>
@@ -958,7 +1290,7 @@ function f() → Function →  Object →  null
 <br>
 <br>
 
-			<h2 id="h27">Implementación con constructores</h2>
+			<h2 id="h37">Implementación con constructores</h2>
 			<p>
 Podemos crear un constructor que herede:
 </p>
@@ -978,7 +1310,7 @@ Vamos a crear un constructor de objetos <tt>Alumno</tt> que herede de un objeto 
 //Objeto base del que queremos heredar
 let persona = {
   administrador: false,
-  telefonos: [],
+  telefonos: [112, 955687777],
 }
 </pre>
 <br>
@@ -993,11 +1325,10 @@ function Alumno(no, ap, ed){
   this.edad = ed;
 }
 Alumno.prototype.info = function(){ 
-    return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad} - Adm: ${this.administrador}`;
+  return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad} - Adm: ${this.administrador}`;
 };
 
-Object.setPrototypeOf(Alumno, persona);
-//Object.setPrototypeOf(Alumno.prototype, Object.assign({},persona));
+Object.setPrototypeOf(Alumno.prototype, persona);                     //propiedades referenciadas
 
 let a = new Alumno ("Javier", "Mancera", 42);
 console.log("Tlf:" + a.telefonos + ", adm: " + a.administrador);
@@ -1008,31 +1339,33 @@ console.log("Tlf:" + a.telefonos + ", adm: " + a.administrador);
 </p>
 <br>
 <p>
-Podemos hacer que al crearse un objeto el prototipo sea un clon nuevo del objeto que vamos a usar como prototipo, así cada nuevo objeto tendrá nuevas propiedades (en lugar de referencias). En el ejemplo sería de <tt>persona</tt> a <tt>Alumno</tt> usando <tt>Object.setPrototypeOf(Alumno.prototype, Object.assign({},persona));</tt>
+Otra manera, pero de nuevo no recomendada, para la herencia podría ser cambiar el constructor y establecer la herencia allí con el código de abajo, (aunque de nuevo la propiedad <tt>__proto__</tt> no es estándar y deberíamos evitarla).
 </p>
-<br>
-<br>
-<p>
-Otra manera, pero de nuevo no recomendada, para la herencia podría ser cambiar el constructor y establecer la herencia allí con el código de abajo, (aunque de nuevo la propiedad <tt>__proto__</tt> no es estándar y deberíamos evitarla):
-</p>
-<pre>
-// Función constructora
+ <br>
+            
+						<pre class="codigo">
+Este código se considera obsoleto y afecta negativamente al rendimiento. Se muestra 
+sólo por si se encuentra en código antiguo poder reconocerlo como motivo de mejora.
+							<div class="codigojs" style="display:none">let s = `// Función constructora
 function Alumno(no, ap, ed){
   this.nombre = no;
   this.apellidos = ap;
   this.edad = ed;
   this.__proto__ = persona;
-  this.info = function(){ return `Alumno: ${this.nombre} ${this.apellidos} - Edad: ${this.edad}`}
+  this.info = function(){ return \`Alumno: \${this.nombre} \${this.apellidos} - Edad: \${this.edad}\`}
 }
-</pre>
-<br>
-<br>
- <br>
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
             
+				            
 				<h3>Un constructor que hereda de otro constructor<a id="un-constructor-que-hereda-de-otro-constructor" class="h_anchor"></a></h3>
-<br>
 <p>
-Este es el método recomendado.
+Este es el método recomendado para generar la cadena de herencia.
 </p>
 <br>
 <p>
@@ -1044,11 +1377,11 @@ function Persona(nombre, edad){
   this.edad = edad;
   this.estado = "inactivo";
   this.saludar = function(){
-    return `Hola, soy ${nombre} y tengo ${edad} años)`;
+    return `Hola, soy ${this.nombre} y tengo ${this.edad} años`;
   }
 }
 Persona.prototype.saludar = function(){ 
-    return `Hola, soy ${nombre} y tengo ${edad} años)`;
+  return `Hola, soy ${this.nombre} y tengo ${this.edad} años`;
 };
 
 </pre>
@@ -1071,6 +1404,7 @@ function Alumno(nombre, edad, curso){
 // Si necesitamos que se hereden los cambios realizados en el prototipo de Persona
 // Por ejemplo: Persona.prototype.activo = false;
 Object.setPrototypeOf(Alumno.prototype, Persona.prototype); // Hereda de Persona
+Alumno.prototype.constructor = Alumno; // Recomendable restaurar el constructor, pero no obligatorio
 
 // deprecated
 //Alumno.prototype = Object.create(Persona.prototype);
@@ -1109,9 +1443,9 @@ Veamos finalmente cómo añadir métodos y propiedades comunes a todos los objet
 Si queremos añadir <b>nuevas</b> propiedades o métodos comunes a todos los objetos creados con el constructor <tt>Persona</tt> Lo haremos a partir del prototipo de la función constructora.
 </p>
 <pre>
-Alumno.prototype.activo=false;
+Alumno.prototype.activo = false;
 Alumno.prototype.getActivo = function(){
-	return "Activo: "+ this.activo;
+  return "Activo: "+ this.activo;
 }
 </pre>
 <br>
@@ -1122,9 +1456,9 @@ Estas propiedades podrán ser sobreescritas para objetos concretos:
 let a1 = new Alumno("Pepe", 34, "daw");
 let a2 = new Alumno("Juan", 60, "smr");
 
-a1.activo=true;
-a2.getActivo=function(){
-	return "hola caracola";
+a1.activo = true;
+a2.getActivo = function(){
+  return "hola caracola";
 }
 
 console.log(a1.getActivo());
@@ -1146,8 +1480,10 @@ function Punto3D(x, y, z){
   Punto2D.call(this,x,y);
   this.z=z;
 }
+
 // Establecemos la herencia
 Object.setPrototypeOf( Punto3D.prototype, Punto2D.prototype );
+Punto3D.prototype.constructor = Punto3D; // Recomendable restaurar el constructor
 
 Punto3D.prototype.mostrar = function(){ return `${this.x}, ${this.y}, ${this.z}`};
 Punto2D.prototype.mostrar = function(){ return `${this.x}, ${this.y}`};
@@ -1173,7 +1509,89 @@ console.log( p3.mostrar() );
 </p>
 <br>
  <br>
-			<h1 id="h33">Clases en JS</h1>
+			<h2 id="h45">Ejercicio complejo: Tareas y Ejercicios</h2>
+			<p>
+En un instituto se utiliza una plataforma educativa propia donde se gestionan ejercicios y tareas. Los ejercicios constan de un título, una fecha de inicio y una fecha de fin. Las tareas son una especialización de los ejercicios y añaden un campo de tamaño máximo en MB.
+</p>
+<br>
+<p>
+Modela estos tipos de datos usando herencia prototípica. Añade una sobreescritura del método <tt>toString()</tt> de ejercicios y también de tareas de modo que devuelva un formato parecido al del código de ejemplo de abajo.
+</p>
+<br>
+<p>
+Abajo se dejan algo de código para probar la implementación:
+</p>
+<pre>
+let e1 = new Ejercicio("Conversión binario-decimal", new Date("2025-03-12"), new Date("2025-03-15"));
+let t1 = new Tarea("Trabajo presupuesto", new Date("2025-03-17"), new Date("2025-03-25"), 100);
+let e2 = new Ejercicio("Conversión Octa-Hexa", new Date("2025-03-15"), new Date("2025-03-19"));
+
+console.log(e1 instanceof Ejercicio); // true
+console.log(e1 instanceof Tarea);     // false
+console.log(t1 instanceof Ejercicio); // true
+console.log(t1 instanceof Tarea);     // true
+console.log("Ej: "+ t1) ;             // Ej: Trabajo presupuesto 17/3/2025-25/3/2025 (Máx: 100MB)
+</pre>
+<br>
+<p>
+Añade un método <tt>compareTo()</tt> a los ejercicios, que permita comparar dos de ellos por su fecha de inicio (aparecerán antes las tareas que comienzan antes). Añade varios ejercicios y tareas a un array y ordénalos usando el método <tt>compareTo()</tt> que has implementado y comprueba que el resultado es correcto.
+</p>
+<pre>
+let arrEjercicios = [e1,t1,e2];
+
+arrEjercicios.toSorted( (e1,e2) =&gt;e1.compareTo(e2) ).forEach( 
+  (e,i)=&gt;
+    console.log("Ejercicio "+i+": "+e)
+);
+
+/* Resultado esperado:
+Ejercicio 0: Conversión binario-decimal 12/3/2025-15/3/2025
+Ejercicio 1: Conversión Octa-Hexa 15/3/2025-19/3/2025
+Ejercicio 2: Trabajo presupuesto 17/3/2025-25/3/2025 (Máx: 100MB)
+*/
+</pre>
+<br>
+<br>
+
+            
+						<pre class="codigo">
+Aquí tienes una posible solución. Intenta resolver el ejercicio tú antes de 
+pulsar el botón.
+							<div class="codigojs" style="display:none">let s = `function Ejercicio(titulo,fechaInicio,fechaFinal){
+  this.titulo=titulo;
+  this.fechaInicio = fechaInicio;
+  this.fechaFinal = fechaFinal;
+}
+
+function Tarea(titulo, fechaInicio, fechaFinal, tamMax){
+  Ejercicio.call(this, titulo, fechaInicio, fechaFinal);
+  this.tamMax = tamMax;
+}
+
+Object.setPrototypeOf(Tarea.prototype, Ejercicio.prototype);
+Tarea.prototype.constructor = Tarea;
+
+Tarea.prototype.toString=function(){
+  return `${this.titulo} ${this.fechaInicio.toLocaleDateString()}-${this.fechaFinal.toLocaleDateString()} (Máx: ${this.tamMax}MB)`;
+}
+
+Ejercicio.prototype.toString=function(){
+  return `${this.titulo} ${this.fechaInicio.toLocaleDateString()}-${this.fechaFinal.toLocaleDateString()}`;
+}
+
+
+Ejercicio.prototype.compareTo=function(ej){
+  return this.fechaInicio - ej.fechaInicio;
+}
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+							<h1 id="h48">Clases en JS</h1>
 			<p>
 Se introdujeron en 2015 como una característica importante, aunque no exenta de cierta controversia.<br>
 <a href="https://everyday.codes/javascript/please-stop-using-classes-in-javascript/" title="https://everyday.codes/javascript/please-stop-using-classes-in-javascript/" class="https">https://everyday.codes/javascript/please-stop-using-classes-in-javascript/</a><br>
@@ -1220,7 +1638,7 @@ persona1.saludar();
 <br>
 <br>
 
-			<h2 id="h34">Herencia de clases</h2>
+			<h2 id="h49">Herencia de clases</h2>
 			<p>
 No existe la herencia múltiple.
 </p>
@@ -1235,24 +1653,25 @@ class Alumno extends Persona {
 
   saludar() {
     super.saludar();  //llama al método del padre que hemos sobreescrito
-    alert(`¡Hola, soy {this.nombre}!`);
+    alert(`¡Hola, soy ${this.nombre}!`);
   }
 }
 </pre>
 <br>
 <br>
 
-			<h2 id="h35">Otras cuestiones</h2>
+			<h2 id="h50">Otras cuestiones</h2>
 			<ul style='padding-left: 30pt'>
 <li>También existen métodos y propiedades estáticos (usando la palabra reservada <tt>static</tt>).</li>
-<li>Hace poco se introdujeron miembros privados
+<li>Hace relativamente poco (en 2020) se introdujeron miembros privados (se marcan con <tt>#nombre</tt>). <b>Sólo están disponibles en clases</b>.
 <ul>
 <li>También experimentalmente hay soporte para miembros protegidos (no lo uses en producción).</li>
+<li>Tradicionalmente se ha usado <tt>_nombre</tt> para indicar que un miembro es privado o que no debe modificarse directamente. No es obligatorio, sólo una convención.</li>
 </ul></li>
 <li>También se han introducido <i>getters</i> y <i>setters</i>.</li>
 <li>Con <b>instanceof</b> podemos averiguar si un objeto es de un tipo de clase.</li>
 <li>No puede haber más de un constructor en una clase.</li>
-<li>Recuerda que al almacenar un objeto en el localStorage se eliminan los métodos y sólo se almacenan los datos. Si deseas recuperar los objetos desde el localStorage tras <i>estringuificarlo</i> y tener de nuevo los métodos, puedes añadir al constructor de tu objeto la funcionalidad necesaria para recrearlo a partir de la cadena stringificada o el objeto JSON recuperado.</li>
+<li>Recuerda que al almacenar un objeto en el <tt>localStorage</tt> se eliminan los métodos y sólo se almacenan los datos. Si deseas recuperar los objetos desde el <tt>localStorage</tt> tras <i>estringuificarlo</i> y tener de nuevo los métodos, puedes añadir al constructor de tu objeto la funcionalidad necesaria para recrearlo a partir de la cadena stringificada o el objeto JSON recuperado. Esto se conoce como rehidratación o deserialización.</li>
 </ul>
 <br>
 <p>
@@ -1263,9 +1682,134 @@ Referencias:
 <li><a href="https://caniuse.com/?search=private class" title="https://caniuse.com/?search=private class " class="https">https://caniuse.com/?search=private class </a></li>
 </ul>
 <br>
-<br>
 
-			<h2 id="h36">Ejercicio Canciones y Ficheros</h2>
+            
+				<h3>Ejemplo de clase con propiedades estáticas, privadas, getters/setters<a id="ejemplo-de-clase-con-propiedades-estáticas-privadas-getterssetters" class="h_anchor"></a></h3>
+<pre>
+class Mensaje {
+  static estadoOK = 0;               // propiedades estáticas
+  static estadoError = 1;
+
+  #estado;                           // propiedad privada
+
+  mensaje;                           // propiedades públicas
+  leido;
+
+  /* Métodos */
+  constructor(mensaje, estado = Mensaje.estadoOK) {
+    this.mensaje = mensaje;
+    this.leido = false;
+    this.#estado = estado; 
+  }
+
+  static codigosEstado() {           // Método estático
+    return `OK = ${Mensaje.estadoOK}\nError = ${Mensaje.estadoError}`;
+  }
+
+  /* Getter &amp; Setters */
+  get fragmentoMensaje() { return this.mensaje.slice(0,15); }
+  get estado() { return this.#estado; }
+  get leido() { return this.leido; }
+
+  set leido(esLeido) {
+    if (typeof esLeido === 'boolean') {
+      this.leido = esLeido;
+    } else {
+      throw new Error("El valor de 'leido' debe ser booleano.");
+    }
+  }
+}
+
+// UTILIZACIÓN
+let m = new Mensaje("No se pudo eliminar el producto", Mensaje.estadoError);
+console.log(`${m.fragmentoMensaje} (Est: ${m.estado})`);   //No se pudo elim (Est: 1) 
+console.log( m.mensaje );                                  //No se pudo eliminar el producto
+
+m.leido = true;                                //Cambiamos el valor mediante el setter
+
+console.log ( Mensaje.codigosEstado() );       //OK = 0\nError = 1
+console.log ( m.codigosEstado() );             //Uncaught TypeError: m.codigosEstado is not a function
+</pre>
+<br>
+<br>
+<br>
+ <br>
+            
+						<pre class="codigo">
+Aquí tienes otro ejemplo: un objeto literal que representa un triángulo rectángulo y que 
+implementa getters y setters para sus atributos x e y (los catetos). Como es un objeto 
+literal, no puede tener atributos privados así que se usa la convención de empezar los 
+atributos miembros con _.
+También implementa un método que calcula la hipotenusa mediante un getter.
+
+Intenta resolver el ejercicio tú antes de pulsar el botón.
+
+Ejercicio: Convierte el objeto en una clase TriánguloRectángulo, usando ahora sí 
+atributos privados para la longitud de los catetos.
+							<div class="codigojs" style="display:none">let s = `const trianguloRectangulo = {
+  _x: 0,
+  _y: 0,
+
+  get x() {return this._x;},
+  set x(x) {
+    if (typeof x !== 'number' || x &lt; 0) {
+      throw new Error("El cateto debe ser un número positivo.");
+    }
+    this._x = x;
+  },
+
+  get y() {return this._y;},
+  set y(y) {
+    if (typeof y !== 'number' || y &lt; 0) {
+      throw new Error("El cateto debe ser un número positivo.");
+    }
+    this._y = y;
+  },
+
+  /**
+  * Calcula y devuelve la longitud de la hipotenusa (c = sqrt(a² + b²)).
+  */
+  get hipotenusa() { return Math.sqrt(this._x * this._x + this._y * this._y); }
+};
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				            
+				<h3>Rehidratación de un objeto<a id="rehidratación-de-un-objeto" class="h_anchor"></a></h3>
+<p>
+Para rehidratarlos podemos añadir un nuevo método estático a la clase:
+</p>
+<pre>
+...
+  static fromJSON(jsonString) {
+    const data = JSON.parse( jsonString );
+        
+    // 1.- Creamos una nueva instancia vacía.
+    const nuevaInstancia = new Mensaje(data.mensaje, data.estado);
+
+    // 2.- Copiamos las propiedades del objeto JSON a la instancia.
+    nuevaInstancia.leido = data.leido;
+
+    // Nota: Las propiedades privadas (#estado) son más complejas de re-hidratar
+    // sin un setter o acceso directo, forzando a reescribirlas.
+
+    return nuevaInstancia;
+  }
+...
+
+// UTILIZACIÓN
+const mensajeEstringuificadoGuardado = localStorage.getItem( 'ultimoMensaje' );
+const mensajeRecuperado = Mensaje.fromJSON( mensajeEstringuificadoGuardado );
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h55">Ejercicio Canciones y Ficheros</h2>
 			<p>
 Crea una clase <tt>Fichero</tt> cuyos atributos sean <tt>nombreFichero</tt> y <tt>tamaño</tt> y que tenga un método <tt>extensión()</tt> que devuelva la extensión del fichero y un método <tt>getDatos()</tt> que devuelva una cadena de caracteres con el nombre del fichero y el tamaño entre paréntesis.<br>
 Crea una clase <tt>Canción</tt> que herede de fichero cuyos atributoas serán <tt>nombreCanción</tt> y <tt>duración</tt> y tendrá un método <tt>getDatos()</tt> que devolverá en una cadena de caracteres el nombre de la canción, la duración y el tamaño del fichero. 
@@ -1286,7 +1830,7 @@ Intenta repetir el ejercicio usando herencia prototípica y funciones constructo
 <br>
 <br>
 
-			<h2 id="h37">Ejercicio</h2>
+			<h2 id="h56">Ejercicio</h2>
 			<p>
 Crea la siguiente clase:
 </p>

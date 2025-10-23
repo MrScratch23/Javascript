@@ -1,0 +1,29 @@
+digraph G {
+    rankdir="LR"
+    node [fontname=arial, fontsize=14, fillcolor="#00bbcc", color="#881177", style=filled, shape=box]
+
+    // Definición de nodos destino
+    "Objeto A en memoria" [fillcolor="#44dd88", style="filled,rounded"]
+    "Objeto C en memoria" [fillcolor="#55ffaa", style="filled,rounded"]
+
+    // Agrupa y ordena los nodos de origen
+    subgraph cluster_origen {
+        // Obliga a 'a', 'b', y 'c' a estar en el MISMO nivel (misma columna vertical)
+        rank=same; 
+        
+        // Aristas invisibles para forzar el orden dentro de ese mismo nivel.
+        // Esto crea el orden 'a' (arriba) -> 'b' (medio) -> 'c' (abajo)
+        edge [style=invis, constraint=false]; // constraint=false previene que altere el ranking global
+        a -> b;
+        b -> c;
+    }
+
+    // Definición de las aristas visibles
+    edge [style=solid, color=black];
+    
+    a -> "Objeto A en memoria" [label="referencia"]
+    b -> "Objeto A en memoria"
+    
+    // La arista de 'c'
+    c -> "Objeto C en memoria"
+}
