@@ -128,13 +128,14 @@ return; }
 
 const perrosOrdenadosRaza = perros.toSorted((a, b) => a.raza.localeCompare(b.raza));
 
+sol += "<ol>";
 
 for (const perro of perros) {
     sol += `<li>${perro.mostrarDatos()}</li>`;
     
   }
 
-  sol += "</ol>";
+  
 
   sol += "</ol>";
 
