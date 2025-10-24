@@ -135,8 +135,6 @@ for (const perro of perros) {
     
   }
 
-  
-
   sol += "</ol>";
 
   lista.innerHTML = sol;
