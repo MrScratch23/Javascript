@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Canción y Archivos</title>
+    <script src="objetos.js" defer></script>
+    <script src="ejerciciocanciones.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    <h1>Formulario de Canción y Archivos</h1>
+
+    <div class="container">
+        <form id="songForm">
+            <!-- Nombre del fichero -->
+            <div class="form-group">
+                <label for="fichero">Nombre del Fichero:</label>
+                <input type="text" id="fichero" name="fichero" placeholder="Ej. mi_cancion.mp3" required>
+            </div>
+
+            <!-- Tamaño -->
+            <div class="form-group">
+                <label for="tamaño">Tamaño (en MB):</label>
+                <input type="text" id="tamaño" name="tamaño" placeholder="Ej. 5.3" required>
+            </div>
+
+            <!-- Nombre de la canción -->
+            <div class="form-group">
+                <label for="nombreCancion">Nombre de la Canción:</label>
+                <input type="text" id="nombreCancion" name="nombreCancion" placeholder="Ej. Bohemian Rhapsody" required>
+            </div>
+
+            <!-- Duración -->
+            <div class="form-group">
+                <label for="duracion">Duración (en minutos):</label>
+                <input type="text" id="duracion" name="duracion" placeholder="Ej. 5.55" required>
+            </div>
+
+            <!-- Radio buttons: Fichero / Canción -->
+            <div class="form-group">
+                <label>Tipo de entrada:</label>
+                <label>
+                    <input type="radio" name="tipo" value="fichero" required> Fichero
+                </label>
+                <label>
+                    <input type="radio" name="tipo" value="cancion" required> Canción
+                </label>
+            </div>
+
+            <!-- Botones -->
+            <div class="button-group">
+                <button type="submit" id="btnAñadir">Agregar</button>
+                <button type="button" id="btnMostrar">Mostrar</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="divResultado" class="notice"></div>
+    
+</body>
+</html>
+    
