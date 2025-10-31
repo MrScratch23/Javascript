@@ -18,16 +18,13 @@ class Fichero {
 
 
 class Cancion extends Fichero {
-
-    constructor(nombreCancion, duracion) {
-        super(nombreFichero,tamaño);
-        this.nombreFichero = nombreCancion;
+    constructor(nombreFichero, tamaño, nombreCancion, duracion) {
+        super(nombreFichero, tamaño); 
+        this.nombreCancion = nombreCancion;  // Nombre artístico de la canción
         this.duracion = duracion;
-        
     }
 
     getDatos(){
-        return `Nombre: ${this.nombreCancion} - Duracion: ${this.duracion} - Tamaño: ${this.tamaño}`;
+        return `Canción: ${this.nombreCancion} - Archivo: ${this.nombreFichero} - Duración: ${this.duracion}s - Tamaño: ${this.tamaño} bytes`;
     }
 }
-
