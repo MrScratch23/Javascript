@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Vehículos</title>
+  <script src="coches.js" defer></script>
+  <script src="practicacoches.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <style>
+    /* Ocultar los campos específicos por defecto */
+    #camposCoche,
+    #camposMoto {
+      display: none;
+    }
+
+    /* Mostrar los campos de coche si se selecciona “coche” */
+    form:has(#tipoVehiculo[value="coche"]:checked) #camposCoche,
+    form:has(#tipoVehiculo option[value="coche"]:checked) #camposCoche {
+      display: block;
+    }
+
+    /* Mostrar los campos de moto si se selecciona “motocicleta” */
+    form:has(#tipoVehiculo[value="motocicleta"]:checked) #camposMoto,
+    form:has(#tipoVehiculo option[value="motocicleta"]:checked) #camposMoto {
+      display: block;
+    }
+
+    /* Pequeño ajuste visual */
+    label {
+      display: block;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gestión de Vehículos</h1>
+
+  <!-- Crear instancias -->
+  <section>
+    <h2>Crear Vehículo</h2>
+    <form id="formCrearVehiculo">
+      <label>
+        Tipo de vehículo:
+        <select id="tipoVehiculo" required>
+          <option value="">Seleccione...</option>
+          <option value="coche">Coche</option>
+          <option value="motocicleta">Motocicleta</option>
+        </select>
+      </label>
+
+      <label>
+        Marca:
+        <input type="text" id="marca" required>
+      </label>
+
+      <label>
+        Modelo:
+        <input type="text" id="modelo" required>
+      </label>
+
+      <label>
+        Año:
+        <input type="number" id="anio" required>
+      </label>
+
+      <label>
+        Precio (€):
+        <input type="number" id="precio" required>
+      </label>
+
+      <label>
+        Matrícula:
+        <input type="text" id="matricula" required>
+      </label>
+
+      <!-- Campos específicos de Coche -->
+      <div id="camposCoche">
+        <label>
+          Número de puertas:
+          <input type="number" id="numeroPuertas">
+        </label>
+
+        <label>
+          Tipo de combustible:
+          <select id="tipoCombustible" name="tipoCombustibleCoche">
+            <option value="">Seleccione...</option>
+            <option value="Gasolina">Gasolina</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Eléctrico">Eléctrico</option>
+            <option value="Gas">Gas</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Campos específicos de Motocicleta -->
+      <div id="camposMoto">
+        <label>
+          Cilindrada (cc):
+          <input type="number" id="cilindrada">
+        </label>
+
+        <label>
+          Tipo (Deportiva, Custom, etc.):
+          <input type="text" id="tipoMoto">
+        </label>
+      </div>
+
+      <button type="button" id="btnAñadir" name="btnAñadir">Crear Vehículo</button>
+    </form>
+  </section>
+
+  <hr>
+
+  <!-- Listar vehículos -->
+  <section>
+    <h2>Vehículos Disponibles</h2>
+    <button type="button" id="btnListarVehiculos" name="btnListarVehiculos">Listar Vehículos</button>
+    <ul id="listaVehiculos"></ul>
+  </section>
+
+  <hr>
+
+  <!-- Vender vehículo -->
+  <section>
+    <h2>Vender Vehículo</h2>
+    <form id="formVenderVehiculo">
+      <label>
+        Matrícula del vehículo a vender:
+        <input type="text" id="matriculaVenta" required>
+      </label>
+      <button type="button" name="btnVender" id="btnVender">Vender</button>
+    </form>
+    <p id="mensajeVenta"></p>
+  </section>
+
+  <hr>
+
+  <!-- Calcular impuestos -->
+  <section>
+    <h2>Calcular Impuestos Totales</h2>
+    <button type="button" id="btnCalcularImpuestos" name="btnCalcularImpuestos">Calcular</button>
+    <p>Total de impuestos: <span id="resultadoImpuestos">0</span> €</p>
+  </section>
+</body>
+</html>

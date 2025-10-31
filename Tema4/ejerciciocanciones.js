@@ -18,6 +18,10 @@ const añadirCancionFichero = function() {
 
 const tipoAñadir = document.querySelector('input[name="tipo"]:checked')?.value;
 
+if (!tipoAñadir) {
+    return;
+}
+
 
    // Convertir a números
   const tamañoNum = parseFloat(tamaño);
@@ -68,5 +72,5 @@ btnMostrar.addEventListener('click', mostrarCancionFichero);
 arrayFicheros.push(new Fichero("documento.txt", 1200));
 arrayFicheros.push(new Fichero("imagen.jpg", 2500));
 arrayFicheros.push(new Fichero("video.mp4", 15000));
-arrayFicheros.push(new Cancion("cancion1.mp3", 3000, "Cancion Uno", 210));
-arrayFicheros.push(new Cancion("cancion2.wav", 5000, "Cancion Dos", 180));
+arrayFicheros.push(new Cancion("cancion1.mp3", 3000, "Cancion Uno", 2.10));
+arrayFicheros.push(new Cancion("cancion2.wav", 5000, "Cancion Dos", 1.80));
