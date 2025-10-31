@@ -25,6 +25,6 @@ class Cancion extends Fichero {
     }
 
     getDatos(){
-        return `Canción: ${this.nombreCancion} - Archivo: ${this.nombreFichero} - Duración: ${this.duracion}s - Tamaño: ${this.tamaño} bytes`;
+        return `Canción: ${this.nombreCancion} - Archivo: ${this.nombreFichero} - Duración: ${this.duracion} segundos - Tamaño: ${this.tamaño} bytes`;
     }
 }

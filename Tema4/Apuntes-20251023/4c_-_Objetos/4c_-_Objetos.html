@@ -338,20 +338,24 @@ background-image: var(--html-background-color-image);
         
         
         
-            &nbsp; &nbsp; <a href="#h45">Ejercicio complejo: Tareas y Ejercicios</a> <br>
+            &nbsp; &nbsp; <a href="#h45">Ejemplo de herencia prototípica entre constructores</a> <br>
+            &nbsp; &nbsp; <a href="#h46">Ampliación: llamar a métodos del padre</a> <br>
         
         
-            <a href="#h48">Clases en JS</a> <br>
-            &nbsp; &nbsp; <a href="#h49">Herencia de clases</a> <br>
-            &nbsp; &nbsp; <a href="#h50">Otras cuestiones</a> <br>
+            &nbsp; &nbsp; <a href="#h49">Ejercicio complejo: Tareas y Ejercicios</a> <br>
+        
+        
+            <a href="#h52">Clases en JS</a> <br>
+            &nbsp; &nbsp; <a href="#h53">Herencia de clases</a> <br>
+            &nbsp; &nbsp; <a href="#h54">Otras cuestiones</a> <br>
 				&nbsp; &nbsp; &nbsp; &nbsp; Ejemplo de clase con propiedades estáticas, privadas, getters/setters <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
         
         
 				&nbsp; &nbsp; &nbsp; &nbsp; Rehidratación de un objeto <br>
         <!-- ocultamos el contenido entre ocultar y finocultar -->
-            &nbsp; &nbsp; <a href="#h55">Ejercicio Canciones y Ficheros</a> <br>
-            &nbsp; &nbsp; <a href="#h56">Ejercicio</a> <br>
+            &nbsp; &nbsp; <a href="#h59">Ejercicio Canciones y Ficheros</a> <br>
+            &nbsp; &nbsp; <a href="#h60">Ejercicio</a> <br>
 </div>
 <!-- Sumario -->
 
@@ -1416,7 +1420,7 @@ Alumno.prototype.constructor = Alumno; // Recomendable restaurar el constructor,
 </p>
 <br>
 <p>
-<b>Importante</b>: fíjate que hemos llamado al constructor de <tt>Persona</tt> al principio de todo y de esa manera incorporamos sus atributos en <tt>Alumno</tt>. Es importante es entender que cuando creamos un objeto de tipo <tt>Alumno</tt> no creamos un objeto de tipo <tt>Persona</tt> (el padre) y otro de tipo <tt>Alumno</tt>, sino que sólo hay un objeto (el <tt>this</tt> lo hace posible). Esto implica que no podemos repetir nombres de métodos o propiedades porque serán sobreescritos.
+<b>Importante</b>: fíjate que hemos llamado al constructor de <tt>Persona</tt> al principio de todo y de esa manera incorporamos sus atributos en <tt>Alumno</tt>. Es importante es entender que cuando creamos un objeto de tipo <tt>Alumno</tt> no creamos un objeto de tipo <tt>Persona</tt> (el padre) y otro de tipo <tt>Alumno</tt>, sino que sólo hay un objeto (el <tt>this</tt> lo hace posible). Esto implica que no podemos repetir nombres de métodos o propiedades porque serán sobreescritos (esto también implica que podemos sobreescribir métodos si así lo deseamos).
 </p>
 <br>
  <br>
@@ -1467,10 +1471,9 @@ console.log(a2.__proto__.getActivo()); //la función del prototipo
 </pre>
 <br>
 <br>
-<p>
-Ejemplo de herencia prototípica entre constructores
-</p>
-<pre>
+ <br>
+			<h2 id="h45">Ejemplo de herencia prototípica entre constructores</h2>
+			<pre>
 function Punto2D(x, y){
   this.x=x;
   this.y=y;
@@ -1508,8 +1511,70 @@ console.log( p3.mostrar() );
 <img src="./4c_-_Objetos_files/diagram001.svg">
 </p>
 <br>
- <br>
-			<h2 id="h45">Ejercicio complejo: Tareas y Ejercicios</h2>
+<br>
+
+			<h2 id="h46">Ampliación: llamar a métodos del padre</h2>
+			<p>
+Se puede llamar a métodos del <tt>Padre</tt> desde un método de <tt>Hijo</tt> usando de nuevo <tt>call()</tt>:
+</p>
+<pre>
+Hijo.prototype.metodoDelHijo = function(){
+  const infoPadre = Padre.prototype.metodoDelPadre.call(this);
+  return `El padre devuelve ${infoPadre}`;
+}
+</pre>
+<br>
+<br>
+
+            
+						<pre class="codigo">
+Ejemplo completo de llamada a un método del padre.
+							<div class="codigojs" style="display:none">let s = `Imagina una función constructora CocheCombustión que hereda de otra Coche.
+
+// COCHE 
+function Coche(marca, modelo, matricula){
+  this.modelo = modelo;
+  this.marca = marca;
+  this.matricula = matricula;
+}
+
+Coche.prototype.infoBasica = function(){
+  return \`\${this.marca} \${this.modelo} \${this.matricula}\`;
+}
+
+// COCHE COMBUSTIÓN
+function CocheCombustion(marca, modelo, matricula,cv){
+  Coche.call(this,marca, modelo,matricula);
+  this.cv = cv;
+}
+
+CocheCombustion.prototype.infoCompleta = function(){
+  return \`\${this.marca} \${this.modelo} \${this.matricula} \${this.cv}CV\`;
+}
+
+// Herencia:
+Object.setPrototypeOf(CocheCombustion.prototype, Coche.prototype);
+CocheCombustion.prototype.constructor = CocheCombustion;
+
+// Si te fijas, el método infoCompleta() es igual que el de infoBasica() de
+// Coche añadiendo los caballos. Podemos reescribirlo para que llame al
+// método del Padre, recoger lo que devuelve y añadir la información faltante
+CocheCombustion.prototype.infoCompleta = function(){
+  const infoPadre = Coche.prototype.infoBasica.call(this); // &lt;-- método del padre
+  return \`\${infoPadre} \${this.cv}CV\`;
+}
+
+c1 = new CocheCombustion("Kia", "Ceed", "3456-TYP", 115);
+console.log( c1.infoCompleta() );
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+							<h2 id="h49">Ejercicio complejo: Tareas y Ejercicios</h2>
 			<p>
 En un instituto se utiliza una plataforma educativa propia donde se gestionan ejercicios y tareas. Los ejercicios constan de un título, una fecha de inicio y una fecha de fin. Las tareas son una especialización de los ejercicios y añaden un campo de tamaño máximo en MB.
 </p>
@@ -1572,11 +1637,11 @@ Object.setPrototypeOf(Tarea.prototype, Ejercicio.prototype);
 Tarea.prototype.constructor = Tarea;
 
 Tarea.prototype.toString=function(){
-  return `${this.titulo} ${this.fechaInicio.toLocaleDateString()}-${this.fechaFinal.toLocaleDateString()} (Máx: ${this.tamMax}MB)`;
+  return \`\${this.titulo} \${this.fechaInicio.toLocaleDateString()}-\${this.fechaFinal.toLocaleDateString()} (Máx: \${this.tamMax}MB)\`;
 }
 
 Ejercicio.prototype.toString=function(){
-  return `${this.titulo} ${this.fechaInicio.toLocaleDateString()}-${this.fechaFinal.toLocaleDateString()}`;
+  return \`\${this.titulo} \${this.fechaInicio.toLocaleDateString()}-\${this.fechaFinal.toLocaleDateString()}\`;
 }
 
 
@@ -1591,7 +1656,7 @@ resultado.innerHTML=s;
 				</pre>
 				
             
-							<h1 id="h48">Clases en JS</h1>
+							<h1 id="h52">Clases en JS</h1>
 			<p>
 Se introdujeron en 2015 como una característica importante, aunque no exenta de cierta controversia.<br>
 <a href="https://everyday.codes/javascript/please-stop-using-classes-in-javascript/" title="https://everyday.codes/javascript/please-stop-using-classes-in-javascript/" class="https">https://everyday.codes/javascript/please-stop-using-classes-in-javascript/</a><br>
@@ -1638,7 +1703,7 @@ persona1.saludar();
 <br>
 <br>
 
-			<h2 id="h49">Herencia de clases</h2>
+			<h2 id="h53">Herencia de clases</h2>
 			<p>
 No existe la herencia múltiple.
 </p>
@@ -1660,7 +1725,7 @@ class Alumno extends Persona {
 <br>
 <br>
 
-			<h2 id="h50">Otras cuestiones</h2>
+			<h2 id="h54">Otras cuestiones</h2>
 			<ul style='padding-left: 30pt'>
 <li>También existen métodos y propiedades estáticos (usando la palabra reservada <tt>static</tt>).</li>
 <li>Hace relativamente poco (en 2020) se introdujeron miembros privados (se marcan con <tt>#nombre</tt>). <b>Sólo están disponibles en clases</b>.
@@ -1809,7 +1874,7 @@ const mensajeRecuperado = Mensaje.fromJSON( mensajeEstringuificadoGuardado );
 <br>
 <br>
  <br>
-			<h2 id="h55">Ejercicio Canciones y Ficheros</h2>
+			<h2 id="h59">Ejercicio Canciones y Ficheros</h2>
 			<p>
 Crea una clase <tt>Fichero</tt> cuyos atributos sean <tt>nombreFichero</tt> y <tt>tamaño</tt> y que tenga un método <tt>extensión()</tt> que devuelva la extensión del fichero y un método <tt>getDatos()</tt> que devuelva una cadena de caracteres con el nombre del fichero y el tamaño entre paréntesis.<br>
 Crea una clase <tt>Canción</tt> que herede de fichero cuyos atributoas serán <tt>nombreCanción</tt> y <tt>duración</tt> y tendrá un método <tt>getDatos()</tt> que devolverá en una cadena de caracteres el nombre de la canción, la duración y el tamaño del fichero. 
@@ -1830,7 +1895,7 @@ Intenta repetir el ejercicio usando herencia prototípica y funciones constructo
 <br>
 <br>
 
-			<h2 id="h56">Ejercicio</h2>
+			<h2 id="h60">Ejercicio</h2>
 			<p>
 Crea la siguiente clase:
 </p>
