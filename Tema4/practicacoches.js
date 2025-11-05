@@ -3,7 +3,6 @@
 // funciones
 let arrayVehiculos = [];
 // vehiculos de prueba
-// Vehículos de prueba
 const vehiculo1 = new Vehiculo("Toyota", "Corolla", 2023, 20000, true);
 arrayVehiculos.push(vehiculo1);
 
@@ -29,10 +28,10 @@ if (!tipoVehiculo) {
 }
 
 
-const marca = document.querySelector("#marca").value;
-const modelo = document.querySelector("#modelo").value;
-const matricula = document.querySelector("#matricula").value;
-const precio = document.querySelector("#precio");
+const marca = document.querySelector("#marca").value.trim();
+const modelo = document.querySelector("#modelo").value.trim();
+const matricula = document.querySelector("#matricula").value.trim();
+const precio = document.querySelector("#precio").valueAsNumber;
 
 if (marca === "" || modelo === "" || matricula === "" || precio === "") {
     alert("Todas las opciones deben ser rellenadas");
@@ -49,15 +48,17 @@ if (tipoVehiculo.toLowerCase === "coche") {
     const numeroPuertas = document.querySelector("#numeroPuertas");
     let coche = new Coche(marca, modelo, matricula, precio, tipoCombustible, numeroPuertas);
     arrayVehiculos.push(coche);
+    
 }
 
 
 if (tipoVehiculo.toLowerCase === "motocicleta") {
     const cilindrada = document.querySelector("#cilindrada").valueAsNumber;
-    const tipoMoto = document.querySelector("#tipoMoto").value;
+    const tipoMoto = document.querySelector("#tipoMoto").value.trim();
 
     let motocicleta = new Motocicleta(marca, modelo, matricula, precio, cilindrada, deportivo);
     arrayVehiculos.push(motocicleta);
+    
 }
 
 };
@@ -68,11 +69,6 @@ const listarVehiculos = function() {
   let sol = `<ul>`
 
   for (const vehiculo of arrayVehiculos) {
-      sol += `<li>${vehiculo.marca}</li>`;
-      sol += `<li>${vehiculo.modelo}</li>`;
-      sol += `<li>${vehiculo.año}</li>`;
-      sol += `<li>${vehiculo.precio}</li>`;
-      sol += `<li>${vehiculo.stock}</li>`;
       sol += `<li>${vehiculo.obtenerDescripcion()}</li>`;
   }
 
@@ -84,9 +80,9 @@ const listarVehiculos = function() {
 };
 
 const venderVehiculo = function() {
-  const matriculaVenta = document.querySelector("#matriculaVenta").value;
+
+  const matriculaVenta = document.querySelector("#matriculaVenta").value.trim();
   const mensajeVenta = document.querySelector("#mensajeVenta");
-  let sol = "";
 
   for (const vehiculo of arrayVehiculos) {
     if (matriculaVenta === vehiculo.matricula) {
@@ -95,20 +91,33 @@ const venderVehiculo = function() {
       } else if (vehiculo.stock === false) {
         vehiculo.stock === true;
       }
-      sol += "Venta de vehiculo confirmado.";
-    } else {
-      sol += "Error en la venta. Matriculo no encontrada.";
+      mensajeVenta.innerHTML = "Venta de vehiculo confirmado.";
+      return;
     }
   }
-
-  mensajeVenta.innerHTML = sol;
-
-
-  return
+  mensajeVenta.innerHTML = "Error en la venta: matrícula no encontrada.";
 };
 
 const calcularImpuestos = function() {
-  return
+  const resultadoImpuestos = document.querySelector("#resultadoImpuestos");
+  let sol = "";
+  let totalImpuestos = 0;
+
+
+  for (const vehiculo of arrayVehiculos) {
+      if (vehiculo.stock === true) {
+        totalImpuestos += vehiculo.calcularImpuestos();
+      }
+  }
+  sol = totalImpuestos;
+ 
+resultadoImpuestos.innerHTML = "Aguanbuluba";
+resultadoImpuestos.innerHTML = `El total de impuestos es: ${totalImpuestos}`;
+
+
+
+
+
 };
 
 

@@ -40,7 +40,7 @@ class Coche extends Vehiculo {
     constructor(marca, modelo, año, precio, stock, numeroPuertas, matricula, tipoCombustible) {
         super(marca, modelo, año, precio, stock);
         this.numeroPuertas = numeroPuertas;
-        this.matricula = this.matricula;
+        this.matricula = matricula;
         this.tipoCombustible = tipoCombustible;
     }
     
