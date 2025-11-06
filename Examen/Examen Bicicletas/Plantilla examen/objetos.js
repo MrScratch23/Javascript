@@ -1,8 +1,8 @@
 class Tienda {
 
-    constructor(tBicis = [], numVentas, altaBicicleta, ventaBici, numCarretera, numMontaña, numTotal, numVenta) {
+    constructor(tBicis = [], numVentas,numCarretera, numMontaña, numTotal, numVenta) {
           this. tBicis = [];
-          this.numVentas = numVenas;  
+          this.numVentas = numVentas;  
           this.numCarretera = numCarretera;
           this.numMontaña = numMontaña;
           this.numTotal = numTotal;
@@ -10,65 +10,165 @@ class Tienda {
     }
     
 
-    altaBicicleta(){
+    altaBicicleta(OBici){
+        this.tBicis.push(OBici);
     }
 
-   ventaBici() {
+
+     ventaBici(localizador) {
+        // Buscar la bicicleta en el array
+        const bici = this.tBicis.find(b => b.localizador === localizador);
+        
+      
+        if (!bici) {
+            alert("La bicicleta no existe");
+            return false;
+        }
+        
+        
+        if (bici.vendida) {
+            alert("Bicicleta ya vendida");
+            return false;
+        }
+        
+        // caso c: Vender la bicicleta
+        bici.vendida = true; // cambiar estado a vendida
+    
+        alert("Bicicleta vendida");
+        return true;
     }
 
 
 
     listadoGeneral() {
+        let html = `
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Localizador</th>
+                        <th>Año</th>
+                        <th>Tipo</th>
+                        <th>Detalle</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>`;
         
+        for (const bici of this.tBicis) {
+            html += bici.toHTMLrow();
+        }
+        
+        html += `</tbody></table>`;
+        return html;
     }
     listadoMontania() {
-
+        let html = `
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Localizador</th>
+                        <th>Año</th>
+                        <th>Suspensiones</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+        for (const bici of this.tBicis) {
+            if (bici instanceof Montaña) {
+                html += bici.toHTMLrowMontaña();
+            }
+        }
+        
+        html += `</tbody></table>`;
+        return html;
     }
 
-    listadoGeneral() {
-
+    listadoCarretera() {
+        let html = `
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Localizador</th>
+                        <th>Año</th>
+                        <th>Platos</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+        for (const bici of this.tBicis) {
+            if (bici instanceof Carretera) {
+                html += bici.toHTMLrowCarretera();
+            }
+        }
+        
+        html += `</tbody></table>`;
+        return html;
     }
-
 
 }
 
 
 
-class Bicicleta {
-    constructor(localizador, año, vendida) {
-        this.localizador = localizador;
-        this.año = año;
-        this.vendida = false;      
-    }
+function Bicicleta(localizador, año, vendida) {
+    this.localizador = localizador;
+    this.año = año;
+    this.vendida = vendida || false;      
 }
 
 Bicicleta.prototype.toHTMLrow = function () {
-
+    const estado = this.vendida ? 'Vendida' : 'Disponible';
+    return `
+        <tr>
+            <td>${this.localizador}</td>
+            <td>${this.año}</td>
+            <td>Bicicleta</td>
+            <td>-</td>
+            <td>${estado}</td>
+        </tr>`;
 }
 
-class Carretera {
-    constructor(localizador, año, vendida, numPlatos) {
-        super(localizador, año, vendida)
-        this.numPlatos= numPlatos;
-    }
-    
-    metodo() {
-        return valor;
-    }
+Bicicleta.prototype.toHTMLrowCarretera = function () {
+    const estado = this.vendida ? 'Vendida' : 'Disponible';
+    return `
+        <tr>
+            <td>${this.localizador}</td>
+            <td>${this.año}</td>
+            <td>${this.numPlatos} platos</td>
+            <td>${estado}</td>
+        </tr>`;
+}
+
+Bicicleta.prototype.toHTMLrowMontaña = function () {
+    const estado = this.vendida ? 'Vendida' : 'Disponible';
+    return `
+        <tr>
+            <td>${this.localizador}</td>
+            <td>${this.año}</td>
+            <td>${this.numSuspensiones} suspensiones</td>
+            <td>${estado}</td>
+        </tr>`;
+}
+
+
+
+// para herencia prototipica, class.call(this, cosa, cosa)
+
+function Carretera(localizador, año, vendida, numPlatos) {
+    Bicicleta.call(this, localizador, año, vendida);
+    this.numPlatos = numPlatos;
 }
 
 Object.setPrototypeOf(Carretera.prototype, Bicicleta.prototype);
 
-class Montaña {
-    constructor(localizador, año, vendida, numSuspensiones) {
-        super(localizador, año, vendida);
-        this.numSuspensiones = numSuspensiones;
-    }
-    
-    metodo() {
-        return valor;
-    }
+function Montaña(localizador, año, vendida, numSuspensiones) {
+    Bicicleta.call(this, localizador, año, vendida);
+    this.numSuspensiones = numSuspensiones;
 }
+
+Object.setPrototypeOf(Montaña.prototype, Bicicleta.prototype);
+
 
 
 Object.setPrototypeOf(Montaña.prototype, Bicicleta.prototype);
