@@ -1,18 +1,26 @@
 class Tienda {
 
-    constructor(tBicis = [], numVentas,numCarretera, numMontaña, numTotal, numVenta) {
+    constructor(tBicis = [], numVentas,numCarretera, numMontaña, numTotal, numSinVender) {
           this. tBicis = [];
           this.numVentas = numVentas;  
           this.numCarretera = numCarretera;
           this.numMontaña = numMontaña;
           this.numTotal = numTotal;
-          this.numVenta = numVenta;
+          this.numSinVender = numSinVender;
     }
     
 
     altaBicicleta(OBici){
+       const bici = this.tBicis.find(b => b.localizador === OBici.localizador);
+
+        if (bici) {
+            return "Bicicleta registrada previamente.";  
+        } else {
+
         this.tBicis.push(OBici);
+        return "Alta bicicleta OK";
     }
+}
 
 
      ventaBici(localizador) {
@@ -20,22 +28,19 @@ class Tienda {
         const bici = this.tBicis.find(b => b.localizador === localizador);
         
       
-        if (!bici) {
-            alert("La bicicleta no existe");
-            return false;
+        if (!bici) {    
+           return "Bicicleta no encontrada";
         }
         
         
         if (bici.vendida) {
-            alert("Bicicleta ya vendida");
-            return false;
+            return "Bicicleta ya vendida";
         }
         
         // caso c: Vender la bicicleta
         bici.vendida = true; // cambiar estado a vendida
-    
-        alert("Bicicleta vendida");
-        return true;
+
+        return "Bicicleta vendida";
     }
 
 
@@ -43,12 +48,11 @@ class Tienda {
     listadoGeneral() {
         let html = `
             <table class="table table-striped">
-                <thead>
+                <thead><h2>Tienda al completo</h2>
                     <tr>
                         <th>Localizador</th>
                         <th>Año</th>
                         <th>Tipo</th>
-                        <th>Detalle</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -64,7 +68,7 @@ class Tienda {
     listadoMontania() {
         let html = `
             <table class="table table-striped">
-                <thead>
+                <thead><h2>Bicicletas de Montaña</h2>
                     <tr>
                         <th>Localizador</th>
                         <th>Año</th>
@@ -87,7 +91,7 @@ class Tienda {
     listadoCarretera() {
         let html = `
             <table class="table table-striped">
-                <thead>
+                <thead> <h2> Bicicletas de Carretera</h2>
                     <tr>
                         <th>Localizador</th>
                         <th>Año</th>
@@ -172,3 +176,4 @@ Object.setPrototypeOf(Montaña.prototype, Bicicleta.prototype);
 
 
 Object.setPrototypeOf(Montaña.prototype, Bicicleta.prototype);
+
