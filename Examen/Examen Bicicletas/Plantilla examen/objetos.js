@@ -16,7 +16,7 @@ class Tienda {
 
 
      ventaBici(localizador) {
-        // Buscar la bicicleta en el array
+        // buscar la bicicleta en el array
         const bici = this.tBicis.find(b => b.localizador === localizador);
         
       
