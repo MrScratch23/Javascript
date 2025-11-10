@@ -20,6 +20,7 @@ function htmlTable(data, headers = null) {
         tableHTML += `<thead><tr>${headerCells}</tr></thead>`;
     }
     
+
     tableHTML += '<tbody>';
     
     if (Array.isArray(data)) {

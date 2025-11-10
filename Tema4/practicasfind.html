@@ -476,31 +476,154 @@ function eliminarProducto() {
             
             // TU CÓDIGO AQUÍ: Encontrar elementos que están en ambos arrays
             // Pista: usar filter e includes
+            // transformamos a string para evitar problemas de referencia
+            const comunes = array1.filter(item => array2.includes(item));
+            resultado.innerHTML = `Elementos comunes: [${comunes.join(', ')}]
+            `;
+
         }
 
         function encontrarDiferentes() {
             const resultado = document.getElementById('resultado5');
             
             // TU CÓDIGO AQUÍ: Encontrar elementos que solo están en un array
+            const diferentes = array1.filter(item => !array2.includes(item))
+                .concat(array2.filter(item => !array1.includes(item)));
+            resultado.innerHTML = `Elementos diferentes: [${diferentes.join(', ')}]
+            `;
         }
 
         function combinarArrays() {
             const resultado = document.getElementById('resultado5');
             
             // TU CÓDIGO AQUÍ: Combinar ambos arrays sin duplicados
+            const combinado = [...new Set([...array1, ...array2])];
+            resultado.innerHTML = `Array combinado sin duplicados: [${combinado.join(', ')}]
+            `;
         }
 
         // ========== EJERCICIO 6: BÚSQUEDA AVANZADA ==========
         function buscarEnInventario() {
-            const texto = document.getElementById('buscarTexto').value.trim();
-            const criterio = document.getElementById('criterioBusqueda').value;
-            const resultado = document.getElementById('resultado6');
-            
-            // TU CÓDIGO AQUÍ: Búsqueda flexible según el criterio
-            // - Por nombre: buscar texto en el nombre
-            // - Por categoría: buscar por categoría exacta
-            // - Por precio: buscar productos con precio <= valor
+    const texto = document.getElementById('buscarTexto').value.trim();
+    const criterio = document.getElementById('criterioBusqueda').value;
+    const resultado = document.getElementById('resultado6');
+    let sol = "";
+
+    // Realizamos la búsqueda en función del criterio seleccionado
+    if (criterio === "nombre") {
+        // Usamos filter para encontrar todos los productos que contengan el texto en el nombre
+        const productosNombre = inventario.filter(e => e.nombre.toLocaleLowerCase().includes(texto.toLocaleLowerCase()));
+
+        // Comprobamos si encontramos productos
+        if (productosNombre.length > 0) {
+            sol += `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            // Recorrer los productos encontrados y agregarlos a la tabla
+            productosNombre.forEach(producto => {
+                sol += `
+                    <tr>
+                        <td>${producto.id}</td>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.categoria}</td>
+                        <td>${producto.precio}</td>
+                        <td>${producto.stock}</td>
+                    </tr>`;
+            });
+
+            sol += `</tbody></table>`;
+        } else {
+            sol = "No se encontraron productos que coincidan con el nombre.";
         }
+    } 
+    else if (criterio === "categoría") {
+        // Usamos filter para encontrar todos los productos que coincidan con la categoría
+        const productosCategoria = inventario.filter(e => e.categoria.toLocaleLowerCase().includes(texto.toLocaleLowerCase()));
+
+        if (productosCategoria.length > 0) {
+            sol += `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            productosCategoria.forEach(producto => {
+                sol += `
+                    <tr>
+                        <td>${producto.id}</td>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.categoria}</td>
+                        <td>${producto.precio}</td>
+                        <td>${producto.stock}</td>
+                    </tr>`;
+            });
+
+            sol += `</tbody></table>`;
+        } else {
+            sol = "No se encontraron productos en esa categoría.";
+        }
+    } 
+    else if (criterio === "precio") {
+        const precioMaximo = parseFloat(texto); // Convertir el texto a un número
+        if (!isNaN(precioMaximo)) {
+            const productosPrecio = inventario.filter(e => e.precio <= precioMaximo);
+
+            if (productosPrecio.length > 0) {
+                sol += `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                productosPrecio.forEach(producto => {
+                    sol += `
+                        <tr>
+                            <td>${producto.id}</td>
+                            <td>${producto.nombre}</td>
+                            <td>${producto.categoria}</td>
+                            <td>${producto.precio}</td>
+                            <td>${producto.stock}</td>
+                        </tr>`;
+                });
+
+                sol += `</tbody></table>`;
+            } else {
+                sol = `No se encontraron productos con un precio menor o igual a $${precioMaximo}.`;
+            }
+        } else {
+            sol = "Por favor, ingrese un precio válido.";
+        }
+    }
+
+    // Mostrar el resultado
+    resultado.innerHTML = sol;
+    debugger;
+}
+
 
         // ========== INICIALIZAR ==========
         document.addEventListener('DOMContentLoaded', function() {
