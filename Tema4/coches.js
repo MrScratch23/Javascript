@@ -36,6 +36,11 @@ class Vehiculo {
 }
 
 
+/**
+ * @class Coche
+ * @extends {Vehiculo}
+ * 
+ */
 class Coche extends Vehiculo {
     constructor(marca, modelo, año, precio, stock, numeroPuertas, matricula, tipoCombustible) {
         super(marca, modelo, año, precio, stock);
@@ -67,7 +72,12 @@ class Coche extends Vehiculo {
 
 
 }
-
+/**
+ *
+ *
+ * @class Motocicleta
+ * @extends {Vehiculo}
+ */
 class Motocicleta extends Vehiculo {
     constructor(marca, modelo, año, precio, stock, matricula, cilidranda, tipo) {
         super(marca, modelo, año, precio, stock);
