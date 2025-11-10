@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios - find, indexOf, splice, filter</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .ejercicio { margin-bottom: 40px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        input, button { margin: 5px; padding: 8px; }
+        .resultado { background-color: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .correcto { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicios - Métodos de Arrays: find, indexOf, splice, filter</h1>
+
+    <!-- Ejercicio 1: Buscar y Eliminar -->
+    <div class="ejercicio">
+        <h2>Ejercicio 1: Buscar y Eliminar Producto</h2>
+        <p><strong>Array de productos:</strong></p>
+        <div id="productosLista"></div>
+        
+        <input type="text" id="productoBuscar" placeholder="Nombre del producto a buscar">
+        <button onclick="buscarProducto()">Buscar Producto</button>
+        <button onclick="eliminarProducto()">Eliminar Producto</button>
+        
+        <div class="resultado" id="resultado1"></div>
+    </div>
+
+    <!-- Ejercicio 2: Filtrar por Categoría -->
+    <div class="ejercicio">
+        <h2>Ejercicio 2: Filtrar Estudiantes por Nota</h2>
+        <p><strong>Array de estudiantes:</strong></p>
+        <div id="estudiantesLista"></div>
+        
+        <input type="number" id="notaMinima" placeholder="Nota mínima" value="70">
+        <button onclick="filtrarAprobados()">Filtrar Aprobados</button>
+        <button onclick="filtrarSuspensos()">Filtrar Suspensos</button>
+        <button onclick="mostrarTodos()">Mostrar Todos</button>
+        
+        <div class="resultado" id="resultado2"></div>
+    </div>
+
+    <!-- Ejercicio 3: Encontrar y Actualizar -->
+    <div class="ejercicio">
+        <h2>Ejercicio 3: Encontrar y Actualizar Usuario</h2>
+        <p><strong>Array de usuarios:</strong></p>
+        <div id="usuariosLista"></div>
+        
+        <input type="text" id="usuarioId" placeholder="ID del usuario">
+        <input type="text" id="nuevoEmail" placeholder="Nuevo email">
+        <button onclick="actualizarUsuario()">Actualizar Email</button>
+        
+        <div class="resultado" id="resultado3"></div>
+    </div>
+
+    <!-- Ejercicio 4: Buscar Duplicados -->
+    <div class="ejercicio">
+        <h2>Ejercicio 4: Encontrar Elementos Duplicados</h2>
+        <p><strong>Array de números:</strong> [1, 2, 3, 4, 2, 5, 6, 3, 7, 8, 8, 9]</p>
+        
+        <button onclick="encontrarDuplicados()">Encontrar Duplicados</button>
+        <button onclick="eliminarDuplicados()">Eliminar Duplicados</button>
+        
+        <div class="resultado" id="resultado4"></div>
+    </div>
+
+    <!-- Ejercicio 5: Comparar Arrays -->
+    <div class="ejercicio">
+        <h2>Ejercicio 5: Comparar Dos Arrays</h2>
+        <p><strong>Array 1:</strong> ["manzana", "banana", "naranja", "uva"]</p>
+        <p><strong>Array 2:</strong> ["banana", "uva", "pera", "kiwi"]</p>
+        
+        <button onclick="encontrarComunes()">Elementos Comunes</button>
+        <button onclick="encontrarDiferentes()">Elementos Diferentes</button>
+        <button onclick="combinarArrays()">Combinar Sin Duplicados</button>
+        
+        <div class="resultado" id="resultado5"></div>
+    </div>
+
+    <!-- Ejercicio 6: Búsqueda Avanzada -->
+    <div class="ejercicio">
+        <h2>Ejercicio 6: Búsqueda Avanzada en Inventario</h2>
+        <p><strong>Inventario:</strong></p>
+        <div id="inventarioLista"></div>
+        
+        <input type="text" id="buscarTexto" placeholder="Texto a buscar">
+        <select id="criterioBusqueda">
+            <option value="nombre">Por Nombre</option>
+            <option value="categoria">Por Categoría</option>
+            <option value="precio">Por Precio Máximo</option>
+        </select>
+        <button onclick="buscarEnInventario()">Buscar</button>
+        
+        <div class="resultado" id="resultado6"></div>
+    </div>
+
+    <script>
+        // ========== DATOS PARA LOS EJERCICIOS ==========
+
+        // Ejercicio 1
+        let productos = [
+            { id: 1, nombre: "Laptop", precio: 800, categoria: "tecnologia" },
+            { id: 2, nombre: "Mouse", precio: 25, categoria: "accesorios" },
+            { id: 3, nombre: "Teclado", precio: 45, categoria: "accesorios" },
+            { id: 4, nombre: "Monitor", precio: 200, categoria: "tecnologia" },
+            { id: 5, nombre: "Auriculares", precio: 80, categoria: "accesorios" }
+        ];
+
+        // Ejercicio 2
+        const estudiantes = [
+            { id: 1, nombre: "Ana García", nota: 85 },
+            { id: 2, nombre: "Carlos López", nota: 45 },
+            { id: 3, nombre: "María Torres", nota: 95 },
+            { id: 4, nombre: "Juan Díaz", nota: 60 },
+            { id: 5, nombre: "Laura Fernández", nota: 72 }
+        ];
+
+        // Ejercicio 3
+        let usuarios = [
+            { id: 101, nombre: "usuario1", email: "user1@email.com", activo: true },
+            { id: 102, nombre: "usuario2", email: "user2@email.com", activo: false },
+            { id: 103, nombre: "usuario3", email: "user3@email.com", activo: true },
+            { id: 104, nombre: "usuario4", email: "user4@email.com", activo: true }
+        ];
+
+        // Ejercicio 4
+        const numeros = [1, 2, 3, 4, 2, 5, 6, 3, 7, 8, 8, 9];
+
+        // Ejercicio 5
+        const array1 = ["manzana", "banana", "naranja", "uva"];
+        const array2 = ["banana", "uva", "pera", "kiwi"];
+
+        // Ejercicio 6
+        const inventario = [
+            { id: "A001", nombre: "Laptop Dell", categoria: "Tecnología", precio: 800, stock: 5 },
+            { id: "A002", nombre: "Mouse Inalámbrico", categoria: "Accesorios", precio: 25, stock: 20 },
+            { id: "A003", nombre: "Monitor 24\"", categoria: "Tecnología", precio: 200, stock: 12 },
+            { id: "B001", nombre: "Silla Oficina", categoria: "Mobiliario", precio: 150, stock: 8 },
+            { id: "A004", nombre: "Teclado Mecánico", categoria: "Accesorios", precio: 75, stock: 15 }
+        ];
+
+        // ========== FUNCIONES DE INICIALIZACIÓN ==========
+
+        function inicializarDatos() {
+            // Ejercicio 1
+            document.getElementById('productosLista').innerHTML = 
+                productos.map(p => `${p.nombre} ($${p.precio})`).join(', ');
+            
+            // Ejercicio 2
+            document.getElementById('estudiantesLista').innerHTML = 
+                estudiantes.map(e => `${e.nombre}: ${e.nota}`).join(', ');
+            
+            // Ejercicio 3
+            document.getElementById('usuariosLista').innerHTML = 
+                usuarios.map(u => `ID: ${u.id} - ${u.nombre} (${u.email})`).join(', ');
+            
+            // Ejercicio 6
+            document.getElementById('inventarioLista').innerHTML = 
+                inventario.map(i => `${i.nombre} - $${i.precio}`).join(', ');
+        }
+
+        // ========== EJERCICIO 1: BUSCAR Y ELIMINAR ==========
+        function buscarProducto() {
+            const nombre = document.getElementById('productoBuscar').value.trim();
+            const resultado = document.getElementById('resultado1');
+            
+            let producto = productos.find(producto => producto.nombre.toLowerCase() === nombre.toLowerCase( ));
+
+
+
+            if (producto) {
+                resultado.innerHTML = `
+                         <table>
+                <thead>
+                <tr>
+                    <th>ID Producto</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Categoria</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                 <td>${producto.id}</td>
+                 <td>${producto.nombre}</td>
+                 <td>${producto.precio}</td>
+                 <td>${producto.categoria}</td>
+                 </tr>
+                 </tbody>
+                 </table>         
+                `;
+            } else {
+
+                resultado.innerHTML = "Producto no encontrado.";
+                return;
+            }
+
+
+            // TU CÓDIGO AQUÍ: Usar find para buscar el producto por nombre
+            // Mostrar resultado en el div resultado1
+        }
+function eliminarProducto() {
+    const nombre = document.getElementById('productoBuscar').value.trim();
+    const resultado = document.getElementById('resultado1');
+    
+    // Usar findIndex para encontrar el índice del producto
+    let indice = productos.findIndex(producto => producto.nombre.toLocaleLowerCase() === nombre.toLocaleLowerCase());
+
+    // Si el producto existe, eliminarlo
+    if (indice > -1) {
+        productos.splice(indice, 1);
+        alert("Producto borrado.");
+    } else {
+        resultado.innerHTML = "Producto no encontrado.";
+        return;
+    }
+
+    // Limpiar el contenido anterior
+    resultado.innerHTML = "";
+
+    // Crear la tabla con los productos restantes
+    resultado.innerHTML += `
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+    // Recorrer los productos restantes y agregar una fila por cada uno
+    productos.forEach(producto => {
+        resultado.innerHTML += `
+            <tr>
+                <td>${producto.id}</td>
+                <td>${producto.nombre}</td>
+                <td>${producto.precio}</td>
+                <td>${producto.categoria}</td>
+            </tr>`;
+    });
+
+    resultado.innerHTML += `
+        </tbody>
+    </table>
+    `;
+}
+
+
+
+        // ========== EJERCICIO 2: FILTRAR ESTUDIANTES ==========
+     
+
+        function filtrarAprobados() {
+    const notaMinima = parseInt(document.getElementById('notaMinima').value) || 70;
+    const resultado = document.getElementById('resultado2');
+    
+    // Usar filter para obtener estudiantes con nota >= notaMinima
+    const aprobados = estudiantes.filter(e => e.nota >= notaMinima);  // Cambié ">" por ">=" para incluir los que están en el límite
+
+    let sol = ``;  // Iniciar la variable para el HTML
+    
+    sol += `
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Estudiante</th>
+                    <th>Nombre</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    
+    // Recorrer los estudiantes aprobados y crear una fila para cada uno
+    for (const estudiante of aprobados) {
+        sol += `
+            <tr>
+                <td>${estudiante.id}</td>
+                <td>${estudiante.nombre}</td>
+                <td>${estudiante.nota}</td>
+            </tr>
+        `;
+    }
+
+    sol += `
+        </tbody>
+    </table>
+    `;
+    
+    // Mostrar el resultado en el div de resultado
+    resultado.innerHTML = sol;
+}
+
+
+        function filtrarSuspensos() {
+            const notaMinima = parseInt(document.getElementById('notaMinima').value) || 70;
+            const resultado = document.getElementById('resultado2');
+            
+            // TU CÓDIGO AQUÍ: Usar filter para obtener estudiantes con nota < notaMinima
+
+            const suspensos = estudiantes.filter(e => e.nota <= notaMinima);  // Cambié ">" por ">=" para incluir los que están en el límite
+
+    let sol = ``;  // Iniciar la variable para el HTML
+    
+    sol += `
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Estudiante</th>
+                    <th>Nombre</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    
+    // Recorrer los estudiantes aprobados y crear una fila para cada uno
+    for (const estudiante of suspensos) {
+        sol += `
+            <tr>
+                <td>${estudiante.id}</td>
+                <td>${estudiante.nombre}</td>
+                <td>${estudiante.nota}</td>
+            </tr>
+        `;
+    }
+
+    sol += `
+        </tbody>
+    </table>
+    `;
+    
+    // Mostrar el resultado en el div de resultado
+    resultado.innerHTML = sol;
+
+
+        }
+
+        function mostrarTodos() {
+            const resultado = document.getElementById('resultado2');
+            // TU CÓDIGO AQUÍ: Mostrar todos los estudiantes
+            let sol = "";
+            sol += `
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Estudiante</th>
+                    <th>Nombre</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    
+    // Recorrer los estudiantes aprobados y crear una fila para cada uno
+    for (const estudiante of estudiantes) {
+        sol += `
+            <tr>
+                <td>${estudiante.id}</td>
+                <td>${estudiante.nombre}</td>
+                <td>${estudiante.nota >=70 ? `<span style="color: green">${estudiante.nota}</span>` : `<span style="color: red">${estudiante.nota}</span>`}</td>
+            </tr>
+        `;
+    }
+
+    sol += `
+        </tbody>
+    </table>
+    `;
+    
+    // Mostrar el resultado en el div de resultado
+    resultado.innerHTML = sol;
+
+
+        }
+
+        // ========== EJERCICIO 3: ACTUALIZAR USUARIO ==========
+        function actualizarUsuario() {
+            const id = parseInt(document.getElementById('usuarioId').value);
+            const nuevoEmail = document.getElementById('nuevoEmail').value.trim();
+            const resultado = document.getElementById('resultado3');
+            
+            let sol = "";
+            // TU CÓDIGO AQUÍ:
+            // 1. Usar find para encontrar el usuario por ID
+            const usuario = usuarios.find(usuario => usuario.id === id);
+
+
+            // 2. Si existe, actualizar su email
+            if (usuario) {
+                usuario.email = nuevoEmail;
+                alert("Usuario actualizado")
+            } else {
+                alert("Usuario no encontrado.")
+            }
+
+            // 3. Mostrar mensaje de éxito/error
+    
+            
+            // 4. Actualizar la lista visual
+        
+                sol = `<table>
+                <thead>
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Activo</th>
+                        </tr>
+                        </thead>
+                        <tbody>`;
+
+              for (const usuario of usuarios) {
+                sol += `<tr>
+                    <td>${usuario.id}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.activo ? "Si" : "No"}
+                     </tr> `
+              }            
+              
+              
+          sol += `
+                  </tbody>
+              </table>`;
+              
+              resultado.innerHTML = sol;
+        }
+
+        // ========== EJERCICIO 4: DUPLICADOS ==========
+   function encontrarDuplicados() {
+    const resultado = document.getElementById('resultado4');
+    let sol = "";
+
+    // Filtrar duplicados usando filter e indexOf
+    const duplicados = numeros.filter((numero, index, self) => {
+        // Solo mantener números que se repiten (aparecen más de una vez)
+        return self.indexOf(numero) !== index && self.lastIndexOf(numero) === index;
+    });
+
+    // Si hay duplicados, mostrar la lista
+    if (duplicados.length > 0) {
+        sol += `<ul>`;
+        for (const numero of duplicados) {
+            sol += `<li>${numero}</li>`;
+        }
+        sol += `</ul>`;
+    } else {
+        sol = "No hay duplicados.";
+    }
+
+    // Mostrar el resultado
+    resultado.innerHTML = sol;
+}
+
+
+        function eliminarDuplicados() {
+            const resultado = document.getElementById('resultado4');
+            
+            // TU CÓDIGO AQUÍ: Eliminar duplicados del array
+            // Pista: usar filter o Set
+            const sinDuplicados = [...new Set(numeros)];
+            resultado.innerHTML = `Array sin duplicados: [${sinDuplicados.join(', ')}]`;
+            
+        }
+
+        // ========== EJERCICIO 5: COMPARAR ARRAYS ==========
+        function encontrarComunes() {
+            const resultado = document.getElementById('resultado5');
+            
+            // TU CÓDIGO AQUÍ: Encontrar elementos que están en ambos arrays
+            // Pista: usar filter e includes
+        }
+
+        function encontrarDiferentes() {
+            const resultado = document.getElementById('resultado5');
+            
+            // TU CÓDIGO AQUÍ: Encontrar elementos que solo están en un array
+        }
+
+        function combinarArrays() {
+            const resultado = document.getElementById('resultado5');
+            
+            // TU CÓDIGO AQUÍ: Combinar ambos arrays sin duplicados
+        }
+
+        // ========== EJERCICIO 6: BÚSQUEDA AVANZADA ==========
+        function buscarEnInventario() {
+            const texto = document.getElementById('buscarTexto').value.trim();
+            const criterio = document.getElementById('criterioBusqueda').value;
+            const resultado = document.getElementById('resultado6');
+            
+            // TU CÓDIGO AQUÍ: Búsqueda flexible según el criterio
+            // - Por nombre: buscar texto en el nombre
+            // - Por categoría: buscar por categoría exacta
+            // - Por precio: buscar productos con precio <= valor
+        }
+
+        // ========== INICIALIZAR ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarDatos();
+        });
+    </script>
+</body>
+</html>
