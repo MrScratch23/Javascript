@@ -546,7 +546,7 @@ function eliminarProducto() {
             sol = "No se encontraron productos que coincidan con el nombre.";
         }
     } 
-    else if (criterio === "categoría") {
+    else if (criterio === "categoria") {
         // Usamos filter para encontrar todos los productos que coincidan con la categoría
         const productosCategoria = inventario.filter(e => e.categoria.toLocaleLowerCase().includes(texto.toLocaleLowerCase()));
 
