@@ -3,7 +3,7 @@
 // objeto Equipo
 
 class Equipo {
-    constructor(id, nombre, deporte, entrenador, jugadores=[]) {
+    constructor(id, nombre, deporte, entrenador) {
         this.id = id;
         this.nombre = nombre;
         this.deporte = deporte;

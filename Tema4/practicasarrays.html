@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios - Modificación de Arrays con LocalStorage</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .ejercicio { margin-bottom: 40px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        input, button, select { margin: 5px; padding: 8px; }
+        .resultado { background-color: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .array-visual { background: #e9ecef; padding: 10px; border-radius: 4px; font-family: monospace; }
+        .reset-btn { background: #dc3545; color: white; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicios - Modificación de Arrays con LocalStorage</h1>
+    <p><strong>¡Los datos se guardan automáticamente! Prueba a recargar la página.</strong></p>
+    <button onclick="resetearTodo()" class="reset-btn">Resetear Todos los Arrays</button>
+
+    <!-- Ejercicio 1: Métodos básicos de modificación -->
+    <div class="ejercicio">
+        <h2>Ejercicio 1: Métodos Básicos - push, pop, shift, unshift</h2>
+        <div class="array-visual" id="array1"></div>
+        
+        <input type="number" id="valorArray1" placeholder="Valor numérico" value="60">
+        <button onclick="agregarFinal()">push() - Agregar al final</button>
+        <button onclick="quitarFinal()">pop() - Quitar del final</button>
+        <button onclick="agregarInicio()">unshift() - Agregar al inicio</button>
+        <button onclick="quitarInicio()">shift() - Quitar del inicio</button>
+        <button onclick="resetearEjercicio1()" class="reset-btn">Resetear Este Array</button>
+        
+        <div class="resultado" id="resultado1"></div>
+    </div>
+
+    <!-- Ejercicio 2: splice - Insertar, Reemplazar, Eliminar -->
+    <div class="ejercicio">
+        <h2>Ejercicio 2: splice() - Insertar, Reemplazar y Eliminar</h2>
+        <div class="array-visual" id="array2"></div>
+        
+        <input type="number" id="indiceSplice" placeholder="Índice" value="2">
+        <input type="number" id="cantidadEliminar" placeholder="Elementos a eliminar" value="1">
+        <input type="text" id="valorSplice" placeholder="Nuevo valor" value="Mango">
+        
+        <button onclick="insertarConSplice()">splice() - Insertar</button>
+        <button onclick="reemplazarConSplice()">splice() - Reemplazar</button>
+        <button onclick="eliminarConSplice()">splice() - Eliminar</button>
+        <button onclick="resetearEjercicio2()" class="reset-btn">Resetear Este Array</button>
+        
+        <div class="resultado" id="resultado2"></div>
+    </div>
+
+    <!-- Ejercicio 3: reverse y sort -->
+    <div class="ejercicio">
+        <h2>Ejercicio 3: reverse() y sort() - Ordenar Arrays</h2>
+        <div class="array-visual" id="array3"></div>
+        <div class="array-visual" id="array3b"></div>
+        
+        <button onclick="invertirArray()">reverse() - Invertir orden</button>
+        <button onclick="ordenarNumeros()">sort() - Ordenar números</button>
+        <button onclick="ordenarTexto()">sort() - Ordenar texto</button>
+        <button onclick="ordenarDescendente()">sort() - Orden descendente</button>
+        <button onclick="resetearEjercicio3()" class="reset-btn">Resetear Estos Arrays</button>
+        
+        <div class="resultado" id="resultado3"></div>
+    </div>
+
+    <!-- Ejercicio 4: slice - Copiar partes del array -->
+    <div class="ejercicio">
+        <h2>Ejercicio 4: slice() - Extraer partes del array</h2>
+        <div class="array-visual" id="array4"></div>
+        
+        <input type="number" id="inicioSlice" placeholder="Índice inicio" value="1">
+        <input type="number" id="finSlice" placeholder="Índice fin" value="4">
+        
+        <button onclick="extraerParte()">slice() - Extraer parte</button>
+        <button onclick="copiarCompleto()">slice() - Copia completa</button>
+        <button onclick="ultimosElementos()">slice() - Últimos elementos</button>
+        <button onclick="resetearEjercicio4()" class="reset-btn">Resetear Este Array</button>
+        
+        <div class="resultado" id="resultado4"></div>
+    </div>
+
+    <!-- Ejercicio 5: Arrays bidimensionales -->
+    <div class="ejercicio">
+        <h2>Ejercicio 5: Arrays Bidimensionales (Matrices)</h2>
+        <div class="array-visual" id="array5"></div>
+        
+        <input type="number" id="fila" placeholder="Fila" value="0">
+        <input type="number" id="columna" placeholder="Columna" value="0">
+        <input type="number" id="valorMatriz" placeholder="Nuevo valor" value="99">
+        
+        <button onclick="accederMatriz()">Acceder a elemento</button>
+        <button onclick="modificarMatriz()">Modificar elemento</button>
+        <button onclick="agregarFila()">Agregar fila</button>
+        <button onclick="mostrarMatriz()">Mostrar como tabla</button>
+        <button onclick="resetearEjercicio5()" class="reset-btn">Resetear Esta Matriz</button>
+        
+        <div class="resultado" id="resultado5"></div>
+        <div id="tablaMatriz"></div>
+    </div>
+
+    <!-- Ejercicio 6: Concatenación y unión -->
+    <div class="ejercicio">
+        <h2>Ejercicio 6: concat() - Unir Arrays</h2>
+        <div class="array-visual">Array A: [1, 2, 3, 4]</div>
+        <div class="array-visual">Array B: [5, 6, 7, 8]</div>
+        <div class="array-visual">Array C: [9, 10]</div>
+        
+        <button onclick="unirAB()">concat() - Unir A + B</button>
+        <button onclick="unirABC()">concat() - Unir A + B + C</button>
+        <button onclick="unirConValores()">concat() - Unir con valores extra</button>
+        
+        <div class="resultado" id="resultado6"></div>
+    </div>
+
+    <!-- Ejercicio 7: join y split -->
+    <div class="ejercicio">
+        <h2>Ejercicio 7: join() y split() - Strings y Arrays</h2>
+        <div class="array-visual" id="array7"></div>
+        <div class="array-visual" id="string7">"manzana,banana,naranja,uva"</div>
+        
+        <input type="text" id="separadorJoin" placeholder="Separador para join" value=" ">
+        <input type="text" id="separadorSplit" placeholder="Separador para split" value=",">
+        
+        <button onclick="unirConJoin()">join() - Array a String</button>
+        <button onclick="dividirConSplit()">split() - String a Array</button>
+        <button onclick="unirConGuiones()">join() - Con guiones</button>
+        
+        <div class="resultado" id="resultado7"></div>
+    </div>
+
+    <script>
+        // ========== FUNCIONES DE LOCALSTORAGE ==========
+
+        function guardarEnLocalStorage(clave, valor) {
+            localStorage.setItem(clave, JSON.stringify(valor));
+        }
+
+        function cargarDesdeLocalStorage(clave, valorPorDefecto) {
+            const guardado = localStorage.getItem(clave);
+            return guardado ? JSON.parse(guardado) : valorPorDefecto;
+        }
+
+        function resetearTodo() {
+            if (confirm('¿Estás seguro de que quieres resetear TODOS los arrays?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // ========== ARRAYS CON LOCALSTORAGE ==========
+
+        // Ejercicio 1
+        let array1 = cargarDesdeLocalStorage('ej1_array', [10, 20, 30, 40, 50]);
+
+        // Ejercicio 2
+        let array2 = cargarDesdeLocalStorage('ej2_array', ["Manzana", "Banana", "Naranja", "Uva", "Pera"]);
+
+        // Ejercicio 3
+        let array3 = cargarDesdeLocalStorage('ej3_array_numeros', [15, 3, 28, 7, 42, 1, 36]);
+        let array3b = cargarDesdeLocalStorage('ej3_array_texto', ["Zanahoria", "Manzana", "Banana", "Uva", "Naranja"]);
+
+        // Ejercicio 4
+        let array4 = cargarDesdeLocalStorage('ej4_array', [100, 200, 300, 400, 500, 600, 700]);
+
+        // Ejercicio 5
+        let matriz = cargarDesdeLocalStorage('ej5_matriz', [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ]);
+
+        // Ejercicio 6 (no necesitan localStorage - son constantes)
+        const arrayA = [1, 2, 3, 4];
+        const arrayB = [5, 6, 7, 8];
+        const arrayC = [9, 10];
+
+        // Ejercicio 7
+        let array7 = cargarDesdeLocalStorage('ej7_array', ["JavaScript", "es", "divertido"]);
+        let string7 = "manzana,banana,naranja,uva";
+
+        // ========== FUNCIONES DE ACTUALIZACIÓN ==========
+
+        function actualizarVisualizacion1() {
+            document.getElementById('array1').textContent = JSON.stringify(array1);
+            guardarEnLocalStorage('ej1_array', array1);
+        }
+
+        function actualizarVisualizacion2() {
+            document.getElementById('array2').textContent = JSON.stringify(array2);
+            guardarEnLocalStorage('ej2_array', array2);
+        }
+
+        function actualizarVisualizacion3() {
+            document.getElementById('array3').textContent = JSON.stringify(array3);
+            document.getElementById('array3b').textContent = JSON.stringify(array3b);
+            guardarEnLocalStorage('ej3_array_numeros', array3);
+            guardarEnLocalStorage('ej3_array_texto', array3b);
+        }
+
+        function actualizarVisualizacion4() {
+            document.getElementById('array4').textContent = JSON.stringify(array4);
+            guardarEnLocalStorage('ej4_array', array4);
+        }
+
+        function actualizarVisualizacion5() {
+            document.getElementById('array5').textContent = JSON.stringify(matriz);
+            guardarEnLocalStorage('ej5_matriz', matriz);
+        }
+
+        function actualizarVisualizacion7() {
+            document.getElementById('array7').textContent = JSON.stringify(array7);
+            guardarEnLocalStorage('ej7_array', array7);
+        }
+
+        // ========== FUNCIONES DE RESETEO ==========
+
+        function resetearEjercicio1() {
+            if (confirm('¿Resetear array del Ejercicio 1?')) {
+                array1 = [10, 20, 30, 40, 50];
+                actualizarVisualizacion1();
+            }
+        }
+
+        function resetearEjercicio2() {
+            if (confirm('¿Resetear array del Ejercicio 2?')) {
+                array2 = ["Manzana", "Banana", "Naranja", "Uva", "Pera"];
+                actualizarVisualizacion2();
+            }
+        }
+
+        function resetearEjercicio3() {
+            if (confirm('¿Resetear arrays del Ejercicio 3?')) {
+                array3 = [15, 3, 28, 7, 42, 1, 36];
+                array3b = ["Zanahoria", "Manzana", "Banana", "Uva", "Naranja"];
+                actualizarVisualizacion3();
+            }
+        }
+
+        function resetearEjercicio4() {
+            if (confirm('¿Resetear array del Ejercicio 4?')) {
+                array4 = [100, 200, 300, 400, 500, 600, 700];
+                actualizarVisualizacion4();
+            }
+        }
+
+        function resetearEjercicio5() {
+            if (confirm('¿Resetear matriz del Ejercicio 5?')) {
+                matriz = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+                actualizarVisualizacion5();
+            }
+        }
+
+        // ========== EJERCICIO 1: MÉTODOS BÁSICOS ==========
+        function agregarFinal() {
+            const valor = parseInt(document.getElementById('valorArray1').value);
+            // TU CÓDIGO: Usar push para agregar al final
+            array1.push(valor);
+            actualizarVisualizacion1();
+        }
+
+        function quitarFinal() {
+            // TU CÓDIGO: Usar pop para quitar del final
+            array1.pop();
+            actualizarVisualizacion1();
+        }
+
+        function agregarInicio() {
+            const valor = parseInt(document.getElementById('valorArray1').value);
+            // TU CÓDIGO: Usar unshift para agregar al inicio
+            array1.unshift(valor);
+            actualizarVisualizacion1();
+        }
+
+        function quitarInicio() {
+            // TU CÓDIGO: Usar shift para quitar del inicio
+            array1.shift()
+            actualizarVisualizacion1();
+        }
+
+        // ========== EJERCICIO 2: SPLICE ==========
+        function insertarConSplice() {
+            const indice = parseInt(document.getElementById('indiceSplice').value);
+            const valor = document.getElementById('valorSplice').value;
+            // TU CÓDIGO: Usar splice para INSERTAR (eliminar 0 elementos)
+            array2.splice(indice,0,valor);
+
+
+            actualizarVisualizacion2();
+        }
+
+        function reemplazarConSplice() {
+            const indice = parseInt(document.getElementById('indiceSplice').value);
+            const valor = document.getElementById('valorSplice').value;
+            // TU CÓDIGO: Usar splice para REEMPLAZAR (eliminar 1, insertar 1)
+            array2.splice(indice, 1, valor);
+            actualizarVisualizacion2();
+        }
+
+        function eliminarConSplice() {
+            const indice = parseInt(document.getElementById('indiceSplice').value);
+            const cantidad = parseInt(document.getElementById('cantidadEliminar').value);
+            // TU CÓDIGO: Usar splice para ELIMINAR (solo eliminar, sin insertar)
+            array2.splice(indice, cantidad);
+            actualizarVisualizacion2();
+        }
+
+        // ========== EJERCICIO 3: REVERSE Y SORT ==========
+        function invertirArray() {
+            // TU CÓDIGO: Usar reverse para invertir array3
+            array3.reverse();    
+            actualizarVisualizacion3();
+        }
+
+        function ordenarNumeros() {
+            // TU CÓDIGO: Usar sort para ordenar array3 (cuidado con números)
+            array3.sort((a,b) => a - b)
+            actualizarVisualizacion3();
+        }
+
+        function ordenarTexto() {
+            // TU CÓDIGO: Usar sort para ordenar array3b alfabéticamente
+           array3b.sort((a, b) => a.localeCompare(b, "es"));
+            actualizarVisualizacion3();
+        }
+
+        function ordenarDescendente() {
+            // TU CÓDIGO: Ordenar array3 de mayor a menor
+            array3.sort((a,b) => b - a)
+            actualizarVisualizacion3();
+        }
+
+
+        // ========== EJERCICIO 4: SLICE ==========
+
+        const resultado4 = document.querySelector("#resultado4");
+        function extraerParte() {
+            const inicio = parseInt(document.getElementById('inicioSlice').value);
+            const fin = parseInt(document.getElementById('finSlice').value);
+            // TU CÓDIGO: Usar slice para extraer una parte
+            let parteExtraida = array4.slice(inicio, fin);
+         
+             document.getElementById('resultado4').innerHTML = 
+        `Parte extraída: [${parteExtraida.join(', ')}] 
+         <br>Array original sigue siendo: [${array4.join(', ')}]`;
+
+
+        }
+
+        function copiarCompleto() {
+            // TU CÓDIGO: Usar slice sin parámetros para copia completa
+            let arrayCompleto = array4.lenght;
+            let parteExtraida = array4.slice(0, arrayCompleto);
+
+            const resultado = document.querySelector("#resultado4");
+
+            resultado.innerHTML = parteExtraida;
+
+        }
+
+        function ultimosElementos() {
+            // TU CÓDIGO: Usar slice con índice negativo para últimos elementos
+             
+            let parteExtraida = array4.slice(-2);
+
+            const resultado = document.querySelector("#resultado4");
+
+            resultado.innerHTML = parteExtraida;
+
+        }
+
+        // ========== EJERCICIO 5: ARRAYS BIDIMENSIONALES ==========
+
+         
+        const resultado5 = document.querySelector("#resultado5");
+        const tablaMatriz = document.querySelector("#tablaMatriz");
+
+
+        function accederMatriz() {
+            const fila = parseInt(document.getElementById('fila').value);
+            const columna = parseInt(document.getElementById('columna').value);
+            // TU CÓDIGO: Acceder a matriz[fila][columna]
+
+           const elemento = matriz[fila][columna];
+            
+            resultado5.innerHTML = elemento;
+
+
+
+        }
+
+        function modificarMatriz() {
+            const fila = parseInt(document.getElementById('fila').value);
+            const columna = parseInt(document.getElementById('columna').value);
+            const valor = parseInt(document.getElementById('valorMatriz').value);
+            // TU CÓDIGO: Modificar matriz[fila][columna] = valor
+
+            
+           let elemento = matriz[fila][columna] = valor;
+         
+
+
+            actualizarVisualizacion5();
+        }
+
+        function agregarFila() {
+            // TU CÓDIGO: Agregar una nueva fila [10, 11, 12] a la matriz
+            matriz.push([10, 11, 12]);
+            actualizarVisualizacion5();
+        }
+
+       function mostrarMatriz() {
+    let html = `<table border="1" style="width: auto;">`;
+    
+    for (const fila of matriz) {
+        html += `<tr>`;
+        
+        for (const elemento of fila) {
+            html += `<td style="padding: 10px; text-align: center;">${elemento}</td>`;
+        }
+        
+        html += `</tr>`;
+    }
+    
+    html += `</table>`;
+    tablaMatriz.innerHTML = html;
+    resultado5.innerHTML = "Matriz mostrada como tabla HTML";
+}
+
+        // ========== EJERCICIO 6: CONCAT ==========
+
+    const resultado6 = document.querySelector("#resultado6");
+
+        function unirAB() {
+            // TU CÓDIGO: Usar concat para unir arrayA y arrayB
+
+            let sol = arrayA.concat(arrayB);
+            resultado6.innerHTML = sol;
+        }
+
+        function unirABC() {
+            // TU CÓDIGO: Usar concat para unir arrayA, arrayB y arrayC
+                  let sol = arrayA.concat(arrayB).concat(arrayC);
+            resultado6.innerHTML = sol;
+
+        }
+
+        function unirConValores() {
+            // TU CÓDIGO: Usar concat para unir arrayA con valores adicionales [99, 100]
+                  let sol = arrayA.concat(99, 100);
+            resultado6.innerHTML = sol;
+        }
+
+        // ========== EJERCICIO 7: JOIN Y SPLIT ==========
+
+        const resultado7 = document.querySelector("#resultado7");
+        function unirConJoin() {
+            const separador = document.getElementById('separadorJoin').value;
+            // TU CÓDIGO: Usar join para convertir array7 en string
+
+            let sol = array7.join(`${separador}`);
+            resultado7.innerHTML = sol;
+        }
+
+        function dividirConSplit() {
+            const separador = document.getElementById('separadorSplit').value;
+            // TU CÓDIGO: Usar split para convertir string7 en array
+            
+
+            let sol = string7.split(separador);
+            resultado7.innerHTML = sol;
+        }
+
+        function unirConGuiones() {
+            // TU CÓDIGO: Usar join con guiones "-" para unir array7
+              let sol = array7.join("-");
+            resultado7.innerHTML = sol;
+
+        }
+
+        // ========== INICIALIZAR ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            actualizarVisualizacion1();
+            actualizarVisualizacion2();
+            actualizarVisualizacion3();
+            actualizarVisualizacion4();
+            actualizarVisualizacion5();
+            actualizarVisualizacion7();
+        });
+    </script>
+</body>
+</html>
