@@ -3,7 +3,7 @@
 // =============================================
 
 // 📖 CLASE LIBRO - 
-class Libro {
+ class Libro {
     constructor(isbn, titulo, genero, anio, autor = null) {
         this.isbn = isbn;
         this.titulo = titulo;
@@ -44,6 +44,7 @@ class Libro {
         return "El libro ya estaba disponible";
     }
 }
+    
 
 // 👨‍🏫 CLASE AUTOR 
 class Autor {
@@ -111,3 +112,90 @@ class Prestamo {
         return "Préstamo marcado como devuelto";
     }
 }
+
+/* Constructor para un objeto genérico
+function Libro(isbn, titulo, genero, anio, autor = null) {
+  this.id = isbn;
+  this.titulo = titulo;
+  this.genero = genero;
+  this.anio = anio;
+  this.autor = autor;
+  this.prestado = false;
+}
+
+// Métodos del objeto usando prototipos
+Libro.prototype.AsignarAutor = function(autor) {
+        // VERIFICAR PRIMERO SI EL AUTOR ES VÁLIDO
+        if (!autor || !autor.id) {
+            return "Error: Autor no válido";
+        }
+        
+        // VERIFICAR SI YA TIENE ESTE AUTOR ASIGNADO
+        if (this.autor && this.autor.id === autor.id) {
+            return "Este libro ya tiene asignado este autor.";
+        } else {
+            this.autor = autor;
+            return "Autor asignado correctamente";
+        }
+    }
+
+    Libro.prototype.MarcarPrestado = function() {
+        if (this.prestado === false) {
+            this.prestado = true;
+            return "Libro marcado como prestado";
+        }
+        return "El libro ya estaba prestado";
+
+    }
+
+    Libro.prototype.MarcarDisponible = function() {    
+        if (this.prestado === true) {
+            this.prestado = false;
+            return "Libro marcado como disponible";
+        }
+        return "El libro ya estaba disponible";
+    }
+   
+  
+// --------- Herencia: Clase LibroDigital (hija de Libro) ---------
+
+// Constructor de la clase LibroDigital
+function LibroDigital(isbn, titulo, genero, anio, autor = null, formato = "PDF", resolucion = "1080p") {
+  // Llamamos al constructor de la clase padre (Libro)
+  Libro.call(this, isbn, titulo, genero, anio, autor);
+  this.formato = formato; // Nuevo atributo para el formato digital
+  this.resolucion = resolucion; // Nuevo atributo para la resolución
+}
+
+// Heredando los métodos de Libro
+LibroDigital.prototype = Object.create(Libro.prototype);
+
+// Agregar métodos específicos de la clase LibroDigital
+LibroDigital.prototype.CambiarResolucion = function(resolucion) {
+  this.resolucion = resolucion;
+  return `Resolución cambiada a: ${resolucion}`;
+};
+
+LibroDigital.prototype.CambiarFormato = function(formato) {
+  this.formato = formato;
+  return `Formato cambiado a: ${formato}`;
+};
+
+// ----- Ejemplo de uso -----
+const autor1 = { id: 1, nombre: "J.K. Rowling", nacionalidad: "Británica" };
+const libroFisico = new Libro("978-3-16-148410-0", "Harry Potter y la Piedra Filosofal", "Fantasía", 1997, autor1);
+const libroDigital = new LibroDigital("978-3-16-148410-1", "Harry Potter y la Cámara Secreta", "Fantasía", 1998, autor1, "EPUB", "720p");
+
+console.log(libroFisico.MarcarPrestado()); // "Libro marcado como prestado"
+console.log(libroDigital.MarcarDisponible()); // "Libro marcado como disponible"
+console.log(libroDigital.CambiarResolucion("4K")); // "Resolución cambiada a: 4K"
+console.log(libroDigital.CambiarFormato("PDF")); // "Formato cambiado a: PDF"
+
+// Guardar el objeto libroFisico en localStorage
+localStorage.setItem("libro", JSON.stringify(libroFisico));
+
+// Recuperar el objeto desde localStorage
+let libroRecuperado = JSON.parse(localStorage.getItem("libro"));
+
+// Verificar que se ha recuperado correctamente
+console.log(libroRecuperado);*/
