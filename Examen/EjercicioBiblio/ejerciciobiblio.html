@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen - Gestión de Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .seccion { margin-bottom: 30px; padding: 20px; border: 2px solid #333; border-radius: 8px; }
+        h1, h2 { color: #2c3e50; }
+        form { margin: 10px 0; }
+        input, button, select { margin: 5px; padding: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .mensaje { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .exito { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .instrucciones { background: #e9ecef; padding: 15px; border-radius: 5px; }
+        .tarea { background: #fff3cd; padding: 10px; margin: 5px 0; border-left: 4px solid #ffc107; }
+    </style>
+    <script src="objetos.js" defer></script>
+     <script src="bibliotecads.js" defer></script>
+</head>
+<body>
+    <div class="seccion instrucciones">
+        <h1>🚀 EXAMEN - Gestión de Biblioteca Universitaria</h1>
+        <h2>📋 Instrucciones</h2>
+        <p><strong>Tiempo estimado:</strong> 90 minutos</p>
+        <p><strong>Objetivo:</strong> Crear un sistema de gestión para una biblioteca universitaria usando Programación Orientada a Objetos en JavaScript.</p>
+        
+        <h3>🎯 REQUISITOS QUE DEBES IMPLEMENTAR:</h3>
+        
+        <div class="tarea">
+            <h4>📖 CLASE LIBRO - Debes crear esta clase:</h4>
+            <ul>
+                <li><strong>Propiedades:</strong> isbn, titulo, genero, anio, autor (inicialmente null), prestado (boolean)</li>
+                <li><strong>Métodos:</strong> constructor, asignarAutor(), marcarPrestado(), marcarDisponible()</li>
+            </ul>
+        </div>
+
+        <div class="tarea">
+            <h4>👨‍🏫 CLASE AUTOR - Debes crear esta clase:</h4>
+            <ul>
+                <li><strong>Propiedades:</strong> id, nombre, nacionalidad, libros (array de libros escritos)</li>
+                <li><strong>Métodos:</strong> constructor, agregarLibro()</li>
+            </ul>
+        </div>
+
+        <div class="tarea">
+            <h4>🎓 CLASE ESTUDIANTE - Debes crear esta clase:</h4>
+            <ul>
+                <li><strong>Propiedades:</strong> matricula, nombre, carrera, semestre, librosPrestados (array)</li>
+                <li><strong>Métodos:</strong> constructor, agregarPrestamo(), devolverLibro()</li>
+            </ul>
+        </div>
+
+        <div class="tarea">
+            <h4>📋 CLASE PRÉSTAMO - Debes crear esta clase:</h4>
+            <ul>
+                <li><strong>Propiedades:</strong> isbn, matricula, fechaPrestamo, fechaDevolucion, devuelto (boolean)</li>
+                <li><strong>Métodos:</strong> constructor, marcarDevuelto()</li>
+            </ul>
+        </div>
+
+        <div class="tarea">
+            <h4>🔧 FUNCIONALIDADES - Debes implementar:</h4>
+            <ol>
+                <li>Registrar nuevos libros, autores y estudiantes</li>
+                <li>Asignar autores a libros</li>
+                <li>Registrar préstamos de libros</li>
+                <li>Registrar devoluciones de libros</li>
+                <li>Validar que no haya IDs duplicados</li>
+                <li>Mostrar todo en tablas dinámicas</li>
+                <li>Manejar mensajes de error/éxito</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 1: REGISTROS -->
+    <div class="seccion">
+        <h2>📚 Registro de Libros</h2>
+        <form id="formLibro">
+            <input type="text" id="isbnLibro" placeholder="ISBN (único)" required>
+            <input type="text" id="tituloLibro" placeholder="Título" required>
+            <input type="text" id="generoLibro" placeholder="Género" required>
+            <input type="number" id="anioLibro" placeholder="Año publicación" required>
+            <button type="button" id="btnRegistrarLibro">Registrar Libro</button>
+        </form>
+
+        <h2>👨‍🏫 Registro de Autores</h2>
+        <form id="formAutor">
+            <input type="text" id="idAutor" placeholder="ID Autor (único)" required>
+            <input type="text" id="nombreAutor" placeholder="Nombre completo" required>
+            <input type="text" id="nacionalidadAutor" placeholder="Nacionalidad" required>
+            <button type="button" id="btnRegistrarAutor">Registrar Autor</button>
+        </form>
+
+        <h2>🎓 Registro de Estudiantes</h2>
+        <form id="formEstudiante">
+            <input type="text" id="matriculaEstudiante" placeholder="Matrícula (única)" required>
+            <input type="text" id="nombreEstudiante" placeholder="Nombre completo" required>
+            <input type="text" id="carreraEstudiante" placeholder="Carrera" required>
+            <input type="number" id="semestreEstudiante" placeholder="Semestre" min="1" max="12" required>
+            <button type="button" id="btnRegistrarEstudiante">Registrar Estudiante</button>
+        </form>
+    </div>
+
+    <!-- SECCIÓN 2: ASIGNACIONES -->
+    <div class="seccion">
+        <h2>🔗 Asignaciones</h2>
+        
+        <h3>➕ Asignar Autor a Libro</h3>
+        <form id="formAsignarAutor">
+            <input type="text" id="isbnAsignarAutor" placeholder="ISBN Libro" required>
+            <input type="text" id="idAutorAsignar" placeholder="ID Autor" required>
+            <button type="button" id="btnAsignarAutor">Asignar Autor</button>
+        </form>
+
+        <h3>📖 Registrar Préstamo</h3>
+        <form id="formPrestamo">
+            <input type="text" id="isbnPrestamo" placeholder="ISBN Libro" required>
+            <input type="text" id="matriculaPrestamo" placeholder="Matrícula Estudiante" required>
+            <input type="date" id="fechaPrestamo" placeholder="Fecha préstamo" required>
+            <input type="date" id="fechaDevolucion" placeholder="Fecha devolución" required>
+            <button type="button" id="btnRegistrarPrestamo">Registrar Préstamo</button>
+        </form>
+
+        <h3>↩️ Registrar Devolución</h3>
+        <form id="formDevolucion">
+            <input type="text" id="isbnDevolucion" placeholder="ISBN Libro" required>
+            <input type="text" id="matriculaDevolucion" placeholder="Matrícula Estudiante" required>
+            <button type="button" id="btnRegistrarDevolucion">Registrar Devolución</button>
+        </form>
+    </div>
+
+    <!-- SECCIÓN 3: LISTADOS -->
+    <div class="seccion">
+        <h2>📊 Listados</h2>
+
+        <h3>📚 Libros Registrados</h3>
+        <table id="tablaLibros" border="1">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Título</th>
+                    <th>Género</th>
+                    <th>Año</th>
+                    <th>Autor</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaLibros">
+                <!-- Los libros se mostrarán aquí dinámicamente -->
+            </tbody>
+        </table>
+
+        <h3>👨‍🏫 Autores Registrados</h3>
+        <table id="tablaAutores" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Nacionalidad</th>
+                    <th>Libros Escritos</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaAutores">
+                <!-- Los autores se mostrarán aquí dinámicamente -->
+            </tbody>
+        </table>
+
+        <h3>🎓 Estudiantes Registrados</h3>
+        <table id="tablaEstudiantes" border="1">
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nombre</th>
+                    <th>Carrera</th>
+                    <th>Semestre</th>
+                    <th>Libros Prestados</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaEstudiantes">
+                <!-- Los estudiantes se mostrarán aquí dinámicamente -->
+            </tbody>
+        </table>
+
+        <h3>📋 Préstamos Activos</h3>
+        <table id="tablaPrestamos" border="1">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Libro</th>
+                    <th>Estudiante</th>
+                    <th>Fecha Préstamo</th>
+                    <th>Fecha Devolución</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaPrestamos">
+                <!-- Los préstamos se mostrarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SECCIÓN 4: MENSAJES -->
+    <div class="seccion">
+        <h2>💬 Mensajes del Sistema</h2>
+        <div id="mensajes">
+            <!-- Los mensajes se mostrarán aquí -->
+        </div>
+    </div>
+
+   
+</body>
+</html>
