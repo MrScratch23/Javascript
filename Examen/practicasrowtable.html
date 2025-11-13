@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Tablas - Practica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .ejercicio { margin-bottom: 40px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        input, button { margin: 5px; padding: 8px; }
+        .bajo-stock { color: red; font-weight: bold; }
+        .aprobado { background-color: #d4edda; }
+        .reprobado { background-color: #f8d7da; }
+        .ingreso { color: green; }
+        .gasto { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicios de Tablas - Practica Pintando Filas</h1>
+
+    <!-- Ejercicio 1: Lista de Tareas Pendientes -->
+    <div class="ejercicio">
+        <h2>Ejercicio 1: Lista de Tareas Pendientes</h2>
+        <table id="tablaTareas">
+            <thead>
+                <tr>
+                    <th>Tarea</th>
+                    <th>Prioridad</th>
+                    <th>Completada</th>
+                </tr>
+            </thead>
+            <tbody id="tareasBody">
+                <!-- Las tareas se pintarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Ejercicio 2: Inventario de Productos -->
+    <div class="ejercicio">
+        <h2>Ejercicio 2: Inventario de Productos</h2>
+        <div id="inventarioContainer">
+            <!-- La tabla se generará aquí -->
+        </div>
+    </div>
+
+    <!-- Ejercicio 3: Sistema de Calificaciones -->
+    <div class="ejercicio">
+        <h2>Ejercicio 3: Sistema de Calificaciones</h2>
+        <table id="tablaCalificaciones">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Matemáticas</th>
+                    <th>Historia</th>
+                    <th>Promedio</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="calificacionesBody">
+                <!-- Los estudiantes se pintarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Ejercicio 4: Agenda de Contactos -->
+    <div class="ejercicio">
+        <h2>Ejercicio 4: Agenda de Contactos</h2>
+        <div>
+            <input type="text" id="nombreContacto" placeholder="Nombre">
+            <input type="text" id="telefonoContacto" placeholder="Teléfono">
+            <input type="text" id="emailContacto" placeholder="Email">
+            <button onclick="agregarContacto()">Agregar Contacto</button>
+        </div>
+        <table id="tablaContactos">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="contactosBody">
+                <!-- Los contactos se pintarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Ejercicio 5: Historial de Transacciones -->
+    <div class="ejercicio">
+        <h2>Ejercicio 5: Historial de Transacciones</h2>
+        <div id="transaccionesContainer">
+            <!-- La tabla se generará aquí -->
+        </div>
+        <div>
+            <p id="balanceTotal">Balance Total: </p>
+        </div>
+    </div>
+
+    <!-- Ejercicio 6: Tabla de Partidos de Fútbol -->
+    <div class="ejercicio">
+        <h2>Ejercicio 6: Tabla de Partidos de Fútbol</h2>
+        <table id="tablaPartidos">
+            <thead>
+                <tr>
+                    <th>Local</th>
+                    <th>Resultado</th>
+                    <th>Visitante</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="partidosBody">
+                <!-- Los partidos se pintarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // ========== DATOS PARA LOS EJERCICIOS ==========
+
+        // Ejercicio 1: Tareas Pendientes
+        const tareas = [
+            { tarea: "Estudiar JavaScript", prioridad: "Alta", completada: false },
+            { tarea: "Hacer ejercicio", prioridad: "Media", completada: true },
+            { tarea: "Leer un libro", prioridad: "Baja", completada: false },
+            { tarea: "Comprar víveres", prioridad: "Alta", completada: false }
+        ];
+
+        const tareasBody = document.querySelector("#tareasBody");
+    
+        function toHtmlRow(array) {
+            let html = ``;
+            
+            for (const element of array) {
+                html += `<tr>`
+                html += `<td>${element.tarea}</td> 
+                <td> ${element.prioridad} </td> 
+                <td> ${element.completada ? "Si" : "No"}</td>`;
+                html += `</tr>`
+            }    
+            return html;
+        }
+
+        tareasBody.innerHTML = toHtmlRow(tareas);
+
+        // Ejercicio 2: Inventario de Productos
+        const inventario = [
+            { codigo: "A001", producto: "Laptop Dell", categoria: "Tecnología", existencia: 8 },
+            { codigo: "A002", producto: "Mouse Inalámbrico", categoria: "Accesorios", existencia: 25 },
+            { codigo: "A003", producto: "Monitor 24\"", categoria: "Tecnología", existencia: 12 },
+            { codigo: "B001", producto: "Silla Oficina", categoria: "Mobiliario", existencia: 5 },
+            { codigo: "A004", producto: "Teclado Mecánico", categoria: "Accesorios", existencia: 3 }
+        ];
+
+        const inventarioContainer = document.querySelector("#inventarioContainer");
+    
+        function toTable(inventario) {
+            const inventarioOrdenado = [...inventario].sort((a, b) => a.categoria.localeCompare(b.categoria, "es"));
+            
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Existencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+            
+            for (const producto of inventarioOrdenado) {
+                html += `
+                        <tr>
+                            <td>${producto.codigo}</td>
+                            <td>${producto.producto}</td>
+                            <td>${producto.categoria}</td>
+                            <td>${producto.existencia < 10 ? '<span style="color:red">BAJO STOCK</span>' : producto.existencia}</td>
+                        </tr>`;
+            }
+            
+            html += `
+                    </tbody>
+                </table>`;
+            
+            return html;
+        }
+      
+        inventarioContainer.innerHTML = toTable(inventario);
+
+        // Ejercicio 3: Sistema de Calificaciones
+        const estudiantes = [
+            { nombre: "Ana García", matematicas: 85, historia: 92 },
+            { nombre: "Carlos López", matematicas: 45, historia: 78 },
+            { nombre: "María Torres", matematicas: 95, historia: 88 },
+            { nombre: "Juan Díaz", matematicas: 60, historia: 65 },
+            { nombre: "Laura Fernández", matematicas: 72, historia: 68 }
+        ];
+
+        const calificacionesBody = document.querySelector("#calificacionesBody");
+
+        function estudiantesRow(array) {
+            let html = ``;
+            
+            for (const element of array) {
+                html += `<tr>`
+                html += `<td>${element.nombre}</td> 
+                <td> ${element.matematicas} </td> 
+                <td>${element.historia}</td>
+                <td> ${(element.matematicas + element.historia )/ 2}</td>
+                <td>${(element.matematicas + element.historia )/ 2 >=70 ? `<span style="color: green">Aprobado</span>` :`<span style="color: red">Suspenso</span>`} </td>`;
+                html += `</tr>`
+            }    
+            return html;
+        }
+
+        calificacionesBody.innerHTML = estudiantesRow(estudiantes);
+
+        // Ejercicio 4: Agenda de Contactos
+        let contactos = [
+            { nombre: "Laura Méndez", telefono: "555-1234", email: "laura@email.com" },
+            { nombre: "Pedro Sánchez", telefono: "555-5678", email: "pedro@email.com" }
+        ];
+
+        const contactosBody = document.querySelector("#contactosBody");
+
+        function agregarContacto(){
+            const nombreContacto = document.querySelector("#nombreContacto").value.trim();
+            const telefonoContacto = document.querySelector("#telefonoContacto").value.trim();
+            const emailContacto = document.querySelector("#emailContacto").value.trim();
+
+            let newContacto = {
+                nombre: nombreContacto,
+                telefono: telefonoContacto,
+                email: emailContacto
+            };
+
+            contactos.push(newContacto);
+
+            // Limpiar inputs
+            document.querySelector("#nombreContacto").value = "";
+            document.querySelector("#telefonoContacto").value = "";
+            document.querySelector("#emailContacto").value = "";
+
+            // Actualizar tabla
+            contactosBody.innerHTML = contactosRow();
+        }
+
+        const eliminarContacto = function(indice) {
+            contactos.splice(indice, 1);
+            // Actualizar la tabla
+            contactosBody.innerHTML = contactosRow();
+        };
+
+        const contactosRow = function() {
+            let html = "";
+            let index = 0;
+
+            for (const contacto of contactos) {
+                html += `<tr>
+                    <td>${contacto.nombre}</td>
+                    <td>${contacto.telefono}</td>
+                    <td>${contacto.email}</td>
+                    <td>
+                        <button type="button" onclick="eliminarContacto(${index})">Eliminar</button>
+                    </td>
+                </tr>`;
+                index++;
+            }
+            return html;
+        };
+
+        contactosBody.innerHTML = contactosRow();
+        
+
+        // Ejercicio 5: Historial de Transacciones
+        const transacciones = [
+            { fecha: "2024-01-15", descripcion: "Compra supermercado", monto: -150.50, tipo: "Gasto" },
+            { fecha: "2024-01-16", descripcion: "Pago nómina", monto: 1200.00, tipo: "Ingreso" },
+            { fecha: "2024-01-17", descripcion: "Pago luz", monto: -45.30, tipo: "Gasto" },
+            { fecha: "2024-01-18", descripcion: "Venta artículo", monto: 80.00, tipo: "Ingreso" },
+            { fecha: "2024-01-19", descripcion: "Restaurante", monto: -35.75, tipo: "Gasto" }
+        ];
+
+        // Ejercicio 6: Partidos de Fútbol
+        const partidos = [
+            { local: "Real Madrid", golesLocal: 3, golesVisitante: 1, visitante: "Barcelona", fecha: "2024-01-20", finalizado: true },
+            { local: "Manchester United", golesLocal: 2, golesVisitante: 2, visitante: "Liverpool", fecha: "2024-01-21", finalizado: true },
+            { local: "Bayern Munich", golesLocal: 0, golesVisitante: 0, visitante: "Borussia Dortmund", fecha: "2024-01-22", finalizado: false },
+            { local: "PSG", golesLocal: 4, golesVisitante: 1, visitante: "Marseille", fecha: "2024-01-23", finalizado: true }
+        ];
+
+        // ========== EJERCICIO 5: HISTORIAL DE TRANSACCIONES ==========
+        function pintarTransacciones() {
+            const container = document.getElementById('transaccionesContainer');
+            // Tu código aquí:
+            // 1. Crear tabla con todas las transacciones
+            // 2. Mostrar montos en verde para ingresos, rojo para gastos
+            // 3. Calcular y mostrar el balance total
+        }
+
+        // ========== EJERCICIO 6: PARTIDOS DE FÚTBOL ==========
+        function pintarPartidos() {
+            const tbody = document.getElementById('partidosBody');
+            // Tu código aquí:
+            // 1. Mostrar partidos en formato: "3-1" para finalizados
+            // 2. Para partidos no finalizados: mostrar "Por jugar"
+            // 3. En estado: "Finalizado" o "Por jugar"
+        }
+
+        // ========== INICIALIZAR TODOS LOS EJERCICIOS ==========
+        function inicializarEjercicios() {
+            // Los ejercicios 1-4 ya están inicializados arriba
+            pintarTransacciones();
+            pintarPartidos();
+        }
+
+        // Ejecutar cuando se cargue la página
+        document.addEventListener('DOMContentLoaded', inicializarEjercicios);
+    </script>
+</body>
+</html>
