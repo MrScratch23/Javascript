@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Tienda - Clases vs Prototipos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .form-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 8px; }
+        .form-toggle { cursor: pointer; background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        .form-content { padding: 10px; background: #f9f9f9; border-radius: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        input, button, select { margin: 5px; padding: 8px; }
+        .ocultar { display: none; }
+        .container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-column, .tables-column { padding: 10px; }
+    </style>
+    <script src="objetostienda.js" defer></script>
+    <script src="tienda.js" defer></script>
+    <link rel="stylesheet" href="tienda.css">
+</head>
+<body>
+    <h1>🏪 Sistema Tienda - Clases vs Prototipos</h1>
+    
+    <div class="container">
+        <!-- COLUMNA FORMULARIOS -->
+        <div class="form-column">
+            <h2>📝 Formularios</h2>
+
+            <!-- PRODUCTO (CLASE) -->
+            <div class="form-section">
+                <div class="form-toggle" id="toggleProducto">
+                    📦 Registrar Producto (CLASE)
+                </div>
+                <div class="form-content ocultar" id="formProducto">
+                    <input type="text" name="codigo" placeholder="Código único" required>
+                    <input type="text" name="nombre" placeholder="Nombre producto" required>
+                    <input type="number" name="precio" placeholder="Precio" step="0.01" required>
+                    <input type="number" name="stock" placeholder="Stock inicial" required>
+                    <select name="categoriaProducto">
+                        <option value="">Seleccionar categoría</option>
+                    </select>
+                    <button id="btnRegistrarProducto">Registrar Producto</button>
+                </div>
+            </div>
+
+            <!-- CLIENTE (PROTOTIPO) -->
+            <div class="form-section">
+                <div class="form-toggle" id="toggleCliente">
+                    👥 Registrar Cliente (PROTOTIPO)
+                </div>
+                <div class="form-content ocultar" id="formCliente">
+                    <input type="text" name="dni" placeholder="DNI único" required>
+                    <input type="text" name="nombreCliente" placeholder="Nombre completo" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="telefono" placeholder="Teléfono" required>
+                    <button id="btnRegistrarCliente">Registrar Cliente</button>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA (PROTOTIPO) -->
+            <div class="form-section">
+                <div class="form-toggle" id="toggleCategoria">
+                    🏷️ Registrar Categoría (PROTOTIPO)
+                </div>
+                <div class="form-content ocultar" id="formCategoria">
+                    <input type="text" name="idCategoria" placeholder="ID Categoría" required>
+                    <input type="text" name="nombreCategoria" placeholder="Nombre categoría" required>
+                    <input type="text" name="descripcion" placeholder="Descripción" required>
+                    <button id="btnRegistrarCategoria">Registrar Categoría</button>
+                </div>
+            </div>
+
+            <!-- PEDIDO (CLASE) -->
+            <div class="form-section">
+                <div class="form-toggle" id="togglePedido">
+                    📋 Realizar Pedido (CLASE)
+                </div>
+                <div class="form-content ocultar" id="formPedido" name="formPedido">
+                    <select name="dniCliente" required>
+                        <option value="">Seleccionar cliente</option>
+                    </select>
+                    <div id="detallesPedido">
+                        <!-- Detalles dinámicos se agregarán aquí -->
+                    </div>
+                    <button id="btnAgregarDetalle">➕ Agregar Producto</button>
+                    <button id="btnRealizarPedido">✅ Realizar Pedido</button>
+                </div>
+            </div>
+
+            <!-- GESTIÓN INVENTARIO -->
+            <div class="form-section">
+                <div class="form-toggle" id="toggleInventario">
+                    📊 Gestión Inventario
+                </div>
+                <div class="form-content ocultar" id="formInventario">
+                    <select name="productoInventario" required>
+                        <option value="">Seleccionar producto</option>
+                    </select>
+                    <input type="number" name="cantidadInventario" placeholder="Cantidad" required>
+                    <button id="btnReponerStock">🔄 Reponer Stock</button>
+                    <button id="btnCambiarPrecio">💰 Cambiar Precio</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMNA TABLAS -->
+        <div class="tables-column">
+            <h2>📊 Listados</h2>
+
+            <h3>📦 Productos</h3>
+            <table id="tablaProductos" border="1">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Categoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoProductos"></tbody>
+            </table>
+
+            <h3>👥 Clientes</h3>
+            <table id="tablaClientes" border="1">
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Total Pedidos</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoClientes"></tbody>
+            </table>
+
+            <h3>🏷️ Categorías</h3>
+            <table id="tablaCategorias" border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Productos</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoCategorias"></tbody>
+            </table>
+
+            <h3>📋 Pedidos</h3>
+            <table id="tablaPedidos" border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoPedidos"></tbody>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>
