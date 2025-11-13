@@ -1,0 +1,1308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>5a - Interacción con los elementos HTML</title>
+	<meta name='Generator' content='Zim 0.76.1'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+
+		@media print {
+			div#pie{display:none;}
+			div#volver{display:none;}
+			form{display:none;}
+			div#sumario{display:none;}
+			/* Evitar que las imágenes se corten en Google Chrome, en FF parece que lo ignora */
+			img {
+				page-break-inside: avoid;
+			}
+			div#contenido{
+				border:0px;
+				box-shadow: none;
+			}
+		}
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">5a - Interacción con los elementos HTML</a> <br>
+            <a href="#h2">Eventos</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicios <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h4">Modelos de gestión de eventos</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Registro en línea <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Registro de eventos tradicional <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Registro de eventos con addEventListener() <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Fase de captura, target o burbujeo <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Objeto evento, target, currentTarget, preventDefault y stopPropagation <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h10">Lanzar eventos</a> <br>
+            <a href="#h11">Gestionar eventos delegados</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; El método .closest() <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h13">El tagName</a> <br>
+            <a href="#h14">Ejercicios</a> <br>
+            <a href="#h15">Otras cuestiones</a> <br>
+            <a href="#h16">API de ficheros (File API)</a> <br>
+            &nbsp; &nbsp; <a href="#h17">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">5a - Interacción con los elementos HTML</h1>
+			<p>
+Contenido básico
+</p>
+<ul style='padding-left: 30pt'>
+<li>Eventos</li>
+<li>Formularios y validación de formularios</li>
+</ul>
+<br>
+<br>
+
+			<h1 id="h2">Eventos</h1>
+			<p>
+<b>Definición de evento en JS</b>: algo que sucede y que puede capturarse para que se produzca una acción.
+</p>
+<br>
+<p>
+Referencia: <a href="https://developer.mozilla.org/en-US/docs/Web/Events" title="https://developer.mozilla.org/en-US/docs/Web/Events" class="https">https://developer.mozilla.org/en-US/docs/Web/Events</a>
+</p>
+<br>
+<p>
+Eventos de ratón:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>click</tt> - botón izquierdo</li>
+<li><tt>dblclick</tt> - doble click</li>
+<li><tt>contextmenu</tt> - botón derecho del ratón (muestra el menú contextual)</li>
+<li><tt>mousedown</tt> - se pulsa un botón del ratón (al presionarla)</li>
+<li><tt>mouseup</tt> - se deja de pulsar un botón del ratón (al liberarlo)</li>
+<li><tt>mouseenter</tt> - cuando el cursor entra en una zona</li>
+<li><tt>mouseout</tt> - cuando el cursor sale de una zona (fuera del elemento o encima de un elemento hijo)</li>
+<li><tt>mouseleave</tt> - cuando el cursor sale de una zona (fuera del elemento sin tener en cuenta los hijos)</li>
+<li><tt>mouseover</tt> - cuando el cursor entra en una etiqueta y también cuando entra en una etiqueta hija</li>
+<li><tt>mousemove</tt> - cuando el cursor se mueve (se repite)</li>
+</ul>
+<br>
+<p>
+Eventos de teclado:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>keydown</tt> - se pulsa una tecla del teclado (al presionarla)</li>
+<li><tt>keyup</tt> - se deja de pulsar una tecla del teclado (al librerarla)</li>
+</ul>
+<br>
+<p>
+Otros eventos:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>change</tt> - se produce un cambio en el control, por ejemplo se selecciona o deselecciona un <b>checkbox</b> o se selecciona un elemento de un <b>select</b>. También se produce cuando se cambia el contenido de un <b>textbox</b> y se cambia el foco (deja de estar seleccionado el textbox). Implica que se debe producir un cambio de foco (en este caso cambia el elemento seleccionado).</li>
+<li><tt>input</tt> - se produce un cambio en el control, pero no es necesario que pierda el foco.</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: En los radio button el evento <tt>change</tt> se produce cuando se selecciona el elemento, pero no cuando se deselecciona. Haz el ejercicio <b>5a-2</b> para comprobar su funcionamiento.
+</p>
+<br>
+<p>
+<b>Nota</b>: Las pantallas táctiles tienen su propio conjunto de eventos: <tt>touchstart</tt>, <tt>touchend</tt>, <tt>touchmove</tt>...
+</p>
+<br>
+<br>
+
+            
+				<h3>Ejercicios<a id="ejercicios" class="h_anchor"></a></h3>
+<p>
+<b>Ejercicio 5a-1</b>: crea una web con este HTML y comprueba la diferencia entre el evento <tt>input</tt> y <tt>change</tt>:
+</p>
+<pre>
+&lt;h1&gt;Input&lt;/h1&gt;
+&lt;label for="txtDato"&gt;Escribe un dato:&lt;/label&gt;
+&lt;input type="text" id="txtDato"&gt;
+
+&lt;p&gt;El evento &lt;code&gt;input&lt;/code&gt; se activa cada vez que cambia el contenido del cuadro de texto.&lt;/p&gt;
+&lt;div id="divDatoEscrito" style="filter:opacity(0.5);padding:0.25rem;"&gt;&lt;/div&gt;	
+
+&lt;p&gt;El evento &lt;code&gt;change&lt;/code&gt; se activa al cambiar el contenido del cuadro de texto y perder el foco (cuando deja de estar seleccionado). Escribe algo debajo y pulsa &lt;kbd&gt;Tab&lt;/kbd&gt; o haz click en alguna parte de la web.&lt;/p&gt;
+&lt;div id="divDatoEscrito2" style="filter:opacity(0.5);padding:0.25rem;"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+	const txtDato = document.querySelector("#txtDato");
+	
+	txtDato.addEventListener("input", e=&gt;{
+		const divDatoEscrito = document.querySelector("#divDatoEscrito");
+		divDatoEscrito.textContent = txtDato.value;
+	});
+
+	txtDato.addEventListener("change", e=&gt;{
+		const divDatoEscrito2 = document.querySelector("#divDatoEscrito2");
+		divDatoEscrito2.textContent = txtDato.value;
+	});
+&lt;/script&gt;
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 5a-2</b>: Crea una web que contenga un formulario con dos radio button cuyo name sea <tt>txtOpcion</tt>: 
+</p>
+<ul style='padding-left: 30pt'>
+<li>colores</li>
+<li>animales</li>
+</ul>
+<p>
+Usa el evento <tt>change</tt> para que si se selecciona <i>colores</i>, se muestren algunos nombres de colores en alguna parte de la web, pero si se selecciona <i>animales</i> se mostrarán algunos nombres de animales.<br>
+<b>Pista</b>: añade un eventListener con change a todos los radiobutton cuyo <tt>name=txtOpcion</tt>. En el código del eventListener puedes recuperar el value del que esté <tt>:checked</tt> o directamente recuperarlo con el atributo <tt>value</tt>.
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 5a-3</b>: Crea una división que contenga un párrafo. Cuando se haga click derecho sobre el párrafo haz que se muestre otra división con dos botones: <i>cursiva</i> y <i>negrita</i>. Si se pulsa el primer botón, el texto del párrafo aparecerá en cursiva y si se pulsa el segundo, el texto del párrafo aparecerá en negrita.
+</p>
+<pre>
+&lt;div id="divTexto"&gt;
+  &lt;p&gt;En un lugar de la mancha...&lt;/p&gt;
+  &lt;div class="menu oculto"&gt;
+    &lt;p&gt;Menú&lt;/p&gt;
+    &lt;button type="button" id="btnCursiva"&gt;cursiva&lt;/button&gt;&lt;br&gt;
+    &lt;button type="button" id="btnNegrita"&gt;negrita&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>
+<b>Nota</b>: ahora mismo no sabemos cómo impedir que aprezca el menú contextual del navegador al hacer click derecho, pero si quieres adelantarte busca información sobre <tt>preventDefault()</tt>
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h4">Modelos de gestión de eventos</h2>
+			<p>
+Los eventos se pueden gestionar de tres maneras distintas, aunque realmente la última es la más adecuada y recomendada.<br>
+Referencia: <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" title="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" class="https">https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener</a>
+</p>
+<br>
+<br>
+
+            
+				<h3>Registro en línea<a id="registro-en-línea" class="h_anchor"></a></h3>
+<p>
+En la propia etiqueta HTML incluimos el código a ejecutar
+</p>
+<pre>
+&lt;a href="pagina.html" onclick="f1();f2();f3();"&gt;Pulsa aqui&lt;/a&gt;
+&lt;p onclick="alert('hola');"&gt;Hola caracola&lt;/p&gt;
+</pre>
+<br>
+<p>
+<b>Inconvenientes:</b> Mezclamos código con el HTML. No es tan legible ni flexible.
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Registro de eventos tradicional<a id="registro-de-eventos-tradicional" class="h_anchor"></a></h3>
+<p>
+Desde el código JS se recupera la etiqueta y se le añade un <i>handler</i> del evento que se desea controlar siguiendo un esquema como este: <tt>elementoDeLaPágina.onnombreevento = handler;</tt> donde <tt>handler</tt> es el nombre de una función (realmente es la referencia de la función que va a gestionar el evento).
+</p>
+<br>
+<p>
+Por ejemplo, supongamos que tenemos un botón con <tt>id="btnClasico"</tt>:
+</p>
+<pre>
+const btnClasicoHandler = () =&gt;{
+  alert("Clásico");
+}
+
+let btnClasico = document.querySelector("#btnClasico");
+btnClasico.onclick = btnClasicoHandler;  //sin paréntesis
+</pre>
+<br>
+<p>
+Otras operaciones:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Borrar el manejador del evento: <tt>btnClasico.onclick = null;</tt></li>
+<li>Forzar que se ejecute el manejador desde el código: <tt>btnClasico.onclick();</tt></li>
+<li>Más de un manejador de eventos: no se puede.</li>
+</ul>
+<br>
+<p>
+Si declaro más de un manejador de eventos, el segundo sobreescribirá al primero:
+</p>
+<pre>
+btnClasico.onclick = f1;
+btnClasico.onclick = f2;
+
+//Solución:
+btnClasico.onclick = function (){ f1(); f2(); };
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Registro de eventos con addEventListener()<a id="registro-de-eventos-con-addeventlistener" class="h_anchor"></a></h3>
+<p>
+El más moderno, flexible y adecuado, permite añadir y quitar manejadores, indicar la fase (de burbujeo o captura) en la que se va a ejecutar además demuchas otras opciones como gestionar nuestros propios eventos.<br>
+La sintaxis es la siguiente: 
+</p>
+<pre>
+elemento.addEventListener('evento', manejador)
+elemento.addEventListener('evento', manejador, true | false )
+elemento.addEventListener('evento', manejador, objetoOpciones )
+</pre>
+<br>
+<p>
+Ejemplo:
+</p>
+<pre>
+const funcListener = (ev) =&gt;{
+  alert("Moderna de pueblo");
+}
+
+let btnAccion = document.querySelector("#btnAccion");
+btnAccion.addEventListener('click', funcListener);
+</pre>
+<br>
+<p>
+Otras operaciones:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Borrar un manejador del evento: <tt>btnAccion.removeEventListener('click', funcListener);</tt></li>
+<li>Para establecer más de un manejador de evento al mismo evento, simplemente añade otro <tt>addEventListener</tt>.</li>
+<li>Hacer que un manejador sólo se ejecute una vez y se borre: <tt>btnAccion.addEventListener('click', funcListener, {once: true});</tt></li>
+<li>Fíjate que cada función manejadora recibe un objeto con los datos del evento (por ejemplo el elemento que lo propició o las coordenadas de la pantalla)</li>
+</ul>
+<br>
+<br>
+ <br>
+            
+				<h3>Fase de captura, target o burbujeo<a id="fase-de-captura-target-o-burbujeo" class="h_anchor"></a></h3>
+<p>
+Esto requiere una explicación. Imagina que tienes este HTML:
+</p>
+<pre>
+&lt;div id="idDiv"&gt;
+  &lt;p id="idParrafo"&gt;
+    Pulsa sobre 
+    &lt;a id="idEnlace" href="#"&gt;este enlace&lt;/a&gt; 
+    para iniciar el evento.
+  &lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<br>
+<p>
+CSS:
+</p>
+<pre>
+body{
+  background-color: #222;
+  color: whitesmoke;
+}
+
+#idParrafo{
+  border: 1px solid white;
+  padding: 0.5rem;
+}
+
+#idDiv{
+  border: 1px solid red;
+  padding: 0.5rem;
+}
+a{
+  color: turquoise;
+}
+</pre>
+<br>
+<p>
+<img src="./5a_-_Interacción_files/pasted_image.png">
+</p>
+<br>
+<p>
+Con este código javascript:
+</p>
+<pre>
+function clickTodos(evt) { alert("¡Click!"); }
+
+document.getElementById("idEnlace").addEventListener('click', clickTodos);
+document.getElementById("idParrafo").addEventListener('click', clickTodos);
+document.getElementById("idDiv").addEventListener('click', clickTodos);
+</pre>
+<br>
+<p>
+¿Qué pasará si hacemos click sobre el enlace, sobre el párrafo o sobre la división? ¿Cuántas alerts se mostrarán?
+</p>
+<br>
+<p>
+Cambia ahora el código javascript por este otro:
+</p>
+<pre>
+function clickEnlace(evt) { alert("El enlace"); }
+function clickParrafo(evt) { alert("El párrafo"); }
+function clickDiv(ev) { alert("La división"); }
+
+document.getElementById("idEnlace").addEventListener('click', clickEnlace);
+document.getElementById("idParrafo").addEventListener('click', clickParrafo);
+document.getElementById("idDiv").addEventListener('click', clickDiv);
+</pre>
+<br>
+<p>
+Cuando hacemos click con el ratón sobre el texto <i>este enlace</i> ¿sobre qué hemos hecho click? Pues se ha hecho click sobre el enlace, sobre el párrafo y sobre la división (y sobre el body). Haz la prueba con el código de arriba y mira el orden en el que aparecen los mensajes.
+</p>
+<br>
+<p>
+Esto se puede controlar indicando la fase en la que queremos que se trate el evento: <tt>elemento.addEventListener('evento', manejador, true | false );</tt>
+</p>
+<ul style='padding-left: 30pt'>
+<li>Tercer parámetro <tt>true</tt> → Fase de captura</li>
+<li>Tercer parámetro <tt>false</tt> → Fase de bubbling o burbujeo (se parece al comportamiento por defecto, aunque en realidad ese iría entre medias de ambos)</li>
+</ul>
+<br>
+<p>
+<img src="./5a_-_Interacción_files/diagram.png">
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Objeto evento, target, currentTarget, preventDefault y stopPropagation<a id="objeto-evento-target-currenttarget-preventdefault-y-stoppropagation" class="h_anchor"></a></h3>
+<p>
+Las funciones manejadoras de eventos reciben un objeto con las propiedades del evento. Las más importantes son:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>target</tt> - Indica <b>el objeto más interno</b> en el que se produce el evento</li>
+<li><tt>currentTarget</tt> - Indica el objeto para el que estamos procesando el evento</li>
+<li><tt>eventPhase</tt> - Indica la fase de propagación del evento (1 = <tt>Event.CAPTURING_PHASE</tt> , 2 = <tt>Event.AT_TARGET</tt>, 3 = <tt>Event.BUBBLING_PHASE</tt>)</li>
+</ul>
+<br>
+<p>
+Se puede impedir el comportamiento por defecto que tendría ese evento usando <tt>preventDefault()</tt> y se puede impedir la propagación de un evento con <tt>stopPropagation()</tt>.
+</p>
+<br>
+<p>
+Añade este código al ejemplo de arriba y comprueba la diferencia.
+</p>
+<pre>
+function rightClickDiv(ev) { ev.preventDefault(); }
+function rightClickParrafo(ev) { ev.stopPropagation(); }
+
+document.getElementById("idDiv").addEventListener('contextmenu', rightClickDiv, true);
+document.getElementById("idParrafo").addEventListener('contextmenu', rightClickParrafo, false);
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 5a-4</b>: Queremos que cuando se pulse sobre la tabla de colores (o el primer párrafo) se elimine todo su contenido. Esto funciona correctamente.<br>
+Pero también queremos que cuando se pulse sobre uno de los colores se muestre el nombre del color elegido, sin que se borre la tabla. ¿Por qué no funciona bien? ¿Podrías arreglarlo?
+</p>
+<pre>
+&lt;div id="tablaColores" style="padding:1rem;background-color:#346;display:grid;gap:1rem;grid-template-columns: 1fr 1fr 1fr;"&gt;
+  &lt;p&gt;Pulsa aquí para borrar la tabla de colores.&lt;/p&gt;
+  &lt;div style="background-color:#e00; min-height: 6rem;"&gt;Rojo&lt;/div&gt;
+  &lt;div style="background-color:#2b2; min-height: 6rem;"&gt;Verde&lt;/div&gt;
+  &lt;div style="background-color:#00f; min-height: 6rem;"&gt;Azul&lt;/div&gt;
+  &lt;div style="background-color:#eb3; min-height: 6rem;"&gt;Amarillo&lt;/div&gt;
+  &lt;div style="background-color:#f19; min-height: 6rem;"&gt;Rosa&lt;/div&gt;
+  &lt;div style="background-color:#73a; min-height: 6rem;"&gt;Morado&lt;/div&gt;
+  &lt;div style="background-color:#4ed; min-height: 6rem;"&gt;Turquesa&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="divColorElegido"&gt;&lt;/&gt;
+
+
+&lt;script&gt;
+  const divColorElegido = document.querySelector("#divColorElegido");
+		
+  const tablaColores = document.querySelector("#tablaColores")
+  tablaColores.addEventListener("click", e=&gt;{
+    tablaColores.innerHTML = "";
+    divColorElegido.innerHTML += "&lt;p&gt;Tabla de colores borrada&lt;/p&gt;";
+  });
+
+  const arrDivColores = document.querySelectorAll("#tablaColores &gt; div");
+  arrDivColores.forEach( d=&gt;d.addEventListener("click", e=&gt;{
+    divColorElegido.innerHTML += "&lt;/p&gt;Color elegido: " + d.textContent + "&lt;/p&gt;";
+  }));
+&lt;/script&gt;
+</pre>
+<br>
+<p>
+<b>Nota</b>: esta manera de gestionar los eventos es muy poco eficiente, fíjate que cada división con colores tiene su propia copia de la función que maneja el evento. Más adelante veremos una manera mejor de resolverlo con eventos <i>delegados</i>.
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h10">Lanzar eventos</h2>
+			<p>
+Dado un elemento, es posible lanzar mediante código la ejecución de un evento mediante el método <tt>dispatchEvent()</tt>:
+</p>
+<pre>
+btnSiguientePaso.dispatchEvent( new Event("click"));
+</pre>
+<br>
+<p>
+<b>Nota</b>: si es un evento <tt>click</tt> realmente podemos utilizar directamente <tt>btnSiguientePaso.click()</tt> para lanzarlo.<br>
+<b>Nota</b>: de esta manera podemos usar nuestros propios eventos.
+</p>
+<br>
+<p>
+Esto no es algo tremendamente útil, pero es bueno recordar que se puede realizar por si alguna vez lo necesitamos.
+</p>
+<br>
+<p>
+Veamos un ejemplo algo más elaborado donde lanzamos y capturamos un tipo de evento creado por nosotros mismos.
+</p>
+<pre>
+&lt;input id="txtDato" value="Hola" type="text"&gt;
+
+&lt;script&gt;
+	const txtDato = document.querySelector("#txtDato")
+	txtDato.addEventListener("cambio de planes", e=&gt;{
+		alert("Se ha producido un evento de cambio de planes");
+	});
+
+	txtDato.dispatchEvent(new Event("cambio de planes"));
+&lt;/script&gt;
+</pre>
+<br>
+<p>
+<b>Nota</b>: una evolución de esto serán las futuras <i>signals</i>.
+</p>
+<br>
+<br>
+
+			<h1 id="h11">Gestionar eventos delegados</h1>
+			<p>
+Usar <i>eventos delegados</i> consiste en colocar el manejador de eventos en un elemento padre que contenga (o que prevemos pueda contener) muchos hijos en lugar de colocar un manejador de evento en cada hijo.
+</p>
+<br>
+<p>
+Se entiende mejor con un ejemplo: una lista en la que cuando se pulse en un elemento, desaparezca.
+</p>
+<br>
+<p>
+Partimos de este código:
+</p>
+<pre>
+&lt;form&gt;
+  &lt;label&gt;Nuevo elemento: &lt;input type="text" id="txtNuevoElemento"&gt;&lt;/label&gt;
+  &lt;button type="button" id="btnAnadir"&gt;Añadir&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;div&gt;&lt;ul id="lista" style="background-color: gray;"&gt;
+  &lt;li&gt;Loro&lt;/li&gt;
+  &lt;li&gt;Gato&lt;/li&gt;
+  &lt;li&gt;Perro&lt;/li&gt;
+  &lt;li&gt;Zorro&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
+&lt;script&gt;
+document.querySelector("#btnAnadir").addEventListener('click', ()=&gt;{
+  const texto = document.querySelector("#txtNuevoElemento").value;  
+  document.querySelector("#lista").innerHTML += `&lt;li&gt;${texto}&lt;/li&gt;`;
+});
+&lt;/script&gt;
+</pre>
+<br>
+<p>
+En esa página web tenemos un formulario que permite añadir elementos a una lista. Queremos que cuando se pulse sobre uno de sus elementos se oculte (con un <tt>display:none</tt> porque de momento no sabemos cómo eliminar elementos del DOM). ¿Cómo lo hago?<br>
+Dos maneras: 
+</p>
+<ol style='padding-left: 30pt' type="1" start="1">
+<li>añadiendo un eventListener a cada nuevo <tt>&lt;li&gt;</tt> que lo oculte al ser pulsado. Puede ser sencillo, pero poco elegante, poco práctico y poco eficiente (es costoso en tiempo y memoria).</li>
+<li>añadiendo el eventListener al <tt>&lt;ul&gt;</tt> recuperando el <tt>target</tt> y ocultándolo. La solución está abajo.</li>
+</ol>
+<br>
+<p>
+<b>Primera aproximación a la solución</b>:
+</p>
+<pre>
+document.querySelector("#lista").addEventListener('click', (e)=&gt;{
+  e.target.style="display:none;";
+});
+</pre>
+<p>
+Este código tiene un problema grave: intenta hacer click sobre el <tt>&lt;ul&gt;</tt> en vez de sobre los <tt>&lt;li&gt;</tt> y verás que se oculta toda la lista y eso evidentemente no es lo que queremos. Eso es porque estamos usando <tt>target</tt> sin discriminar si es un <tt>&lt;li&gt;</tt> o el <tt>&lt;ul&gt;</tt>.
+</p>
+<br>
+<p>
+Antes de ver la solución veamos otro problema diferente, pero relacionado que nos servirá para ver la solución.
+</p>
+<br>
+
+            
+				<h3>El método .closest()<a id="el-método-closest" class="h_anchor"></a></h3>
+<p>
+Si modificamos ligeramente el código de arriba para que el texto aparezca en negrita, las tres primeras letras en mayúsculas y el resto cursiva, veremos que tenemos nuevos problemas.
+</p>
+<pre>
+document.querySelector("#btnAnadir").addEventListener('click', ()=&gt;{
+  const texto = document.querySelector("#txtNuevoElemento").value;  
+  document.querySelector("#lista").innerHTML += `&lt;li&gt;&lt;strong&gt;${texto.slice(0,3).toUpperCase()}&lt;em&gt;${texto.slice(1)}&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;`;
+});
+</pre>
+<br>
+<p>
+Si hacemos click sobre la parte cursiva se elima sólo esa parte. Si pinchamos sobre la parte en mayúsculas se elimina todo el texto, pero no el <tt>&lt;li&gt;</tt>...
+</p>
+<br>
+<p>
+Una solución razonale es usar el método <tt>.closest()</tt>. Para los eventos delegados es habitual el usar el método <tt>.closest()</tt> para recuperar <b>el ancestro más cercano que cumpla con el selector</b> que se le pasa como parámetro. 
+</p>
+<br>
+<p>
+<b>Solución</b>: una posible solución es la siguiente.
+</p>
+<pre>
+document.querySelector("#lista").addEventListener('click', (e)=&gt;{
+  if( e.target.closest("li") )
+    e.target.closest("li").style="display:none;";
+});
+</pre>
+<br>
+<p>
+Que funcionará correctamente... siempre que el elemento con id <tt>#lista</tt> no tenga un antecesor que sea un elemento <tt>&lt;li&gt;</tt>.
+</p>
+<br>
+<p>
+Por ejemplo, imagina este código HTML erróneo:
+</p>
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;Lista de animales&lt;/li&gt;
+  &lt;li&gt;  &lt;!-- este li no debería estar --&gt;
+    &lt;ul id="lista" style="background-color: gray;"&gt;
+      &lt;li&gt;Loro&lt;/li&gt;
+      &lt;li&gt;Gato&lt;/li&gt;
+      &lt;li&gt;Perro&lt;/li&gt;
+      &lt;li&gt;Zorro&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Lista de colores&lt;/li&gt;
+  &lt;ul id="lista" style="background-color: gray;"&gt;
+    &lt;li&gt;Rojo&lt;/li&gt;
+    &lt;li&gt;Azul&lt;/li&gt;
+    &lt;li&gt;Morado&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+</pre>
+<br>
+<br>
+<p>
+El método <tt>.closest()</tt> puede ser útil en muchos escenarios, por ejemplo, imagina que queremos que al pulsar alguno de los botones se oculte la sección en la que se encuentran.<br>
+<img src="./5a_-_Interacción_files/pasted_image004.png">
+</p>
+<pre>
+&lt;section&gt;
+  &lt;p&gt;Sección que se puede ocultar pulsando sobre un botón de los de abajo.&lt;/p&gt;
+  &lt;button type="button"&gt;&lt;img src="img/square-check.svg"&gt;Aceptar&lt;/button&gt;
+  &lt;button type="button"&gt;&lt;img src="img/square-x.svg"&gt;Cancelar&lt;/button&gt;
+&lt;section&gt;
+
+&lt;section&gt;
+  &lt;p&gt;Otra sección que se puede ocultar pulsando sobre uno de estos botones.&lt;/p&gt;
+  &lt;button type="button"&gt;&lt;img src="img/square-check.svg"&gt;Aceptar&lt;/button&gt;
+  &lt;button type="button"&gt;&lt;img src="img/square-x.svg"&gt;Cancelar&lt;/button&gt;
+&lt;section&gt;
+
+</pre>
+<br>
+<p>
+Código:
+</p>
+<pre>
+document.querySelectorAll("button").forEach(b=&gt;
+  b.addEventListener("click", e=&gt;{
+    e.target.closest("section").style.display="none";
+  })
+);
+</pre>
+<br>
+<p>
+O incluso usando un evento delegado sobre el <tt>&lt;body&gt;</tt> aunque no es muy recomendable.
+</p>
+<pre>
+document.body.addEventListener("click", e=&gt;{
+    e.target.closest("section").style.display="none";
+})
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h13">El tagName</h2>
+			<p>
+En un ejercicio más complejo, puede que necesitemos distinguir en qué tipo de etiqueta se hizo <i>click</i>. Imagina algo así:
+</p>
+<pre>
+&lt;div class="imagenes"&gt;
+  &lt;p class="titulo"&gt;Fotos destacadas&lt;/p&gt;
+  &lt;img src="1.jpg"&gt;
+  &lt;img src="2.jpg"&gt;
+  &lt;img src="3.jpg"&gt;
+  &lt;img src="4.jpg"&gt;
+&lt;/div&gt;
+</pre>
+<br>
+<p>
+Queremos que cuando se pulse el párrafo con el título, se oculten todas las fotos, que cuando se pulse una foto nos la muestre el doble de grande y que si se pulsa sobre la división se cambie el color de fondo a uno aleatorio.
+</p>
+<br>
+<p>
+Podríamos establecer un eventListener a cada elemento individualmente, pero entonces tendríamos que hacerlo también para cada imagen nueva que añadamos, por ejemplo con un bucle que itere por las imágenes.<br>
+Otra opción sería crear un evento delegado en el div y distinguir si se hizo click sobre una etiqueta u otra:
+</p>
+<pre>
+if(ev.target.tagName=="DIV"){
+  // Cambiamos el fondo de pantalla a ev.target
+}
+else if(ev.target.tagName=="P"){
+  // Ocultamos todas las imágenes
+}
+else{
+  // Se duplica el tamaño a la imagen ev.target
+}
+</pre>
+<br>
+<br>
+<p>
+<b>Nota</b>: en HTML el <tt>tagName</tt> siempre devuelve el nombre de la etiqueta en mayúsculas, pero en XML y derivados lo hace en minúsculas. Esto lo tendremos que tener en cuenta si tenemos un <tt>&lt;button&gt;</tt> con un SVG dentro (recuerda que el formato SVG es un XML).
+</p>
+<br>
+<p>
+<b>Ejemplo</b>: Intenta rehacer el ejercicio <b>5a-4</b> para usar un evento delegado en lugar de que cada división de color tenga su propio <tt>eventListener</tt>.
+</p>
+<br>
+<br>
+
+			<h1 id="h14">Ejercicios</h1>
+			<p>
+<b>Ejercicio 5a-5</b>: Crea una web que contenga un emoji de una cara sonriente 😀. Cuando se haga click izquierdo en el emoji, cambiará por una cara triste 🙁. Si se hace doble click se cambiará a una cara molesta 😒. Si se hace click derecho se volverá a la cara sonriente original (y no se mostrará el menú contextual del navegador).
+</p>
+<br>
+<p>
+<b>Ejercicio 5a-6</b>: Crea una web con cualquier contenido en la que si pulsas la tecla '<tt>a</tt>' muestre un alert con tu nombre. Si pulsas la tecla '<tt>e</tt>' mostrará tu edad.<br>
+<sup><b>Pista</b>: añade el evento <i>keyup</i> al <i>document</i> y usa la propiedad del evento <i>key</i> para saber qué tecla se ha pulsado.</sup>
+</p>
+<br>
+<p>
+<b>Ejercicio 5a-7</b>: Crea una web con un textbox en el que escribir un código postal. El código postal tiene que ser un número de 5 cifras y sus dos primeras cifras tienen que estar entre 01 y 52.<br>
+En el momento en el que haya escrita 5 cifras se mostrará la provincia a la que pertenece ese código postal.
+</p>
+<pre>
+let arrProvincias = ["Álava","Albacete","Alicante","Almería","Ávila","Badajoz","Baleares",
+"Barcelona","Burgos","Cáceres","Cádiz","Castellón","Ciudad Real","Córdoba","Coruña","Cuenca",
+"Girona","Granada","Guadalajara","Guipuzcoa","Huelva","Huesca","Jaén","León","Lleida",
+"Rioja","Lugo","Madrid","Málaga", "Murcia","Navarra","Orense","Asturias","Palencia","Las Palmas",
+"Pontevedra","Salamanca","Tenerife","Cantabria","Segovia","Sevilla","Soria","Tarragona","Teruel",
+"Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza","Ceuta","Melilla"];
+</pre>
+<br>
+<p>
+<b>Ejercicio 5a-8</b>: Crea una web que contenga esta división: <br>
+<tt>&lt;div id="ene" style="width:100px;height: 100px; background-color: aquamarine; position:absolute; top:200px; right:0px;"&gt;&lt;/div&gt;</tt><br>
+A continuación añade este código JS:
+</p>
+<pre>
+const ene = document.querySelector("#ene");
+let eneX = 0;
+
+const mueveEne =()=&gt;{
+	eneX++;
+	ene.style.right = eneX + "px";
+	requestAnimationFrame(mueveEne);
+};
+mueveEne();
+</pre>
+<p>
+Finalmente haz que cuando se haga click sobre la división se resetee la posición horizontal a la derecha del todo, que la posición vertical sea aleatoria entre 1 y 400 y que se suemen 50 puntos a la puntuación (que se mostrará en alguna parte de la web). Si quieres haz que la división se mueva más rápido cuando se haga click sobre ella.
+</p>
+<br>
+<p>
+<b>Ejercicio resuelto 5a-9</b>: Crea una tabla que tenga 4 filas y 4 columnas donde todas las celdas tengan de color de fondo el blanco. Haz que cuando se haga click en una celda se cambie el color de fondo de toda su fila y toda su columna a amarillo (el resto seguirá teniendo el color blanco de fondo).
+</p>
+<br>
+<p>
+HTML:
+</p>
+<pre>
+&lt;table id="tabla"&gt;
+  &lt;tr&gt;&lt;td&gt;1-1&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;2-1&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;2-1&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;&lt;span&gt;4-1&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+<br>
+<p>
+CSS:
+</p>
+<pre>
+.amarillo{
+  background-color: yellow !important;
+}
+</pre>
+<br>
+<p>
+Primera aproximación:
+</p>
+<pre>
+document.querySelector("#tabla").addEventListener('click', (e)=&gt;{
+  const elemento = e.target; //el elemento más interno
+  if(elemento.tagName == "TD"){
+    elemento.parentElement.classList.add("amarillo");
+  }
+});
+</pre>
+<br>
+<p>
+Eso nos marca la fila en la que está, pero no siempre. Si pulsamos sobre el <tt>span</tt> de la esquina inferior izquierda fallará porque el elemento más interno no es un <tt>td</tt>, sino el propio <tt>span</tt>. Para ello vamos a usar la función <tt>closest()</tt>.
+</p>
+<br>
+<p>
+Segunda aproximación:
+</p>
+<pre>
+const quitarFondo = () =&gt;{
+  document.querySelectorAll("#tabla .amarillo").forEach(
+    elem=&gt;elem.classList.remove("amarillo")
+  );
+}
+
+document.querySelector("#tabla").addEventListener('click', (e)=&gt;{
+  quitarFondo();
+
+  const td = e.target.closest('td'); //el ancestro &lt;td&gt; más cercano al elemento más interno
+  const tr = td.parentElement;
+  tr.classList.add("amarillo");
+});
+</pre>
+<br>
+<p>
+Solución completa:
+</p>
+<pre>
+const quitarFondo = () =&gt;{
+  document.querySelectorAll("#tabla .amarillo").forEach(
+    elem=&gt;elem.classList.remove("amarillo")
+  );
+}
+
+document.querySelector("#tabla").addEventListener('click', (e)=&gt;{
+  quitarFondo();
+
+  const td = e.target.closest('td'); //el ancestro &lt;td&gt; más cercano al elemento más interno
+  const tr = td.parentElement;
+  tr.classList.add("amarillo");
+
+  //¿En qué columna está?
+  let i = 0;
+  for( ; i&lt;tr.childElementCount ; i++){
+    if(tr.children[i] === td ) break;
+  }
+
+  // let i = Array.from(tr.children).indexOf(td) // alternativa propuesta por ChatGPT
+
+  document.querySelectorAll(`td:nth-child( ${i+1})`).forEach(elem =&gt; {
+    elem.classList.add("amarillo");
+  });
+});
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 5a-10</b>: Crea una web que contenga dos divisiones. En la primera división crea una lista de alimentos (patatas, huevos, leche, uvas pasas...). La segunda división estará vacía.<br>
+Haz que cuando se pulse sobre un elemento de la primera lista se añada en la segunda división un párrafo que contenga el texto del elemento.
+</p>
+<br>
+<br>
+<br>
+
+			<h1 id="h15">Otras cuestiones</h1>
+			<p>
+Creación de nuestros propios eventos en JS<br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent" title="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent" class="https">https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent</a>
+</p>
+<br>
+<p>
+Eventos para dispositivos táctiles. En principio no son muy diferentes a los ya vistos, pero quizá queramos dar soporte a tecnologías <i>multitouch</i> (parámetro targetTouches)<br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent" title="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent" class="https">https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent</a>
+</p>
+<br>
+<p>
+Mutation observer. Se usa para reaccionar a cambios producidos en el documento (por ejemplo, los bloqueadores de publicidad suelen usarlo para detectar cuándo se añade un elemento no deseado a la web).<br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" title="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" class="https">https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver</a><br>
+<a href="https://es.javascript.info/mutation-observer" title="https://es.javascript.info/mutation-observer" class="https">https://es.javascript.info/mutation-observer</a>
+</p>
+<br>
+<br>
+
+			<h1 id="h16">API de ficheros (File API)</h1>
+			<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/File_API" title="https://developer.mozilla.org/en-US/docs/Web/API/File_API" class="https">https://developer.mozilla.org/en-US/docs/Web/API/File_API</a>
+</p>
+<br>
+<p>
+Aunque las aplicaciones web no tienen acceso directo al sistema de ficheros de nuestro ordenador, pueden interactuar con él mediante el navegador y el sistema operativo en condiciones específicas y siempre mediante la interacción con el usuario (al menos hasta que se desarrolle el soporte para la File System API <a href="https://developer.mozilla.org/en-US/docs/Web/API/File_System_API" title="https://developer.mozilla.org/en-US/docs/Web/API/File_System_API" class="https">https://developer.mozilla.org/en-US/docs/Web/API/File_System_API</a> que en el momento de escribir esto es de 0% <a href="https://caniuse.com/native-filesystem-api" title="https://caniuse.com/native-filesystem-api" class="https">https://caniuse.com/native-filesystem-api</a>). 
+</p>
+<br>
+<p>
+Una aplicación web puede acceder al contenido de un fichero  cuando el usuario lo indica a tavés de un evento <i>drag and drop</i> o a través de un elemento <tt>&lt;input type="file"&gt;</tt>. Veamos cómo hacerlo usando un <tt>&lt;input type="file"&gt;</tt> de dos maneras diferentes. 
+</p>
+<br>
+<p>
+La primera es  usando el evento <tt>change</tt> del input y una función asíncrona. Esta opción es más elegante.
+</p>
+<pre>
+const fileInput = document.querySelector("input[type=file]");
+const output = document.querySelector(".output");
+
+fileInput.addEventListener("change", async () =&gt; {
+  const [file] = fileInput.files;
+
+  if (file) {
+    output.innerText = await file.text();
+  }
+});
+</pre>
+<br>
+<p>
+La segunda es usando un botón que cargue el contenido del fichero al ser pulsado y utiliza un registro de evento tradicional además de un objeto de tipo <tt>FilerReader</tt>.  La solución de arriba es algo más moderna.
+</p>
+<pre>
+function cargarFichero() {
+  //Recuperamos el fichero (en este caso sólo habrá uno seleccionado)
+  const f = txtFile.files[0]; 
+  if (f) {
+    const r = new FileReader();
+    r.addEventListener("load", function(e) { 
+      const contents = e.target.result;
+      output.innerText=contents;
+    });
+
+    //r.readAsText(f); // Otra alternativa
+    r.readAsBinaryString(f);
+  } else { 
+    alert("Failed to load file");
+  }
+}
+
+const fileInput = document.querySelector("input[type=file]");
+const output = document.querySelector(".output");
+document.querySelector("#btnCargar").addEventListener('click', cargarFichero);
+</pre>
+<br>
+
+			<h2 id="h17">Ejercicios</h2>
+			<p>
+<b>Ejercicio 5a-11</b>: Nos encargan crear una web para una influencer en la que hay que crear una tabla que contenga los seguidores en diferentes redes sociales. Estos seguidores se consiguen en tiempo real desde el servidor usando las API de las redes sociales y al cliente nos llegará un array como este:
+</p>
+<pre>
+{
+  "arrRedesSociales" : [
+    {
+      "url": "https://www.facebook.com/julitamaria",
+      "nombre": "Facebook",
+      "seguidores": 45670
+    },
+    {
+      "url": "https://www.instagram.com/julitamaria",
+      "nombre": "Instagram",
+      "seguidores": 70854
+    },
+    {
+      "url": "https://www.pinterest.es/julitamaria/",
+      "nombre": "Pinterest",
+      "seguidores": 12348
+    },
+    {
+      "url": "https://www.youtube.com/@julitamaria",
+      "nombre": "Youtube",
+      "seguidores": 511348
+    },
+    {
+      "url": "https://www.twitch.com/@julitamaria",
+      "nombre": "Twitch",
+      "seguidores": 36214
+    },
+    {
+      "url": "https://www.twitter.com/julitamaria",
+      "nombre": "Twitter (X)",
+      "seguidores": 35214
+    }
+  ]
+}
+</pre>
+<br>
+<p>
+A continuación, nos piden que cuando se pulse en la cabecera de cada columna, los datos de la tabla se reordenen según los datos de dicha columna. <br>
+Para realizar pruebas de tu aplicación, crea un fichero de texto con extensión <tt>json</tt> y ese contenido y añade un <tt>input type="file"</tt> que permita seleccionar el fichero que tu aplicación leará, lo cargará, procesará y generará la tabla con la funcionalidad que se pide.
+</p>
+<br>
+<p>
+<b>Ejercicio 5a-12:</b> Crea una web que lea los datos de los gastos diarios de una semana de un fichero CSV (<a href="https://es.wikipedia.org/wiki/Valores_separados_por_comas" title="https://es.wikipedia.org/wiki/Valores_separados_por_comas" class="https">https://es.wikipedia.org/wiki/Valores_separados_por_comas</a>) que seleccionará el usuario. Por ejemplo:
+</p>
+<pre>
+Día,Gastos
+lunes,100
+martes,22
+miércoles,60
+jueves,5
+viernes,10
+sábado,30
+domingo,160
+</pre>
+<br>
+<p>
+<img src="./5a_-_Interacción_files/pasted_image003.png">
+</p>
+<br>
+<p>
+Estos gastos se mostrarán en una división de ancho <tt>500px</tt> con forma de gráfico de barras horizontales. Las barras estarán normalizadas para ocupar todo el ancho disponible en la división (manteniendo los tamaños relativos entre ellas, claro). <br>
+De esta manera la mayor cantidad ocupará todo el ancho de la división.<br>
+Añade también la suma total de los gastos de la semana en alguna posición.
+</p>
+<br>
+<p>
+Ejemplo de gráfico sin normalizar (fíjate que la barra de 160 tiene un ancho de 160px):<br>
+<img src="./5a_-_Interacción_files/pasted_image001.png">
+</p>
+<br>
+<p>
+Ejemplo de gráfico normalizado (fíjate que la barra de 160 tiene un ancho de 500px):<br>
+<img src="./5a_-_Interacción_files/pasted_image002.png">
+</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>

@@ -1,0 +1,1397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>5b - Formularios y cuadros de diálogo</title>
+	<meta name='Generator' content='Zim 0.75.2'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">5b - Formularios y cuadros de diálogo</a> <br>
+            <a href="#h2">Cuadros de diálogo</a> <br>
+            <a href="#h3">Formularios</a> <br>
+            &nbsp; &nbsp; <a href="#h4">Recuperar formularios desde JS</a> <br>
+            &nbsp; &nbsp; <a href="#h5">Recuperar/cambiar atributos de formulario</a> <br>
+            &nbsp; &nbsp; <a href="#h6">Métodos del formulario</a> <br>
+            <a href="#h7">Elementos de los formularios</a> <br>
+            &nbsp; &nbsp; <a href="#h8">Referenciar un elemento de un formulario</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Posibles problemas <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h10">Elementos de un formulario</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Input type="text" <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Input type="number" <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Input type="hidden" <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Input type="checkbox" <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Input type="radio" <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Select (desplegables o drop-down menu) <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+				&nbsp; &nbsp; &nbsp; &nbsp; Otros controles <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h19">Ejercicios</a> <br>
+            <a href="#h20">Validación de formularios</a> <br>
+            &nbsp; &nbsp; <a href="#h21">Introducción a la validación de formularios</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Usando atributos <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Usando javascript y onsubmit <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Usando javascript y un eventListener <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h25">Expresiones regulares en JS</a> <br>
+        
+        
+            &nbsp; &nbsp; <a href="#h28">Un par de métodos para gestionar los errores</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Usar la validación HTML <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h30">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">5b - Formularios y cuadros de diálogo</h1>
+			<p>
+Contenido básico
+</p>
+<ul style='padding-left: 30pt'>
+<li>Cuadros de diálogo (documentación: <a href="https://developer.mozilla.org/es/docs/Web/HTML/Element/dialog" title="https://developer.mozilla.org/es/docs/Web/HTML/Element/dialog" class="https">https://developer.mozilla.org/es/docs/Web/HTML/Element/dialog</a>)</li>
+<li>Formularios</li>
+<li>Elementos de formulario</li>
+<li>Validación</li>
+</ul>
+<br>
+
+			<h1 id="h2">Cuadros de diálogo</h1>
+			<p>
+HTML proporciona la etiqueta <tt>&lt;dialog&gt;</tt> que permite crear cuadros de diálogo con un código mínimo.
+</p>
+<br>
+<p>
+<b>Código HTML</b>: Partimos de un botón que servirá para mostrar el diálogo. Como el elemento <tt>&lt;dialog&gt;</tt> no tiene el atributo <tt>open</tt> no se muestra por defecto.
+</p>
+<pre>
+&lt;button id="btnMostrar"&gt;Mostrar diálogo&lt;/button&gt;
+
+&lt;dialog id="dialogo"&gt;
+  &lt;form method="dialog"&gt;
+    &lt;p&gt;Una pregunta comprometida. La tortilla es mejor...&lt;/p&gt;
+    &lt;button value="concebollista"&gt;Con cebolla&lt;/button&gt;
+    &lt;button value="sincebollista"&gt;Sin cebolla&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;
+</pre>
+<br>
+<p>
+<b>CSS</b>: Se usa el pseudoelemento <tt>::backdrop</tt> para indicar las propiedades del fondo. 
+</p>
+<pre>
+dialog::backdrop{ background-color: #3366; }
+</pre>
+<br>
+<p>
+<b>Javascript</b>: 
+</p>
+<pre>
+const dialogo = document.querySelector("#dialogo");
+
+document.querySelector("#btnMostrar").addEventListener('click', ()=&gt;{
+  dialogo.showModal();
+});
+
+dialogo.addEventListener('close', () =&gt; {
+  console.log('Valor devuelto: '+ dialogo.returnValue); 
+  //concebollista o sincebollista
+})
+</pre>
+<br>
+<br>
+<p>
+<b>Código alternativo</b>: si no queremos tener una variable para el diálogo también podríamos haber usado el  <tt>target</tt> del evento:
+</p>
+<pre>
+document.querySelector("#btnMostrar").addEventListener('click', ()=&gt;{
+  document.querySelector("#dialogo").showModal();
+});
+
+document.querySelector("#dialogo").addEventListener('close', (e)=&gt;{
+  console.log('Valor devuelto: '+ e.target.returnValue);
+})
+</pre>
+<br>
+<br>
+
+			<h1 id="h3">Formularios</h1>
+			<p>
+Los formularios son elementos HTML que permiten encapsular elementos para introducir datos por parte del usuario. En HTML además tienen una funcionalidad propia que los hace muy interesantes: pueden enviar datos a un servidor simplemente pulsando un botón de tipo <tt>submit</tt>.
+</p>
+<br>
+<p>
+Ejemplo de formulario:
+</p>
+<pre>
+&lt;form action="saludo.php" method="get"&gt;
+  &lt;input type="text" name="txtNombre" id="txtNombre"&gt;&lt;br&gt;
+  &lt;input type="number" name="txtEdad" id="txtEdad"&gt;&lt;br&gt;
+  &lt;input type="submit" value="Enviar"&gt;
+&lt;/form&gt;
+</pre>
+<br>
+<p>
+Fíjate en los siguientes aspectos:
+</p>
+<ul style='padding-left: 30pt'>
+<li>En la propiedad <tt>action</tt> del formulario se incluye la página que va a procesar los datos del formulario</li>
+<li>En la propiedad <tt>method</tt> del formulario se especifica si los datos se mandarán por el método GET (el método por defecto que se usará si no se indica nada) o por el método POST. Con GET los parámetros viajan en la URL (se ven en la barra de direcciones) y con POST no.</li>
+<li>Existe un botón de tipo <tt>submit</tt> que al pulsarlo mandará la información a la página que procesará los datos (que aparece en el <tt>action</tt>)</li>
+<li>Si vamos a usarlo desde JS <b>es buena idea</b> añadirle un <tt>name</tt> y un <tt>id</tt> y que además coincidan.</li>
+</ul>
+<br>
+<p>
+<b>Importante</b>: sólo se mandarán los datos de los controles que contengan un atributo <tt>name</tt>.
+</p>
+<br>
+<p>
+<b>Importante</b>: un <tt>&lt;button&gt;</tt> dentro de un formulario se comporta como un &lt;input type="submit"&gt;, si queremos que sea un botón que no produzca el evento <tt>submit</tt>, tendremos que indicarlo: <tt>&lt;button type="button"&gt;</tt>
+</p>
+<br>
+<p>
+La página que procesará los datos se llamará <tt>saludo.php</tt> (el nombre del atributo <tt>action</tt> del formulario) y tendrá que recuperar el valor que el usuario haya introducido en el cuadro de texto y mostrará una respuesta como la de abajo.
+</p>
+<br>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hola &lt;?php echo $_GET['txtNombre'] ?&gt;, aunque tienes &lt;?php echo $_GET['txtEdad'] ?&gt; 
+    años, estás hecho un chaval.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<br>
+<br>
+<p>
+Ejemplo de formulario algo más completo:
+</p>
+<pre>
+&lt;form name="frmRegistro" action="registro.php" method="post"&gt;
+  &lt;label for="nombre"&gt;Nombre: &lt;/label&gt;
+  &lt;input type="text" name="nombre"  required&gt;
+  &lt;br&gt;
+  &lt;label for="lastname"&gt;Apellido: &lt;/label&gt;
+  &lt;input type="text" name="apellido"  required&gt;
+  &lt;br&gt;
+  &lt;label for="email"&gt;Email: &lt;/label&gt;
+  &lt;input type="email" name="email"  required&gt;
+  &lt;br&gt;
+  &lt;label for="password"&gt;Password: &lt;/label&gt;
+  &lt;input type="password" name="password"  required&gt;
+  &lt;br&gt;
+  &lt;input type="submit" value="Registrarse"&gt;
+&lt;/form&gt;
+</pre>
+<br>
+<br>
+<p>
+<b>Nota</b>: es posible indicar que un control que se encuentra fuera de un formulario forma parte del mismo usando el atributo <tt>form</tt>. Un control sólo puede estar asociado con un formulario.
+</p>
+<pre>
+&lt;form id="f1"&gt;
+  &lt;label&gt;Localizador &lt;input type="text" name="txtLoc"&gt;&lt;/label
+&lt;/form&gt;
+...
+&lt;input type="submit" form="f1" value="Enviar"&gt;
+</pre>
+<br>
+<br>
+<p>
+<b>Nota</b>: si el formulario contiene controles <tt>&lt;input type="file"&gt;</tt>, se debe añadir al formulario el parámetro <tt>enctype="multipart/form-data"</tt> para que se mande el contenido correctamente al servidor.
+</p>
+<br>
+<br>
+
+			<h2 id="h4">Recuperar formularios desde JS</h2>
+			<p>
+Recuperar el objeto del formulario desde JS es posible de varias maneras.
+</p>
+<br>
+<p>
+A través del id (la manera recomendada):
+</p>
+<pre>
+let formulario = document.getElementById("frmContactar");
+let formulario = document.querySelector("#frmContactar");
+</pre>
+<br>
+<p>
+Por nombre de etiqueta y su posición en el array:
+</p>
+<pre>
+let primerFormulario = document.getElementsByTagName("form")[0] ;
+</pre>
+<br>
+<p>
+Mediante el array document.forms:
+</p>
+<pre>
+let primerFormulario = document.forms[0];
+let formulario = document.forms["frmContactar"]; 
+</pre>
+<br>
+<p>
+Mediante el atributo <tt>name</tt> del formulario:<br>
+<tt>frmContactar</tt> ← Variable creada por el navegador
+</p>
+<br>
+<p>
+Jerarquía del DOM para formularios y controles:<br>
+<img src="./5b_-_Formularios_y_cuadros_de_diálogo_files/diagram.png">
+</p>
+<br>
+
+			<h2 id="h5">Recuperar/cambiar atributos de formulario</h2>
+			<ul style='padding-left: 30pt'>
+<li><tt>action</tt></li>
+<li><tt>method</tt> </li>
+<li><tt>name</tt></li>
+<li><tt>target</tt> → <tt>_blank</tt> (pestaña nueva) o <tt>_self</tt> (por defecto)</li>
+<li><tt>elements[ ]</tt> → Array con los elementos del formulario (<tt>input</tt>, <tt>fieldset</tt>, <tt>select</tt>,...). También funciona con <tt>frmRegistro[i]</tt>, por ejemplo <tt>for(let e of frmRegistro) console.log(e)</tt></li>
+</ul>
+<br>
+<br>
+
+			<h2 id="h6">Métodos del formulario</h2>
+			<ul>
+<li><tt>reset()</tt> → Restablece los valores de los campos del formulario a su valor original</li>
+<li><tt>submit()</tt> → Fuerza el envío del formulario a la página del <tt>action</tt> junto con los datos de los controles con atributo <tt>name</tt></li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: El envío del formulario también se lanza con los controles <tt>&lt;button&gt;</tt> e <tt>&lt;input type="submit"&gt;</tt>
+</p>
+<br>
+<br>
+
+			<h1 id="h7">Elementos de los formularios</h1>
+			<p>
+Deben tener atributo <tt>name</tt> para que se manden al servidor (y es conveniente que tengan atributo <tt>id</tt> que coincida con el <tt>name</tt> si los vamos a usar desde Javascript).
+</p>
+<br>
+
+			<h2 id="h8">Referenciar un elemento de un formulario</h2>
+			<pre>
+document.getElementById("idDelControl")
+document.getElementByName("nombreDelControl")
+
+document.querySelector("#idDelControl")
+document.querySelector("[name=nombreDelControl]")
+</pre>
+<br>
+<p>
+Esta son las maneras más recomendadas para acceder a un elemento de un formulario. A continuación veremos algunas maneras alternativas que pueden ser más problemáticas.<br>
+Especialmente importante es nombrar correctamente los controles de nuestro formulario para evitar sorpresas por colisiones de nombres.
+</p>
+<br>
+
+            
+				<h3>Posibles problemas<a id="posibles-problemas" class="h_anchor"></a></h3>
+<p>
+Dado este formulario hay varias otras formas de acceder a un control que son menos recomendables.
+</p>
+<pre>
+&lt;form name="formulario"&gt;
+  &lt;label&gt;Foo
+    &lt;input name="foo"&gt;
+  &lt;/label&gt;
+  &lt;br&gt;
+  &lt;label&gt;Bar
+    &lt;input id="bar"&gt;
+  &lt;/label&gt;
+&lt;/form&gt;
+</pre>
+<br>
+<p>
+<b>Primera manera</b>: se basa en que Internet Explorer asignaba una variable global por cada elemento que tuviera un <tt>id</tt> en lugar de mirar en su tabla de nombres (esto era parte del estándar, pero Netscape no estaba de acuerdo y no quería implementarlo). Por motivos de compatibilidad se ha terminado reproduciendo, pero puede presentar problemas. Por ejemplo si se crea una variable en algún momento que coincida con el <tt>id</tt> del control.
+</p>
+<pre>
+foo              // foo is not defined
+bar              // &lt;input id="bar"&gt;
+let bar = "El tremendo";
+bar              // El tremendo
+</pre>
+<br>
+<p>
+<b>Segunda manera</b>: utilizando el nombre del formulario junto con el <tt>id</tt> del elemento o el <tt>name</tt>. De nuevo por motivos de compatibilidad con Internet Explorer, se crea una variable global con el <tt>id</tt> o <tt>name</tt> de los formularios, esto tiene el mismo problema de antes (que se declare una variable que se llame igual). También podemos referenciar el formulario como atributo de <tt>document</tt>, pero hay que tener cuidado de que el <tt>name</tt> o el <tt>id</tt> del control no coincida con un atributo del formulario (por ejemplo <tt>length</tt>, <tt>action</tt>, etc). 
+</p>
+<pre>
+formulario.foo           # &lt;input name="foo"&gt;
+formulario.bar           # &lt;input id="bar"&gt;
+
+document.formulario.foo  # &lt;input name="foo"&gt;
+document.formulario.bar  # &lt;input id="bar"&gt;
+</pre>
+<br>
+<p>
+Nota: el formulario seguirá funcionando correctamente, su atributo <tt>method</tt> o <tt>action</tt> no cambiará, pero al intentar recuperar sus valores el navegador nos devolverá el control y no el atributo. <br>
+Tendremos que ejecutar un <tt>formulario.getAttribute("method")</tt> para recupearlo.
+</p>
+<br>
+<p>
+<b>Tercera manera</b>: usando la propiedad <tt>elements</tt> de un formulario. Al igual que el método anterior, puede ser problemático si tenemos un control cuyo <tt>id</tt> sea <tt>elements</tt>. 
+</p>
+<br>
+<p>
+Por ejemplo, si añadimos el control de arriba a nuestro formulario, fallarán todas estas maneras:
+</p>
+<pre>
+document.forms['formulario'].elements['foo']
+document.forms['formulario'].elements['bar']
+
+document.forms['formulario'].elements.foo
+document.forms['formulario'].elements.bar
+
+document.forms.formulario.elements.foo
+document.forms.formulario.elements.bar
+</pre>
+<br>
+<p>
+Nota: podríamos usar <tt>formulario.children</tt>, pero eso también nos devolverá los label y otros elementos que pueda haber, no sólo los controles.
+</p>
+<br>
+<p>
+<b>Cuarta manera</b>: la peor de todas. Recupera el primer formulario y el primer elemento por la posición. El principal problema es que si cambiamos de posición los formularios en la página o los elementos dentro de un formulario puede que no accedamos al control que queremos. Es el método más frágil de todos.
+</p>
+<pre>
+document.forms[0].elements[0]; # la menos recomendable de todas
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h10">Elementos de un formulario</h2>
+			<p>
+Algunos de los elementos principales que pueden aparecer en un formulario.
+</p>
+<br>
+
+            
+				<h3>Input type="text"<a id="input-typetext" class="h_anchor"></a></h3>
+<ul style='padding-left: 30pt'>
+<li><tt>value</tt> - Contiene el texto</li>
+<li><tt>size</tt> - Tamaño visual del control de texto</li>
+<li><tt>maxlength</tt> - Número máximo de caracteres que se puede escribir</li>
+<li><tt>readOnly</tt> - Permite consultar y/o establecer el valor de solo lectura del campo de texto</li>
+<li><tt>required</tt> - Obligación de rellenar el campo</li>
+<li><tt>disabled</tt> - Habilita/deshabilita el uso del campo. Un campo deshabilitado no genera eventos, el usuario no puede interactuar con él, y tampoco se envía al servidor</li>
+</ul>
+<br>
+ <br>
+            
+				<h3>Input type="number"<a id="input-typenumber" class="h_anchor"></a></h3>
+<ul style='padding-left: 30pt'>
+<li><tt>value</tt> - Contiene el texto</li>
+<li><tt>valueAsNumber</tt> - Contiene el texto</li>
+<li><tt>size</tt> - Tamaño visual del control de texto</li>
+<li><tt>maxlength</tt> - Número máximo de caracteres que se puede escribir</li>
+<li><tt>max</tt> - Valor máximo que permite</li>
+<li><tt>min</tt> - Valor mínimo que permite</li>
+<li><tt>readOnly</tt> - Permite consultar y/o establecer el valor de solo lectura del campo de texto</li>
+<li><tt>required</tt> - Obligación de rellenar el campo</li>
+<li><tt>disabled</tt> - Habilita/deshabilita el uso del campo. Un campo deshabilitado no genera eventos, el usuario no puede interactuar con él, y tampoco se envía al servidor</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: se puede recuperar su valor con <tt>.valueAsNumber</tt> para que devuelva un número o NaN en lugar de <tt>.value</tt> que devuelve texto.
+</p>
+<br>
+ <br>
+            
+				<h3>Input type="hidden"<a id="input-typehidden" class="h_anchor"></a></h3>
+<p>
+Un campo oculto para el usuario pero que puede contener datos que se enviarán al servidor. Por ejemplo, se puede usar en formularios multipágina de manera que en la segunda página se guarden los datos que se introdujeron en la primera en atributos ocultos.
+</p>
+<br>
+ <br>
+            
+				<h3>Input type="checkbox"<a id="input-typecheckbox" class="h_anchor"></a></h3>
+<ul style='padding-left: 30pt'>
+<li><tt>checked</tt> - Permite recuperar/establecer el valor de marcado de la casilla de verificación (es un booleano que indica si está marcado, el valor estará en <tt>value</tt>).</li>
+</ul>
+<br>
+<p>
+Recuperar los checkboxes marcados: <tt>document.querySelectorAll("[type='checkbox']:checked")</tt>
+</p>
+<br>
+ <br>
+            
+				<h3>Input type="radio"<a id="input-typeradio" class="h_anchor"></a></h3>
+<p>
+Deben tener un atributo <tt>name</tt> común para que funcionen correctamente.<br>
+<img src="./5b_-_Formularios_y_cuadros_de_diálogo_files/pasted_image.png">
+</p>
+<pre>
+&lt;form&gt;
+  &lt;input type="radio" name="edad" value="10"&gt; 10 &lt;br&gt;
+  &lt;input type="radio" name="edad" value="20"&gt; 20 &lt;br&gt;
+  &lt;input type="radio" name="edad" value="20"&gt; 30 &lt;br&gt;
+&lt;/form&gt;
+</pre>
+<br>
+<ul style='padding-left: 30pt'>
+<li><tt>checked</tt> - Permite recuperar/establecer qué opción está marcada.</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: estos controles a menudo se usan con un fieldset alrededor:
+</p>
+<pre>
+&lt;form&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Selecciona una edad&lt;/legend&gt;
+    &lt;input type="radio" name="edad" value="10"&gt; 10 &lt;br&gt;
+    &lt;input type="radio" name="edad" value="20"&gt; 20 &lt;br&gt;
+    &lt;input type="radio" name="edad" value="20"&gt; 30 &lt;br&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+</pre>
+<p>
+<img src="./5b_-_Formularios_y_cuadros_de_diálogo_files/pasted_image001.png">
+</p>
+<br>
+ <br>
+            
+				<h3>Select (desplegables o drop-down menu)<a id="select-desplegables-o-drop-down-menu" class="h_anchor"></a></h3>
+<pre>
+&lt;select name="provincias" id="provincias"&gt;
+  &lt;option value="C"&gt;LaCoruña&lt;/option&gt;
+  &lt;option value="LU"&gt;Lugo&lt;/option&gt;
+  &lt;option value="OU"&gt;Ourense&lt;/option&gt;
+  &lt;option value="PO"&gt;Pontevedra&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+<br>
+<p>
+Desde JS podemos recuperar mucha información
+</p>
+<pre>
+formulario.provincias.value           // Valor seleccionado
+formulario.provincias.options         // Array de opciones
+formulario.provincias.selectedIndex   // Índice del option seleccionado
+
+// option seleccionado
+formulario.provincias.options[formulario.provincias.selectedIndex]
+
+// Texto del option seleccionado
+formulario.provincias.options[formulario.provincias.selectedIndex].text
+
+// Value del option seleccionado
+formulario.provincias.options[formulario.provincias.selectedIndex].value
+</pre>
+<br>
+ <br>
+            
+				<h4>Select Múltiple<a id="select-múltiple" class="h_anchor"></a></h4>
+<pre>
+&lt;select name="provincias" id="provincias" multiple&gt;
+  &lt;option value="C"&gt;LaCoruña&lt;/option&gt;
+  &lt;option value="LU"&gt;Lugo&lt;/option&gt;
+  &lt;option value="OU"&gt;Ourense&lt;/option&gt;
+  &lt;option value="PO"&gt;Pontevedra&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+<br>
+<p>
+Desde JS:
+</p>
+<pre>
+formulario.provincias.selectedOptions           // Array de options seleccionados
+formulario.provincias.selectedOptions.length    // Longitud del array de options seleccionados
+formulario.provincias.selectedOptions[0].value  // Valor del primer option seleccionado
+let arrayElementos = formulario.elements.provincias // Array con todas las opciones disponibles 
+
+//Recorrer los options seleccionados (con el atributo selected a true)
+for( x of formulario.provincias.selectedOptions){ 
+	console.log(x.value); 
+}
+</pre>
+<br>
+ <br>
+            
+				<h3>Otros controles<a id="otros-controles" class="h_anchor"></a></h3>
+<ul style='padding-left: 30pt'>
+<li><tt>&lt;textarea&gt;...&lt;/textarea&gt;</tt> (usa el atributo value para recuperar el texto)</li>
+<li><tt>&lt;input type="password"&gt;</tt></li>
+<li><tt>&lt;input type="date"&gt;</tt> (usa el atributo <tt>valueAsDate</tt> o <tt>value</tt> para recupear el dato)</li>
+<li><tt>&lt;input type="color"&gt;</tt></li>
+<li><tt>&lt;input type="file"&gt;</tt></li>
+<li><tt>&lt;input id="method" type="range" min="0" max="10" step="2"&gt;</tt> <img src="./5b_-_Formularios_y_cuadros_de_diálogo_files/pasted_image003.png"></li>
+<li><tt>&lt;input type="reset"&gt;</tt></li>
+<li><tt>&lt;input type="time"&gt;</tt></li>
+</ul>
+<br>
+<br>
+ <br>
+			<h2 id="h19">Ejercicios</h2>
+			<p>
+<b>Ejercicio 1</b>: Crea una web con un cuadro de texto y una división, de modo que en el momento que se modifique el contenido del cuadro de texto éste aparezca automáticamente en la división.<br>
+<sup><b>Pista</b>: el evento que debes usar es <i>input</i>, pero también puedes usar el evento de teclado <i>keyup</i>.</sup>
+</p>
+<br>
+<p>
+<b>Ejercicio 2</b>: Crea una web que contenga un botón, una división y tres <i>checkbox</i> (mañana, tarde, noche) y al pulsar el botón se procederá así:
+</p>
+<ul style='padding-left: 30pt'>
+<li>comprobará que al menos una de las opciones está marcada y como máximo estarán marcadas dos.</li>
+<li>si todo es correcto mostrará en la división las opciones seleccionadas</li>
+<li>si no hay seleccionada ninguna opción o están marcadas todas, se mostrará un mensaje de error en la división</li>
+</ul>
+<br>
+<p>
+<b>Ejercicio 3</b>: Crea una web que contenga diez textboxes de tipo number y varios botones:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Botón <i>Aleatorio</i>: cuando se pulse el botón se rellenarán con valores aleatorios todos los textboxes</li>
+<li>Botón <i>Todos positivos</i>: cuando se pulse el botón se mostrará un mensaje indicando si todos los valores son positivos</li>
+<li>Botón <i>Contar positivos</i>: al pulsar el botón se mostrará un mensaje indicando cuántos valores son positivos</li>
+</ul>
+<br>
+<p>
+<b>Ejercicio 4</b>: Crea una web que contenga un select con cuatro sabores de helado (vainilla, fresa, chocolate, nata) y un grupo de radio button con la nota de ese sabor (del 1 al 5 siendo 5 la mejor puntuación). Al pulsar en un botón con la etiqueta <i>Votar</i>, se almacenará en un array un objeto que contendrá dos valores: el sabor elegido y la puntuación elegida. Al pulsar otro botón se nos mostrará en un cuadro de diálogo  cada sabor con el número de votos, su media y cuántas veces ha obtenido la puntuación máxima.
+</p>
+<br>
+<p>
+<b>Ejercicio 5</b>: Crea una web que contenga una división con el atributo <tt>contenteditable</tt> y que tenga entre sus reglas de estilo <tt>overflow:scroll</tt>. Por ejemplo:
+</p>
+<pre>
+&lt;div id="divEditable" contenteditable style="overflow:scroll;width:200px;height:100px;"&gt;&lt;/div&gt;
+</pre>
+<p>
+Ahora se podrá escribir en la división. Haz que cuando se pulse la combinación de teclas <tt>Ctrl+b</tt> el contenido de la división aparezca en negrita. Si se pulsa <tt>Ctrl+i</tt> aparecerá en cursiva y si se pulsa <tt>Ctrl+u</tt> aparecerá subrayado.<br>
+Amplíación: añade que si se pulsa <tt>Ctrl++</tt> se aumente el tamaño de letra únicamente para esa división y con <tt>Ctrl+-</tt> se disminuya.
+</p>
+<br>
+<br>
+
+			<h1 id="h20">Validación de formularios</h1>
+			<p>
+<b>Referencias</b>:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Constraint validation 
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation" title="https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation" class="https">https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation</a></li>
+</ul></li>
+<li>Interesante los mensajes personalizados y la API de validación <tt>setCustomValidity(message)</tt>
+<ul>
+<li><a href="https://developer.mozilla.org/es/docs/Learn/Forms/Form_validation" title="https://developer.mozilla.org/es/docs/Learn/Forms/Form_validation" class="https">https://developer.mozilla.org/es/docs/Learn/Forms/Form_validation</a></li>
+</ul></li>
+<li>Interesante para acceder a los campos de un formulario
+<ul>
+<li><a href="https://matiashernandez.dev/blog/post/handling-forms-with-vanilla-javascript" title="https://matiashernandez.dev/blog/post/handling-forms-with-vanilla-javascript" class="https">https://matiashernandez.dev/blog/post/handling-forms-with-vanilla-javascript</a></li>
+</ul></li>
+</ul>
+<br>
+<p>
+Muchos de los controles HTML ya incluyen alguna forma de validación. Por ejemplo, si indicamos que un <tt>input</tt> es de <tt>type="number"</tt> obtendremos un comportamiento interesante: en Chrome no nos dejará meter letras (salvo la <tt>e</tt> de exponente) y en Firefox sí nos dejará meter letras pero al recuperar el valor nos dará una cadena vacía.
+</p>
+<br>
+
+			<h2 id="h21">Introducción a la validación de formularios</h2>
+			<p>
+Hay varias maneras de realizar la validación de un formulario en el lado del cliente:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Usando atributos de los propios controles</li>
+<li>Usando Javascript</li>
+<li>Combinando ambos métodos</li>
+</ul>
+<br>
+<p>
+Y en cualquier caso <b>siempre</b> se deben validar de nuevo los datos en el servidor. El Javascript del lado del cliente puede ser manipulado o incluso desactivado. La validación que se hace en el cliente es para evitar realizar una llamada al servidor que consume tiempo y ancho de banda con datos que son inválidos, pero la validación real se debe hacer en el lado del servidor.
+</p>
+<br>
+<br>
+
+            
+				<h3>Usando atributos<a id="usando-atributos" class="h_anchor"></a></h3>
+<br>
+<p>
+Una de las más sencillas es establecer en los propios controles (etiquetas <tt>&lt;input&gt;</tt>, <tt>&lt;select&gt;</tt>, etc.) las características de un dato válido. Este tipo de validación es más rápida que la que se puede realizar con Javascript, pero menos flexible.
+</p>
+<br>
+<p>
+Por ejemplo, el siguiente cuadro de texto es obligatorio que tenga un dato que tenga entre 3 y 5 caracteres (incluidos ambos):<br>
+<tt>&lt;input type="text" minlength="3" maxlength="5" required name="txtDato1" id="txtDato1"&gt;</tt>
+</p>
+<br>
+<p>
+Otros atributos posibles para los controles son:
+</p>
+<ul style='padding-left: 30pt'>
+<li><b>required</b>: El campo tiene que estar relleno</li>
+<li><b>minlength</b> y <b>maxlength</b>: La longitud de la cadena de caracteres mínima y máxima</li>
+<li><b>min</b> y <b>max</b>: El valor mínimo y máximo de un valor numérico</li>
+<li><b>type</b>: Especifica si el dato tiene que ser un número, una dirección de correo, una fecha, etc.</li>
+<li><b>pattern</b>: El dato debe cumplir la expresión regular que se indique, por ejemplo <tt>[A-Za-zñÑáéíóúÁÉÍÓÚ]{3}</tt> equivale a 3 letras (incluyendo <tt>ñ</tt> y vocales acentuadas).</li>
+<li>Si se incluye <tt>step="1"</tt> en un <tt>type="number"</tt> se indicará que sólo son válidos los números enteros (así que 3.4 será un valor inválido).</li>
+</ul>
+<br>
+<p>
+<b>Importante</b>: Un formulario no se enviará al servidor con el botón <i>submit</i> si contiene valores que sean inválidos.
+</p>
+<br>
+<p>
+Estos valores inválidos pueden recalcarse visualmente usando el pseudo-selector <tt>:invalid</tt> y los navegadores pueden incluir alguna ayuda visual. También existe el pseudoselector <tt>:valid</tt> y <tt>:out-of-range</tt>.
+</p>
+<br>
+<p>
+<img src="./5b_-_Formularios_y_cuadros_de_diálogo_files/pasted_image002.png">
+</p>
+<br>
+<p>
+Ejemplo de patrones:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>pattern="[Pp]látano|[Cc]ereza"</tt> → Plátano o Cereza (también en minúsculas)</li>
+<li><tt>pattern="[0-9]{4}"</tt> → Un número de 4 dígitos</li>
+<li><tt>pattern="[a-z ]{8}"</tt> → Texto en minúsculas (con espacios) de 8 caracteres</li>
+<li><tt>pattern="\w{3,10}"</tt> → Una única palabra con entre 3 y 10 caracteres </li>
+<li><tt>pattern="\d{4}"</tt> → 4 dígitos</li>
+</ul>
+<br>
+<p>
+<b>Nota sobre accesibilidad:</b> si usamos patrones, deberíamos indicarlo a ser posible en el atributo <tt>title</tt> del propio control.
+</p>
+<br>
+<p>
+Ayuda para elegir un valor predeterminado:
+</p>
+<pre>
+&lt;label for="t1"&gt;¿Cuál es tu color favorito?&lt;abbr title="Campo obligatorio" aria-label="required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+&lt;input type="text" id="t1" 
+  name="fruit" list="listaOpciones" required
+  pattern="[Rr]ojo|[Vv]erde|[Aa]zul|[Nn]egro"&gt;
+
+&lt;datalist id="listaOpciones"&gt;
+  &lt;option&gt;Rojo&lt;/option&gt;
+  &lt;option&gt;Verde&lt;/option&gt;
+  &lt;option&gt;Azul&lt;/option&gt;
+  &lt;option&gt;Negro&lt;/option&gt;
+&lt;/datalist&gt;
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Usando javascript y onsubmit<a id="usando-javascript-y-onsubmit" class="h_anchor"></a></h3>
+<br>
+<p>
+El segundo método consiste en realizar una validación en Javascript antes de mandar algún dato al servidor. Puede ser necesario en algunos casos, por ejemplo si tenemos dos campos y hay que asegurarse de que ambos contengan el mismo dato (como el típico ejemplo de escribir el correo electrónico en una página de registro).
+</p>
+<br>
+<p>
+Podemos usar la manera antigua (importante el <tt>return</tt>): <br>
+<tt>&lt;form onsubmit="return validar()" ...&gt;</tt>
+</p>
+<br>
+<p>
+Y luego en Javascript:
+</p>
+<pre>
+function validar(){
+  if( ... ) return false;
+  return true;
+}
+</pre>
+<br>
+<p>
+ La función validar comprobará los valores del formulario. Si son todos correctos devolverá <tt>true</tt> y en caso contrario devolverá <tt>false</tt>. Sólo se mandarán los datos al servidor si se devuelve <tt>true</tt>.
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Usando javascript y un eventListener<a id="usando-javascript-y-un-eventlistener" class="h_anchor"></a></h3>
+<br>
+<p>
+El método más moderno consiste en asignar un <tt>id</tt> al formulario y luego en el Javascript asignar un <i>eventListener</i> al evento <i>Submit</i>.<br>
+<tt>&lt;form id="fdatos" ...&gt;</tt>
+</p>
+<br>
+<p>
+En el Javascript se comprueba que los datos del formulario sean correctos y si no lo son se ejecuta el <tt>preventDefault()</tt> que impedirá que se manden los datos al servidor.
+</p>
+<pre>
+document.querySelector("#fdatos").addEventListener("submit", e=&gt;{
+  if( ...) e.preventDefault();
+});
+</pre>
+<br>
+<p>
+También podemos hacerlo más explícito llamando directamente al método <tt>submit()</tt> del formulario:
+</p>
+<pre>
+if( txtNombre.value=="" ) {
+  e.preventDefault();
+}
+else{
+  e.currentTarget.submit();
+}
+</pre>
+<br>
+ <br>
+			<h2 id="h25">Expresiones regulares en JS</h2>
+			<p>
+Se pueden usar para validar datos en los controles (como en el <tt>pattern</tt> de los controles) o en algunos métodos. <br>
+Por ejemplo: <tt>"hola caracola".replace(/[ac]/g,"x");</tt> → reemplaza cada <tt>a</tt> y <tt>c</tt> por una <tt>x</tt>
+</p>
+<br>
+<p>
+Se crean usando un constructor o una sintaxis simplificada:
+</p>
+<pre>
+const regex = new RegExp("patrón");
+const regex = /patrón/;
+</pre>
+<br>
+<p>
+Las expresiones regulares sólo tienen dos métodos interesantes:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>test(cadena)</tt>:  Comprueba si un patrón coincide en una cadena y devuelve <tt>true</tt> o <tt>false</tt>.</li>
+<li><tt>exec(cadena)</tt>: Busca la primera coincidencia en una cadena y devuelve detalles sobre la coincidencia.</li>
+</ul>
+<br>
+<p>
+Las expresiones regulares se pueden usar  algunos métodos de cadenas de caracteres. Por ejemplo si tenemos <tt>s="hola caracolaa"</tt>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>s.match(expreg)</tt>: Devuelve todas las coincidencias en un array. Por ejemplo: <tt>s.match(/la+/g)</tt> → <tt>["la", "laa"]</tt></li>
+<li><tt>s.search(expreg)</tt>: Devuelve la posición de la primera coincidencia.</li>
+<li><tt>s.replace(expreg)</tt>: Reemplaza coincidencias con un nuevo texto.</li>
+<li><tt>s.split(cadena)</tt>: Divide una cadena en un arreglo utilizando un patrón como separador. Ejemplo: <tt>s.split(/la+/)</tt> → <tt>["ho", " caraco", ""]</tt></li>
+</ul>
+<br>
+<p>
+Existen además dos modificadores interesantes (hay más): <tt>i</tt> para ignorar diferencias entre mayúsculas y minúsculas <tt>g</tt> para que busque en toda la cadena (y pare en cuanto encuentre una ocurrencia). 
+</p>
+<pre>
+const regex = /patrón/i;
+const regex = /patrón/g;
+</pre>
+<br>
+<p>
+Ejemplo de modificadores:
+</p>
+<pre>
+const texto = "Hola hola hola";
+texto.match(/hola/); // ["hola"]
+texto.match(/hola/i); // ["Hola"]
+texto.match(/hola/g); // ["hola", "hola"]
+texto.match(/hola/gi); // ["Hola hola hola"]
+</pre>
+<br>
+<p>
+Los patrones son los habituales en otras herramientas como la orden <tt>grep</tt> de Linux:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>"Hola"</tt> – La cadena "Hola"</li>
+<li><tt>.</tt> – Representa cualquier caracter</li>
+<li><tt>[aeiou]</tt> – Un caracter de los que están entre corchetes</li>
+<li><tt>[^aeiou]</tt> – Un caracter de los que no están entre corchetes. También se permiten rangos como <tt>[0-9]</tt> o <tt>[a-z]</tt> (nota: no incluye la <tt>ñ</tt>, ni vocales acentuadas, con diéresis, ni la <tt>ç</tt>)</li>
+<li><tt>a*</tt> – 0 o N repeticiones de lo que tenga delante el <tt>*</tt>, en este caso <tt>""</tt>, <tt>"a"</tt>, <tt>"aa"</tt>, <tt>"aaa"</tt>, ...</li>
+<li><tt>a+</tt> – 1 o N repeticiones de lo que tenga delante el <tt>+</tt>, en este caso <tt>"a"</tt>, <tt>"aa"</tt>, <tt>"aaa"</tt>, ...</li>
+<li><tt>[ab]{3}</tt> – 3 repeticiones exactas de lo que tenga delante, en este caso <tt>aaa</tt>, <tt>aab</tt>, <tt>aba</tt>, <tt>abb</tt>, <tt>baa</tt>, <tt>bab</tt>, <tt>bba</tt> y <tt>bbb</tt>. </li>
+<li><tt>a?</tt> – Lo que tenga delante el <tt>?</tt> es opcional</li>
+<li><tt>()</tt> – Establece un <i>grupo de captura</i>, por ejemplo: <tt>a(ja)+m</tt> → <tt>"ajam"</tt>, <tt>"ajajam"</tt>, "<tt>ajajajam</tt>"...</li>
+<li><tt>|</tt> – Un OR en una expresión regular. Por ejemplo: <tt>/^(y|s)$/i</tt> indica que serán válidas las cadenas <tt>y</tt>, <tt>Y</tt>, <tt>s</tt> y <tt>S</tt>. El resto de las cadenas serán evaluadas como incorrectas (las mayúsculas de <tt>Y</tt> y <tt>S</tt> son correctas por el modificado <tt>i</tt>.</li>
+<li><tt>^</tt> – Representa el inicio del patrón</li>
+<li><tt>$</tt> – Representa el final del patrón</li>
+<li><tt>\</tt> – Caracter de escape que se usa para quitar significado al caracter que le sigue. Por ejemplo <tt>/\$/</tt> es una expresión regular donde sólo será válido el caracter <tt>$</tt></li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: para comprobar que algo no cumple una expresión regular se puede usar con el operador de negación. Por ejemplo, la siguiente expresión <tt>!/^as$/i.test(cadena)</tt> devolverá true si la cadena no es <tt>"as"</tt>.
+</p>
+<br>
+<p>
+Referencia:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Visualizador de expresiones regulares: <a href="https://jex.im/regulex" title="https://jex.im/regulex" class="https">https://jex.im/regulex</a></li>
+<li>Visualizador de expresiones regulares: <a href="https://extendsclass.com/regex-tester.html" title="https://extendsclass.com/regex-tester.html" class="https">https://extendsclass.com/regex-tester.html</a></li>
+<li>Cuentificadores: <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions/Quantifiers" title="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions/Quantifiers" class="https">https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions/Quantifiers</a></li>
+<li>Cheatsheet: <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet" title="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet" class="https">https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet</a></li>
+</ul>
+<br>
+<br>
+<br>
+<p>
+<b>Ejercicio</b>: crea una expresión regular que indique si un código de producto es correcto. Un código de producto correcto comienza por dos números seguido de un guión y una vocal.<br>
+Ejemplos de códigos correctos: 12-e, 38-u
+</p>
+<br>
+<p>
+<b>Ejercicio</b>: crea una expresión regular que indique si una cadena de caracteres es un DNI válido. Es válido tanto si la letra está en mayúsculas como si no, tanto si está junto a los números como separados de ellos por un <tt>-</tt>.<br>
+Nota: no se trata de validar el caracter de control, sólo la forma del dato. 
+</p>
+<br>
+<p>
+<b>Ejercicio</b>: se trata de crear una función que valide la contraseña de un usuario:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Debe constar de exactamente 8 caracteres.</li>
+<li>El primer caracter tiene que ser una <tt>i</tt></li>
+<li>Debe contener mayúsculas y minúsculas.</li>
+<li>La contraseña debe terminar con un dígito (pueden aparecer dígitos en otras posiciones).</li>
+</ul>
+<br>
+<p>
+Por ejemplo: <tt>iZorros1</tt>, <tt>imBecil3</tt> e <tt>informA2</tt> son contraseñas válidas.
+</p>
+<br>
+
+            
+						<pre class="codigo">
+Abajo puedes ver una posible solución del ejercicio. Piénsalo antes de pulsar el botón.
+							<div class="codigojs" style="display:none">let s = `const testPassword = (password)=&gt;{
+  let sol = /^i......[0-9]$/.test(password);
+  sol &amp;&amp;= /[a-z]/.test(password)
+  sol &amp;&amp;= /[A-Z]/.test(password)
+  return sol;
+}
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				<p>
+<sup>Pista: no necesitas hacer una única expresión regular que abarque todo, puedes crear varias.</sup>
+</p>
+<br>
+<br>
+			<h2 id="h28">Un par de métodos para gestionar los errores</h2>
+			<p>
+Es muy molesto cuando un formulario muestra los errores de uno en uno (es decir, que en cuanto encuentre un error se detenga la validación del resto de los campos). Lo ideal es que se validen todos los campos y se muestren todos los errores que se hayan encontrado. Esto se puede realizar de varias maneras, pero esta es una sencilla y elegante.
+</p>
+<br>
+<p>
+Se basa en usar un array de errores donde se irán incluyendo los mensajes que se mostrarán al usuario en una división con <tt>id="divMensajesError"</tt>. Si hay algún error, se impedirá el  envío del formulario y se mostrarán los errores uno tras otro. 
+</p>
+<pre>
+form.addEventListener('submit', function(event) {
+  let errores = [];
+
+  if (email.value === '') {
+    errores.push('Debe indicar un email.');
+  } else if (!isValidEmail(email.value)) {
+    errores.push('Debe indicar una dirección de email correcta.');
+  }
+
+  if (password.value === '') {
+    errores.push('No ha indicado un password.');
+  } else if (password.value.length &lt; 8) {
+    errores.push('El password debe contener al menos 8 caracteres.');
+  }
+
+  if (errores.length &gt; 0) {
+    event.preventDefault();
+    divMensajesError.textContent = errors.join(' '); 
+  }
+});
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+</pre>
+<br>
+<p>
+El ejemplo de arriba basa su funcionamiento en capturar el evento <tt>submit</tt>, pero si usamos los atributos HTML para validar (ejemplo: <tt>max="5"</tt>), el evento no llegará a producirse y nuestro código JS no se ejecutará.
+</p>
+<br>
+<br>
+
+            
+				<h3>Usar la validación HTML<a id="usar-la-validación-html" class="h_anchor"></a></h3>
+<p>
+Para usar la validación del propio HTML podemos usar el código de abajo que captura el evento <tt>click</tt> del botón en lugar del <tt>submit</tt> del formulario.
+</p>
+<br>
+<p>
+Fichero HTML:
+</p>
+<pre>
+&lt;form id="frmEnviar"&gt;
+    &lt;label&gt;Nombre&lt;br&gt;
+      &lt;input type="text" name=" " id="txtNombre" maxlength="5" pattern="^[aeiou][0-9]+" title="El nombre debe empezar con una vocal seguida de números"&gt;
+    &lt;/label&gt;
+    &lt;br&gt;
+    &lt;label&gt;Edad (valores válidos: entre 18 y 60 año)&lt;br&gt;
+      &lt;input type="number" name="txtEdad" id="txtEdad" min="18" max="60"&gt;
+    &lt;/label&gt;
+    &lt;br&gt;
+    &lt;label&gt;Dato (requerido)&lt;br&gt;
+      &lt;input type="number" name="txtDato" id="txtDato" required&gt;
+    &lt;/label&gt;
+
+    &lt;div id="divErrores" class="errores"&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;button type="button" id="btnEnviar"&gt;Enviar&lt;/button&gt;
+  &lt;/form&gt;
+</pre>
+<br>
+<p>
+Fichero CSS:
+</p>
+<pre>
+input:invalid{
+  outline: 2px solid red;
+  border:0;
+}
+
+.errores{
+  margin-top: 1rem;
+  background-color: #735;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.errores:empty{
+  display: none;
+}
+</pre>
+<br>
+<p>
+Fichero JS:
+</p>
+<pre>
+"use strict";
+
+///////////////
+// FUNCTIONS
+/////////////////
+const enviarDatos = e =&gt;{
+  document.querySelector("#divErrores").innerHTML="";
+
+  const frmEnviar = document.querySelector("#frmEnviar");
+
+  let fallos = [];
+  for(let control of frmEnviar.elements){
+    if(! control.checkValidity() ){
+      if(control.id === "txtNombre"){
+        fallos.push("&lt;p&gt;Error, el nombre debe comenzar por una vocal seguida de números&lt;/p&gt;");
+      }
+      else if(control.id === "txtEdad"){
+        fallos.push("&lt;p&gt;Error, la edad debe ser un número entre 18 y 60&lt;/p&gt;");
+      }
+      else if(control.id === "txtDato"){
+        fallos.push("&lt;p&gt;Error, el dato debe estar relleno&lt;/p&gt;");
+      }
+    }
+  }
+  document.querySelector("#divErrores").innerHTML=fallos.join("\n");
+}
+
+///////////////
+// MAIN
+/////////////////
+const btnEnviar  = document.querySelector("#btnEnviar");
+btnEnviar.addEventListener("click", enviarDatos)
+</pre>
+<br>
+<br>
+<br>
+ <br>
+			<h1 id="h30">Ejercicios</h1>
+			<p>
+<b>Ejercicio 6</b>:<br>
+Crea un formulario cuyo atributo <tt>target</tt> sea <tt>_blank</tt> y que contenga:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Un cuadro de texto para el <i>nickname</i>. No podrá tener menos de 3 letras ni más de 8. El campo es obligatorio y además, no podrá comenzar por un número ni contener los siguientes caracteres: <tt>.,:;</tt> </li>
+<li>Dos cuadros de texto de tipo password para establecer un código PIN. Su tamaño será de 4 caracteres y todos tendrán que ser dígitos. El contenido de los dos cuadros de texto tendrán que ser el mismo. Estos campos son obligatorios también.</li>
+<li>Un radio button que permita seleccionar si se quiere indicar el día de nacimiento o no. Por defecto la opción seleccionada será <tt>No</tt>, pero si se selecciona <tt>Sí</tt> el usuario tendrá que rellenar los cuadros de texto de la sección de abajo.</li>
+<li>Una sección para establecer el día de nacimiento que conste de un cuadro de texto numérico para el día, otro para el mes y otro para el año. El día tendrá que estar entre el 1 y el 31, el mes entre el 1 y el 12 y el año tendrá estar entre 1900 y el año actual. Todos estos campos son obligatorios rellenarlos si se seleccionó la opción del <tt>Sí</tt> en el radio button de arriba. </li>
+<li>Añade tres checkboxes para elegir dos colores de los tres disponibles: <tt>Rojo</tt>, <tt>Verde</tt> y <tt>Azul</tt>. El usuario tendrá que marcar dos opciones obligatoriamente.</li>
+<li>Añade un botón de <tt>Reset</tt> y otro de <tt>Enviar</tt>.</li>
+</ul>
+<br>
+<p>
+Establece las opciones de validación de los controles en el HTML cuando sea posible. <br>
+Haz que cuando se pulse el botón de <tt>Enviar</tt> se realice la validación del formulario antes de mandar los datos al servidor y si hay problemas se muestren en un cuadro de diálogo creado con la etiqueta <tt>&lt;dialog&gt;</tt>.<br>
+Finalmente haz que el color de fondo del body de la página del formulario refleje los colores elegidos por el usuario (azul + rojo = morado, rojo + verde = amarillo, azul + verde = turquesa).
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 7</b>: Tratar con fechas es siempre unas de las cosas más tediosas en programación. En el ejemplo de arriba, por ejemplo, no se comprueba si la fecha es correcta o no (una fecha como el 31 de febrero de 2010 sería aceptada como válida con los requisitos del problema).<br>
+Crea una web que contenga un formulario con un <tt>&lt;input type="date" name="txtFecha1" id="txtFecha1"&gt;</tt> y<br>
+Tres <tt>&lt;input type="number"&gt;</tt> (uno para el día, otro para el mes y otro para el año de una segunda fecha).<br>
+Finalmente un botón de submit que cuando se pulse valide las fechas:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Todos los campos tienen que estar rellenos</li>
+<li>La fecha1 debe ser correcta</li>
+<li>La fecha2 debe ser correcta (no vale un 31 de febrero)</li>
+<li>La fecha 1 debe ser anterior a la fecha2</li>
+</ul>
+<br>
+<p>
+La manera de validar fechas de manera sencilla es la siguiente:
+</p>
+<pre>
+/**
+ * Valida si una fecha en formato AÑO-MES-DÍA es válida
+ * @param {String} dateStr - Fecha en formato AÑO-MES-DÍA 
+ * @returns Boolean
+ */
+function isValidDate(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  const date = new Date(year, month - 1, day); // el mes comienza a contarse en 0
+
+  return date.getFullYear() == year &amp;&amp;
+         date.getMonth() == month - 1 &amp;&amp;
+         date.getDate() == day;
+}
+</pre>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>

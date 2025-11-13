@@ -1,0 +1,687 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>5c - Interacción con CSS</title>
+	<meta name='Generator' content='Zim 0.75.1'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">5c - Interacción con CSS</a> <br>
+            &nbsp; &nbsp; <a href="#h2">Gestión simplificada</a> <br>
+            &nbsp; &nbsp; <a href="#h3">Puntualizaciones y opciones avanzadas</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Usando la propiedad style <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Propiedades de estilo con valores computados <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Objetos que describen ficheros y bloques de estilo <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Cambiar la hoja de estilos por otra <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+				&nbsp; &nbsp; &nbsp; &nbsp; Cambiar al modo oscuro usando variables <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h9">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">5c - Interacción con CSS</h1>
+			<p>
+Contenido básico:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Gestión del CSS desde JS</li>
+<li>Cambio de hojas de estilo</li>
+</ul>
+<br>
+
+			<h2 id="h2">Gestión simplificada</h2>
+			<p>
+Se puede manejar hasta cierto punto el CSS desde JS. Partimos de esto:
+</p>
+<pre>
+let btn = document.querySelector("#btnAccion");
+</pre>
+<br>
+<p>
+Podemos añadirle estilos en línea así: <tt>btn.style="outline: 2px solid red;"</tt>
+</p>
+<br>
+<p>
+Se puede acceder y cambiar las clases de un elemento:
+</p>
+<pre>
+btn.className = "clase1 clase2" //como cadena
+btn.classList = ["clase1", "clase2"] //como array de cadenas
+</pre>
+<br>
+<p>
+Pero no está permitido esto:
+</p>
+<pre>
+btn.classList[1] = "clase1"; //sólo la lectura está permitida
+</pre>
+<br>
+<p>
+También podemos acceder a sus clases y modificarlas con <tt>btn.classList</tt>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>btn.classList.add("rojo, "borde1")</tt>: agrega las clases <i>rojo</i> y <i>borde1</i> al botón.</li>
+<li><tt>btn.classList.remove("rojo")</tt>: elimina la clase <i>rojo</i></li>
+<li><tt>btn.classList.toggle("rojo")</tt>: alterna la presencia de la clase (si la clase ya está presente, la elimina, si no está presente, la agrega)</li>
+<li><tt>btn.classList.contains("rojo")</tt>: devuelve <tt>true</tt> o <tt>false</tt> si el elemento tiene asignada la clase</li>
+</ul>
+<br>
+<p>
+También hay otros más circunstanciales:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>btn.classList.replace("rojo", "verde")</tt>: Reemplaza la <i>rojo</i> clase por la <i>verde</i></li>
+<li><tt>btn.classList.item(0)</tt> o <tt>btn.classList[0]</tt>:  devuelve la clase CSS que esté en la posición indicada (en el ejemplo es la primera), puede ser usada para iterar en un bucle por lass clases. No se pueden modificar las clases de esta manera.</li>
+<li><tt>btn.classList.length</tt>: el número de clases CSS asignadas al elemento.</li>
+</ul>
+<br>
+<br>
+
+			<h2 id="h3">Puntualizaciones y opciones avanzadas</h2>
+			<ul style='padding-left: 30pt'>
+<li>Puntualizaciones sobre la propiedad <tt>style</tt></li>
+<li>Estilos computados</li>
+<li>Ficheros y bloques de estilo</li>
+</ul>
+<br>
+
+            
+				<h3>Usando la propiedad style<a id="usando-la-propiedad-style" class="h_anchor"></a></h3>
+<p>
+Se puede usar de dos maneras, modificando toda la cadena <tt>style</tt> o sólo una propiedad concreta.
+</p>
+<br>
+<p>
+<b>Nota</b>: si la propiedad tiene guiones se convierte en <i>camelCase</i>, por ejemplo <tt>text-align</tt> → <tt>textAlign</tt>.
+</p>
+<br>
+<p>
+Ejemplo:
+</p>
+<pre>
+elem.style = "background-color: yellow;";
+elem.style.backgroundColor = "yellow";
+elem.style.paddingLeft = "10px";   //hay que indicar la unidad
+
+// Eliminación:
+elem.style.backgroundColor = "";   
+</pre>
+<br>
+<p>
+<b>Nota</b>: Por las reglas de precedencia de CSS, estas propiedades tienen más prioridad que las definidas en un fichero CSS.
+</p>
+<br>
+<p>
+<b>Nota</b>: si queremos recuperar la cadena de texto de los estilos <i>inline</i>, podemos usar <tt>elem.style.cssText</tt>
+</p>
+<br>
+<p>
+<b>Nota</b>: una excepción a la regla <i>camelCase</i> es la propiedad CSS <tt>float</tt> que se convierte a <tt>cssFloat</tt> (float es una palabra reservada de Javascript).<br>
+Ejemplo <tt>elem.style.cssFloat = "right";</tt>
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Propiedades de estilo con valores computados<a id="propiedades-de-estilo-con-valores-computados" class="h_anchor"></a></h3>
+<br>
+<p>
+<b>Referencia</b>: <a href="https://www.w3.org/TR/1998/REC-CSS2-19980512/cascade.html#computed-value" title="https://www.w3.org/TR/1998/REC-CSS2-19980512/cascade.html#computed-value" class="https">https://www.w3.org/TR/1998/REC-CSS2-19980512/cascade.html#computed-value</a>
+</p>
+<br>
+<p>
+Hay propiedades que permiten valores absolutos como <tt>5px</tt> o <tt>blue</tt>, pero también valores cuyo valor hay que calcular como <tt>auto</tt>, <tt>em</tt>, <tt>10%</tt> cuyo valor depende de las características del dispositivo y tienen que ser calculados.
+</p>
+<br>
+<p>
+La propiedad <tt>style</tt> no nos permite conocer los estilos computados, pero podemos obtenerlos usando el método <tt>getComputedStyles(elemento)</tt>.
+</p>
+<ul style='padding-left: 30pt'>
+<li>Los estilos computados son de solo lectura.</li>
+<li>Solo se pueden recuperar propiedades no compuestas.</li>
+</ul>
+<br>
+<p>
+<b>Ejemplo</b>:
+</p>
+<pre>
+let oEstilo = getComputedStyle( elemento );
+console.log(oEstilo.width);       // "317.583px"
+console.log( oEstilo.marginTop );  // "10px"
+console.log(oEstilo.margin);       // ""
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Objetos que describen ficheros y bloques de estilo<a id="objetos-que-describen-ficheros-y-bloques-de-estilo" class="h_anchor"></a></h3>
+<br>
+<p>
+En <tt>document.styleSheets</tt> podemos obtener un array de los ficheros CSS y los bloques de estilo incluidos en nuestra página.
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>document.styleSheets[index]</tt> – Es una hoja de estilos concreta</li>
+<li><tt>document.styleSheets[index].cssRules</tt> – Lista de reglas CSS (no es un array).  Además no podremos cambiar de esta manera las reglas que provengan de dominios externos (CDN, por ejemplo).</li>
+</ul>
+<br>
+<p>
+Podemos desactivar una hoja de estilos así:
+</p>
+<pre>
+document.styleSheets[0].disabled=true 
+</pre>
+<br>
+<p>
+El array de reglas contiene objetos <tt>cssRule</tt> con las siguientes propiedades:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>cssText</tt> – texto completo de la regla (no se puede modifica aquí)</li>
+<li><tt>selectorText</tt> – texto del selector (sí puede ser modificado)</li>
+<li>objeto <tt>style</tt> – que nos permite conocer y modificar los estilos aplicados. 
+<ul>
+<li>Ejemplo: <tt>document.styleSheets[0].cssRules[5].style.backgroundColor="yellow"</tt></li>
+</ul></li>
+</ul>
+<br>
+<p>
+Podemos utilizar el método <tt>insertRule</tt> para crear dinámicamente reglas nuevas en una hoja de estilos y <tt>deleteRule</tt> para eliminarlas:<br>
+Ejemplo:
+</p>
+<pre>
+// El 0 indica el índice, en este caso se inserta al principio 
+// (si no lo indicamos se inserta como primera regla igualmente)
+document.styleSheets[index].insertRule("#blanco { color: white }", 0); 
+
+document.styleSheets[index].deleteRule( 0 ) // borra la primera regla
+</pre>
+<br>
+<p>
+<b>Importante</b>: si la hoja de estilos usa <tt>@import</tt>, por ejemplo para añadir tipografías externas, no se podrá añadir una nueva regla antes de algún de estos <tt>imports</tt> (los imports deben aparecer primero).
+</p>
+<br>
+<br>
+ <br>
+            
+				<h3>Cambiar la hoja de estilos por otra<a id="cambiar-la-hoja-de-estilos-por-otra" class="h_anchor"></a></h3>
+<p>
+En el HTML indicamos un id al elemento link:
+</p>
+<pre>
+...
+&lt;head&gt;
+  &lt;!-- Light theme stylesheet --&gt;
+  &lt;link href="light-theme.css" rel="stylesheet" id="theme-link"&gt;
+&lt;/head&gt;
+...
+</pre>
+<br>
+<p>
+Al pulsar el botón se cambia la hoja de estilo que se carga:
+</p>
+<pre>
+document.querySelector("#btnTema").addEventListener("click", () =&gt; {
+  // seleccionamos la etiqueta link
+  const theme = document.querySelector("#theme-link");
+
+ // cambiamos el fichero css que se usa
+ if (theme.getAttribute("href") == "light-theme.css") {
+  theme.href = "dark-theme.css";
+ } else {
+  theme.href = "light-theme.css";
+ }
+});
+</pre>
+<br>
+<br>
+ <br>
+            
+				<h3>Cambiar al modo oscuro usando variables<a id="cambiar-al-modo-oscuro-usando-variables" class="h_anchor"></a></h3>
+<p>
+Usando variables CSS en el <tt>:root</tt>
+</p>
+<pre>
+:root{
+  --border: blue;
+  --accent-bg: aliceblue;
+}
+
+:root.dark {
+  --border: navy;
+  --accent-bg: rgb(199, 208, 215);
+}
+</pre>
+<br>
+<p>
+Al pulsa el botón se añade la clase dark:
+</p>
+<pre>
+document.querySelector("#btnTema").addEventListener("click", () =&gt; {
+  document.querySelector(":root").classList.toggle("dark");
+});
+</pre>
+<br>
+<br>
+<br>
+<br>
+<br>
+ <br>
+			<h1 id="h9">Ejercicios</h1>
+			<p>
+<b>Ejercicio 1</b>: crea una web que use una hoja de estilos que asigne a los botones y al body estas reglas CSS:
+</p>
+<pre>
+body{
+  background-color: #eee;
+  color: #444;
+}
+
+button{
+  padding: .5rem;
+  margin-bottom: .5rem;
+  border-radius: 5px;
+  max-width: 100%;
+  color: white;
+  background-color: #0d47a1;
+  border: 1px solid black;
+}
+</pre>
+<br>
+<p>
+Haz que cuando se pulse un botón con la etiqueta C<i>olor</i>, se cambie el color de fondo de los botones a <tt>#47adad</tt>;
+</p>
+<br>
+<p>
+Por otro lado, crea un segundo botón con la etiqueta <i>Modo oscuro/claro</i> que cuando se pulse cambie la hoja de estilos actual a otra hoja de estilo diferente con las reglas:
+</p>
+<pre>
+body{
+  background-color: #456;
+  color: #def;
+}
+button{
+  padding: .5rem;
+  margin-bottom: .5rem;
+  border-radius: 5px;
+  max-width: 100%;
+  color: white;
+  background-color: #0d47a1;
+  border: 1px solid black;
+}
+</pre>
+<br>
+<p>
+Si se pulsa el botón de cambiar  el modo, se volverá a cargar la hoja de estilos inicial.
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 2</b>: Crea una web que use tailwind a partir de un CDN. Según la documentación inicial (<a href="https://tailwindcss.com/docs/installation/play-cdn" title="https://tailwindcss.com/docs/installation/play-cdn" class="https">https://tailwindcss.com/docs/installation/play-cdn</a>), esto se consigue añadiendo al <tt>&lt;head&gt;</tt> la siguiente línea.
+</p>
+<pre>
+&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+</pre>
+<br>
+<p>
+En tu web habrá una etiqueta <tt>&lt;p id="parrafo"&gt;Hola caracola&lt;/p&gt;</tt> y un formulario con un textbox y dos botones: <i>Añadir</i> y <i>Eliminar</i>.<br>
+Cada vez que se pulse <i>Añadir</i>, se añadirá al párrafo la clase de tailwind que el usuario haya indicado en el textbox.<br>
+Cada vez que se pulse <i>Eliminar</i>, se eliminará del párrafo la clase de tailwind que el usuario haya indicado en el textbox.
+</p>
+<br>
+<p>
+Ejemplos de clases para probar:
+</p>
+<pre>
+p-2
+m-5
+bg-indigo-200
+w-1/2
+border-solid border-2 border-indigo-500 
+drop-shadow-lg
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 3</b>: Crea una web que contenga un cuadro de texto y un botón con la etiqueta <i>Añadir</i> que añada el contenido del cuadro de texto a una lista.<br>
+También habrá un botón con la etiqueta <i>Colorear</i>. Al pulsar este botón se colorearán los ítems de la lista con estilos en línea (con la etiqueta <tt>style</tt>) de la siguiente manera:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Los que tengan un número de caracteres impar tendrán un color de fondo rojo y letras en blanco.</li>
+<li>Los que tengan un número de caracteres par tendrán un color de fondo <tt>golden-rod</tt>.</li>
+</ul>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.twitch.tv/profesorinfo">https://www.twitch.tv/profesorinfo</a></p>
+   </div>
+</body>
+
+</html>

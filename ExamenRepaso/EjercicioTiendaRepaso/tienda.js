@@ -277,6 +277,7 @@ document.querySelector("#togglePedido").addEventListener('click', () => {
     const formPedido = document.querySelector("[name='formPedido']");
     formPedido.classList.toggle("ocultar");
     formPedido.classList.toggle("mostrar");
+    
 });
 
 const toggleInventario = document.querySelector('.form-section:nth-child(6) .form-toggle').addEventListener('click', () => {
