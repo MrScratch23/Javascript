@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguidores de Redes Sociales</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .file-upload {
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload:hover {
+            border-color: #3498db;
+            background-color: #f0f8ff;
+        }
+        
+        .file-upload label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .file-input {
+            margin: 10px 0;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        
+        thead {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+        
+        th:hover {
+            background-color: #2980b9;
+        }
+        
+        th.sort-asc::after {
+            content: " ▲";
+            font-size: 0.8em;
+        }
+        
+        th.sort-desc::after {
+            content: " ▼";
+            font-size: 0.8em;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        td {
+            padding: 15px;
+        }
+        
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .social-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .followers {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .instructions {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        
+        .instructions h3 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+    <script src="5a11.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Seguidores de Redes Sociales</h1>
+            <p class="subtitle">Visualiza y ordena los seguidores de todas las redes sociales</p>
+        </header>
+        
+        <div class="file-upload">
+            <label for="json-file">Cargar datos desde un archivo JSON:</label>
+            <input type="file" id="json-file" accept=".json" class="file-input">
+            <p>Selecciona un archivo JSON con la estructura de datos de redes sociales</p>
+        </div>
+        
+        <div class="table-container">
+            <table id="social-table">
+                <thead>
+                    <tr>
+                        <th data-sort="nombre">Red Social</th>
+                        <th data-sort="url">Enlace</th>
+                        <th data-sort="seguidores">Seguidores</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Los datos se cargarán aquí dinámicamente -->
+                    <tr>
+                        <td colspan="3" class="no-data">Carga un archivo JSON para ver los datos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="instructions">
+            <h3>Instrucciones:</h3>
+            <p>1. Prepara un archivo JSON con la estructura correcta (puedes usar el ejemplo proporcionado).</p>
+            <p>2. Haz clic en el botón "Seleccionar archivo" y elige tu archivo JSON.</p>
+            <p>3. Los datos se cargarán automáticamente en la tabla.</p>
+            <p>4. Haz clic en los encabezados de columna para ordenar los datos.</p>
+        </div>
+    </div>
+
+ 
+</body>
+</html>

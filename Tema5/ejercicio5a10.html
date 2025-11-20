@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Alimentos Interactiva</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    <h1>Lista de Alimentos</h1>
+    
+    <!-- Primera división con la lista de alimentos -->
+    <div id="listaAlimentos">
+        <h2>Alimentos disponibles:</h2>
+        <ul>
+            <li>Patatas</li>
+            <li>Huevos</li>
+            <li>Leche</li>
+            <li>Uvas pasas</li>
+            <li>Pan</li>
+            <li>Queso</li>
+            <li>Tomates</li>
+            <li>Pollo</li>
+        </ul>
+    </div>
+    
+    <!-- Segunda división vacía -->
+    <div id="segundaLista">
+        <h2>Alimentos seleccionados:</h2>
+        <p id="listaSeleccionados"></p>
+     
+    </div>
+
+    <script>
+     
+
+        let arraySegundaLista = [];
+
+        document.querySelector('#listaAlimentos').addEventListener('click',e => {
+           if (e.target.tagName === "LI") {
+           let textoAlimento =  e.target.textContent; 
+            arraySegundaLista.push(textoAlimento);
+             const listaSeleccionados = document.querySelector("#listaSeleccionados");
+           let html = "<ul>";
+
+           for (const producto of arraySegundaLista) {
+            html += `<li>${producto}</li>`;
+           }
+           html += `</ul>`
+
+           listaSeleccionados.innerHTML = html;
+           } 
+        })
+
+
+
+
+
+        
+    </script>
+</body>
+</html>
