@@ -59,30 +59,24 @@ const archivo = document.querySelector("#json-file");
 const tabla = document.querySelector("#table-body"); 
 
 // event listeners para diferentes botones
-document.querySelector("#redSocial").addEventListener('click', (e) => {
-    if (redesSociales.length === 0) {
-        alert("Primero carga un archivo JSON");
-        return;
-    }
-    ordenarPorNombre();
-});
 
-document.querySelector("#seguidores").addEventListener('click', (e) => {
-    if (redesSociales.length === 0) {
-        alert("Primero carga un archivo JSON");
-        return;
-    }
-    ordenarPorSeguidores();
-});
 
-document.querySelector("#url").addEventListener('click', (e) => {
-    if (redesSociales.length === 0) {
-        alert("Primero carga un archivo JSON");
-        return;
+document.addEventListener('click', (e) => {
+   
+    
+    // Delegación de eventos para los th
+    if (e.target.closest('th')) {
+        const th = e.target.closest('th');
+        
+        if (th.id === 'redSocial') {
+            ordenarPorNombre();
+        } else if (th.id === 'seguidores') {
+            ordenarPorSeguidores();
+        } else if (th.id === 'url') {
+            ordenarPorURL();
+        }
     }
-    ordenarPorURL();
 });
-
 archivo.addEventListener("change", async () => {
     const [file] = archivo.files;
     if (file && (file.type === "application/json" || file.name.endsWith('.json'))) {
