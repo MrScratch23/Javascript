@@ -47,7 +47,17 @@ document.querySelector(".voting-section").addEventListener('click', e => {
         }
         
         const sabores = ["vainilla", "fresa", "chocolate", "nata"];
-        let html = "";
+        let html = `
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>Sabor</th>
+                    <th>Votos</th>
+                    <th>Media</th>
+                    <th>Veces 5 estrellas</th>
+                </tr>
+            </thead>
+            <tbody>`;
         
         for (let i = 0; i < sabores.length; i++) {
             const sabor = sabores[i];
@@ -74,23 +84,24 @@ document.querySelector(".voting-section").addEventListener('click', e => {
                 const media = (sumaPuntos / votosSabor.length).toFixed(2);
                 
                 html += `
-                <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-                    <h3>${sabor}</h3>
-                    <p>Votos: ${votosSabor.length}</p>
-                    <p>Media: ${media}</p>
-                    <p>Veces 5 estrellas: ${vecesMaximo}</p>
-                </div>
-                `;
+                <tr>
+                    <td>${sabor}</td>
+                    <td>${votosSabor.length}</td>
+                    <td>${media}</td>
+                    <td>${vecesMaximo}</td>
+                </tr>`;
             } else {
                 html += `
-                <div style="border: 1px solid #eee; padding: 10px; margin: 10px 0;">
-                    <h3>${sabor}</h3>
-                    <p>No hay votos</p>
-                </div>
-                `;
+                <tr>
+                    <td>${sabor}</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>`;
             }
         }
         
+        html += `</tbody></table>`;
         html += `<p><strong>Total votos: ${votos.length}</strong></p>`;
         document.querySelector("#listado").innerHTML = html;
     }
