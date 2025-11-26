@@ -10,6 +10,14 @@ let votos = [
     { sabor: "vainilla", puntos: 5 }
 ];
 
+// Obtener referencia al dialog
+const dialog = document.querySelector("#listado");
+
+// Función para cerrar el dialog
+function cerrarDialog() {
+    dialog.close();
+}
+
 // Un solo event listener para todo el contenedor
 document.querySelector(".voting-section").addEventListener('click', e => {
     
@@ -30,7 +38,20 @@ document.querySelector(".voting-section").addEventListener('click', e => {
         
         const puntos = parseInt(puntosInput.value);
         votos.push({ sabor, puntos });
-        alert(`Votado: ${sabor} - ${puntos} estrellas`);
+        
+        // Mostrar el dialog con la confirmación de voto
+        dialog.innerHTML = `
+            <h3>¡Voto Registrado!</h3>
+            <p>Has votado por: <strong>${sabor}</strong></p>
+            <p>Puntuación: <strong>${puntos} estrellas</strong> ⭐</p>
+            <button id="closeResults">Cerrar</button>
+        `;
+        
+        // Mostrar el dialog
+        dialog.showModal();
+        
+        // Agregar evento para cerrar el dialog
+        document.querySelector("#closeResults").addEventListener('click', cerrarDialog);
         
         // Limpiar
         document.querySelector("#flavorSelect").selectedIndex = 0;
@@ -42,12 +63,21 @@ document.querySelector(".voting-section").addEventListener('click', e => {
     // Si hicieron click en el botón Ver Resultados
     if (e.target.id === "resultsBtn" || e.target.closest("#resultsBtn")) {
         if (votos.length === 0) {
-            document.querySelector("#listado").innerHTML = "<p>No hay votos</p>";
+            dialog.innerHTML = `
+                <h3>Resultados</h3>
+                <p>No hay votos</p>
+                <button id="closeResults">Cerrar</button>
+            `;
+            dialog.showModal();
+            
+            // Agregar evento para cerrar el dialog
+            document.querySelector("#closeResults").addEventListener('click', cerrarDialog);
             return;
         }
         
         const sabores = ["vainilla", "fresa", "chocolate", "nata"];
         let html = `
+        <h3>Resultados de la Votación</h3>
         <table border="1" width="100%">
             <thead>
                 <tr>
@@ -103,6 +133,12 @@ document.querySelector(".voting-section").addEventListener('click', e => {
         
         html += `</tbody></table>`;
         html += `<p><strong>Total votos: ${votos.length}</strong></p>`;
-        document.querySelector("#listado").innerHTML = html;
+        html += `<button id="closeResults">Cerrar</button>`;
+        
+        dialog.innerHTML = html;
+        dialog.showModal();
+        
+        // Agregar evento para cerrar el dialog de resultados
+        document.querySelector("#closeResults").addEventListener('click', cerrarDialog);
     }
 });
