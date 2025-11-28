@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>5c - Interacción con CSS</title>
-	<meta name='Generator' content='Zim 0.75.1'>
+	<meta name='Generator' content='Zim 0.76.3'>
 	<style type='text/css'>
 	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
 	    :root {
@@ -73,6 +73,7 @@ background-image: var(--html-background-color-image);
 		             background-color: rgba(.99, .99, 1, 0.1);
 					 padding: 20px;
 					 font-size: large;
+					 overflow-x: scroll;
 				   }
 		div.zim-object pre        {
 		             background-color: white;
@@ -245,6 +246,39 @@ background-image: var(--html-background-color-image);
 		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
 		ul {list-style-image: none}
 		/* ul rule needed to reset style for sub-bullets */
+
+		@media print {
+			div#pie{display:none;}
+			div#volver{display:none;}
+			form{display:none;}
+			div#sumario{display:none;}
+			/* Evitar que las imágenes se corten en Google Chrome, en FF parece que lo ignora */
+			img {
+				page-break-inside: avoid;
+			}
+			div#contenido{
+				border:0px;
+				box-shadow: none;
+			}
+		}
+
+		table {
+			border: 1px solid var(--main-color);
+		}
+		thead {
+			background-color: var(--heading1-background-color);
+		}
+		tr:nth-child(2n) {
+			background-color: color-mix(in srgb, var(--main-color) 20%, transparent);
+		}
+		td {
+			padding-inline: 0.5rem;
+		}
+		th {
+			padding-inline: 0.5rem;
+			padding-block: 0.25rem;
+		}
+
 	</style>
 	
 	<!-- resaltado de sintaxis -->
@@ -313,22 +347,26 @@ Podemos añadirle estilos en línea así: <tt>btn.style="outline: 2px solid red;
 Se puede acceder y cambiar las clases de un elemento:
 </p>
 <pre>
-btn.className = "clase1 clase2" //como cadena
-btn.classList = ["clase1", "clase2"] //como array de cadenas
+btn.className = "clase1 clase2" // como cadena, recomendado para cambiar la lista completa 
+                                // de clases de una vez
 </pre>
 <br>
 <p>
 Pero no está permitido esto:
 </p>
 <pre>
-btn.classList[1] = "clase1"; //sólo la lectura está permitida
+btn.classList[1] = "clase1"; // sólo la lectura está permitida
+
+btn.classList = ["clase1", "clase2"] // no funcionará como esperamos, el navegador intentará
+                                     // convertir  el array a cadena de caracteres y asignará
+                                     // una única clase "clase1,clase2"
 </pre>
 <br>
 <p>
-También podemos acceder a sus clases y modificarlas con <tt>btn.classList</tt>:
+También podemos acceder a sus clases y modificarlas con <tt>btn.classList</tt> de una manera más granular y segura:
 </p>
 <ul style='padding-left: 30pt'>
-<li><tt>btn.classList.add("rojo, "borde1")</tt>: agrega las clases <i>rojo</i> y <i>borde1</i> al botón.</li>
+<li><tt>btn.classList.add("rojo", "borde1")</tt>: agrega las clases <i>rojo</i> y <i>borde1</i> al botón.</li>
 <li><tt>btn.classList.remove("rojo")</tt>: elimina la clase <i>rojo</i></li>
 <li><tt>btn.classList.toggle("rojo")</tt>: alterna la presencia de la clase (si la clase ya está presente, la elimina, si no está presente, la agrega)</li>
 <li><tt>btn.classList.contains("rojo")</tt>: devuelve <tt>true</tt> o <tt>false</tt> si el elemento tiene asignada la clase</li>
@@ -343,6 +381,9 @@ También hay otros más circunstanciales:
 <li><tt>btn.classList.length</tt>: el número de clases CSS asignadas al elemento.</li>
 </ul>
 <br>
+<p>
+<b>Nota</b>: .
+</p>
 <br>
 
 			<h2 id="h3">Puntualizaciones y opciones avanzadas</h2>
@@ -380,7 +421,7 @@ elem.style.backgroundColor = "";
 </p>
 <br>
 <p>
-<b>Nota</b>: si queremos recuperar la cadena de texto de los estilos <i>inline</i>, podemos usar <tt>elem.style.cssText</tt>
+<b>Nota</b>: si queremos recuperar la cadena de texto de los estilos <i>inline</i>, podemos usar <tt>elem.style.cssText</tt>, porque <tt>elem.style</tt> nos devuelve un objeto.
 </p>
 <br>
 <p>
@@ -405,7 +446,7 @@ Hay propiedades que permiten valores absolutos como <tt>5px</tt> o <tt>blue</tt>
 La propiedad <tt>style</tt> no nos permite conocer los estilos computados, pero podemos obtenerlos usando el método <tt>getComputedStyles(elemento)</tt>.
 </p>
 <ul style='padding-left: 30pt'>
-<li>Los estilos computados son de solo lectura.</li>
+<li>El objeto que devuelve es de solo lectura.</li>
 <li>Solo se pueden recuperar propiedades no compuestas.</li>
 </ul>
 <br>
@@ -414,9 +455,9 @@ La propiedad <tt>style</tt> no nos permite conocer los estilos computados, pero 
 </p>
 <pre>
 let oEstilo = getComputedStyle( elemento );
-console.log(oEstilo.width);       // "317.583px"
-console.log( oEstilo.marginTop );  // "10px"
-console.log(oEstilo.margin);       // ""
+console.log( oEstilo.width );       // "317.583px"
+console.log( oEstilo.marginTop );   // "10px"
+console.log( oEstilo.margin );      // ""
 </pre>
 <br>
 <br>
@@ -429,7 +470,8 @@ En <tt>document.styleSheets</tt> podemos obtener un array de los ficheros CSS y 
 </p>
 <ul style='padding-left: 30pt'>
 <li><tt>document.styleSheets[index]</tt> – Es una hoja de estilos concreta</li>
-<li><tt>document.styleSheets[index].cssRules</tt> – Lista de reglas CSS (no es un array).  Además no podremos cambiar de esta manera las reglas que provengan de dominios externos (CDN, por ejemplo).</li>
+<li><tt>document.styleSheets[0].href</tt> – Si es una hoja externa, esta es la URL de la misma (puede ser útil para diferenciar varias hojas de estilo)</li>
+<li><tt>document.styleSheets[index].cssRules</tt> – Lista de reglas CSS (no es un array, aunque tenga la propiedad <tt>length</tt> y se pueda usar el operador <tt>[]</tt>).  Hay que tener en cuenta que no podremos cambiar de esta manera las reglas que provengan de dominios externos (un CDN, por ejemplo).</li>
 </ul>
 <br>
 <p>
@@ -448,6 +490,11 @@ El array de reglas contiene objetos <tt>cssRule</tt> con las siguientes propieda
 <li>objeto <tt>style</tt> – que nos permite conocer y modificar los estilos aplicados. 
 <ul>
 <li>Ejemplo: <tt>document.styleSheets[0].cssRules[5].style.backgroundColor="yellow"</tt></li>
+<li>También se puede usar el método <tt>setProperty()</tt>
+<ul>
+<li>Ejemplo de lectura: <tt>getComputedStyle(elemento).getPropertyValue('--nombre-variable)</tt></li>
+<li>Ejemplo de escritura: <tt>elemento.style.setProperty('--nombre-variable', 'nuevo valor')</tt></li>
+</ul></li>
 </ul></li>
 </ul>
 <br>
@@ -464,7 +511,7 @@ document.styleSheets[index].deleteRule( 0 ) // borra la primera regla
 </pre>
 <br>
 <p>
-<b>Importante</b>: si la hoja de estilos usa <tt>@import</tt>, por ejemplo para añadir tipografías externas, no se podrá añadir una nueva regla antes de algún de estos <tt>imports</tt> (los imports deben aparecer primero).
+<b>Importante</b>: si la hoja de estilos usa <tt>@import</tt>, por ejemplo para añadir tipografías externas, no se podrá añadir una nueva regla antes de algún de estos <tt>imports</tt> (los <tt>imports</tt> deben aparecer primero).
 </p>
 <br>
 <br>
@@ -614,8 +661,16 @@ También habrá un botón con la etiqueta <i>Colorear</i>. Al pulsar este botón
 </p>
 <ul style='padding-left: 30pt'>
 <li>Los que tengan un número de caracteres impar tendrán un color de fondo rojo y letras en blanco.</li>
-<li>Los que tengan un número de caracteres par tendrán un color de fondo <tt>golden-rod</tt>.</li>
+<li>Los que tengan un número de caracteres par tendrán un color de fondo <tt>goldenrod</tt>.</li>
 </ul>
+<br>
+<p>
+Resuelve el ejercicio también añadiendo reglas CSS dinámicamente a la hoja de estilos de la página:
+</p>
+<pre>
+li:nth-child(odd) { background-color:goldenrod; color:white;}
+li:nth-child(even){ background-color:red; color:white;}
+</pre>
 <br>
 <br>
 
@@ -680,7 +735,7 @@ Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenid
    </script>
    <div id="pie">
    <p>Javier Mancera Fernández<br>
-   <a href="https://www.twitch.tv/profesorinfo">https://www.twitch.tv/profesorinfo</a></p>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
    </div>
 </body>
 
