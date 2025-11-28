@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#textoInput {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#textoInput:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#btnAnadir {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#btnAnadir:hover {
+    background-color: #45a049;
+}
+
+#btnColorear {
+    background-color: #2196F3;
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#btnColorear:hover {
+    background-color: #1976D2;
+}
+
+#lista {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#lista li {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 5px solid #ddd;
+    background-color: #f9f9f9;
+    font-size: 16px;
+}
+
+.ejemplo {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.ejemplo h3 {
+    margin-top: 0;
+    color: #856404;
+}

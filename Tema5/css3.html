@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Coloreada</title>
+    <style>
+    </style>
+    <link rel="stylesheet" href="css3.css">
+    <script src="css3.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista Coloreada</h1>
+        
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="texto"
+                placeholder="Escribe un texto..."
+                class="text-input"
+            >
+            <button type="button" id="btnAnadir">Añadir</button>
+        </div>
+        
+        <button id="btnColorear" type="button">Colorear</button>
+        
+        <ul id="lista"></ul>
+        
+        <div class="ejemplo">
+            <h3>💡 Ejemplo:</h3>
+            <p><strong>Texto impar:</strong> "Hola" (4 caracteres) → Fondo golden-rod</p>
+            <p><strong>Texto par:</strong> "Hello" (5 caracteres) → Fondo rojo con texto blanco</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
