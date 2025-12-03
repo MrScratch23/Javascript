@@ -19,9 +19,10 @@ tabla.addEventListener('click', e => {
     }
 
     if (e.target.tagName === "P") {
+        const colorBorrado = tabla.lastElementChild.textContent;
         tabla.lastElementChild.remove();
         let p = document.createElement("p");
-        p.textContent = "Eliminado ultimo color: " + e.target.textContent;
+        p.textContent = "Eliminado ultimo color: " + colorBorrado;
         divAcción.append(p);
         
     }
