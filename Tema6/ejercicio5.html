@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Alumnos</title>
+    <script src="ejercicio5.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    <h1>Lista de Alumnos</h1>
+    
+    <div>
+        <h3>Ordenar por nombre:</h3>
+        <button id="btnOrdenar">Ordenar por Nombre</button>
+    </div>
+    
+    <div>
+        <h3>Buscar alumnos:</h3>
+        <input type="text" id="busqueda" placeholder="Introduce nombre a buscar...">
+        <button id="btnBuscar">Buscar</button>
+    </div>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+            </tr>
+        </thead>
+        <tbody id="tablaAlumnos">
+            <tr>
+                <td>Tomás</td>
+                <td>Tuerzo</td>
+            </tr>
+            <tr>
+                <td>Aitor</td>
+                <td>Tilla</td>
+            </tr>
+            <tr>
+                <td>Sara</td>
+                <td>Mago</td>
+            </tr>
+            <tr>
+                <td>Pancho</td>
+                <td>Colate</td>
+            </tr>
+            <tr>
+                <td>Ana</td>
+                <td>Tema</td>
+            </tr>
+            <tr>
+                <td>Armando</td>
+                <td>Bronca</td>
+            </tr>
+            <tr>
+                <td>Aitor</td>
+                <td>Menta</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div id="resultadosBusqueda">
+        <!-- Aquí se mostrarán los resultados de búsqueda -->
+    </div>
+</body>
+</html>
