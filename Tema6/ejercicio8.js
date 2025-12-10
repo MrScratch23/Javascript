@@ -6,6 +6,7 @@ const crearCards = function(arrayObjetos) {
      for (const carta of arrayObjetos) {
          let div = document.createElement("div");
     let img = document.createElement("img");
+    img.style = "cursor:pointer";
     img.src = carta.imagen;
     img.dataset.producto = carta.producto;
     img.dataset.precio = carta.precio;
@@ -55,7 +56,7 @@ console.log(arrayObjetos);
 
 
 const divCards = document.querySelector("#divCards");
-
+// intenta ponerlos con style para el grid
 crearCards(arrayObjetos);
 
 divCards.addEventListener('click', e => {
