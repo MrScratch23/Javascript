@@ -55,6 +55,7 @@ console.log(arrayObjetos);
 
 
 const divCards = document.querySelector("#divCards");
+
 crearCards(arrayObjetos);
 
 divCards.addEventListener('click', e => {
