@@ -1,6 +1,13 @@
 "use strict";
 
-let tareas = [];
+let arrTareas = localStorage.tareas;
+
+if (!arrTareas) {
+    arrTareas = [];
+} else {
+    arrTareas = JSON.parse(localStorage.getItem("arrTareas"));
+}
+
 
 const addTaskBtn = document.querySelector("#addTaskBtn").addEventListener('click', e => {
 
@@ -12,7 +19,7 @@ const addTaskBtn = document.querySelector("#addTaskBtn").addEventListener('click
     let obtenido = JSON.parse(localStorage.getItem("tareas"));
     console.log(obtenido);
 
-    const dialog = document.createElement("dialong");
+    const dialog = document.createElement("dialog");
     const h2 = document.createElement("h2");
     const label = document.createElement("label");
     const input = document.createElement("input");
@@ -35,7 +42,14 @@ const addTaskBtn = document.querySelector("#addTaskBtn").addEventListener('click
 
     dialog.addEventListener("close", e=> dialog.remove());
 
-    button
+    buttonCancelar.addEventListener('click', e=>{
+        dialog.closest();
+        dialog.remove();
+    })
+
+    buttonAceptar.addEventListener('click', e=> {
+        const taskInput = input
+    } )
 
 
 });
