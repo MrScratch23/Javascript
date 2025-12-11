@@ -1,0 +1,1027 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>7 - AJAX</title>
+	<meta name='Generator' content='Zim 0.76.3'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+
+		@media print {
+			div#pie{display:none;}
+			div#volver{display:none;}
+			form{display:none;}
+			div#sumario{display:none;}
+			/* Evitar que las imágenes se corten en Google Chrome, en FF parece que lo ignora */
+			img {
+				page-break-inside: avoid;
+			}
+			div#contenido{
+				border:0px;
+				box-shadow: none;
+			}
+		}
+
+		table {
+			border: 1px solid var(--main-color);
+		}
+		thead {
+			background-color: var(--heading1-background-color);
+		}
+		tr:nth-child(2n) {
+			background-color: color-mix(in srgb, var(--main-color) 20%, transparent);
+		}
+		td {
+			padding-inline: 0.5rem;
+		}
+		th {
+			padding-inline: 0.5rem;
+			padding-block: 0.25rem;
+		}
+
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">7 - AJAX</a> <br>
+            <a href="#h2">Comunicación síncrona y asíncrona</a> <br>
+            &nbsp; &nbsp; <a href="#h3">Callbacks</a> <br>
+            <a href="#h4">AJAX</a> <br>
+            &nbsp; &nbsp; <a href="#h5">XMLHttpRequest  (procesar XML)</a> <br>
+            &nbsp; &nbsp; <a href="#h6">Ejercicios</a> <br>
+            <a href="#h7">Fetch</a> <br>
+            &nbsp; &nbsp; <a href="#h8">Promesas</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicio <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h10">Procesado de ficheros CSV (fetch+then)</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Lectura de un CSV <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+        
+            &nbsp; &nbsp; <a href="#h13">Procesado de ficheros CSV (async+await)</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Cuidado con las funciones asíncronas <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h15">Procesado de fichero JSON</a> <br>
+            <a href="#h16">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">7 - AJAX</h1>
+			<p>
+<b>Definición de asincronía</b>: Que no tiene lugar en completa correspondencia temporal con otro proceso o con la causa que lo produce.<br>
+<a href="https://dle.rae.es/as%C3%ADncrono" title="https://dle.rae.es/as%C3%ADncrono" class="https">https://dle.rae.es/as%C3%ADncrono</a>
+</p>
+<br>
+<p>
+<b>En programación</b>: La asincronía es un modelo de programación que permite que se inicie una operación de larga duración (como una solicitud a un servidor) y se continúe ejecutando otras tareas sin tener que esperar la respuesta, manejando el resultado o error de la operación inicial en el futuro cuando ésta está disponible.
+</p>
+<br>
+<p>
+<b>Referencias</b>: 
+</p>
+<ul style='padding-left: 30pt'>
+<li><a href="https://developer.mozilla.org/es/docs/Learn/JavaScript/Asynchronous" title="https://developer.mozilla.org/es/docs/Learn/JavaScript/Asynchronous" class="https">https://developer.mozilla.org/es/docs/Learn/JavaScript/Asynchronous</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX" title="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX" class="https">https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX</a></li>
+</ul>
+<br>
+<br>
+
+			<h1 id="h2">Comunicación síncrona y asíncrona</h1>
+			<p>
+Cuando nos referimos a <i>comunicación</i> nos referimos a realizar peticiones a un servidor a través de una red u operaciones de entrada/salida. Existen diferencias grandes en cómo se gestiona esta comunicación dependiendo si es síncrona o asíncrona.
+</p>
+<br>
+<p>
+<b>Comunicación Síncrona</b>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><b>Bloqueo del Hilo Principal</b>: las tareas se ejecutan en el hilo principal y bloquean la ejecución de otras tareas hasta que se completen (si una tarea toma tiempo, puede hacer que toda la aplicación se ralentice o no responda). Este es el principal motivo por el que no es deseable en una petición de un recurso externo.</li>
+</ul>
+<br>
+<p>
+Sería como si en un restaurante un cliente pide una sopa y un vaso de agua (por ese orden) y el cocinero se ponga a hacer la sopa esperando a que hierva el caldo, mirándolo sin hacer nada más. Hasta que no esté completado el caldo no seguirá trabajando en la sopa añadiendo el resto de los ingredientes y, cuando por fin esté terminada la sopa, servirá el vaso de agua.<br>
+La espera del cliente para el vaso de agua es inaceptable.
+</p>
+<br>
+<p>
+<b>Comunicación Asíncrona</b>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><b>No Bloquea el Hilo Principal</b>: las tareas se ejecutan en segundo plano (realmente se encolan y se ejecutan cuando el hilo principal no está ocupado) y no bloquean el hilo principal, esto permite que otras tareas continúen ejecutándose sin interrupción. 
+<ul>
+<li>Realmente es mucho más complejo: la petición se realiza y se encola el procesamiento de la respuesta, cuando el hilo principal no esté ocupado y haya llegado la respuesta se continuará con la ejecución.</li>
+</ul></li>
+<li><b>Callbacks o Promesas</b>:  se basa en el uso de callbacks (funciones que se ejecutan después de que se complete una tarea) o promesas (objetos que representan un valor futuro).</li>
+</ul>
+<br>
+<p>
+Siguiendo el ejemplo del cocinero, el cocinero pone a hervir el caldo y lo deja calentándose. Como no puede hacer nada más en la sopa hasta que hierva el caldo, inmediatamente sirve el vaso de agua. Cuando hierva el caldo, volverá a él y seguirá trabajando en la sopa.<br>
+El cliente apenas ha tenido que esperar nada por el vaso de agua.
+</p>
+<br>
+<br>
+
+			<h2 id="h3">Callbacks</h2>
+			<p>
+Una función de <i>callback</i> (no se suele traducir) es simplemente una función que se envía como parámetro y será ejecutada cuando se termina un proceso.
+</p>
+<br>
+<p>
+En el ejemplo de abajo la función <tt>imprimeResultado</tt> se pasa como función de callback.
+</p>
+<pre>
+const imprimeResultado = (resultado) =&gt; {
+  console.log("El resultado es " + resultado);
+}
+
+const sumarCB = (x, y, cb) =&gt; {
+  const res = x + y;
+  cb(res);
+}
+
+sumarCB(3, 4, imprimeResultado);
+</pre>
+<br>
+<p>
+Otros ejemplos podrían ser los <tt>eventListeners</tt>, como los que hemos usado para leer ficheros del servidor en el apartado 5a donde vimos la API File (en ese apartado también se introdujo la programación asíncrona).
+</p>
+<br>
+<br>
+
+			<h1 id="h4">AJAX</h1>
+			<p>
+AJAX (<i>Asynchronous JavaScript and XML</i>), supuso un cambio importante en la manera en la que funcionaban las webs, haciéndolas más dinámicas y mejorando la experiencia del usuario al permitir cargar contenido de un servidor de manera asíncrona, actualizando una parte de la página sin necesidad de recargar la página completamente.<br>
+AJAX se terminó convirtiendo en un una <i>buzzword</i> que <b>involucraba un conjunto de técnicas que añadían efectos, animaciones y funcionalidad</b> a las páginas no relacionadas con la asincronía.
+</p>
+<br>
+<p>
+Microsoft implementó el objeto <tt>XMLHttpRequest</tt> por su cuenta sin esperar a ningún estándar, lo que obligó a otros navegadores a implementarlo también de la misma forma. Ahora mismo esta técnica está superada y sólo se encontrará en código <i>legacy</i> (antiguo y/o heredado).
+</p>
+<br>
+<p>
+Para ver cómo funcionaba vamos a usar un ejemplo que permite cargar un documento XML de una web de manera asíncrona. 
+</p>
+<br>
+<br>
+
+			<h2 id="h5">XMLHttpRequest  (procesar XML)</h2>
+			<p>
+La idea básica es esta: en el servidor tenemos un fichero XML con contenido (o bien el fichero se genera dinámicamente en el servidor, no importa).<br>
+En el cliente creamos la función que aparece abajo, que recibe el nombre del fichero y una función de callback que tratará el XML que recuperemos.
+</p>
+<br>
+<p>
+La función crea un objeto de tipo <tt>XMLHttpRequest</tt> y realiza una petición al servidor. Obtendremos como respuesta un objeto de tipo documento XML, que es análogo al objeto <tt>document</tt> de la página HTML (las propiedades y métodos de manejo de nodos son iguales). Ese documento se lo pasamos a la función de <i>callback</i> como parámetro.
+</p>
+<br>
+<p>
+<b>Nota</b>: en el código está comentado la posibilidad de leer un fichero de texto en vez de un XML.
+</p>
+<br>
+<pre>
+function loadXMLDoc(filename, callback) {
+  let xhttp; // Definimos el objeto XMLHTTPRequest
+  if (window.XMLHttpRequest) {
+    xhttp = new XMLHttpRequest();
+  }
+  else { // código de IE5 and IE6
+    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xhttp.onreadystatechange = function (){ // Definimos el listener
+    if (xhttp.readyState === XMLHttpRequest.DONE) {
+      if (xhttp.status === 200) {
+        callback(xhttp.responseXML);
+        // callback(xhttp.responseText); // si el fichero es de texto
+      } else {
+        console.log("Hubo un error con la petición.");
+      }
+    }	
+  };
+  xhttp.open("GET", filename, true); //true = asíncrona, //false = síncrona
+  xhttp.send();
+}
+</pre>
+<br>
+<p>
+Si queremos acudir a una URL podemos hacerlo modificando la siguiente línea:
+</p>
+<pre>
+httpRequest.open("GET", "http://www.example.org/some.file", true);
+</pre>
+<br>
+<p>
+Por ejemplo: al hacer click en un botón se ejecutará esto: <tt>loadXMLDoc("ejemplo_peliculas.xml", gestionarFichero);</tt>
+</p>
+<br>
+<p>
+Y la función podría ser algo así:
+</p>
+<pre>
+function gestionarFichero(xml) {
+  const divResultado = document.getElementById("resultado");
+  let res = "";
+
+  xml.querySelectorAll("pelicula").forEach( p=&gt;{
+    const nombre = p.querySelector("nombre");
+    const actor = nombre.nextElementSibling;
+    const director = actor.nextElementSibling;
+    const categoria = actor.nextElementSibling.nextElementSibling;
+    res += `&lt;li&gt;${nombre.textContent} - ${actor.textContent} - ${director.textContent} - ${categoria.textContent}&lt;/li&gt;`;
+  });
+
+  divResultado.innerHTML = `&lt;ul&gt;${res}&lt;/ul&gt;`;
+}
+</pre>
+<br>
+<p>
+<b>Interesante</b>: fíjate que como se ha leído un fichero XML se pueden usar directamente los métodos que hemos visto del DOM. En el ejemplo de arriba se fuerza el código para poder mostrar un <tt>querySelectorAll()</tt>, un <tt>querySelector()</tt>, un <tt>nextElementSibling</tt> y un <tt>textContent</tt>.
+</p>
+<br>
+<p>
+<b>Importante</b>: un elemento XML no tiene una propiedad <tt>innerText</tt>, por eso se usa <tt>textContent</tt> (también se podría usar un <tt>innerHTML</tt>).
+</p>
+<br>
+<br>
+
+			<h2 id="h6">Ejercicios</h2>
+			<p>
+<b>Ejercicio 1</b>: Crea una web que automáticamente cargue el fichero XML desde <a href="https://www.w3schools.com/xml/simple.xml" title="https://www.w3schools.com/xml/simple.xml" class="https">https://www.w3schools.com/xml/simple.xml</a> y lo procese de manera que se muestren todas las comidas disponibles, con toda la información, cada una en una <i>card</i> distinta.
+</p>
+<br>
+<p>
+<b>Ejercicio 2</b>: Carga dinámica de formularios.<br>
+Añade un botón con la etiqueta <i>Realizar un pedido</i> que al pulsarlo cargue el fichero <tt>form.xml</tt>, cree un formulario con la información contenida en él y se quite él mismo del DOM. El fichero contiene esta información:
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;form&gt;
+  &lt;title&gt;Postre&lt;/title&gt;
+  &lt;select id="slPostre"&gt;&lt;/select&gt;
+  &lt;input_number&gt;Cantidad&lt;/input_number&gt;
+  &lt;button type="button" id="btnAnadir"&gt;Añadir al pedido&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+<br>
+<p>
+Instrucciones:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Tendrás que utilizar métodos del DOM para hacerlo todo</li>
+<li>Tendrás que añadir un formulario al final del documento.</li>
+<li>A este formulario tendrás que añadirle un elemento <tt>&lt;fieldset&gt;</tt> y dentro un <tt>&lt;legend&gt;</tt> con el contenido del <tt>&lt;title&gt;</tt> del XML.</li>
+<li>Dentro del <tt>&lt;fieldset&gt;</tt> que has añadido tendrás que incorporar el elemento <tt>&lt;select id="slPostre"&gt;</tt> directamente desde el XML</li>
+<li>En el XML aparece un elemento <tt>&lt;input_number&gt;Cantidad&lt;/input_number&gt;</tt> que tendrás que convertir en un <tt>&lt;label&gt;</tt> con un <tt>&lt;input type="number"&gt;</tt> asociado. El texto del label es el que aparece en el XML (Cantidad) y tanto el <tt>&lt;label&gt;</tt> como el <tt>&lt;input&gt;</tt> estarán dentro del <tt>&lt;fieldset&gt;</tt></li>
+<li>Añade el botón que aparece como último elemento del XML fuera del <tt>&lt;fieldset&gt;</tt></li>
+<li>Finalmente, por cada plato que haya en el menú añade un <tt>&lt;option&gt;</tt> al <tt>&lt;select&gt;</tt> del formulario</li>
+<li>Resuelve el ejercicio de manera que cambiando el fichero XML se cambie también el formulario que se carga, por ejemplo al cambiar el <tt>&lt;title&gt;</tt> a <i>"Elija un postre"</i> se deberá ver reflejado.</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: aunque puedes añadir un elemento del XML al HTML directamente, éste no se convertirá a un elementoHTML y seguirá siendo un elemento XML, por lo que, por ejemplo, un <tt>&lt;button&gt;</tt> o un <tt>&lt;select&gt;</tt> no funcionará como esperamos. En el ejemplo de arriba puede ser tentador hacer algo como:
+</p>
+<pre>
+fieldset.append(  xml.querySelector("#slPostre") ); // no funcionará
+</pre>
+<br>
+<p>
+Pero lamentablemente, eso no nos generará un elemento <tt>&lt;select&gt;</tt>, aunque lo parezca. Lo que tendremos que hacer es parsear el texto del XML para que se convierta en un elemento HTML con el innerHTML o crear nosotros el elemento y añadirlo.
+</p>
+<pre>
+fieldset.innerHTML = xml.querySelector("#slPostre").outerHTML; // sí funcionará
+</pre>
+<br>
+<p>
+En el caso del botón ocurrirá lo mismo.
+</p>
+<br>
+<br>
+<br>
+
+			<h1 id="h7">Fetch</h1>
+			<p>
+Evidentemente, el lío que hay organizar para leer algo con la idea de Microsoft es complejo (aunque en su momento no había nada mejor). Pero con la API Fetch todo se ha simplificado bastante. 
+</p>
+<br>
+<p>
+La API Fetch permite realizar peticiones a un servidor con esta sintaxis:
+</p>
+<pre>
+fetch( url, objetoConParámetros )
+</pre>
+<br>
+<p>
+El objeto con los parámetros es opcional, pero puede ser bastante complejo, para por ejemplo, realizar una petición <tt>POST</tt> a una API enviando datos para crear un nuevo producto. Todo esto lo veremos más adelante, pero aquí aparece ya a modo de introducción.
+</p>
+<pre>
+fetch("https://dummyjson.com/products/add",{
+  method: "POST",
+  headers: {
+    "Content-type" : "application/json"
+  },
+  body: JSON.stringify({
+    description: "Drones de combate",
+    price: "1000",
+    rating: "9/10"
+  })
+})
+.then(res=&gt;res.json())
+.then(json=&gt;console.log(json))
+.catch(error=&gt;console.error(error));
+</pre>
+<br>
+
+			<h2 id="h8">Promesas</h2>
+			<p>
+Vamos a resolver como primer ejemplo la lectura de un fichero de texto en formato CSV (<i>comma separated values</i>).
+</p>
+<br>
+<p>
+En este caso, en lugar de usar callbacks, se usan promesas, que es un objeto que representa el resultado posible (éxito o fracaso) de una operación asíncrona.
+</p>
+<br>
+<p>
+Una promesa es la garantía de que algo ocurrirá en el futuro, por ejemplo que se pidan datos al servidor y que nos avisarán cuando estén listos para ser usados (o cuando haya fallado la petición). Se usan para no bloquear el hilo de ejecución mientras mantenemos la sincronía.
+</p>
+<br>
+<p>
+Puedes generar tus propias promesas adaptando este código:
+</p>
+<pre>
+const promesa = new Promise((resolve, reject) =&gt; {
+  // Simular una operación asincrónica
+  const exito = true;
+  if (exito) {
+    resolve('¡Éxito!'); // La operación fue exitosa
+  } else {
+    reject( new Error('Hubo un error') ); // La operación falló
+  }
+});
+</pre>
+<br>
+<br>
+
+            
+				<h3>Ejercicio<a id="ejercicio" class="h_anchor"></a></h3>
+<br>
+<p>
+<b>Ejercicio 3</b>: ¿En qué orden se mostrarán los mensajes? ¿Qué es el <i>Event loop</i> en Javascript?
+</p>
+<pre>
+function promesa(){
+  return new Promise( (res,rej)=&gt;{
+    res("3: La promesa");
+  });
+}
+
+function ordenDeEjecución(){
+  console.log("1: primer console");
+
+//  setTimeout( ()=&gt;console.log("2: setTimeOut"), 100); // cambiarlo a 0 y probar de nuevo
+
+//  promesa().then( mensaje=&gt;{
+//    console.log(mensaje);
+//  });
+
+   console.log("4: último console de la función");
+}
+
+ordenDeEjecución();
+console.log("5: el último console");
+</pre>
+<br>
+<p>
+<b>Ampliación</b>: puedes crear tus operaciones <i>microtask</i> con <tt>queueMicrotask(()=&gt;{console.log("Hola")});</tt>
+</p>
+<br>
+<br>
+<br>
+ <br>
+			<h2 id="h10">Procesado de ficheros CSV (fetch+then)</h2>
+			<p>
+En su forma más sencilla (y menos robusta) el código es simplemente este (usando como ejemplo el servicio jsonplaceholder):
+</p>
+<pre>
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response =&gt; response.json())
+  .then(json =&gt; console.log(json))
+</pre>
+<br>
+<p>
+Si bien es cierto que funciona, asume que todo, absolutamente todo, irá perfectamente. Si hay problemas de red, DNS, errores en la URL, el servidor no responde, devolvió otro tipo de datos como una imagen, no tenemos permisos sobre ese recurso, el recurso no existe, etc. tendremos que capturar estos errores.
+</p>
+<br>
+<p>
+Una manera más realista sería la que se describe a continuación.
+</p>
+<pre>
+document.querySelector("#btnJSON").addEventListener("click", e=&gt;{
+  divResultado.innerHTML="Cargando...";
+
+  fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response =&gt; {
+    if (!response.ok) throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
+    return response.json();
+  })
+  .then(json =&gt; divResultado.innerHTML = JSON.stringify(json, "" , 2) )
+  .catch(error =&gt; divResultado.innerHTML=error);
+});
+</pre>
+<br>
+<br>
+
+            
+				<h3>Lectura de un CSV<a id="lectura-de-un-csv" class="h_anchor"></a></h3>
+<p>
+Imaginemos ahora que en el servidor tenemos un fichero llamado <tt>datos.csv</tt> que queremos leer cuando se pulse un botón.
+</p>
+<br>
+<p>
+Fichero <tt>datos.csv</tt>:
+</p>
+<pre>
+nombre,nota1,nota2
+Javier,5,6
+Mariano,7,9
+Carlos,3,10
+</pre>
+<br>
+<p>
+Esta sería la manera correcta de hacerlo:
+</p>
+<pre>
+function iniciar() {
+  divResultado.innerHTML = "Cargando...";
+
+  fetch('datos.csv')
+  .then(response =&gt; {
+    // Verificar si la solicitud fue exitosa (código de respuesta 200..299)
+    if (!response.ok) {
+      throw new Error('Error de red o servidor');
+    }
+    // Convertir la respuesta a formato JSON con response.json() o texto
+    return response.text();
+  })
+  .then(data =&gt; {
+    // Hacer algo con los datos
+    divResultado.innerHTML = "";
+    console.log(data);
+    
+    data.split("\n").forEach(e =&gt; {divResultado.innerHTML += "&lt;p&gt;" + e + "&lt;/p&gt;"});
+  })
+  .catch(error =&gt; {
+    // Manejar errores
+    console.error('Hubo un problema con la solicitud: ', error);
+    divResultado.innerHTML = "Hubo un problema con la solicitud: "+error;
+  });
+}
+</pre>
+<br>
+<p>
+La respuesta se recibe del servidor en el primer <tt>.then()</tt> en un objeto de tipo <tt>Response</tt> que tiene algunas funciones y atributos interesantes y necesarias para poder utilizar los datos:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>response.ok</tt> es un booleano que indica si se pudo realizar correctamente la petición en el servidor (el servidor ha respondido con un código HTTP entre <tt>200</tt> y <tt>299</tt>). Si no fue así, será <tt>false</tt>. Por ejemplo, puede que intentaras eliminar el producto con código <tt>123</tt> pero que ese producto no exista, el servidor debería mandar una respuesta con un código <tt>404</tt>, pero si no está bien configurado puede que devuelva la respuesta con un código <tt>200</tt> pero indicando el error en los datos. Esto es algo a tener en cuenta. </li>
+<li><tt>response.json()</tt> convierte en JSON la respuesta que el servidor dio</li>
+<li><tt>response.text()</tt> convierte en texto plano la respuesta que el servidor dio</li>
+<li><tt>response.blob()</tt> convierte en un blob la respuesta que el servidor dio (un blob es un objeto binario: una imagen png, un fichero mp3, un pdf, un fichero zip, etc.)</li>
+</ul>
+<br>
+<br>
+<p>
+<b>Nota</b>: también existe un <tt>.finally()</tt> que se ejecutará siempre al final, tanto si se terminó correctamente como si hubo un error capturado por el <tt>.catch()</tt> 
+</p>
+<br>
+<p>
+El problema de los <tt>.then()</tt> es que rápidamente se convierte en código complicado de mantener, sobre todo si tenemos que realizar una llamada que depende del resultado de otra anterior.<br>
+Si encadenamos muchas promesas podemos llegar a tener lo que se conoce como <i>Promise Hell</i> (similar al <i>callback hell</i>, pero con promesas).
+</p>
+<br>
+<p>
+<img src="./7_-_AJAX_files/pasted_image.png">
+</p>
+<br>
+ <br>
+            
+				<h4>Procesar XML<a id="procesar-xml" class="h_anchor"></a></h4>
+<br>
+<p>
+¿Y si hubiéramos querido leer un XML?  No hay un <tt>response.xml()</tt>, así que hay que usar un parseador.
+</p>
+<pre>
+fetch("datos.xml")
+  .then(response =&gt; response.text())
+  .then(str =&gt; new window.DOMParser().parseFromString(str, "text/xml"))
+  .then(data =&gt; console.log(data));
+</pre>
+<br>
+ <br>
+			<h2 id="h13">Procesado de ficheros CSV (async+await)</h2>
+			<p>
+Es bastante sencillo conseguirlo, tanto por el uso de la API Fetch como por el uso de async/await.
+</p>
+<pre>
+//IMPORTANTE: Esto sólo funciona si el fichero está en un servidor web como express, apache o al menos LiveServer
+async function iniciar() {
+  divResultado.innerHTML = "Cargando...";
+  const data = await getData("datos.csv");
+
+  divResultado.innerHTML = "";
+  console.log(data);
+   
+  data.split("\n").forEach(e =&gt; {divResultado.innerHTML += "&lt;p&gt;" + e + "&lt;/p&gt;"});
+}
+
+async function getData(fichero) {
+  const response = await fetch(fichero);
+  const data = await response.text();
+  return data;
+}
+
+document.querySelector("#btn").addEventListener('click', iniciar);
+</pre>
+<br>
+<p>
+Fíjate que el fichero se lee en la función getData() y es muy sencilla de entender. Si queremos algo más robusto, tendremos que hacer algo así:
+</p>
+<pre>
+async function getData(fichero) {
+  const response = await fetch(fichero);
+  if (!response.ok) {
+    throw new Error('Error de red o servidor');
+  }
+  const data = await response.text();
+  return data;
+}
+</pre>
+<br>
+<p>
+Ahora que puede devolver un error, tendremos que envolver su llamada con un bloque <tt>try..catch</tt>.
+</p>
+<pre>
+async function iniciar() {
+  divResultado.innerHTML = "Cargando...";
+  try{
+    const data = await getData("datos.cs");
+    divResultado.innerHTML = "";
+    console.log(data); 
+    data.split("\n").forEach(e =&gt; {divResultado.innerHTML += "&lt;p&gt;" + e + "&lt;/p&gt;"});
+  }
+  catch(error){
+    divResultado.innerHTML = "Hubo un problema con la solicitud: "+error;
+  }
+}
+</pre>
+<br>
+<br>
+
+            
+				<h3>Cuidado con las funciones asíncronas<a id="cuidado-con-las-funciones-asíncronas" class="h_anchor"></a></h3>
+<p>
+Usar <tt>async</tt> sobre una función no es algo inocuo, en el momento en el que creamos una función asíncrona, ésta devolverá una promesa. Por ejemplo:
+</p>
+<pre>
+async function getNumber(){return 7;}
+
+getNumber(); //Promise { &lt;state&gt;: "fulfilled", &lt;value&gt;: 7 }
+</pre>
+<br>
+<p>
+Lo que ocurre en el ejemplo de arriba es que se devuelve una promesa cuyo valor <tt>resolve</tt> es 7.
+</p>
+<br>
+<br>
+ <br>
+			<h2 id="h15">Procesado de fichero JSON</h2>
+			<p>
+Dado este fichero <tt>profesores.json</tt>:
+</p>
+<pre>
+{ 
+  "profesores": [
+	{ "nombre": "Javier", "apellido": "Mancera"},
+	{ "nombre": "Carlos", "apellido": "Rodríguez"},
+	{ "nombre": "Juan", "apellido": "Vílches"}
+  ]
+}
+</pre>
+<br>
+<br>
+<p>
+Es simplemente una variación del código anterior.
+</p>
+<pre>
+"use strict";
+
+//IMPORTANTE: Esto sólo funciona si el fichero csv está en un servidor como express o apache
+async function iniciar() {
+   divResultado.innerHTML = "Cargando...";
+   const data = await getData("profesores.json");
+
+   divResultado.innerHTML = "";
+   console.log(data);  
+   data.profesores.forEach(e =&gt; {divResultado.innerHTML += `&lt;p&gt;${e.nombre} ${e.apellido}&lt;/p&gt;`});
+}
+
+async function getData(fichero) {
+   const response = await fetch(fichero);
+   const data = await response.json();
+   return data;
+}
+
+document.querySelector("#btn").addEventListener('click', iniciar);
+</pre>
+<br>
+<br>
+<br>
+
+			<h1 id="h16">Ejercicios</h1>
+			<p>
+<b>Ejercicio 4</b>: Usando la API Fetch, muestra en un documento HTML bien presentado la información que devuelve las siguientes llamadas a una API
+</p>
+<ul style='padding-left: 30pt'>
+<li><a href="https://mocktarget.apigee.net/xml" title="https://mocktarget.apigee.net/xml" class="https">https://mocktarget.apigee.net/xml</a>  (devuelve un documento XML que habrá que parsear)</li>
+<li><a href="https://mocktarget.apigee.net/iloveapis" title="https://mocktarget.apigee.net/iloveapis" class="https">https://mocktarget.apigee.net/iloveapis</a>  (devuelve HTML)</li>
+<li><a href="https://mocktarget.apigee.net/json" title="https://mocktarget.apigee.net/json" class="https">https://mocktarget.apigee.net/json</a> (devuelve un objeto JSON)</li>
+</ul>
+<br>
+<p>
+Para el primer y tercer apartado utiliza async/await, para el segundo utiliza then/catch.
+</p>
+<br>
+<p>
+Otros ejemplos: <a href="https://apidocs.apigee.com/docs/mock-target/1/routes/xml/get" title="https://apidocs.apigee.com/docs/mock-target/1/routes/xml/get" class="https">https://apidocs.apigee.com/docs/mock-target/1/routes/xml/get</a>
+</p>
+<br>
+<p>
+<b>Opcional</b>: Usa la llamada de abajo que permite indicar el nombre de un usuario como parámetro.<br>
+<a href="https://apidocs.apigee.com/docs/mock-target/1/routes/user/get" title="https://apidocs.apigee.com/docs/mock-target/1/routes/user/get" class="https">https://apidocs.apigee.com/docs/mock-target/1/routes/user/get</a>
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 5</b>: Usa el servicio de geolocalización por IP de <a href="https://getgeoapi.com/" title="https://getgeoapi.com/" class="https">https://getgeoapi.com/</a> y crea una web que permita al usuario introducir una IP pública y que al pulsar un botón se muestre la información asociada a dicha IP. <br>
+Mostrará el nombre del país, la bandera, la población del país y la ciudad.
+</p>
+<br>
+<p>
+Documentación: <a href="https://getgeoapi.com/documentation/" title="https://getgeoapi.com/documentation/" class="https">https://getgeoapi.com/documentation/</a>
+</p>
+<br>
+<p>
+<b>Ejercicio 6</b>: Crea una web que al cargar haga una llamada a la API Rest <a href="https://jsonplaceholder.typicode.com/users" title="https://jsonplaceholder.typicode.com/users" class="https">https://jsonplaceholder.typicode.com/users</a> que devuelve 10 usuarios y muestra en una tabla de cada usuario el nombre del usuario (el username), el e-mail, el sitio web y la ciudad en la que vive. El id de cada usuario se almacenará en un atributo <tt>data-id</tt> de la fila. 
+</p>
+<br>
+<p>
+Nota: No almacenes la respuesta en una variable, queremos usar este ejercicio para practicar llamadas al servidor.
+</p>
+<br>
+<p>
+Cuando se pulse en uno de los usuarios, se recuperará el id del usuario del data-id y se realizará una llamada para recuperar más información de ese usuario concreto. Por ejemplo, si el usuario elegido es el 5 se llamará a <a href="https://jsonplaceholder.typicode.com/users/5" title="https://jsonplaceholder.typicode.com/users/5" class="https">https://jsonplaceholder.typicode.com/users/5</a>
+</p>
+<br>
+<p>
+Se mostrará en una división abajo el detalle del usuario elegido, se mostrará concretamente el nombre completo y el nombre de su compañía.
+</p>
+<br>
+<br>
+<p>
+<b>Ejemplo 7</b>: Crea una web que tenga una imagen y un botón <i>Anterior</i> y uno <i>Siguiente</i>.
+</p>
+<ul style='padding-left: 30pt'>
+<li>Al cargar la página se generará un número aleatorio entre 0 y 29. El número elegido será el id de la imagen que se mostrará.</li>
+<li>Para obtener la lista de fotos se hará una petición a <a href="https://picsum.photos/v2/list" title="https://picsum.photos/v2/list" class="https">https://picsum.photos/v2/list</a> esta lista se guardará en memoria en un array de objetos y cuando se pulse el botón <i>Siguiente</i> se mostrará la siguiente imagen de la lista, con <i>Anterior</i> se mostrará la anterior.</li>
+<li>Si la imagen es la 29, la siguiente será la imagen 30, el problema es que no tenemos datos de más fotos descargadas, por lo que habrá que pedir la siguiente página: <a href="https://picsum.photos/v2/list?page=2" title="https://picsum.photos/v2/list?page=2" class="https">https://picsum.photos/v2/list?page=2</a> y añadir estos datos a nuestro array. Este comportamiento seguirá siendo necesario cada vez que el id sea divisible por 30. Nota: Los datos de la página 1, sí los tenemos, por lo que si se pulsa el botón <i>Anterior</i> no habrá que pedirlos de nuevo. </li>
+<li>Si la imagen es la 0, el botón <i>Anterior</i> no hará nada.</li>
+<li>Además de la imagen, se mostrará también el autor de la misma.</li>
+</ul>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>

@@ -1,0 +1,950 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>7e - Node y Express</title>
+	<meta name='Generator' content='Zim 0.75.2'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">7e - Node y Express</a> <br>
+            &nbsp; &nbsp; <a href="#h2">Controladores</a> <br>
+            <a href="#h3">Bases de datos</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">7e - Node y Express</h1>
+			<p>
+Creado domingo 09 febrero 2025
+</p>
+<br>
+<pre>
+npm init -y
+</pre>
+<br>
+<p>
+Explicar el package.json <br>
+Crear un index.js<br>
+Ejecutar node index.js<br>
+Añadir un script "start" :"node index.js"
+</p>
+<br>
+<p>
+Modificar el package.json:
+</p>
+<pre>
+"start": "node --watch index.js"
+</pre>
+<br>
+<br>
+<p>
+Seguimos la documentación:<br>
+<a href="https://expressjs.com/en/starter/installing.html" title="https://expressjs.com/en/starter/installing.html" class="https">https://expressjs.com/en/starter/installing.html</a>
+</p>
+<pre>
+npm install express
+</pre>
+<br>
+<p>
+Copiamos y ejecutamos el helloworld<br>
+<a href="https://expressjs.com/en/starter/hello-world.html" title="https://expressjs.com/en/starter/hello-world.html" class="https">https://expressjs.com/en/starter/hello-world.html</a>
+</p>
+<br>
+<p>
+Vamos al basic routing para explicar el 
+</p>
+<pre>
+app.get('/',  (req, res) =&gt; {
+	 res.send('Hello World!')
+});
+</pre>
+<br>
+<p>
+Y probamos a mandar HTML.<br>
+<a href="https://expressjs.com/en/starter/basic-routing.html" title="https://expressjs.com/en/starter/basic-routing.html" class="https">https://expressjs.com/en/starter/basic-routing.html</a>
+</p>
+<br>
+<p>
+Ficheros estáticos y creamos un directorio public, public/css y public/js<br>
+Y aquí leemos <a href="https://expressjs.com/en/starter/static-files.html" title="https://expressjs.com/en/starter/static-files.html" class="https">https://expressjs.com/en/starter/static-files.html</a>
+</p>
+<pre>
+app.use(express.static('public'))
+</pre>
+<p>
+Creamos un public/index.html, public/css/style.css y public/js/index.js
+</p>
+<br>
+<br>
+<p>
+Hasta aquí el Getting Started de la web de express.Ahora seguimos con el Guide/Routing, al final hay un express.Router con un ejemplo de pájaros. Cópialo a un fichero routes/enrutador.js (cámbialo a módulos de ECMA Script con el export default router)<br>
+Úsalo en el index.js del servidor:
+</p>
+<pre>
+// Rutas:
+import enrutador from './routes/enrutador.js';
+app.use('/api', enrutador);
+</pre>
+<p>
+<a href="https://expressjs.com/en/guide/routing.html" title="https://expressjs.com/en/guide/routing.html" class="https">https://expressjs.com/en/guide/routing.html</a>
+</p>
+<br>
+<p>
+Un poco más arriba en <a href="https://expressjs.com/en/guide/routing.html" title="https://expressjs.com/en/guide/routing.html" class="https">https://expressjs.com/en/guide/routing.html</a> hay una tabla con métodos del objeto response
+</p>
+<br>
+<p>
+Crea una ruta post y una get con parámetro:
+</p>
+<pre>
+// Define una ruta con parámetro
+router.get('/producto/:id', (req, res) =&gt; {
+  res.send('Información sobre el producto '+ req.params.id);
+})
+
+// Una ruta de descarga
+router.post('/download', (req, res) =&gt; {
+  // res.download('./public/css/style.css');
+  res.status(500).send('¡Error horroroso, perro sarnoso!')
+})
+</pre>
+<br>
+<p>
+Prueba la del post:<br>
+<img src="./7e_-_Node_y_Express_files/pasted_image.png">
+</p>
+<br>
+<p>
+En el index.html creamos un formulario:
+</p>
+<pre>
+&lt;form id="frmDatos" method="GET" action="/api/gestion/datossubmit"&gt;
+	&lt;label&gt;
+	  Dato&lt;br&gt;
+	  &lt;input type="text" name="txtDato" id="txtDato" value="Hola caracola"&gt;
+	&lt;/label&gt;
+	&lt;select name="txtSelect"&gt;
+	  &lt;option selected value="uno"&gt;uno&lt;/option&gt;
+	  &lt;option value="uno"&gt;dos&lt;/option&gt;
+	  &lt;option value="uno"&gt;tres&lt;/option&gt;
+	&lt;/select&gt;
+	&lt;br&gt;
+	&lt;label&gt;
+	  &lt;input type="checkbox" name="chkAceptar" id="chkAceptar"&gt; Aceptar términos
+	&lt;/label&gt;
+	&lt;fieldset&gt;
+	  &lt;legend&gt;Opciones&lt;/legend&gt;
+	  &lt;label&gt;
+		&lt;input type="radio" name="txtRadio" value="rojo" checked&gt; Rojo
+	  &lt;/label&gt;
+	  &lt;br&gt;
+	  &lt;label&gt;
+		&lt;input type="radio" name="txtRadio" value="verde"&gt; Verde
+	  &lt;/label&gt;
+	  &lt;br&gt;
+	  &lt;label&gt;
+		&lt;input type="radio" name="txtRadio" value="azul"&gt; Azul
+	  &lt;/label&gt;
+	&lt;/fieldset&gt;
+    
+	&lt;button type="button" id="btnEnviarGET"&gt;Enviar GET&lt;/button&gt;
+	&lt;button type="button" id="btnEnviarPOST"&gt;Enviar POST&lt;/button&gt;
+	&lt;br&gt;
+	&lt;button type="button" id="btnEnviarFORMDATA"&gt;Enviar FORMADATA&lt;/button&gt;
+	&lt;button&gt;Enviar formulario (submit)&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;div id="divResultado"&gt;&lt;/div&gt;
+</pre>
+<br>
+<p>
+En el index.js del cliente:
+</p>
+<pre>
+/////////////////////
+// MAIN
+/////////////////////
+
+const divResultado = document.querySelector("#divResultado");
+
+
+document.querySelector("#btnEnviarGET").addEventListener("click", enviarGET);
+document.querySelector("#btnEnviarPOST").addEventListener("click", enviarPOST);
+document.querySelector("#btnEnviarFORMDATA").addEventListener("click", enviarFORMDATA);
+</pre>
+<br>
+<p>
+Haz la prueba con el botón de submit del formulario que hace la petición a <tt>/api/gestion/datossubmit</tt>. Hay que crear la función que responda a esa ruta. Los datos mandados por GET se responden desde el servidor con
+</p>
+<pre>
+// La ruta de prueba del submit
+router.get('/gestion/datossubmit', (req, res) =&gt; {
+  // console.log(req);
+  console.log(req.query);
+  const ahora=Date.now();
+  while(Date.now() &lt; ahora+3000){}
+
+  res.send(`
+	&lt;p&gt;Información recibida (SUBMIT):&lt;/p&gt;
+	&lt;ul&gt; 
+	  &lt;li&gt;txtDato: ${req.query.txtDato}&lt;/li&gt;
+	  &lt;li&gt;txtSelect: ${req.query.txtSelect}&lt;/li&gt;
+	  &lt;li&gt;chkAceptar: ${req.query.chkAceptar}&lt;/li&gt;
+	  &lt;li&gt;txtRadio: ${req.query.txtRadio}&lt;/li&gt;
+	&lt;/ul&gt;
+  `);
+});
+</pre>
+<br>
+<p>
+Ahora vamos a hacer en el cliente la funcionalidad de los métodos asíncronos de los botones.
+</p>
+<br>
+<p>
+Primero el de enviar con GET
+</p>
+<pre>
+const enviarGET = async () =&gt;{
+  try{
+    const sp = new URLSearchParams();
+    const txtDato = document.querySelector("#txtDato");
+    sp.append("txtDato", txtDato.value);
+    const txtSelect = document.querySelector("[name=txtSelect]");
+    sp.append("txtSelect", txtSelect.value);
+    const chkAceptar = document.querySelector("#chkAceptar");
+    sp.append("chkAceptar", chkAceptar.checked);
+    const txtRadio = document.querySelector("[name=txtRadio]");
+    sp.append("txtRadio", txtRadio.value);
+
+    // Alternativa usando FormData
+    // const frmDatos = document.querySelector("#frmDatos");
+    //const formdata = new FormData( frmDatos );
+
+    const response = await fetch("/api/gestion/datosget?" + sp.toString() );
+    if(!response.ok) throw new Error("Error al realizar la petición");
+    const datos = await response.text();
+    divResultado.innerHTML=datos;
+  }
+  catch(err){
+    divResultado.innerHTML=err;
+  }
+}
+</pre>
+<br>
+<p>
+En el servidor:
+</p>
+<pre>
+// La ruta de datosget asíncrona
+router.get('/gestion/datosget', (req, res) =&gt; {
+  // console.log(req);
+  console.log(req.query);
+  const ahora=Date.now();
+  while(Date.now() &lt; ahora+3000){}
+
+  res.send(`
+    &lt;p&gt;Información recibida (GET):&lt;/p&gt;
+    &lt;ul&gt; 
+      &lt;li&gt;txtDato: ${req.query.txtDato}&lt;/li&gt;
+      &lt;li&gt;txtSelect: ${req.query.txtSelect}&lt;/li&gt;
+      &lt;li&gt;chkAceptar: ${req.query.chkAceptar}&lt;/li&gt;
+      &lt;li&gt;txtRadio: ${req.query.txtRadio}&lt;/li&gt;
+    &lt;/ul&gt;
+  `);
+});
+</pre>
+<br>
+<br>
+<p>
+Ahora en el index del cliente el de enviar POST, el mismo código que ya hemos usado:
+</p>
+<pre>
+const enviarPOST = async () =&gt;{
+  const txtDato = document.querySelector("#txtDato");
+  const txtSelect = document.querySelector("[name=txtSelect]");
+  const chkAceptar = document.querySelector("#chkAceptar");
+  const txtRadio = document.querySelector("[name=txtRadio]");
+  
+  const objetoJSON = {
+    txtDato: txtDato.value,
+    txtSelect: txtSelect.value,
+    chkAceptar: chkAceptar.checked,
+    txtRadio : txtRadio.value
+  }
+
+  try{
+    const response = await fetch("/api/gestion/datospost",{
+      method: "POST",
+      headers: {
+        "Content-type" : "application/json"
+      },
+      body: JSON.stringify(objetoJSON)
+    } );
+    if(!response.ok) throw new Error("Error al realizar la petición");
+    const datos = await response.text();
+    divResultado.innerHTML=datos;
+  }
+  catch(err){
+    divResultado.innerHTML=err;
+  }
+}
+</pre>
+<br>
+<p>
+En el servidor:
+</p>
+<pre>
+// La ruta de datos post
+router.post('/gestion/datospost', (req, res) =&gt; {
+  // console.log(req);
+  console.log("Petición POST con objeto JSON")
+  console.log(req.body);
+  const ahora=Date.now();
+  while(Date.now() &lt; ahora+3000){}
+
+  res.send(`
+    &lt;p&gt;Información recibida (POST JSON):&lt;/p&gt;
+    &lt;ul&gt; 
+      &lt;li&gt;txtDato: ${req.body.txtDato}&lt;/li&gt;
+      &lt;li&gt;txtSelect: ${req.body.txtSelect}&lt;/li&gt;
+      &lt;li&gt;chkAceptar: ${req.body.chkAceptar}&lt;/li&gt;
+      &lt;li&gt;txtRadio: ${req.body.txtRadio}&lt;/li&gt;
+    &lt;/ul&gt;
+  `);
+});
+</pre>
+<br>
+<p>
+La req.body saldrá como undefined o {} y eso es lo que se mandará al cliente o directamente un error. Eso es porque el body no se puebla automáticamente. En el index.js tenemos que indicar:
+</p>
+<pre>
+// Middleware para parsear el cuerpo de las solicitudes como JSON
+app.use(express.json());
+</pre>
+<p>
+<a href="https://expressjs.com/en/4x/api.html#express.json" title="https://expressjs.com/en/4x/api.html#express.json" class="https">https://expressjs.com/en/4x/api.html#express.json</a>
+</p>
+<br>
+<p>
+Ahora el botón del cliente de POST con FORMDATA:
+</p>
+<pre>
+const enviarFORMDATA = async () =&gt;{
+
+  divResultado.innerHTML="Cargando...";
+
+  const frmDatos = document.querySelector("#frmDatos");
+  const formdata = new FormData( frmDatos );
+
+  try{
+    const response = await fetch("/api/gestion/datosformdata",{
+      method: "POST",
+      body: formdata
+    } );
+    if(!response.ok) throw new Error("Error al realizar la petición");
+    const datos = await response.text();
+    divResultado.innerHTML=datos;
+  }
+  catch(err){
+    divResultado.innerHTML=err;
+  }
+}
+</pre>
+<br>
+<p>
+El problema es que se manda como "multipart/form-data" y eso no lo  maneja Express, necesitamos un middleware<br>
+<a href="https://expressjs.com/en/resources/middleware.html" title="https://expressjs.com/en/resources/middleware.html" class="https">https://expressjs.com/en/resources/middleware.html</a>  → Multipart formdata<br>
+<a href="https://expressjs.com/en/resources/middleware/multer.html" title="https://expressjs.com/en/resources/middleware/multer.html" class="https">https://expressjs.com/en/resources/middleware/multer.html</a>
+</p>
+<br>
+<pre>
+npm install multer
+</pre>
+<br>
+<p>
+Hay una parte que dice esto:
+</p>
+<pre>
+In case you need to handle a text-only multipart form, you should use the .none() method:
+
+const express = require('express')
+const app = express()
+const multer  = require('multer')
+const upload = multer()
+
+app.post('/profile', upload.none(), function (req, res, next) {
+  // req.body contains the text fields
+})
+</pre>
+<br>
+<p>
+La parte del enrutador.js (fíjate en el upload.none()):
+</p>
+<pre>
+// La ruta de del formdata
+import multer from 'multer';
+const upload = multer();
+
+router.post('/gestion/datosformdata', upload.none(), (req, res) =&gt; {
+  // console.log(req);
+  console.log("Petición POST con objeto FORMDATA")
+  console.log(req.body);
+  const ahora=Date.now();
+  while(Date.now() &lt; ahora+3000){}
+
+  res.send(`
+	&lt;p&gt;Información recibida (POST JSON):&lt;/p&gt;
+	&lt;ul&gt; 
+	  &lt;li&gt;txtDato: ${req.body.txtDato}&lt;/li&gt;
+	  &lt;li&gt;txtSelect: ${req.body.txtSelect}&lt;/li&gt;
+	  &lt;li&gt;chkAceptar: ${req.body.chkAceptar}&lt;/li&gt;
+	  &lt;li&gt;txtRadio: ${req.body.txtRadio}&lt;/li&gt;
+	&lt;/ul&gt;
+  `);
+});
+</pre>
+<br>
+<br>
+
+			<h2 id="h2">Controladores</h2>
+			<pre>
+class ProductoController {
+  constructor() {}
+  datosFormData(req,res){
+	// console.log(req);
+	console.log("Petición POST con objeto FORMDATA")
+	console.log(req.body);
+	const ahora=Date.now();
+	while(Date.now() &lt; ahora+3000){}
+  
+	res.send(`
+	  &lt;p&gt;Información recibida (POST JSON):&lt;/p&gt;
+	  &lt;ul&gt; 
+		&lt;li&gt;txtDato: ${req.body.txtDato}&lt;/li&gt;
+		&lt;li&gt;txtSelect: ${req.body.txtSelect}&lt;/li&gt;
+		&lt;li&gt;chkAceptar: ${req.body.chkAceptar}&lt;/li&gt;
+		&lt;li&gt;txtRadio: ${req.body.txtRadio}&lt;/li&gt;
+	  &lt;/ul&gt;
+	`);
+  }
+}
+
+export default new ProductoController();
+</pre>
+<br>
+<p>
+Y modificamos el enritador.js:
+</p>
+<pre>
+import productoController from '../controllers/ProductoController.js';
+router.post('/gestion/datosformdata', upload.none(), productoController.datosFormData);
+</pre>
+<br>
+<br>
+<br>
+
+			<h1 id="h3">Bases de datos</h1>
+			<p>
+<a href="https://expressjs.com/en/guide/database-integration.html" title="https://expressjs.com/en/guide/database-integration.html" class="https">https://expressjs.com/en/guide/database-integration.html</a>
+</p>
+<br>
+<p>
+<a href="https://expressjs.com/en/guide/database-integration.html#mysql" title="https://expressjs.com/en/guide/database-integration.html#mysql" class="https">https://expressjs.com/en/guide/database-integration.html#mysql</a><br>
+<a href="https://expressjs.com/en/guide/database-integration.html#postgresql" title="https://expressjs.com/en/guide/database-integration.html#postgresql" class="https">https://expressjs.com/en/guide/database-integration.html#postgresql</a>
+</p>
+<br>
+<p>
+<a href="https://expressjs.com/en/guide/database-integration.html#sqlite" title="https://expressjs.com/en/guide/database-integration.html#sqlite" class="https">https://expressjs.com/en/guide/database-integration.html#sqlite</a>
+</p>
+<pre>
+npm install sqlite3
+</pre>
+<br>
+<p>
+El paquete sqlite3 es un cliente de SQLite que usa callbacks, con el de sqlite podremos usar async/await
+</p>
+<br>
+<p>
+Este es el código que aparece de ejemplo: fíjate que se crea en memoria, no en un fichero. 
+</p>
+<pre>
+const sqlite3 = require('sqlite3').verbose()
+const db = new sqlite3.Database(':memory:')
+
+db.serialize(() =&gt; {
+  db.run('CREATE TABLE lorem (info TEXT)')
+  const stmt = db.prepare('INSERT INTO lorem VALUES (?)')
+
+  for (let i = 0; i &lt; 10; i++) {
+	stmt.run(`Ipsum ${i}`)
+  }
+
+  stmt.finalize()
+
+  db.each('SELECT rowid AS id, info FROM lorem', (err, row) =&gt; {
+	console.log(`${row.id}: ${row.info}`)
+  })
+})
+
+db.close()
+</pre>
+<br>
+<br>
+<p>
+Vamos a crear el directorio database y dentro el fichero db.js, que es un módulo que exporta un objeto.<br>
+Fíjate que:
+</p>
+<ul style='padding-left: 30pt'>
+<li>run() recibe un Statement creado con create(), un array con los valores y una función de callback (tiene que ser function, no función flecha por el this). Este run() sólo está pensado ahora mismo para las consultas de inserción</li>
+<li>get() devuelve una fila, recibe un statement y un callback(error, fila)</li>
+<li>all() devuelve un array de filas, recibe un statement y un callback(error, fila)</li>
+</ul>
+<pre>
+import sqlite3 from 'sqlite3';
+
+class Basedatos {
+
+  constructor(ruta) {
+    this.db = new sqlite3.Database(ruta);
+    this.db.serialize(() =&gt; {
+      this.db.run(`CREATE TABLE IF NOT EXISTS Producto (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT not null,
+        precio REAL
+        );
+      `);
+    });
+  }
+
+  prepare(ordenStr){
+    return this.db.prepare(ordenStr);
+  }
+
+  run(statement, values, callback){
+    this.db.serialize(() =&gt; {
+      statement.run(...values, function(error){
+        if(error) return callback(error, null);
+        return callback(null, {lastID: this.lastID});
+      });      
+    });
+  }
+
+
+  get(statement, callback){
+    this.db.serialize(() =&gt; {
+      statement.get( function(error, fila){
+        if(error) return callback(error, null);
+        return callback(null, fila);
+      });  
+    });
+  }
+
+
+  all(statement, callback){
+    this.db.serialize(() =&gt; {
+      statement.all( function(error, arrFilas){
+        if(error) return callback(error, null);
+        return callback(null, arrFilas);
+      });  
+    });
+  }
+
+  close(){
+    db.close();
+  }
+}
+
+export default new Basedatos("./database/db.SQLITE");
+</pre>
+<br>
+<p>
+En el controller.js o en el modelo mejor:<br>
+<tt>import database from "../database/db.js";</tt>
+</p>
+<br>
+<p>
+Y ahora el código:
+</p>
+<ul style='padding-left: 30pt'>
+<li>con <tt>database.prepare( sentenciaSQL )</tt> preparamos la sentencia y se crea un objeto de tipo <tt>Statement</tt> (sentencia)</li>
+<li>con database.run(), database.get() o database.all() ejecutamos la sentencia según queremos insertar/eliminar/actualizar, recuperar una fila o varias filas</li>
+<li>Los métodos tienen que incluir un callback <tt>(error, resultado) =&gt;{}</tt>  para tratar el error o el resultado correcto.</li>
+</ul>
+<pre>
+insertProducto(req,res){
+    // console.log(req);
+    console.log("Petición POST con objeto FORMDATA")
+    console.log(req.body);
+    const ahora=Date.now();
+    while(Date.now() &lt; ahora+2000){}
+  
+    const stmt = database.prepare(`INSERT INTO Producto (nombre, precio) VALUES (?,?)`);
+
+    database.run(stmt, [req.body.txtDato, 23.5], (error, resultado)=&gt;{
+      if(error)
+        res.status(500).send(`Error: ${error}`);
+
+      console.log("RESULTADO:")
+      console.log(resultado);
+      res.send(`
+        &lt;p&gt;Información recibida (Insert Producto):&lt;/p&gt;
+        &lt;p&gt;${resultado.lastID}&lt;/p&gt;
+        `);  
+    });
+  }
+
+
+  selectProductos(req,res){
+    // console.log(req);
+    console.log("Petición POST con objeto FORMDATA")
+    const ahora=Date.now();
+    while(Date.now() &lt; ahora+2000){}
+
+    const stmt = database.prepare(`Select * from producto`);
+    const resultado = database.all(stmt, (error, resultado)=&gt;{
+      if(error)
+        res.status(500).send(`Error: ${error}`);
+
+      console.log("RESULTADO:")
+      console.log(resultado);
+
+      res.send(`
+        &lt;p&gt;Información recibida (Select productos):&lt;/p&gt;
+        &lt;p&gt;${resultado}&lt;/p&gt;
+        `);  
+    });
+  } 
+
+</pre>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>
