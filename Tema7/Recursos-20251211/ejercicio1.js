@@ -58,17 +58,17 @@ const listado = document.querySelector("#listado");
 
 
 const tratarXML = (XML) => {
+
     console.log(XML)
     XML.querySelectorAll("food").forEach(food=> {
-        const name = food.children[0];
-        f = food;
-        const precio = food.children[1];
-        console.log(name.textContent);
-        console.log(precio.textContent);
-        const descripcion = food.children[2];
-        console.log(descripcion.textContent);
-        const calorias = food.children[3];
-        console.log(calorias.textContent);
+        const name = food.children[0].textContent;
+        const precio = food.children[1].textContent;
+        console.log(name);
+        console.log(precio);
+        const descripcion = food.children[2].textContent;
+        console.log(descripcion);
+        const calorias = food.children[3].textContent;
+        console.log(calorias);
 
         
         
@@ -106,6 +106,9 @@ const tratarXML = (XML) => {
     
 }
 
+const cargar = document.querySelector("#cargar").addEventListener('click', e => {
+
 loadXMLDoc("simple.xml", tratarXML);
-let f;
 listado.append(tabla);
+
+});
