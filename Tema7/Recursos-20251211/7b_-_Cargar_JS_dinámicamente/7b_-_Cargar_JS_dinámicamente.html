@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>7b - Cargar JS dinámicamente</title>
-	<meta name='Generator' content='Zim 0.75.2'>
+	<meta name='Generator' content='Zim 0.76.3'>
 	<style type='text/css'>
 	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
 	    :root {
@@ -246,6 +246,39 @@ background-image: var(--html-background-color-image);
 		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
 		ul {list-style-image: none}
 		/* ul rule needed to reset style for sub-bullets */
+
+		@media print {
+			div#pie{display:none;}
+			div#volver{display:none;}
+			form{display:none;}
+			div#sumario{display:none;}
+			/* Evitar que las imágenes se corten en Google Chrome, en FF parece que lo ignora */
+			img {
+				page-break-inside: avoid;
+			}
+			div#contenido{
+				border:0px;
+				box-shadow: none;
+			}
+		}
+
+		table {
+			border: 1px solid var(--main-color);
+		}
+		thead {
+			background-color: var(--heading1-background-color);
+		}
+		tr:nth-child(2n) {
+			background-color: color-mix(in srgb, var(--main-color) 20%, transparent);
+		}
+		td {
+			padding-inline: 0.5rem;
+		}
+		th {
+			padding-inline: 0.5rem;
+			padding-block: 0.25rem;
+		}
+
 	</style>
 	
 	<!-- resaltado de sintaxis -->
@@ -283,6 +316,8 @@ background-image: var(--html-background-color-image);
         
         
             <a href="#h13">Ejercicios</a> <br>
+        
+        
 </div>
 <!-- Sumario -->
 
@@ -347,7 +382,7 @@ console.log("Probando las importaciones de un módulo autónomo");
 alert("Bienvenido");
 
 // importación del módulo cuadrado.js
-import './saludo.js';
+import './cuadrado.js';
 
 document.querySelector("#btnAccion").addEventListener("click", e=&gt;{
   console.log("Botón pulsado");
@@ -377,8 +412,8 @@ Cosas a tener en cuenta:
 <li>Desde el <tt>index.html</tt> se ha cargado el fichero <tt>code.js</tt> con <tt>&lt;script type="module" src="code.js"&gt;&lt;/script&gt;</tt>, porque <b>un módulo sólo puede ser cargado desde otro módulo.</b></li>
 <li>El fichero <tt>code.js</tt> se carga sin usar el <tt>defer</tt>, este ya es el comportamiento por defecto de los módulos y no es necesario indicarlo.</li>
 <li>Aunque cargues varias veces el mismo módulo, sólo será cargado y ejecutado una única vez.</li>
-<li>El orden en el que se han ejecutado las operaciones no parece el intuitivo, <b>primero se ha ejecutado el módulo y luego el resto del código</b>. Esto es, sin embargo, el comportamiento esperado. En el parseado inicial del fichero <tt>code.js</tt>, el navegador <b>importa el módulo y lo ejecuta inmediatamente</b> antes de pasar a ejecutar el propio <tt>code.js</tt>.</li>
-<li>Si pulsamos el botón, saldrá un error en la consola indicando que la funcioón <tt>cuadrado()</tt> no está definida, esa función sólo existe en el módulo <tt>cuadrado.js</tt></li>
+<li>El orden en el que se han ejecutado las operaciones no parece el intuitivo, <b>primero se ha ejecutado el módulo y luego el resto del código</b>. Esto es, sin embargo, el comportamiento esperado. En el parseado inicial del fichero <tt>code.js</tt>, el navegador <b>importa el módulo y lo ejecuta inmediatamente</b> antes de pasar a ejecutar el propio <tt>code.js</tt>. <b>Este proceso es síncrono</b>.</li>
+<li><b>Si pulsamos el botón, saldrá un error en la consola</b> indicando que la función <tt>cuadrado()</tt> no está definida, <b>esa función sólo existe en el módulo</b> <tt>cuadrado.js</tt></li>
 <li>Por todo esto el uso de este tipo de módulos está muy limitado, pero podría usarse por ejemplo para que al acceder a la página principal se realizase una petición a un servidor que devolviera los 5 productos de oferta de la semana y los mostrase en la página.</li>
 </ul>
 <br>
@@ -498,7 +533,7 @@ export default saludo;
 Y se usaría así (<b>sin llaves</b>):
 </p>
 <pre>
-import saludo from './saludo.js';
+import saludo from './saludoModulo.js';
 saludo("Javier);
 </pre>
 <br>
@@ -506,7 +541,7 @@ saludo("Javier);
 También se puede aprovechar que vamos a importar sólo la exportación por defecto para cambiarle el nombre a uno que nos guste más:
 </p>
 <pre>
-import hola from './saludo.js';
+import hola from './saludoModulo.js';
 hola("Javier);
 </pre>
 <br>
@@ -547,6 +582,10 @@ Los módulos son una manera conveniente de añadir funcionalida da una web, pero
 </p>
 <br>
 <p>
+<b>Nota</b>: Tal y como hemos estado usando los módulos hasta ahora simplemente son una buena manera de organizar el código evitando tener que añadir etiquetas <tt>&lt;script&gt;</tt> en el HTML. Si un fichero <tt>a.js</tt> necesita uno <tt>b.js</tt> para funcionar lo cargamos desde <tt>a.js</tt> y no desde el HTML, así si dejamos de usar la biblioteca <tt>a.js</tt> no tendremos que eliminar del <tt>&lt;head&gt;</tt> las etiquetas <tt>&lt;script&gt;</tt> de <tt>a.js</tt> y <tt>b.js</tt> (podríamos olvidar eliminar <tt>b.js</tt> y seguiríamos cargándolo aunque ya no lo usásemos).
+</p>
+<br>
+<p>
 Imaginemos que en nuestra web se muestra un conjunto de datos, por ejemplo una factura o las notas de unos alumnos, también tenemos un botón para convertir los datos a PDF y otro para crear una hoja de cálculo con los datos. Según las estadísticas de uso de la aplicación, los datos sólo <b>se convierten a PDF una de cada veinte veces</b> que se muestran. Y a una <b>hoja de cálculo sólo una de cada cuarenta veces</b> que se muestran. Además, rara vez se usan las dos funcionalidades en la misma sesión.
 </p>
 <br>
@@ -576,7 +615,6 @@ document.querySelector("#btnAccion").addEventListener("click", async e=&gt;{
   catch(error){
     divResultado.innerHTML = error +" Error al cargar la biblioteca";
   }
-  
 });
 </pre>
 <br>
@@ -733,7 +771,7 @@ resultado.innerHTML=s;
             
 							<h1 id="h13">Ejercicios</h1>
 			<p>
-<b>Ejercicio 1:</b> Crea una web que contenga un <tt>&lt;input type="number" id="temperatura"&gt;</tt>, un botón y una división de resultado. Cuando se pulse el botón cargará dinámicamente un módulo que contendrá tres funciones, usará las funciones con el dato que el usuario haya escrito en el <tt>&lt;input&gt;</tt> e imprimirá el resultado en la división.
+<b>Ejercicio 7b-1:</b> Crea una web que contenga un <tt>&lt;input type="number" id="temperatura"&gt;</tt>, un botón y una división de resultado. Cuando se pulse el botón cargará dinámicamente un módulo que contendrá tres funciones, usará las funciones con el dato que el usuario haya escrito en el <tt>&lt;input&gt;</tt> e imprimirá el resultado en la división.
 </p>
 <br>
 <p>
@@ -746,8 +784,187 @@ Las tres funciones del módulo serán las siguientes:
 </ul>
 <br>
 <br>
+<p>
+<b>Ejercicio 7b-2</b>: Utiliza la biblioteca <a href="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" title="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" class="https">https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js</a> para que ejecutar la función <tt>fireConfetti</tt> cuando se pulse un botón. Abajo hay un trozo de código que lo usa, pero no tiene por qué ser eficiente, fíjate que se carga siempre. ¿Cómo podemos modificarlo para que la biblioteca de confetti se cargue sólo cuando se ha pulsado el botón?
+</p>
+<pre>
+import('https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js');
+
+function fireConfetti(event) {
+	const x = event.clientX / document.body.clientWidth;
+	const y = event.clientY / document.body.clientHeight;
+	confetti({origin: {x, y}});
+}
+
+document.querySelector("#btnAccion").addEventListener("click", async e=&gt;{
+  fireConfetti(e); // ¡Fire Confetti! 🎉
+});
+</pre>
+<br>
+<p>
+Nota: esta biblioteca está preparada para ser consumida como módulo, pero sus funciones, como <tt>confetti()</tt>, se convierten en funciones globales.
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 7b-3</b>: Otro ejemplo de biblioteca simpática es Rough Notation (<a href="https://roughnotation.com/" title="https://roughnotation.com/" class="https">https://roughnotation.com/</a>). ¿Puedes leer la documentación y usarla de manera que cuando se pulse sobre el botón se cargue la biblioteca y cree un rectángulo alrededor del propio botón?
+</p>
 <br>
 
+            
+						<pre class="codigo">
+Posible solución: Intenta leer la documentación para resolver el ejercicio.
+							<div class="codigojs" style="display:none">let s = `document.querySelector("#btnAccion").addEventListener("click", async e=&gt;{
+  try{
+    const { annotate } = await import('https://unpkg.com/rough-notation?module');
+    const annotation = annotate(e.target, { type: 'box', padding:[20,20,20,20] });
+    annotation.show();
+  }
+  catch(error){
+    alert(error);
+  }
+});
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+				<p>
+<b>Ejercicio 7b-4</b>: Intenta utilizar dinámicamente la biblioteca <a href="https://sweetalert2.github.io/" title="https://sweetalert2.github.io/" class="https">https://sweetalert2.github.io/</a> para mostrar diálogos y notificaciones.<br>
+<img src="./7b_-_Cargar_JS_dinámicamente_files/pasted_image_260107.png">
+</p>
+<br>
+<p>
+<b>Ejercicio avanzado 7b-5</b>: Para almacenar información de manera permanente en el cliente podemos usar cookies o localStorage, pero también existe la opción estándar IndexedDB, que permite usar una base de datos no relacional directamente desde el navegador y sin las limitaciones de tamaño de localStorage. Lamentablemente su uso es bastante complejo, pero podemos ayudarnos de librerías como <tt>Dexie</tt> (<a href="https://github.com/dexie/Dexie.js?tab=readme-ov-file" title="https://github.com/dexie/Dexie.js?tab=readme-ov-file" class="https">https://github.com/dexie/Dexie.js?tab=readme-ov-file</a>).
+</p>
+<br>
+<p>
+El objetivo de este ejercicio es usar Dexie para almacenar una lista de asignaturas (id, nombre, dificultad).
+</p>
+<br>
+<p>
+<b>Ejercicio avanzado 7b-6</b>: Usa Zod (<a href="https://zod.dev/" title="https://zod.dev/" class="https">https://zod.dev/</a>) para validar formularios.
+</p>
+<pre>
+document.querySelector("#btnAccion").addEventListener("click", async e=&gt;{
+try {
+    // Apuntamos a la versión 4
+    const { z } = await import('https://cdn.jsdelivr.net/npm/zod@4/+esm');
+
+    const PerroSchema = z.object({
+      nombre: z.string().min(3, "El nombre es muy corto"),
+      email: z.string().email(),
+      edad: z.number().min(0).max(20),
+      esBueno: z.boolean()
+    });
+    
+    const datosDelUsuario = {
+      nombre: "Aria",
+      email: "aria@guau.com",
+      edad: 3,
+      esBueno: true
+    };
+
+    const validacion = PerroSchema.safeParse(datosDelUsuario);
+
+    if (validacion.success) {
+      console.log("✅ Datos correctos:", validacion.data);
+      alert("¡Perro validado correctamente!");
+    } else {
+      console.error("❌ Errores de validación:", validacion.error.format());
+      alert("Los datos del perro no son válidos.");
+    }
+
+  } catch (error) {
+    console.error("No se pudo cargar Zod 4", error);
+  }
+});
+
+</pre>
+<br>
+<p>
+<b>Ejemplo de uso 7b-7</b>: Swappy (<a href="https://swapy.tahazsh.com/" title="https://swapy.tahazsh.com/" class="https">https://swapy.tahazsh.com/</a>) es una biblioteca que permite crear interfaces drag &amp; drop con unas pocas líneas de código.
+</p>
+<br>
+<p>
+JS (cargado como módulo):
+</p>
+<pre>
+const container = document.querySelector(".container");
+await import ("https://unpkg.com/swapy/dist/swapy.min.js")
+const swapy = Swapy.createSwapy(container)
+</pre>
+<br>
+<p>
+HTML:
+</p>
+<pre>
+&lt;div class="container"&gt;
+  &lt;div class="section-1" data-swapy-slot="foo"&gt;
+	&lt;div class="content-a" data-swapy-item="a"&gt;
+	  &lt;!-- Your content for content-a goes here --&gt;
+	   &lt;p&gt;Javier Mancera&lt;/p&gt;
+	&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="section-2" data-swapy-slot="bar"&gt;
+	&lt;div class="content-b" data-swapy-item="b"&gt;
+	  &lt;!-- Your content for content-b goes here --&gt;
+	  &lt;div class="handle" data-swapy-handle&gt;👇🏼&lt;/div&gt;
+	  &lt;p&gt;Este se arrastra con la mano.&lt;/p&gt;
+	  &lt;ul&gt;
+		&lt;li&gt;Gato&lt;/li&gt;
+		&lt;li&gt;Zorro&lt;/li&gt;
+		&lt;li&gt;Caballo&lt;/li&gt;
+		&lt;li&gt;Gallo&lt;/li&gt;
+		&lt;li&gt;Perro&lt;/li&gt;
+		&lt;li&gt;Vaca&lt;/li&gt;
+	  &lt;/ul&gt;
+
+	&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="section-3" data-swapy-slot="baz"&gt;
+	&lt;div class="content-c" data-swapy-item="c"&gt;
+	  &lt;!-- Your content for content-c goes here --&gt;
+	   &lt;p&gt;Hola caracola&lt;/p&gt; 
+	&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<br>
+<p>
+CSS:
+</p>
+<pre>
+.container{
+   display: grid; grid-template-columns: 1fr 1fr;
+   gap: 1rem;
+}
+
+.container &gt; div{
+  border: 2px solid white;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(72, 45, 133);
+  min-height: 7rem;
+  display:grid;
+  place-content: center;
+  user-select: none;
+}
+
+.container &gt; div:nth-child(2){
+  background-color: rgb(100, 28, 74);
+}
+
+.container &gt; div:nth-child(3){
+  background-color: navy;
+}
+</pre>
+<br>
 
 
 
