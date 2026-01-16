@@ -10,6 +10,17 @@
 //   </porte>
 
 
+
+const arreglarFormulario = function() {
+  const txtContenedor = document.querySelector("[name='txtContenedor']");
+  txtContenedor.checked = true;
+  txtContenedor.parentElement.nextElementSibling.firstElementChild.name = "txtContenedor";
+
+  const txtFruta = document.querySelector("[name='txtFruta']");
+   txtFruta.checked = true;
+
+};
+
 const cambiarTema = function() {
   
     let dialog = document.createElement("dialog");
@@ -159,6 +170,33 @@ fecha : "",
 portes: []
 };
 
+
+const porteNuevo = function() {
+  
+    let errores = [];
+    const txtProducto = document.querySelector("#txtProducto").value.trim();
+
+    if (txtProducto.lenght > 20 || txtProducto.lenght === 0) {
+        errores.push("Error con el producto");
+    }
+
+    if (errores.lenght==0) {
+        
+    } else {
+        crearDialog(errores);
+    }
+
+
+
+};
+
+const crearDialog = function(errores) {
+  return
+};
+
+
+arreglarFormulario();
+
 cargarDatosDelFichero()
 
 const btnCambiarTema = document.querySelector("#btnCambiarTema").addEventListener('click', cambiarTema);
@@ -189,6 +227,8 @@ btnInicio.addEventListener('click', () => {
     crearPorte.setAttribute("ocultar", "");
 });
 
+
+document.querySelector("#btnAddContenedorAlPorte").addEventListener('click', porteNuevo);
 
 /////////////////
 // FUNCTIONS
