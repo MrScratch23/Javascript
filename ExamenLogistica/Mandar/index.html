@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Logistidaw</title>
+	<link rel="preload" as="image" href="public/img/bg.jpg" type="image/jpeg" fetchpriority="high">
+	<link rel="stylesheet" href="./public/css/style.css">
+	<script src="code.js" defer></script>
+</head>
+<body>
+	<header>
+		<h1>Logistidaw</h1>
+	</header>
+	<nav>
+		<button id="btnInicio">Inicio</button>
+		<button id="btnPortes">Portes</button>
+		<button id="btnCambiarTema">Cambiar tema</button>
+	</nav>
+	<main>
+		<div id="landingPage" class="landingPage">
+			<!-- <h2>Gestión de logística</h2> -->
+			<img src="public/img/landing.jpg" alt="">
+		</div>
+		<div id="crearPorte" class="ocultar">
+			<form>
+				<fieldset>
+					<legend>Tipo de contenedor</legend>
+					<label>
+						<input name="txtContenedor" type="radio" value="box"> Box
+					</label>
+						<label>
+						<input type="radio" value="palé"> Palé
+					</label>
+				</fieldset>
+
+				<fieldset>
+					<legend>Tipo de mercancía</legend>
+					<label>
+						<input name="txtMercancia" type="radio" value="fruta"> Fruta
+					</label>
+					<label>
+						<input name="txtMercancia" type="radio" value="verdura"> Verdura
+					</label>
+					<label>
+						<input name="txtMercancia" type="radio" value="carne"> Carne
+					</label>	
+				</fieldset>
+				<label>
+					Producto:<br>		
+					<input id="txtProducto" name="txtProducto" type="text" placeholder="Ej. Zanahorias"> 
+				</label>
+				<label>
+					<input name="chkEspecial" type="checkbox" value="especial"> Porte especial	
+				</label>	
+				<label>
+					Número de contenedores:<br>	
+					<input id="txtNumContendores" name="txtNumContendores" type="number" value="1"> 
+				</label>
+				<button id="btnAddContenedorAlPorte" type="button">Añadir contenedores al porte</button>
+				<button id="btnCrearPorte" type="button">Añadir porte a la jornada</button>
+			</form>
+		</div>
+	</main>
+	<div id="divToast"></div>
+	<footer>
+		IES Cristóbal de Monroy
+	</footer>
+</body>
+</html>

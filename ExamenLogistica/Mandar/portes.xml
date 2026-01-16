@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jornada fecha="07/03/2025">
+  <porte especial="especial">
+    <palé mercancia="fruta">Melón</palé>
+    <palé mercancia="fruta">Sandía</palé>
+    <box mercancia="verdura">Calabacín</box>
+  </porte>
+  <porte>
+    <palé mercancia="verdura">Zanahorias</palé>
+    <palé mercancia="fruta">Sandía</palé>
+    <box mercancia="fruta">Melocotón</box>
+    <box mercancia="fruta">Kiwi</box>
+    <box mercancia="verdura">Lechuga</box>
+    <box mercancia="verdura">Lechuga</box>
+  </porte>
+  <porte>
+    <box mercancia="carne">Solomillo de cerdo</box>
+    <box mercancia="carne">Salchichas frescas</box>
+    <box mercancia="carne">Chuleta de cordero</box>
+    <box mercancia="carne">Carne picada</box>
+    <box mercancia="carne">Conejo</box>
+    <box mercancia="carne">Pechuga de pollo</box>
+    <box mercancia="carne">Lomo de ternera</box>
+    <box mercancia="carne">Lomo embuchado</box>
+  </porte>
+</jornada>
