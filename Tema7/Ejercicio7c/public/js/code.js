@@ -82,4 +82,9 @@ document.addEventListener('click', async e => {
             console.error("Error:", error);
         }
     }
+
+    if (e.target.type === "BUTTON") {
+        
+    }
+
 }); 
