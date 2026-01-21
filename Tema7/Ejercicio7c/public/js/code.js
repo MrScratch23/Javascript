@@ -67,6 +67,92 @@ document.addEventListener('click', async e => {
     }
 
     if (e.target.id === "btnPantallaAltaAlumnos") {
+    const container = document.querySelector(".container");
+
+    try {
+        const response = await fetch("http://localhost:3000/altaAlumno");
+        const html = await response.text();
+        
+        // Parsear el HTML como documento XML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Obtener el artículo del documento parseado
+        const articleFromResponse = doc.querySelector('article');
+        
+        if (!articleFromResponse) {
+            throw new Error('No se encontró el formulario en la respuesta');
+        }
+        
+        // Limpiar container sin innerHTML
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+        
+        // Importar el nodo al documento actual (esto es clave)
+        const importedArticle = document.importNode(articleFromResponse, true);
+        
+        // Agregar el artículo importado al container
+        container.appendChild(importedArticle);
+        
+        // Remover el botón que disparó el evento
+        e.target.remove();
+
+        const form = container.querySelector("#frmRegistroAlumno");
+        
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // ¡IMPORTANTE! Previene el envío normal
+            
+            const nombre = document.querySelector("#nombre").value.trim();
+            const edad = document.querySelector("input[name=edad]").valueAsNumber; // Cambiado a 
+            const curso = document.querySelector('input[name="curso"]:checked')?.value; // Cambiado nombre de variable
+            const grupo = document.querySelector("#grupo").value.trim();
+            const email = document.querySelector("#email").value.trim();
+
+            // Validaciones
+            if (!nombre || !edad || !curso || !grupo || !email) {
+                alert("Por favor, complete todos los campos obligatorios");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:3000/api/alumno", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        edad: parseInt(edad),
+                        curso: curso, // Usamos la variable correcta
+                        grupo: grupo,
+                        email: email
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
+                }
+                
+                const alumnoCreado = await response.text();
+                alert("Alumno creado exitosamente");
+                form.reset(); // Opcional: limpiar formulario después del éxito
+                
+            } catch (error) {
+                // console.error("Error en fetch:", error);
+                alert(`Error al crear alumno: ${error.message}`);
+            }
+        });
+
+    } catch (error) {
+        console.error("Error:", error);
+        const p = document.createElement('p');
+        p.textContent = `Error: ${error.message}`;
+        p.style.color = 'red';
+        container.appendChild(p);
+    }
+}
+    /*if (e.target.id === "btnPantallaAltaAlumnos") {
 
         const container = document.querySelector(".container");
 
@@ -86,5 +172,9 @@ document.addEventListener('click', async e => {
     if (e.target.type === "BUTTON") {
         
     }
+*/
 
 }); 
+
+
+
