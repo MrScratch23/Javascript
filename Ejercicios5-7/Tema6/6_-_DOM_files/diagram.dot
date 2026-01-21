@@ -1,0 +1,19 @@
+digraph lineatemp {
+/* ranksep hará que los rangos establecidos estén más (ej. 3) 
+o menos separados (ej. 0.5)*/
+ranksep=.75; 
+size = "7.5,7.5";
+node [shape=box;];
+
+
+
+
+main -> {h1,p,"  #text  ",div}
+h1 -> " #text  "
+p -> {"#text", strong, "#text "}
+strong -> "#text  "
+div -> "p " -> "  #text "
+
+
+p [color=red]
+}

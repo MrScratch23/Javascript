@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Texto con Atajos</title>
+    <script src="ejercicio5.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    <h1>Editor de Texto con Atajos de Teclado</h1>
+    
+    <p>Instrucciones:</p>
+    <ul>
+        <li><strong>Ctrl+B</strong> - Negrita</li>
+        <li><strong>Ctrl+I</strong> - Cursiva</li>
+        <li><strong>Ctrl+U</strong> - Subrayado</li>
+        <li><strong>Ctrl++</strong> - Aumentar tamaño</li>
+        <li><strong>Ctrl+-</strong> - Disminuir tamaño</li>
+    </ul>
+    
+    <!-- División editable -->
+    <div id="divEditable" contenteditable="true" 
+         style="overflow:scroll; width:300px; height:200px; border:2px solid #333; padding:10px; margin:20px 0;">
+        Escribe tu texto aquí...
+    </div>
+    
+    <p id="estado" style="font-style:italic;">Listo para editar...</p>
+
+   
+</body>
+</html>

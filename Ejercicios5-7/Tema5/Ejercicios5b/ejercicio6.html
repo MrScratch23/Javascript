@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Validación</title>
+    <script src="ejercicio6.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    <h1>Formulario de Registro</h1>
+    
+    <form id="formularioRegistro" target="_blank" novalidate>
+        
+        <!-- Sección Nickname -->
+        <fieldset>
+            <legend>Nickname</legend>
+            <div>
+                <label for="nickname">Nickname (3-8 letras):</label>
+                <input type="text" id="nickname" name="nickname" 
+                       required
+                       minlength="3"
+                       maxlength="8"
+                       pattern="^[^0-9][^.,:;]*$"
+                       title="Mínimo 3, máximo 8 caracteres. No puede empezar con número ni contener .,:;">
+                <small>3-8 caracteres, no puede empezar con número ni contener .,:;</small>
+            </div>
+        </fieldset>
+        
+        <!-- Sección PIN -->
+        <fieldset>
+            <legend>Código PIN</legend>
+            <div>
+                <label for="pin1">PIN (4 dígitos):</label>
+                <input type="password" id="pin1" name="pin1" 
+                       required
+                       pattern="^\d{4}$"
+                       title="Debe contener exactamente 4 dígitos">
+            </div>
+            <div>
+                <label for="pin2">Confirmar PIN:</label>
+                <input type="password" id="pin2" name="pin2" 
+                       required
+                       pattern="^\d{4}$"
+                       title="Debe coincidir con el PIN anterior">
+            </div>
+        </fieldset>
+        
+        <!-- Sección Fecha Nacimiento -->
+        <fieldset>
+            <legend>Fecha de Nacimiento</legend>
+            <div>
+                <input type="radio" id="fechaNo" name="fechaOpcion" value="no" checked>
+                <label for="fechaNo">No indicar fecha de nacimiento</label>
+            </div>
+            <div>
+                <input type="radio" id="fechaSi" name="fechaOpcion" value="si">
+                <label for="fechaSi">Sí, indicar fecha de nacimiento</label>
+            </div>
+            
+            <!-- Campos de fecha (inicialmente deshabilitados) -->
+            <div id="camposFecha" style="display: none; margin-top: 10px;">
+                <div>
+                    <label for="dia">Día (1-31):</label>
+                    <input type="number" id="dia" name="dia" min="1" max="31">
+                    
+                    <label for="mes">Mes (1-12):</label>
+                    <input type="number" id="mes" name="mes" min="1" max="12">
+                    
+                    <label for="anio">Año (1900-2024):</label>
+                    <input type="number" id="anio" name="anio" min="1900" max="2024">
+                </div>
+            </div>
+        </fieldset>
+        
+        <!-- Sección Colores -->
+        <fieldset>
+            <legend>Selecciona 2 colores</legend>
+            <div>
+                <input type="checkbox" id="colorRojo" name="colores" value="rojo">
+                <label for="colorRojo">Rojo</label>
+            </div>
+            <div>
+                <input type="checkbox" id="colorVerde" name="colores" value="verde">
+                <label for="colorVerde">Verde</label>
+            </div>
+            <div>
+                <input type="checkbox" id="colorAzul" name="colores" value="azul">
+                <label for="colorAzul">Azul</label>
+            </div>
+            <small>Debes seleccionar exactamente 2 colores</small>
+        </fieldset>
+        
+        <!-- Botones -->
+        <div style="margin-top: 20px;">
+            <button type="button" id="btnReset">Reset</button>
+            <button type="button" id="btnEnviar">Enviar</button>
+        </div>
+    </form>
+    
+   
+    
+</body>
+</html>

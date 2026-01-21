@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Interactivo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: #444;
+        }
+        
+        .emoji-container {
+            font-size: 8rem;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+            margin-bottom: 30px;
+        }
+        
+        .emoji-container:hover {
+            transform: scale(1.1);
+        }
+        
+        .instructions {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .instructions h2 {
+            margin-top: 0;
+            color: #555;
+        }
+        
+        .instructions ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .current-state {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emoji Interactivo</h1>
+    
+    <div class="emoji-container" id="emoji">😀</div>
+    
+    <div class="instructions" id="instrucciones">
+        <h2>Instrucciones:</h2>
+        <ul>
+            <li><strong>Clic izquierdo:</strong> Cambia a cara triste 🙁</li>
+            <li><strong>Doble clic:</strong> Cambia a cara molesta 😒</li>
+            <li><strong>Clic derecho:</strong> Vuelve a la cara sonriente 😀</li>
+        </ul>
+        <div class="current-state" id="state">Estado actual: Cara sonriente</div>
+    </div>
+    <script>
+        
+        // click - botón izquierdo
+        //dblclick - doble click
+        //contextmenu - botón derecho del ratón (muestra el menú contextual)
+    
+        const emoji = document.querySelector("#emoji");
+        const state = document.querySelector("#state");
+
+        emoji.addEventListener("click", e => {
+           
+            emoji.innerHTML = "🙁";
+            state.innerHTML = "Estado actual: Cara tristona (perdio el betis)";
+        })
+
+        emoji.addEventListener('dblclick', e => {
+            emoji.innerHTML = "😒";
+            state.innerHTML = "Estado actual: Cara molestar (le hicieron tortilla pero era con cebolla)";
+        })
+
+        emoji.addEventListener('contextmenu', e => {
+            event.preventDefault();
+            emoji.innerHTML = "😀";
+            state.innerHTML = "Estado actual: Cara sonriente";
+        })
+    
+    </script>
+</body>
+</html>

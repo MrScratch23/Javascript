@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web con Eventos de Teclado</title>
+    <style></style>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    
+    <div class="notice">
+         <h3> El pan de ayer:</h3>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzO7d7UEn-H5ZkJ3WRd05Za69dOyo11356Ug&s" alt="ERSONIC">
+    </div>
+   
+
+
+    <!-- Aquí irá tu código JavaScript -->
+    <script>
+       /* Eventos de teclado:
+
+keydown - se pulsa una tecla del teclado (al presionarla)
+keyup - se deja de pulsar una tecla del teclado (al librerarla)
+*/
+
+document.addEventListener('keydown', e => {
+   e.preventDefault();
+
+   if (e.key === 'a') {
+    e.preventDefault();
+        alert("Hola ruben, ¿que dice su polla?");
+   } 
+
+   if (e.key === 'e') {
+    e.preventDefault();
+    alert("Lamentablemente sigues teniendo demasiado.");
+   }
+
+})
+
+
+
+    </script>
+</body>
+</html>

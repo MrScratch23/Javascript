@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio División Móvil</title>
+</head>
+<body>
+    <h1>¡Atrapa el cuadrado!</h1>
+    
+    <div id="puntuacion" style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+        Puntuación: <span id="puntos">0</span>
+    </div>
+    
+    <p>Haz click en el cuadrado para ganar puntos</p>
+    
+    <div id="ene" style="width:100px; height:100px; background-color: aquamarine; position:absolute; top:200px; right:0px; cursor:pointer;">
+        ¡CLICK!
+    </div>
+
+    <script>
+        "use strict";
+        
+        const ene = document.querySelector("#ene");
+        const puntosSpan = document.querySelector("#puntos");
+        let eneX = 0;
+        let puntuacion = 0;
+        let velocidad = 1;
+        
+        // Función para mover el elemento
+        const mueveEne = () => {
+            eneX += velocidad;
+            ene.style.right = eneX + "px";
+            
+            // Resetear cuando salga de la pantalla (opcional)
+            if (eneX > window.innerWidth) {
+                resetearPosicion();
+            }
+            
+            requestAnimationFrame(mueveEne);
+        };
+        
+        // Función para resetear posición
+        function resetearPosicion() {
+            eneX = 0;
+            
+            // Posición vertical aleatoria entre 1 y 400
+            const nuevaTop = Math.floor(Math.random() * 400) + 1;
+            ene.style.top = nuevaTop + "px";
+            
+            // Aumentar velocidad
+            velocidad += 0.5;
+            
+            // Actualizar puntuación
+            puntuacion += 50;
+            puntosSpan.textContent = puntuacion;
+        }
+        
+        // Evento click en el elemento
+        ene.addEventListener('click', resetearPosicion);
+        
+        // Iniciar movimiento
+        mueveEne();
+    </script>
+</body>
+</html>

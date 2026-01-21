@@ -1,0 +1,1145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>6 - DOM</title>
+	<meta name='Generator' content='Zim 0.76.3'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+					 overflow-x: scroll;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+
+		@media print {
+			div#pie{display:none;}
+			div#volver{display:none;}
+			form{display:none;}
+			div#sumario{display:none;}
+			/* Evitar que las imágenes se corten en Google Chrome, en FF parece que lo ignora */
+			img {
+				page-break-inside: avoid;
+			}
+			div#contenido{
+				border:0px;
+				box-shadow: none;
+			}
+		}
+
+		table {
+			border: 1px solid var(--main-color);
+		}
+		thead {
+			background-color: var(--heading1-background-color);
+		}
+		tr:nth-child(2n) {
+			background-color: color-mix(in srgb, var(--main-color) 20%, transparent);
+		}
+		td {
+			padding-inline: 0.5rem;
+		}
+		th {
+			padding-inline: 0.5rem;
+			padding-block: 0.25rem;
+		}
+
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">6 - DOM</a> <br>
+            <a href="#h2">Introducción</a> <br>
+            &nbsp; &nbsp; <a href="#h3">Buscar elementos en el árbol</a> <br>
+            &nbsp; &nbsp; <a href="#h4">Navegar por los elementos</a> <br>
+            &nbsp; &nbsp; <a href="#h5">HTMLCollection y NodeList</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Ejercicios <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h7">Gestionar atributos de elementos</a> <br>
+            &nbsp; &nbsp; <a href="#h8">Atributos estándar de HTML</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Gestionar atributos de un elemento <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h10">Atributos personalizados data-x</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Reglas de nombrado de atributos data-x <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h12">Contenido de las etiquetas HTML y nodos de texto</a> <br>
+            &nbsp; &nbsp; <a href="#h13">Insertar contenido adyacente</a> <br>
+        
+        
+            <a href="#h16">Creación, eliminación de nodos e incorporación al documento</a> <br>
+            <a href="#h17">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">6 - DOM</h1>
+			<p>
+O de manera más precisa: Utilización del modelo de objetos del documento (DOM).
+</p>
+<br>
+<p>
+Referencia:<br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API" title="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API" class="https">https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API</a>
+</p>
+<br>
+<br>
+
+			<h1 id="h2">Introducción</h1>
+			<p>
+<b>Importante</b>: Diferencia entre <i>nodo</i> y <i>elemento</i>: nodo incluye elementos HTML, texto y comentarios.
+</p>
+<br>
+<p>
+El DOM es un árbol de nodos en el que aparecen todos los componentes de la web. Existen distintos tipos de nodos (12 tipos), de los cuales los más importantes son:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Nodo <i>document</i> (&lt;html&gt;)</li>
+<li>Nodo <i>element</i> (cualquier otra etiqueta html: h1, form, etc)</li>
+<li>Nodo <i>attr</i> (atributos de las etiquetas)</li>
+<li>Nodo <i>text</i></li>
+</ul>
+<br>
+<p>
+Nomenclatura de árboles:
+</p>
+<ul style='padding-left: 30pt'>
+<li><b>Raíz (root)</b>: nodo superior de la estructura (el objeto <tt>document</tt>)</li>
+<li><b>Nodo(s) hijo(s) (child o children)</b>: descendientes de un nodo. <i>Children</i> es el plural de <i>child</i>.</li>
+<li><b>Nodo padre (parent)</b>: nodo superior/antecesor en el que se encuentra anidado uno dado</li>
+<li><b>Nodo hermano (sibling)</b>: nodos que comparten nodo padre</li>
+<li><b>Nodo hoja</b>: nodo sin hijos. Todos los nodos de texto son nodos hoja.</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: nosotros trabajaremos casi siempre con elementos directamente, para los que se aplican también esa nomenclatura. 
+</p>
+<br>
+<p>
+<img src="./6_-_DOM_files/pasted_image.png">
+</p>
+<br>
+
+			<h2 id="h3">Buscar elementos en el árbol</h2>
+			<p>
+<b>Métodos de búsqueda clásica</b>:<br>
+Algunos devuelven una colección de elementos (HTMLCollection no es un array, pero sí es una estructura iterable).
+</p>
+<pre>
+document.getElementById("id");
+document.getElementsByName("txtNombre"); // Campos de formulario
+document.getElementsByTagName("h1");
+document.getElementsByClassName("seleccionado");
+</pre>
+<br>
+<p>
+También se puede buscar a partir de un elemento que no sea <tt>document</tt>, por ejemplo:
+</p>
+<pre>
+const div = document.getElementById("divDatos");
+div.getElementsByClassName("rojo");
+div.getElementsByTagName("rojo");
+div.querySelector(".rojo");
+</pre>
+<br>
+<p>
+<b>Nota</b>: No tendremos disponible un <tt>div.getElementById(id);</tt><br>
+<b>Nota</b>: Un error común es olvidarse del plural de <i>Elements</i> en métodos que devuelven o pueden devolver varios nodos.
+</p>
+<br>
+<br>
+<p>
+<b>Métodos de búsqueda con selectores CSS</b>:
+</p>
+<pre>
+document.querySelector("selector-css");
+document.querySelectorAll("selector-css");
+</pre>
+<br>
+<p>
+<b>Ejemplos</b>: 
+</p>
+<pre>
+let oInput = document.querySelector("#txtNombre");
+let oH1 = document.querySelectorAll("h1");
+let oSeleccionados = document.querySelectorAll(".seleccionado");
+let oTxtNombre = document.querySelector("[name='txtNombre']");
+</pre>
+<br>
+<p>
+Propiedades de los nodos:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>nodeType</tt> - Número que identifica el tipo de nodo</li>
+<li><tt>nodeName</tt> - Nombre del nodo. En elementos HTML es la etiqueta en mayusculas (<tt>"DIV"</tt>, <tt>"UL"</tt>), si el nodo es de texto el nombre será <tt>"#text"</tt>.</li>
+<li><tt>tagName</tt> - Si es un elemento HTML tendrá esta propiedad y coincidirá con el <tt>nodeName</tt>.</li>
+<li><tt>nodeValue</tt> - Valor asociado al nodo y depende del tipo de nodo. Si es un input se usará <tt>value</tt> para recuperar su contenido.</li>
+</ul>
+<br>
+<br>
+
+			<h2 id="h4">Navegar por los elementos</h2>
+			<p>
+<b>Propiedades que devuelven elementos HTML</b> (etiquetas). Probablemente sean los más utilizados desde JS.
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>parentElement</tt> – El elemento padre</li>
+<li><tt>firstElementChild</tt> – El primer hijo</li>
+<li><tt>lastElementChild</tt> – El último hijo</li>
+<li><tt>children</tt> – HTMLCollection (similar a un array) que contiene todos los hijos del elemento</li>
+<li><tt>nextElementSibling</tt> – El siguiente hermano en la jerarquía del árbol</li>
+<li><tt>previousElementSibling</tt> – El hermano anterior en la jerarquía del árbol</li>
+<li><tt>closest("tr")</tt> – El elemento antecesor (padre, abuelo, ...) más cercano que sea un <tt>&lt;tr&gt;</tt></li>
+</ul>
+<br>
+<p>
+Devolverán <tt>null</tt> si no existe el elemento referenciado, por ejemplo un elemento que no tenga hermanos ni hijos tendrá <tt>null</tt> como valor de <tt>nextElementSibling</tt>, <tt>previousElementSibling</tt>, <tt>firstElementChild</tt> y <tt>lastElementChild</tt>. Sin embargo <tt>children</tt> será un <tt>HTMLCollection</tt> con 0 elementos (se ve en la propiedad <tt>length</tt>).
+</p>
+<br>
+<p>
+<b>Propiedades que devuelven cualquier tipo de Nodo</b>. Hay que teber cuidado porque pueden devolver también nodos de texto, por tanto no deberíamos usarlos si sólo queremos recorrer los elementos (las etiquetas HTML) del DOM. 
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>parentNode</tt> – Referencia al nodo padre</li>
+<li><tt>firstChild</tt> – Referencia al primer nodo hijo</li>
+<li><tt>lastChild</tt> – Referencia al último nodo hijo</li>
+<li><tt>childNodes</tt> – Array con los nodos hijo</li>
+<li><tt>nextSibling</tt> – Referencia al siguiente hermano</li>
+<li><tt>previousSibling</tt> – Referencia al hermano anterior</li>
+</ul>
+<br>
+<br>
+<p>
+Ejemplo:
+</p>
+<pre>
+&lt;main&gt;
+ &lt;h1&gt;Graphviz&lt;/h1&gt;
+ &lt;p&gt;Graphviz permite &lt;strong&gt;definir diagramas&lt;/strong&gt; con texto.&lt;/p&gt;
+ Este texto será usado para definir formas, colores y relaciones.
+ &lt;div&gt;
+   &lt;p&gt;Hay varios tipos de gráficos que se pueden crear.&lt;/p&gt;
+ &lt;/div&gt;
+&lt;/main&gt;
+</pre>
+<br>
+<p>
+Si vemos el árbol que nos genera en <a href="https://software.hixie.ch/utilities/js/live-dom-viewer/" title="https://software.hixie.ch/utilities/js/live-dom-viewer/" class="https">https://software.hixie.ch/utilities/js/live-dom-viewer/</a> observaremos que se crean muchos nodos de texto vacío por los espacios y retornos de carro.
+</p>
+<br>
+<p>
+Si <b>lo minificamos y lo dejamos en una única línea</b>, obtendremos este árbol:<br>
+<img src="./6_-_DOM_files/diagram.png">
+</p>
+<br>
+<p>
+Partiendo del elemento <tt>p</tt> destacado en rojo (recuerda que se ha minificado el código HTML):
+</p>
+<pre>
+p.parentElement                   // &lt;main&gt;
+p.parentNode                      // &lt;main&gt;
+
+p.nextSibling                     // #text "Este texto... "
+p.nextElementSibling              // &lt;div&gt;
+
+p.previousSibling                 // &lt;h1&gt;
+p.previousElementSibling          // &lt;h1&gt;
+
+p.previousSibling.previousSibling // null
+
+p.firstElementChild               // &lt;strong&gt;
+p.lastElementChild                // &lt;strong&gt;
+p.firstChild                      // #text " con texto."
+
+p.children.length                 // 1 (sólo el strong)
+p.childNodes.length               // 3 [ #text, strong, #text ]
+</pre>
+<br>
+<p>
+<b>Nota</b>: si no quitamos los retornos de carro y espacios entre etiquetas, tendremos muchos más nodos de texto. Tendremos que tenerlo en cuenta al usar unos métodos u otros.
+</p>
+<br>
+<br>
+
+			<h2 id="h5">HTMLCollection y NodeList</h2>
+			<p>
+Los métodos que devuelven varios nodos como <tt>querySelectorAll()</tt> no devuelven un array, sino una colección de nodos en un objeto <tt>NodeList</tt>.<br>
+Por otro lado hay métodos que devuelven una colección de elementos en un objeto <tt>HTMLCollection</tt> como <tt>document.getElementsByTagName("section")</tt>. 
+</p>
+<br>
+<p>
+La diferencia principal es que un <tt>HTMLCollection</tt> sólo contendrá elementos y un <tt>NodeList</tt> puede contener otro tipo de nodos. 
+</p>
+<br>
+<p>
+Esta colección de objetos es iterable y por tanto se puede acceder a sus elementos usando el operador <tt>[]</tt>, el método <tt>forEach()</tt>, un <tt>for..of</tt> o un bucle <tt>for</tt> clásico.
+</p>
+<br>
+<p>
+Si fuera necesario podríamos convertirlos a Array usando <tt>Array.from( ... );</tt> y así podríamos tener acceso a los métodos de array como <tt>filter()</tt> o <tt>map()</tt>.<br>
+También se puede usar el operador <i>spread</i> para convertir estas colecciones en un array,por ejemplo para crear un array a partir de los atributos de un nodo: <tt>[...nodo.attributes]</tt>
+</p>
+<br>
+<p>
+<b>Referencia</b>: <a href="https://www.freecodecamp.org/news/dom-manipulation-htmlcollection-vs-nodelist/" title="https://www.freecodecamp.org/news/dom-manipulation-htmlcollection-vs-nodelist/" class="https">https://www.freecodecamp.org/news/dom-manipulation-htmlcollection-vs-nodelist/</a>
+</p>
+<br>
+<br>
+
+            
+				<h3>Ejercicios<a id="ejercicios" class="h_anchor"></a></h3>
+<br>
+<p>
+<b>Ejercicio 1</b>: dado este HTML, recupera el elemento con <tt>id="resultado"</tt>. Y partiendo de él realiza las siguientes operaciones navegando por el DOM con los métodos vistos:
+</p>
+<ol style='padding-left: 30pt' type="1" start="1">
+<li>Cambia el texto del párrafo para que indique <tt>"Lista de animales"</tt>.</li>
+<li>Haz que el último elemento de la lista indique <tt>"Lobo"</tt>.</li>
+<li>Haz que el texto en negrita sea <tt>"de agua"</tt>.</li>
+<li>Haz que se muestre por pantalla el contenido del último párrafo.</li>
+</ol>
+<br>
+<pre>
+&lt;div id="resultado"&gt;
+  A continuación tenemos una lista de animales.
+  &lt;p&gt;Animales&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Zorro&lt;/li&gt;
+    &lt;li&gt;Gato&lt;/li&gt;
+    &lt;li&gt;Perro &lt;strong&gt;pastor&lt;/strong&gt;&lt;/li&gt;
+    &lt;li&gt;Loro&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p&gt;Fin de la lista de animales.&lt;/p&gt;
+  Ahora es tu turno para construir una lista de plantas.
+&lt;/div&gt;
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 2</b>: Partiendo del HTML de arriba, quita el atributo id de la etiqueta <tt>&lt;div&gt;</tt> (a mano, no con código) y añádeselo  al <tt>&lt;strong&gt;</tt>. Repite el ejercicio a partir de ese elemento.
+</p>
+<br>
+<br>
+ <br>
+			<h1 id="h7">Gestionar atributos de elementos</h1>
+			<ul style='padding-left: 30pt'>
+<li>Atributos estándar</li>
+<li>Gestionar atributos</li>
+<li>Atributos personalizados</li>
+</ul>
+<br>
+
+			<h2 id="h8">Atributos estándar de HTML</h2>
+			<p>
+Se puede acceder a <b>un atributo estándar directamente por su nombre</b>.
+</p>
+<br>
+<p>
+Por ejemplo en una etiqueta <tt>&lt;a id="enlace"&gt;</tt>:
+</p>
+<pre>
+const a = document.querySelector("#enlace"); //selector CSS
+a.href = "https:\\google.es";
+</pre>
+<br>
+<p>
+Si el atributo no es estándar de HTML para esa etiqueta se le añadirá el atributo, pero no tendrá efectos prácticos.
+</p>
+<br>
+<p>
+Referencia: 
+</p>
+<ul style='padding-left: 30pt'>
+<li>Lista de atributos HTML: <a href="https://developer.mozilla.org/es/docs/Web/HTML/Attributes" title="https://developer.mozilla.org/es/docs/Web/HTML/Attributes" class="https">https://developer.mozilla.org/es/docs/Web/HTML/Attributes</a></li>
+<li>Lista de atributos estándar: <a href="https://www.w3schools.com/tags/ref_attributes.asp" title="https://www.w3schools.com/tags/ref_attributes.asp" class="https">https://www.w3schools.com/tags/ref_attributes.asp</a></li>
+</ul>
+<br>
+
+            
+				<h3>Gestionar atributos de un elemento<a id="gestionar-atributos-de-un-elemento" class="h_anchor"></a></h3>
+<p>
+Si queremos gestionar los atributos de un elemento HTML, por ejemplo un formulario:
+</p>
+<pre>
+const f = document.querySelector("form.login");
+</pre>
+<br>
+<ul style='padding-left: 30pt'>
+<li><tt>f.setAttribute("nombre","valor")</tt> – Define <tt>nombre="valor"</tt></li>
+<li><tt>f.getAttribute("id")</tt> – Recupera el valor del atributo de etiqueta <tt>id</tt></li>
+<li><tt>f.removeAttribute("id")</tt> – Borra el atributo <tt>id</tt></li>
+<li><tt>f.hasAttribute("id")</tt> – Booleano que indica si <tt>id</tt> existe como atributo</li>
+<li><tt>f.attributes</tt> – Estructura similar a un array con todos los nodos atributos (es un <tt>NamedNodeMap</tt>). </li>
+</ul>
+<br>
+<p>
+Usando estos métodos podemos cambiar dinámicamente el funcionamiento del formulario:
+</p>
+<pre>
+f.setAttribute("method", "get");
+f.setAttribute("action", "login.php");
+f.method="get";
+f.removeAttribute("id");
+</pre>
+<br>
+<p>
+También podemos acceder a los nodos atributos y cambiarlos:
+</p>
+<pre>
+let nodoAttr = f.attributes[0];
+if( nodoAttr.nodeName == "TARGET")
+  nodoAttr.nodeValue = "_blank";
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h10">Atributos personalizados data-x</h2>
+			<p>
+Permiten almacenar datos en las propias etiquetas HTML.<br>
+Estos atributos aparecen en las etiquetas con el prefijo <tt>"data-"</tt>, seguido del nombre específico que lo identifique. Estos atributos no son estándar y por tanto serán ignorados por el navegador y los screen readers cuando los encuentren.
+</p>
+<br>
+<p>
+Por ejemplo imaginemos el código interno de un producto, algo así como <i>xghx567xf</i>, es un dato que al comprador de nuestra tienda <i>on-line</i> no le importa y por tanto no se debería mostrar al usuario (sólo ensuciará el diseño). Podemos añadir un campo <tt>&lt;input type="hidden"&gt;</tt> o similares, pero la solución más elegante es guardar el dato en, por ejemplo, la etiqueta con la imagen del producto.
+</p>
+<br>
+<p>
+Por ejemplo:
+</p>
+<pre>
+&lt;div class="producto"&gt;
+  &lt;img class="muestra"
+    data-id="xghx567xf"
+    data-precio-de-producto="15"
+    data-categoria="limpieza"
+    src="xghx567xf.jpg"&gt;
+  &lt;p&gt;Fregona extensible&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<br>
+<p>
+Desde JS podemos acceder al contenido de los atributos, modificarlos o crear nuevos atributos mediante la propiedad <tt>dataset</tt> del elemento HTML.
+</p>
+<br>
+<p>
+Ejemplo:
+</p>
+<pre>
+let img = document.querySelector(“.producto &gt; img”);
+
+console.log( img.dataset.id); 
+console.log( img.dataset.categoria);
+console.log( img.dataset.precioDeProducto);
+
+// Se actualiza el atributo
+img.dataset.precioDeProducto=22;
+
+// Se eliminan algunos atributos personalizados
+// (si se accede a ellos devolverán undefined
+delete img.dataset.categoria; 
+img.removeAttribute("data-id");
+
+// Se crea un nuevo atributo
+img.dataset.nuevoAtributo = "azul";
+console.log(img.dataset.nuevoAtributo); // aparece en consola "azul"
+</pre>
+<br>
+<p>
+Tras ejecutarse ese código, la etiqueta queda así:
+</p>
+<pre>
+&lt;img class="muestra"
+    data-precio-de-producto="22"
+    src="xghx567xf.jpg"
+    data-nuevo-atributo="azul"
+&gt;
+</pre>
+<br>
+
+            
+				<h3>Reglas de nombrado de atributos data-x<a id="reglas-de-nombrado-de-atributos-data-x" class="h_anchor"></a></h3>
+<ul style='padding-left: 30pt'>
+<li>El nombre comienza en HTML con <tt>data-</tt> </li>
+<li>Sólo puede estar formado por letras minúsculas, números y los caracteres: guión (<tt>-</tt>), punto (<tt>.</tt>), dos puntos (<tt>:</tt>) y guión bajo (<tt>_</tt>).</li>
+<li>No pueden usarses letras mayúsculas (A a Z).</li>
+<li>El nombre del atributo <b>en JavaScript</b> será el del correspondiente atributo HTML pero en <b>camelCase</b>, sin guiones, puntos, etc.</li>
+</ul>
+<br>
+<br>
+<br>
+ <br>
+			<h1 id="h12">Contenido de las etiquetas HTML y nodos de texto</h1>
+			<p>
+Propiedades para recuperar y establecer el HTML y texto de un elemento HTML:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>innerHTML</tt> – Texto que representa el contenido interno de las etiquetas HTML. Al insertarlo en la etiqueta es procesado por el navegador y se generan los nodos (elementos, comentarios, nodos de texto, atributos,...). Ejemplo: <tt>divResultado.innerHTML = '&lt;p class="resaltado"&gt;Resultado: 42&lt;/p&gt;';</tt></li>
+<li><tt>outerHTML</tt> – Recupera o sustituye, utilizando cadenas de texto, el propio HTML de un elemento. Se usa igual que el <tt>innerHTML</tt></li>
+<li><tt>innerText</tt> y <tt>outerText</tt> – Ídem del anterior, pero el texto no será procesado para convertirlo a elementos HTML</li>
+<li><tt>textContent</tt> – El contenido de texto del elemento HTML <b>incluyendo sus descendientes</b>.</li>
+</ul>
+<br>
+<p>
+Diferencias entre <tt>innerText</tt> y <tt>textContent</tt>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>innerText</tt> intenta parecerse a lo que ve el usuario de la web, si un elemento de su interior está oculto lo ignorará (un <tt>display:none</tt> o <tt>visibility:hidden</tt>). Convierte el texto, por ejemplo quita espacios al final, transforma etiquetas <tt>&lt;br&gt;</tt> en saltos de línea, etc. Esto hace que sea más lento.</li>
+<li><tt>textContent</tt> muestra el contenido en bruto, incluyendo el texto de elementos ocultos. Respeta los saltos de línea, sangrías, etc. Al no tener que preocuparse de CSS ni de manipular el texto, es más rápido. y debería ser nuestra opción preferida.</li>
+</ul>
+<br>
+<p>
+<b>Nota</b>: si queremos verlo en la consola podemos usar <tt>JSON.stringify( p.textContent )</tt> para evitar que los <tt>\n</tt> se conviertan en retornos de carro.
+</p>
+<br>
+<p>
+<b>Nota</b>: El texto que insertamos con innerHTML es procesado para buscar etiquetas como <tt>&lt;p&gt;</tt>, por lo que cuando insertamos un texto con un símbolo <tt>&gt;</tt> o <tt>&lt;</tt>, será convertido a la entidad HTML correspondiente: <tt>&amp;gt;</tt> y <tt>&amp;lt;</tt> respectivamente. Igualmente el texto es procesado al recuperarlo también dependiendo del método usado.
+</p>
+<br>
+<p>
+<b>Ejemplo</b>: 
+</p>
+<pre>
+p.innerHTML = "7&gt;2"; 
+
+console.log( p.innerHTML );       // Imprime "7&amp;gt;2"
+console.log( p.innerText );       // Imprime "7&gt;2"
+console.log( p.textContent );     // Imprime "7&gt;2"
+
+p.innerHTML += "&lt;p&gt;Hola &lt;span&gt;caracola&lt;/span&gt;.&lt;/p&gt;";
+console.log( p.innerHTML );       // Imprime "7&amp;gt;2&lt;p&gt;Hola &lt;span&gt;caracola&lt;/span&gt;.&lt;/p&gt;"
+console.log( p.innerText );       // Imprime "7&gt;2\n\nHola caracola."  ( \n = retorno de carro, serán convertidos al imprimirse) 
+console.log( p.textContent );     // Imprime "7&gt;2Hola caracola."      ( ignora los retornos de carro )
+</pre>
+<br>
+
+			<h2 id="h13">Insertar contenido adyacente</h2>
+			<p>
+Además de las propiedades ya vistas como <tt>innerHTML</tt>, hay un método que permite establecer la posición donde se insertará el texto HTML que indiquemos:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>elemento.insertAdjacentHTML( "posición", "html-en-texto" )</tt></li>
+</ul>
+<br>
+<p>
+El atributo <tt>posición</tt> es una cadena de caracteres que puede tomar los valores:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>"beforebegin"</tt> – Antes de la etiqueta de apertura</li>
+<li><tt>"afterbegin"</tt> – Se coloca como primer hijo</li>
+<li><tt>"beforeend"</tt>  – Se coloca como último hijo</li>
+<li><tt>"afterend"</tt> – Después de la etiqueta de cierre</li>
+</ul>
+<br>
+<p>
+<b>Explicación</b>: supongamos una etiqueta <tt>&lt;ul&gt;</tt> con un par de <tt>&lt;li&gt;</tt> en su interior.
+</p>
+<br>
+<pre>
+"beforebegin"
+&lt;ul&gt;
+  "afterbegin"
+    &lt;li&gt;uno&lt;/li&gt;
+    &lt;li&gt;dos&lt;/li&gt;
+  "beforeend"
+&lt;/ul&gt;
+"afterend"
+</pre>
+<br>
+<br>
+
+            
+						<pre class="codigo">
+Ampliación: ¿Por qué no está recomendado usar innerHTML?
+							<div class="codigojs" style="display:none">let s = `Es mejor usar métodos específicos del DOM (como createElement, appendChild, 
+textContent) en lugar de innerHTML por dos razones principales: Seguridad y Rendimiento.
+
+Problemas de XSS: Con innerHTML un usuario o una fuente externa podría introducir 
+             código malicioso ejecutable mediante una etiqueta &amp;lt;script&amp;gt;. ¿Pero el
+             usuario no puede ejecutar código ya desde la consola? Sí, pero innerHTML
+             puede afectar a otros usuarios. 
+             Imagina un campo comentario en el perfil del usuario A que pueda ser leído
+             por otros usuarios de la aplicación. El usuario A introduce código malicioso
+             que con innerHTML se ejecutará y afectará a otros usuarios (pensemos en algo
+             sencillo: borra las cookies de sesión, hace una petición al servidor para 
+             borrar su cuenta o cambia algún enlace para hacer phishing).
+
+Rendimiento: El innerHTML es más rápido cuando se tiene que interpretar grandes porciones
+             de HTML de una vez, pero si se tiene que modificar una pequeña parte suele
+             ser más eficiente usar métodos del DOM, porque con innerHTML se elimina todo
+             el nodo padre y se reconstruye.
+
+En un futuro se podrá usar setHTML() que es un método seguro para sanear cadenas HTML.
+https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML
+`;
+resultado.innerHTML=s;
+									</div>
+					<div class="codigoresultado"></div>
+<input class="codigoboton" type="button" value="Ejecutar">
+				</pre>
+				
+            
+							<h1 id="h16">Creación, eliminación de nodos e incorporación al documento</h1>
+			<p>
+<b>Creación de elementos y nodos de texto</b>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>let elem = document.createElement( "etiqueta" )</tt> – Crea un elemento HTML para la etiqueta indicada como cadena de texto (no distingue mayúsculas de minúsculas)</li>
+<li><tt>let nodo = document.createTextNode( "cadena de texto" )</tt> – Crea un nodo de texto</li>
+</ul>
+<br>
+<p>
+También se pueden crear atributos, comentarios, eventos... Una vez que tenemos creado el nodo, podemos agregarlo al documento, eliminarlo o clonarlo usando alguna de estas funciones.
+</p>
+<br>
+<p>
+<b>Agegarlo al documento</b>:<br>
+Supongamos que el nodo que queremos insertar está recogido en la variable <tt>nodo</tt>. Necesitamos un elemento HTML (en los ejemplos de abajo es <tt>elem</tt>) que nos sirva de referencia para insertarlo cerca de él:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>elem.appendChild( nodo )</tt> – Agrega el nodo como último hijo del elemento HTML</li>
+<li><tt>elem.append( nodo )</tt> – idem del anterior, pero permite como parámetro cadenas de caracteres (se añadirán como nodos de texto). También permite añadir varios nodos a la vez indicándolos como paramétros.</li>
+<li><tt>elem.prepend( nodo )</tt> – Agrega el nodo (o nodos o cadenas) como primer hijo del elemento. </li>
+<li><tt>elem.insertBefore( nodo, nodoHijo )</tt> – Agrega el <tt>nodo</tt> como hijo del elemento <tt>elem</tt>, justo antes del <tt>nodoHijo</tt> que se indica en el segundo parámetro </li>
+<li><tt>elem.insertAdjacentElement( "posición", nodo )</tt> – Agrega el <tt>nodo</tt> en la posición especificada por <tt>"posición"</tt> (<tt>"beforebegin"</tt>, <tt>"afterbegin"</tt>, <tt>"beforeend"</tt>,  <tt>"afterend"</tt>)</li>
+<li><tt>elem.before( nodo )</tt> – inserta el nodo (o nodos o cadenas) como hermano del <tt>elem</tt> justo antes que éste.</li>
+<li><tt>elem.after( nodo )</tt> – inserta el nodo (o nodos o cadenas) como hermano del <tt>elem</tt> justo después que éste.</li>
+</ul>
+<br>
+<p>
+<b>Clonar elemento</b>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>let clon = elem.cloneNode( bClonarDescendientes )</tt> – Obtiene un clon de un elemento (si el parámetro es <tt>true</tt>, también clona los descendientes)</li>
+</ul>
+<br>
+<p>
+<b>Eliminar un elemento, eliminar un y reemplazar un hijo</b>:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>elem.remove()</tt> – Elimina el elemento y sus descendientes del documento</li>
+<li><tt>elem.removeChild( nodoHijo )</tt> – Elimina el nodo hijo (y sus descendientes)</li>
+<li><tt>elem.replaceChild( nodoNuevo, nodoAntiguo )</tt> – Reemplaza el nodo antiguo por el nuevo. </li>
+<li><tt>elem.replaceChildren( nodoNuevo1, nodoNuevo2, ...)</tt> – Reemplaza todos los hijos por los que se pasa como parámetro. Esto se puede usar para eliminar todos los hijos de un nodo (por ejemplo todos los <tt>&lt;li&gt;</tt> de un <tt>&lt;ul&gt;</tt>) por ejemplo con <tt>elem.replaceChildren("")</tt>.</li>
+</ul>
+<br>
+<p>
+Referencia: <a href="https://www.freecodecamp.org/news/javascript-document-object-model-explained/" title="https://www.freecodecamp.org/news/javascript-document-object-model-explained/" class="https">https://www.freecodecamp.org/news/javascript-document-object-model-explained/</a>
+</p>
+<br>
+<p>
+<b>Nota</b>: Se ha incorporado un nuevo método llamado <tt>moveBefore()</tt> que permite mover un elemento de una parte del DOM a otra sin tener que borrarlo y volverlo a recrear. Este método permite hacer cosas como mover un vídeo de un lado de la pantalla a otro sin que se interrumpa la visualización del vídeo (no se pierde el estado).
+</p>
+<ul style='padding-left: 30pt'>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/moveBefore" title="https://developer.mozilla.org/en-US/docs/Web/API/Element/moveBefore" class="https">https://developer.mozilla.org/en-US/docs/Web/API/Element/moveBefore</a></li>
+</ul>
+<br>
+<br>
+<p>
+<b>Ejercicio de la tabla de colores</b>: Dado este HTML y CSS, queremos que cuando se pulse sobre una división con un color se clone la división y se añada a la tabla de colores. Sin embargo, cuando se pulse sobre el párrafo queremos que se elimine la última división de la tabla. Cada vez que se realice una acción se añadirá un párrafo explicando qué se ha hecho en la división con id <tt>divAcción</tt>.
+</p>
+<pre>
+&lt;div id="tablaColores" class="autogrid"&gt;
+  &lt;p&gt;Borrar un color&lt;/p&gt;
+  &lt;div style="background-color:#e00;"&gt;Rojo&lt;/div&gt;
+  &lt;div style="background-color:#2b2;"&gt;Verde&lt;/div&gt;
+  &lt;div style="background-color:#00f;"&gt;Azul&lt;/div&gt;
+  &lt;div style="background-color:#eb3;"&gt;Amarillo&lt;/div&gt;
+  &lt;div style="background-color:#f19;"&gt;Rosa&lt;/div&gt;
+  &lt;div style="background-color:#73a;"&gt;Morado&lt;/div&gt;
+  &lt;div style="background-color:#4ed;"&gt;Turquesa&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="divAcción"&gt;&lt;/&gt;
+</pre>
+<br>
+<p>
+CSS:
+</p>
+<pre>
+*,::after,::before{
+	box-sizing: border-box;
+}
+
+.autogrid {
+  --min-col-size: 100px;
+  display: grid;
+  gap: 1rem;
+  /*auto-fill es mejor que autofit si el nº de elementos va a cambiar (añadir, filtrar, ...)*/
+  grid-template-columns:
+   repeat(auto-fill, minmax( min(var(--min-col-size), 100%), 1fr));
+}
+
+.autogrid div{
+  min-height: 6rem;
+  display: grid;
+  place-content: center;
+}
+</pre>
+<br>
+<br>
+
+			<h1 id="h17">Ejercicios</h1>
+			<p>
+<b>Ejercicio 3</b>: crea una biblioteca de JS que funcione de manera similar a <a href="https://butterup.nlanger.dev/?ref=producthunt" title="https://butterup.nlanger.dev/?ref=producthunt" class="https">https://butterup.nlanger.dev/?ref=producthunt</a>
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 4</b>: Crea una web con tres listas sin ordenar y un par de radio buttons.<br>
+La primera lista tendrá una serie de nombres de alumnos. La segunda tendrá una serie de alumnos aprobados y la tercera alumnos suspensos.<br>
+Las opciones del radio button serán dos: <tt>aprobado</tt> y <tt>suspenso</tt>.<br>
+Si se pulsa sobre un alumno de la primera lista y está seleccionada la opción <tt>aprobado</tt>, se moverá a la lista de aprobados como último elemento.<br>
+Si se pulsa sobre un alumno de la primera lista y está seleccionada la opción <tt>suspenso</tt>, se moverá a la lista de suspensos como primer elemento.<br>
+Finalmente si se pulsa sobre un alumno de la lista de suspenso, volverá a la primera lista de alumnos.
+</p>
+<br>
+<p>
+Parte de esta lista de alumnos:
+</p>
+<pre>
+&lt;ul class="listaAlumnos"&gt;
+  &lt;li&gt;Tomás Tuerzo&lt;/li&gt;
+  &lt;li&gt;Aitor Tilla&lt;/li&gt;
+  &lt;li&gt;Sara Mago&lt;/li&gt;
+  &lt;li&gt;Pancho Colate&lt;/li&gt;
+  &lt;li&gt;Ana Tema&lt;/li&gt;
+  &lt;li&gt;Armando Bronca&lt;/li&gt;
+  &lt;li&gt;Aitor Menta&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 5</b>: Crea una tabla HTML con los datos de la lista original. Esta lista tendrá dos columnas: nombre y apellido.<br>
+Añade un botón que al ser pulsado ordene la tabla por el nombre.
+</p>
+<br>
+<p>
+Añade un cuadro de búsqueda y un botón. Al pulsar el botón se mostrará un listado de los alumnos cuyo nombre comience con el contenido del cuadro de búsqueda.
+</p>
+<br>
+<p>
+Posible solución (sería mejor usar un <tt>localeCompare</tt>):
+</p>
+<pre>
+let tbody = document.querySelector("table tbody");
+
+Array.from(tbody.children).toSorted( (f1,f2) =&gt; f1.children[0].innerText&gt;f2.children[0].innerText).forEach( fila =&gt; {
+  tbody.appendChild(fila);
+});
+</pre>
+<br>
+<br>
+<p>
+<b>Ejercicio 6</b>: Partiendo de la lista de alumnos de abajo crea una tabla con dos columnas usando únicamente métodos de manipulación del DOM.<br>
+La tabla se creará al pulsar un botón de crear tabla.
+</p>
+<br>
+<p>
+Parte de esta lista de alumnos:
+</p>
+<pre>
+&lt;ul class="listaAlumnos"&gt;
+  &lt;li&gt;Tomás Tuerzo&lt;/li&gt;
+  &lt;li&gt;Aitor Tilla&lt;/li&gt;
+  &lt;li&gt;Sara Mago&lt;/li&gt;
+  &lt;li&gt;Pancho Colate&lt;/li&gt;
+  &lt;li&gt;Ana Tema&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<br>
+<p>
+Añade un formulario con dos cuadros de texto (nombre y apellido) y un botón que permita añadir un elemento a la lista y a la tabla simultáneamente como último elemento.
+</p>
+<br>
+<p>
+Añade un checkbox para indicar si se quiere añadir el nuevo alumno al final de la lista/tabla.
+</p>
+<br>
+<p>
+Añade un manejador de evento delegado en la lista que permita que al hacer click sobre un elemento se coloque el primero.
+</p>
+<br>
+<p>
+Añade un manejador de evento delegado en la tabla que permita que al hacer click sobre una fila de la tabla que contenga datos (no la cabecera)  cree un clon y lo añada al final de la misma.
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 7</b>: haz una aplicación que permita gestionar una lista de tareas, incluyendo guardar las tareas realizadas y las no realizadas en el localStorage. Cada vez que se añada una tarea o se complete una tarea, se actualizará el localStorage.
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 8</b>: Hacer el ejercicio de las listas desplegables.
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 9</b>: A partir del array de abajo, crea una card por cada objeto en una división <tt>&lt;div id="cards"&gt;</tt>.
+</p>
+<pre>
+[
+  {
+  "producto" : "Semi-sheer shirt with pintucks",
+  "precio" : "29,95",
+  "tallas" : ["XS", "S", "M", "L"],
+  "imagen" : "img1.jpg"
+  },
+  {
+  "producto" : "Mini dress with lace trims",
+  "precio" : "35,95",
+  "tallas" : ["XL"],
+  "imagen" : "img2.jpg"
+  },
+  {
+  "producto" : "Diamond pattern mini dress",
+  "precio" : "35,95",
+  "tallas" : ["S", "M", "L"],
+  "imagen" : "img3.jpg"
+  },
+  {
+  "producto" : "Red shirt with laces",
+  "precio" : "15,95",
+  "tallas" : ["M", "L", "XL"],
+  "imagen" : "img4.jpg"
+  },
+]
+</pre>
+<br>
+<p>
+Cada card mostrará únicamente la imagen y el resto de los datos se guardarán como atributos <tt>data-x</tt>, cuando se haga click sobre una de las imágenes se mostrará en un <tt>&lt;aside&gt;</tt> tanto la imagen como el resto de los datos en una lista. Todo se realizará mediante funciones de manipulación del DOM.
+</p>
+<br>
+<br>
+<p>
+<b>Ejercicio 10</b>: Crea un power ranking con funciones del DOM. La web debe contener una división <tt>&lt;div id="listado"&gt;</tt>, un cuadro de texto y un botón, cuando se pulse el botón se añadirá un párrafo dentro de la división con el contenido del cuadro de texto.<br>
+Además habrá, un <i>checkbox</i> con dos opciones, <tt>arriba</tt> y <tt>abajo</tt>. Cuando se pulsa sobre uno de los párrafos se moverá arriba o abajo en función de la opción elegida en el checkbox.
+</p>
+<br>
+<p>
+<b>Ampliación</b>: Investiga cómo hacerlo usando eventos de drag &amp; drop, de manera que puedas arrastrar y soltar los párrafos en las zonas que lo permitan.
+</p>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.youtube.com/@Profesorinfo-x">https://www.youtube.com/@Profesorinfo-x</a></p>
+   </div>
+</body>
+
+</html>

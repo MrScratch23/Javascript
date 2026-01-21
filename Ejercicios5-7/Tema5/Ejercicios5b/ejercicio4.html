@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votación de Helados</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <script src="ejercicio4.js" defer></script>
+</head>
+<body>
+    <h1>Votación de Sabores de Helado</h1>
+    
+    <h3>Selecciona un sabor y dale una puntuación:</h3>
+    
+    <!-- Select para los sabores -->
+    <div>
+        <label for="sabor">Sabor de helado:</label>
+        <select id="sabor">
+            <option value="vainilla">Vainilla</option>
+            <option value="fresa">Fresa</option>
+            <option value="chocolate">Chocolate</option>
+            <option value="nata">Nata</option>
+        </select>
+    </div>
+    
+    <br>
+    
+    <!-- Radio buttons para la puntuación -->
+    <div>
+        <label>Puntuación (1-5):</label><br>
+        <input type="radio" name="puntuacion" id="p1" value="1">
+        <label for="p1">1</label>
+        
+        <input type="radio" name="puntuacion" id="p2" value="2">
+        <label for="p2">2</label>
+        
+        <input type="radio" name="puntuacion" id="p3" value="3">
+        <label for="p3">3</label>
+        
+        <input type="radio" name="puntuacion" id="p4" value="4">
+        <label for="p4">4</label>
+        
+        <input type="radio" name="puntuacion" id="p5" value="5" checked>
+        <label for="p5">5</label>
+    </div>
+    
+    <br><br>
+    
+    <!-- Botones de funcionalidad -->
+    <div>
+        <button id="btnVotar">Votar</button>
+        <button id="btnMostrar">Mostrar Estadísticas</button>
+    </div>
+    
+    <br>
+    
+    <!-- Área para mostrar información -->
+    <div id="info" style="border: 1px solid #000; padding: 10px; margin-top: 20px;">
+        Información de votaciones aparecerá aquí...
+    </div>
+
+   
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Fechas</title>
+    <script src="ejercicio7.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    <h1>Validación de Fechas</h1>
+    
+    <form id="formFechas">
+        <div>
+            <label for="txtFecha1">Fecha 1 (input date):</label>
+            <input type="date" name="txtFecha1" id="txtFecha1">
+        </div>
+        
+        <div>
+            <label>Fecha 2 (inputs separados):</label><br>
+            <div>
+                <label for="dia2">Día:</label>
+                <input type="number" id="dia2" name="dia2" min="1" max="31" placeholder="DD">
+            </div>
+            <div>
+                <label for="mes2">Mes:</label>
+                <input type="number" id="mes2" name="mes2" min="1" max="12" placeholder="MM">
+            </div>
+            <div>
+                <label for="anio2">Año:</label>
+                <input type="number" id="anio2" name="anio2" min="1900" max="2100" placeholder="AAAA">
+            </div>
+        </div>
+        
+        <div>
+            <button type="submit">Validar Fechas</button>
+        </div>
+    </form>
+    
+    <div id="resultado">
+        Los resultados aparecerán aquí...
+    </div>
+
+    
+</body>
+</html>

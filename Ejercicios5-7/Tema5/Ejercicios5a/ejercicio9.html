@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla con Filas y Columnas Resaltadas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 400px;
+            height: 400px;
+        }
+        td {
+            border: 1px solid #333;
+            text-align: center;
+            background-color: white;
+            padding: 10px;
+        }
+        .amarillo {
+            background-color: yellow !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    <h1>Tabla 4x4</h1>
+    <p>Haz click en cualquier celda para resaltar su fila y columna</p>
+    
+    <table id="tabla">
+        <tr><td>1-1</td><td>1-2</td><td>1-3</td><td>1-4</td></tr>
+        <tr><td>2-1</td><td>2-2</td><td>2-3</td><td>2-4</td></tr>
+        <tr><td>3-1</td><td>3-2</td><td>3-3</td><td>3-4</td></tr>
+        <tr><td><span>4-1</span></td><td>4-2</td><td>4-3</td><td>4-4</td></tr>
+    </table>
+
+    <script>
+        // Tu código JavaScript irá aquí
+        // Copia la solución completa que ya tienes:
+        
+        const quitarFondo = () => {
+            document.querySelectorAll("#tabla .amarillo").forEach(
+                elem => elem.classList.remove("amarillo")
+            );
+        }
+
+        document.querySelector("#tabla").addEventListener('click', (e) => {
+            quitarFondo();
+
+            const td = e.target.closest('td');
+            const tr = td.parentElement;
+            tr.classList.add("amarillo");
+
+            // Encontrar índice de la columna
+            let i = 0;
+            for (; i < tr.childElementCount; i++) {
+                if (tr.children[i] === td) break;
+            }
+
+            // Alternativa: let i = Array.from(tr.children).indexOf(td)
+
+            document.querySelectorAll(`td:nth-child( ${i+1})`).forEach(elem => {
+                elem.classList.add("amarillo");
+            });
+        });
+    </script>
+</body>
+</html>

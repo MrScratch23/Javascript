@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6: Gestión de Alumnos</title>
+</head>
+<script src="ejercicio6.js" defer></script>
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+<body>
+    <h1>Ejercicio 6: Gestión de Alumnos</h1>
+    
+    <div id="contenedor">
+        <h2>Lista de Alumnos</h2>
+        <ul class="listaAlumnos">
+            <li>Tomás Tuerzo</li>
+            <li>Aitor Tilla</li>
+            <li>Sara Mago</li>
+            <li>Pancho Colate</li>
+            <li>Ana Tema</li>
+        </ul>
+        
+        <button id="crearTabla">Crear Tabla</button>
+        
+        
+        <h2>Formulario para agregar alumnos</h2>
+        <form id="formularioAlumno">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+            </div>
+            
+            <div>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" required>
+            </div>
+            
+            <div>
+                <label>
+                    <input type="checkbox" id="agregarAlFinal">
+                    Agregar al final de la lista/tabla
+                </label>
+            </div>
+            
+            <button type="button" id="agregarAlumno">Agregar Alumno</button>
+        </form>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+digraph{
+
+  node [fontname=arial,fontsize=14,shape=box,fillcolor=pink,color=red,style=filled]
+  window -> document -> form
+  form -> text
+  form -> textarea
+  form -> password
+  form -> radio
+  form -> checkbox
+  form -> hidden
+  form -> button
+  form -> reset
+  form -> submit
+  form -> select -> option
+}

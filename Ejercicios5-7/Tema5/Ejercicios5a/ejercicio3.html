@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Contextual - Cursiva y Negrita</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <script src="ejercicio3.js" defer></script>
+    <style>
+        .oculto { display: none; }
+        .visible { display: block; }
+    </style>
+</head>
+<body>
+    <h1>Menú Contextual con Click Derecho</h1>
+    
+    <div id="divTexto">
+        <p id="textoParrafo">En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.</p>
+        
+        <div id="menuContextual" class="oculto" style="border: 1px solid #ccc; padding: 10px; margin-top: 10px; width: 200px;">
+            <p style="margin: 0 0 10px 0; font-weight: bold;">Menú Formato</p>
+            <button type="button" id="btnCursiva">Cursiva</button>
+            <button type="button" id="btnNegrita">Negrita</button>
+        </div>
+    </div>
+
+  
+</body>
+</html>

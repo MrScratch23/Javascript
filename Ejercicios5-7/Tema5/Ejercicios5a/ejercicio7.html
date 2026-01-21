@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de Códigos Postales Españoles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2a5298;
+        }
+        
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            border-color: #2a5298;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.2);
+        }
+        
+        input.valid {
+            border-color: #28a745;
+        }
+        
+        input.invalid {
+            border-color: #dc3545;
+        }
+        
+        .status-icon {
+            position: absolute;
+            right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .valid-icon {
+            color: #28a745;
+        }
+        
+        .invalid-icon {
+            color: #dc3545;
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .provincia {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 10px;
+        }
+        
+        .codigo {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .instructions {
+            background-color: #e8f4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            border-left: 4px solid #2a5298;
+        }
+        
+        .instructions h3 {
+            color: #2a5298;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Validador de Códigos Postales</h1>
+            <p class="subtitle">Introduce un código postal español válido</p>
+        </header>
+        
+        <div class="content">
+            <div class="input-group">
+                <label for="codigoPostal">Código Postal:</label>
+                <div class="input-container">
+                    <input type="text" id="codigoPostal" maxlength="5" placeholder="Ej: 28001">
+                    <div class="status-icon hidden" id="statusIcon"></div>
+                </div>
+            </div>
+            
+            <div class="result hidden" id="result">
+                <div class="provincia" id="provinciaNombre"></div>
+                <div class="codigo">Código Postal: <span id="codigoMostrado"></span></div>
+            </div>
+            
+            <div class="instructions">
+                <h3>Requisitos del código postal:</h3>
+                <ul>
+                    <li>Debe tener exactamente 5 cifras</li>
+                    <li>Las dos primeras cifras deben estar entre 01 y 52</li>
+                    <li>La provincia se mostrará automáticamente al completar 5 cifras válidas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Validador de Códigos Postales Españoles</p>
+    </footer>
+
+    <script>
+        // Array de provincias españolas
+        const arrProvincias = [
+            "Álava", "Albacete", "Alicante", "Almería", "Ávila", "Badajoz", "Baleares",
+            "Barcelona", "Burgos", "Cáceres", "Cádiz", "Castellón", "Ciudad Real", "Córdoba", 
+            "Coruña", "Cuenca", "Girona", "Granada", "Guadalajara", "Guipuzcoa", "Huelva", 
+            "Huesca", "Jaén", "León", "Lleida", "Rioja", "Lugo", "Madrid", "Málaga", "Murcia", 
+            "Navarra", "Orense", "Asturias", "Palencia", "Las Palmas", "Pontevedra", "Salamanca", 
+            "Tenerife", "Cantabria", "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", 
+            "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza", "Ceuta", "Melilla"
+        ];
+
+        // Elementos del DOM
+        const codigoPostalInput = document.getElementById('codigoPostal');
+        const resultDiv = document.getElementById('result');
+        const provinciaNombre = document.getElementById('provinciaNombre');
+        const codigoMostrado = document.getElementById('codigoMostrado');
+        const statusIcon = document.getElementById('statusIcon');
+
+        // Función para validar el código postal
+        function validarCodigoPostal(codigoPostal) {
+            // Verificar que tenga exactamente 5 dígitos
+            if (!/^\d{5}$/.test(codigoPostal)) {
+                return false;
+            }
+            
+            // Obtener las dos primeras cifras
+            const primerasDosCifras = parseInt(codigoPostal.substring(0, 2));
+            
+            // Verificar que estén entre 01 y 52
+            if (primerasDosCifras < 1 || primerasDosCifras > 52) {
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Función para obtener la provincia
+        function obtenerProvincia(codigoPostal) {
+            const codigoProvincia = parseInt(codigoPostal.substring(0, 2)) - 1;
+            return arrProvincias[codigoProvincia];
+        }
+
+        // Evento que se ejecuta cada vez que se escribe en el input
+        codigoPostalInput.addEventListener('input', function() {
+            const codigoPostal = this.value;
+            
+            // Ocultar resultado y resetear estilos
+            resultDiv.classList.add('hidden');
+            statusIcon.classList.add('hidden');
+            codigoPostalInput.classList.remove('valid', 'invalid');
+            
+            // Si tiene 5 caracteres, validar
+            if (codigoPostal.length === 5) {
+                if (validarCodigoPostal(codigoPostal)) {
+                    // Código postal válido
+                    codigoPostalInput.classList.add('valid');
+                    statusIcon.classList.remove('hidden');
+                    statusIcon.innerHTML = '✓';
+                    statusIcon.classList.add('valid-icon');
+                    
+                    // Mostrar provincia
+                    resultDiv.classList.remove('hidden');
+                    provinciaNombre.textContent = obtenerProvincia(codigoPostal);
+                    codigoMostrado.textContent = codigoPostal;
+                } else {
+                    // Código postal inválido
+                    codigoPostalInput.classList.add('invalid');
+                    statusIcon.classList.remove('hidden');
+                    statusIcon.innerHTML = '✗';
+                    statusIcon.classList.add('invalid-icon');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
