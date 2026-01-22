@@ -5,6 +5,20 @@ let arrBombillas = [];
 document.querySelector("#btnDetectarBombillas").addEventListener('click', async e => {
     
     try {
+        // Verificar si ya hay opciones cargadas
+        const slCtrlBombilla = document.querySelector("#slCtrlBombilla");
+        
+        // Si ya tiene opciones y estamos en display:block, no hacemos nada
+        if (slCtrlBombilla.children.length > 0 && slCtrlBombilla.style.display === "block") {
+            return;
+        }
+        
+        // Si tiene opciones pero está oculto, solo lo mostramos
+        if (slCtrlBombilla.children.length > 0) {
+            slCtrlBombilla.style.display = "block";
+            return;
+        }
+        
         const response = await fetch("/api/bombilla");
         
         if (!response.ok) {
@@ -13,9 +27,14 @@ document.querySelector("#btnDetectarBombillas").addEventListener('click', async 
         
         const bombillas = await response.json();
        
-
-        const slCtrlBombilla = document.querySelector("#slCtrlBombilla");
-        slCtrlBombilla.style.display="block";
+        slCtrlBombilla.style.display = "block";
+        
+        // Agregar opción por defecto
+        let defaultOption = document.createElement("option");
+        defaultOption.textContent = "Selecciona una bombilla";
+        defaultOption.value = "";
+        slCtrlBombilla.append(defaultOption);
+        
         for (const bombilla of bombillas) {
             let option = document.createElement("option");
             option.textContent = bombilla.etiqueta;
@@ -25,14 +44,18 @@ document.querySelector("#btnDetectarBombillas").addEventListener('click', async 
 
         slCtrlBombilla.addEventListener('change', async e => {
             const id = slCtrlBombilla.value;
-            // buscamos la bombilla en el array de bombillas por el id
-              const existeBombilla = arrBombillas.find(b => b.id === id)
-                // si existe no hacemos la peticion
-                if (existeBombilla) {
-                    return;
-                }
+            
+            if (!id) return;
+            
+            const idNum = parseInt(id);
+            const existeBombilla = arrBombillas.find(b => b.id === idNum);
+            
+            // si existe no hacemos la peticion
+            if (existeBombilla) {
+                return;
+            }
 
-                // y si no existe hacemos la peticion
+            // y si no existe hacemos la peticion
             try {
                 const response = await fetch(`/api/bombilla/${id}`);
                 
@@ -49,122 +72,107 @@ document.querySelector("#btnDetectarBombillas").addEventListener('click', async 
                 let div = document.createElement("div");
                 div.id = "divControlBombilla";
                 let img = document.createElement("img");
-                 let historial = oBombilla.historial;
+                let historial = oBombilla.historial;
                 
-                
-                // no encontre una forma menos bestia, lo lamento
+                // Determinamos el estado actual
                 if (historial.length === 0) {
                     img.src = "img/bombilla-off.svg";
-                }
-                 for (const historialBombilla of historial) {
-                    if (historialBombilla.encendido === true) {
+                } else {
+                    // Tomamos el último estado del historial
+                    const ultimoEstado = historial[historial.length - 1];
+                    if (ultimoEstado.encendido === true) {
                         img.src = "img/bombilla-on.svg";
-                    }
-                    if (historialBombilla.encendido == false) {
+                    } else {
                         img.src = "img/bombilla-off.svg";
                     }
-
-                 }
-
-                
+                }
 
                 div.append(img);
-               const secControl = document.querySelector("#secControl");
-               const divControlBombilla = document.querySelector("#divControlBombilla");
-               if (divControlBombilla) {
+                const secControl = document.querySelector("#secControl");
+                const divControlBombilla = document.querySelector("#divControlBombilla");
+                if (divControlBombilla) {
                     secControl.removeChild(divControlBombilla);
-               }
-               secControl.append(div);
-               
-
-                // no se como hacer para que se centre
+                }
+                secControl.append(div);
                 
-                secControl.addEventListener('click', async e => {
+                // evento para cambiar el estado de la bombilla
+                img.addEventListener('click', async e => {
                     e.stopPropagation();
-                    if (e.target.tagName === "IMG") {
-                        try {
+                    
+                    try {
+                        // Cambiamos la imagen inmediatamente (estrategia optimista)
+                        const currentSrc = img.src;
+                        if (currentSrc.includes("bombilla-off.svg")) {
+                            img.src = "img/bombilla-on.svg";
+                        } else {
+                            img.src = "img/bombilla-off.svg";
+                        }
 
-                            if (img.src === "bombilla-off.svg") {
-                                img.src = "img/bombilla-on.svg";
-                            }
-                            if (img.src === "bombilla-on.svg") {
-                                img.src = "img/bombilla-off.svg";
-                            }
+                        let fecha = new Date();
+                        // Formato de fecha: DD/MM/YYYY
+                        let fechaBombilla = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+                        // Formato de hora: HH:MM
+                        let horaMinutos = fecha.getHours() + ":" + (fecha.getMinutes() < 10 ? "0" : "") + fecha.getMinutes();
+                        
+                        // Determinar el nuevo estado (opuesto al actual)
+                        let nuevoEstado;
+                        if (currentSrc.includes("bombilla-off.svg")) {
+                            nuevoEstado = true; // Encender
+                        } else {
+                            nuevoEstado = false; // Apagar
+                        }
 
+                        let estado = {
+                            bombilla_id: idNum,
+                            fecha: fechaBombilla,
+                            hora: horaMinutos,
+                            encendido: nuevoEstado
+                        };
 
-                            let fecha = new Date();
-                            // lamento la forma bestia de sacar las horas, minutos, y la fecha
-                            let fechaBombilla = fecha.getDay() + "/" + fecha.getMonth()+1 + "/" + fecha.getFullYear()
-                            let horaMinutos = fecha.getHours() + " " + fecha.getMinutes;
-                             let historial = oBombilla.historial;
-                            let bombillaEstado = "";
-                               for (const historialBombilla of historial) {
-                                if (historialBombilla.encendido === true) {
-                                    bombillaEstado === false;
-                                     }
-                                if (historialBombilla.encendido == false) {
-                                    bombillaEstado === true;
-                                    }
-
-                                    };
-
-                             let estado = {
-                                bombilla_id: id,
-                                fecha: fechaBombilla,
-                                hora: horaMinutos,
-                                encendido: bombillaEstado
-                             }       
-
-
-                            const response = await fetch(`/api/estado/${id}`, {
-                                method: 'POST',
-                                headers:{
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                 bombilla_id: estado.bombilla_id,
-                                 fecha: estado.fecha,
-                                 hora:  estado.hora,
-                                 encendido: estado.bombillaEstado 
-                                })
-                            });
-                            
-                            if (!response.ok) {
-                                throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
-                            }
-                            
-                            arrBombillas[$id].historial.push(estado);
-                            
-                            
-                        } catch (error) {
-                             let dialog = document.createElement("dialog");
-                            dialog.textContent = `Error al cambiar el estado de la bombilla: ${error}`;
-                
-                            let closeButton = document.createElement("button");
-                            closeButton.textContent = "Cerrar";
-                            closeButton.addEventListener("click", () => {
+                        const response = await fetch(`/api/estado`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(estado)
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
+                        }
+                        
+                        // añadir el nuevo estado al historial en arrBombillas
+                        const bombillaIndex = arrBombillas.findIndex(b => b.id === idNum);
+                        if (bombillaIndex !== -1) {
+                            arrBombillas[bombillaIndex].historial.push(estado);
+                        }
+                        
+                    } catch (error) {
+                        // Si falla, restaurar la imagen original
+                        const currentSrc = img.src;
+                        if (currentSrc.includes("bombilla-off.svg")) {
+                            img.src = "img/bombilla-on.svg";
+                        } else {
+                            img.src = "img/bombilla-off.svg";
+                        }
+                        
+                        let dialog = document.createElement("dialog");
+                        dialog.textContent = `Error al cambiar el estado de la bombilla: ${error}`;
+                        
+                        let closeButton = document.createElement("button");
+                        closeButton.textContent = "Cerrar";
+                        closeButton.addEventListener("click", () => {
                             dialog.close();
                             document.body.removeChild(dialog);
-                            });
-                
-                            dialog.appendChild(document.createElement("br"));
-                            dialog.appendChild(closeButton);
-                
-                            document.body.appendChild(dialog);
-                            dialog.show();
-                               if (img.src === "bombilla-off.svg") {
-                                img.src = "img/bombilla-on.svg";
-                            }
-                            if (img.src === "bombilla-on.svg") {
-                                img.src = "img/bombilla-off.svg";
-                            }
-
-                
-                        }
+                        });
+                        
+                        dialog.appendChild(document.createElement("br"));
+                        dialog.appendChild(closeButton);
+                        
+                        document.body.appendChild(dialog);
+                        dialog.showModal();
                     }
-                })
-                
-
+                });
                 
             } catch (error) {
                 let dialog = document.createElement("dialog");
@@ -181,19 +189,9 @@ document.querySelector("#btnDetectarBombillas").addEventListener('click', async 
                 dialog.appendChild(closeButton);
                 
                 document.body.appendChild(dialog);
-                dialog.show();
-                
-               
-                // throw error; // O return null;
+                dialog.showModal();
             }
-
-           
-
-
-        })
-
-
-
+        });
         
     } catch (error) {
         let dialog = document.createElement("dialog");
@@ -210,10 +208,8 @@ document.querySelector("#btnDetectarBombillas").addEventListener('click', async 
         dialog.appendChild(closeButton);
         
         document.body.appendChild(dialog);
-        dialog.show();
+        dialog.showModal();
         const slCtrlBombilla = document.querySelector("#slCtrlBombilla");
         slCtrlBombilla.style.display = "none";
-        // throw error; // O return null;
     }
-
-})
+});
