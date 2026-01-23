@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:7000
+
+### Obtener todas las bombillas (Array de objetos)
+GET {{baseUrl}}/api/bombilla
+Accept: application/json
+
+### Obtener una bombilla específica (con su historial)
+GET {{baseUrl}}/api/bombilla/1
+Accept: application/json
+
+### Intentar obtener una bombilla que no existe
+GET {{baseUrl}}/api/bombilla/99
+Accept: application/json
+
+### Añadir un nuevo estado
+POST {{baseUrl}}/api/estado
+Content-Type: application/json
+
+{
+  "bombilla_id": 1,
+  "fecha": "12/01/2026",
+  "hora": "14:30",
+  "encendido": true
+}
